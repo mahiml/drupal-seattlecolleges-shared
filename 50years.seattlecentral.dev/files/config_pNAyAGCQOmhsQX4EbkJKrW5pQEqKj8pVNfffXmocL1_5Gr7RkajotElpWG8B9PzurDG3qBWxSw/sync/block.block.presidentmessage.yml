@@ -1,0 +1,31 @@
+uuid: 45b0c950-3a93-4173-a21a-ed9a7a597dab
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:4cf5dc01-cd08-4aa5-88cd-af84ce3e3a3a'
+  module:
+    - block_content
+    - system
+  theme:
+    - scc_heros
+id: presidentmessage
+theme: scc_heros
+region: content
+weight: -13
+provider: null
+plugin: 'block_content:4cf5dc01-cd08-4aa5-88cd-af84ce3e3a3a'
+settings:
+  id: 'block_content:4cf5dc01-cd08-4aa5-88cd-af84ce3e3a3a'
+  label: 'President''s message'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /president
+    negate: false
+    context_mapping: {  }

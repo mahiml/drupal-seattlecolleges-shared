@@ -1,0 +1,40 @@
+uuid: 58716918-1650-4cd1-b631-94b3823a2913
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scc_50th_president_timeline
+    - field.field.block_content.scc_50th_president_timeline.body
+    - field.field.block_content.scc_50th_president_timeline.field_president_images
+    - image.style.thumbnail
+  module:
+    - image
+    - text
+id: block_content.scc_50th_president_timeline.default
+targetEntityType: block_content
+bundle: scc_50th_president_timeline
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 3
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_president_images:
+    weight: 4
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  info:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

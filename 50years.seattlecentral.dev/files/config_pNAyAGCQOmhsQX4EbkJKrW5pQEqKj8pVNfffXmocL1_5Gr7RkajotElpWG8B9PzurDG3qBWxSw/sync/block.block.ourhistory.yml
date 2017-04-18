@@ -1,0 +1,31 @@
+uuid: f83694d2-9066-44e5-8a7b-365e8cd82902
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:scc_50th_president_timeline:dd4a849a-bd83-45fb-8ae8-db393a490239'
+  module:
+    - block_content
+    - system
+  theme:
+    - scc_heros
+id: ourhistory
+theme: scc_heros
+region: content
+weight: -8
+provider: null
+plugin: 'block_content:dd4a849a-bd83-45fb-8ae8-db393a490239'
+settings:
+  id: 'block_content:dd4a849a-bd83-45fb-8ae8-db393a490239'
+  label: 'Our History'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /history
+    negate: false
+    context_mapping: {  }

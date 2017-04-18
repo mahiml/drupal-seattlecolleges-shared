@@ -1,0 +1,104 @@
+uuid: 91183ec6-f3e5-4487-9898-76544a13d094
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.SCC-50th-MainParagraph.body
+    - field.field.node.SCC-50th-MainParagraph.field_links
+    - field.field.node.SCC-50th-MainParagraph.field_logo
+    - field.field.node.SCC-50th-MainParagraph.field_poster
+    - field.field.node.SCC-50th-MainParagraph.field_text
+    - field.field.node.SCC-50th-MainParagraph.field_video
+    - image.style.thumbnail
+    - node.type.SCC-50th-MainParagraph
+  module:
+    - file
+    - image
+    - link
+    - path
+    - text
+id: node.SCC-50th-MainParagraph.default
+targetEntityType: node
+bundle: SCC-50th-MainParagraph
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 31
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+  field_links:
+    weight: 33
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  field_logo:
+    weight: 37
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_poster:
+    weight: 36
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_text:
+    weight: 34
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textfield
+  field_video:
+    weight: 35
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,403 @@
+.jumbotron {
+    /* background-image: url("images/seattle-maritime-academy.jpg"); */
+    background-size: cover;
+    height: 500px;
+    margin: 0;
+}
+
+.details-page-main-content,
+.details-page-sidebar {
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: -.003em;
+    line-height: 1.5;
+    padding-top: 1.25em;
+}
+
+.details-page-main-content {
+    color: #111;
+    padding-bottom: 1.8em;
+    padding-right: 40px;
+}
+
+.details-page-main-content .small-screen-section-title {
+    display: none;
+}
+
+.details-page-main-content h1 {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 100%;
+    margin-bottom: .35em !important;
+}
+
+.details-page-main-content .img-hero {
+    border-radius: 2px 2px 0 0;
+    margin-top: 10px;
+}
+
+.details-page-main-content .caption {
+    background-color: #fff;
+    border-radius: 0 0 2px 2px;
+    color: #444;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.details-page-main-content h2,
+.details-page-main-content h3,
+.details-page-main-content h4,
+.details-page-main-content h5,
+.details-page-main-content h6 {
+    font-weight: 700;
+    font-style: normal;
+}
+
+.details-page-main-content h2 {
+    color: #111;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-top: 36px;
+    margin-bottom: 16px;
+}
+
+.details-page-main-content h3 {
+    color: #555;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-top: 21px;
+    margin-bottom: 12px;
+}
+
+.details-page-main-content a {
+    color: #0000ff;
+    text-decoration: none;
+}
+
+.details-page-main-content a:hover, .details-page-main-content a:focus {
+    background-color: #eee;
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+.details-page-main-content .btn-primary {
+    color: #002c46;
+    background-color: #ffc628;
+    border: 1px solid #ffc628;
+    text-decoration: none;
+}
+
+.details-page-main-content .btn-primary:focus,
+.details-page-main-content .btn-primary.focus {
+    color: #fff;
+    background-color: #0066a1;
+    border: 1px solid #0066a1;
+}
+
+.details-page-main-content .btn-primary:hover {
+    color: #fff;
+    background-color: #0066a1;
+    border: 1px solid #0066a1;
+}
+
+.details-page-main-content p,
+.details-page-main-content ol,
+.details-page-main-content ul {
+    margin: 0 0 1.5em 0;
+}
+
+.details-page-main-content ol,
+.details-page-main-content ul {
+    margin: 0 0 1em -10px;
+}
+
+.details-page-main-content ul li,
+.details-page-main-content ol li {
+    margin-bottom: 8px;
+}
+
+.details-page-sidebar {
+    padding-left: 1.5em;
+}
+
+.list-group {
+    padding-left: 0;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.list-group-item-heading {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1px;
+}
+
+a.list-group-item, button.list-group-item {
+    color: #111;
+}
+
+.list-group-item.active {
+    z-index: 0;
+    color: #111;
+    background-color: #ffc628;
+    border-color: #fff;
+    position: relative;
+}
+
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+    z-index: 2;
+    color: #111;
+    background-color: #ffc628;
+    border-color: #fff;
+    position: relative;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 12px 16px;
+    margin-bottom: -1px;
+    background-color: #eee;
+    border: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.breadcrumb-container {
+    padding-top: 30px;
+}
+
+.breadcrumb {
+    background-color: #fff;
+    border-radius: 2px;
+    color: #555;
+    font-size: 16px;
+    margin: 0;
+    padding: 0 0 0 4px;
+}
+
+.breadcrumb a {
+    color: #555;
+}
+
+.breadcrumb>.active {
+    color: #555;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 1600px) {
+    .jumbotron {
+        height: 450px;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 1450px) {
+    .jumbotron {
+        height: 420px;
+        margin: 0;
+    }
+
+    .details-page-main-content {
+        padding-left: 20px;
+        padding-right: 40px;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    .jumbotron {
+        height: 360px;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .jumbotron {
+        height: 300px;
+    }
+
+    .details-page-sidebar {
+        padding-right: 1.15em;
+    }
+
+    .details-page-main-content,
+    .details-page-sidebar {
+        font-size: 17px;
+        padding-top: 1.15em;
+    }
+
+    .details-page-main-content .caption {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .details-page-main-content h2 {
+        color: #111;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 26px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+    }
+
+    .details-page-main-content h3 {
+        font-size: 17px;
+        line-height: 24px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+    }
+
+    .details-page-sidebar h4.list-group-item-heading {
+        font-size: 19px;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+    }
+
+    .breadcrumb>.active {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .jumbotron {
+        height: 250px;
+    }
+
+    .breadcrumb-container {
+        padding: 24px 24px 0 24px;
+    }
+
+    .details-page-main-content {
+        font-size: 19px;
+        padding: 0 24px 10px 24px;
+    }
+
+    .details-page-sidebar {
+        padding: 0 24px 20px 24px;
+    }
+
+    .details-page-main-content h1 {
+        font-size: 30px;
+        line-height: 36px;
+        margin-bottom: 24px;
+        margin-top: 20px;
+    }
+
+    .details-page-main-content h2 {
+        color: #111;
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 28px;
+        margin-top: 26px;
+        margin-bottom: 12px;
+    }
+
+    .details-page-main-content h3 {
+        font-size: 19px;
+        line-height: 26px;
+        margin-top: 26px;
+        margin-bottom: 12px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .jumbotron {
+        height: 200px;
+    }
+
+    .breadcrumb-container {
+        padding: 30px 25px 0 25px;
+    }
+
+    .details-page-main-content {
+        font-size: 17px;
+        padding: 0 25px 0 25px;
+    }
+
+    .details-page-main-content h2 {
+        font-weight: 700;
+        line-height: 26px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+    }
+
+    .details-page-main-content h3 {
+        line-height: 22px;
+        margin-top: 22px;
+        margin-bottom: 8px;
+    }
+
+    .details-page-sidebar {
+        padding: 20px 50px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .jumbotron {
+        height: 150px;
+    }
+
+    .breadcrumb-container {
+        padding: 25px 25px 2px 25px;
+    }
+
+    .breadcrumb {
+        font-size: 10px;
+    }
+
+    .breadcrumb>.active {
+        font-size: 11px;
+    }
+
+    .details-page-main-content .caption {
+        font-size: 10px;
+        margin-bottom: 20px;
+    }
+
+    .details-page-main-content {
+        font-size: 15px;
+        padding: 0 25px 20px 25px;
+    }
+
+    .details-page-sidebar {
+        padding: 0 25px 25px 25px;
+    }
+
+    .details-page-main-content h1 {
+        font-size: 24px !important;
+        line-height: 24px;
+        margin-bottom: 12px !important;
+    }
+
+    .details-page-main-content h2 {
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+    }
+
+    .details-page-main-content h3 {
+        font-size: 15px;
+        line-height: 14px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+    }
+}

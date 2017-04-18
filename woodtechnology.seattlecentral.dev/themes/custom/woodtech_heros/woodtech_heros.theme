@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+
+/**
+ * @param array $suggestions
+ * @param array $variables
+ */
+function woodtech_heros_theme_suggestions_page_alter(array &$suggestions, array $variables)
+{
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $content_type = $node->bundle();
+        if (!empty($content_type)) {
+            $tokens = explode('-', trim($content_type));
+            $twigName = implode('__', $tokens);
+            $suggestions[] = 'page__' . $twigName;
+        }
+        $node_name = $node->getTitle();
+        if (isset($node_name)) {
+            $tokens = explode('-', trim($node_name));
+            $twigName = implode('__', $tokens);
+            $suggestions[] = 'page__' . $twigName;
+
+        }
+    }
+}
+
+
+function woodtech_heros_theme_suggestions_block_alter(array &$suggestions, array $variables)
+{
+    $content = $variables['elements']['content'];
+    if (isset($content['#block_content']) && $content['#block_content'] instanceof \Drupal\block_content\BlockContentInterface) {
+        $suggestions[] = 'block__' . $content['#block_content']->bundle();
+    }
+}
+
+function woodtech_heros_preprocess_breadcrumb(&$variables) {
+    $request = \Drupal::request();
+    $route_match = \Drupal::routeMatch();
+    $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+
+    //this variable will avaliable in twig file.
+    $variables['current_page_title'] = $page_title;
+}
+
+function woodtech_heros_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+    if (isset($form_id) && strcmp($form_id, 'search_form') == 0) {
+        $form['#method'] = "get";
+    }
+
+}
+
+function woodtech_heros_theme_suggestions_form_alter(array &$suggestions, array $variables)
+{
+    if ($variables['element']['#form_id']) {
+        $suggestions[] = 'form__' . $variables['element']['#form_id'];
+    }
+}
+
+function woodtech_heros_preprocess_page_title(&$variables)
+{
+    $request = \Drupal::request();
+    if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+        $title = \Drupal::service('title_resolver')->getTitle($request, $route);
+        if (strcmp($title, 'Search') == 0) {
+            $variables['title'] = 'Search Seattle Central WoodTechnology Institute';
+        }
+    }
+}

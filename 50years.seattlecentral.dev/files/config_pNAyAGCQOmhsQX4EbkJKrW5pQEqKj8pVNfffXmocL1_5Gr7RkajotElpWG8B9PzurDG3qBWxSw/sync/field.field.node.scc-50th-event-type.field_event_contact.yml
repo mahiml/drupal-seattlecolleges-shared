@@ -1,0 +1,19 @@
+uuid: f99dbd1f-ab77-4949-889e-4d06c5c13570
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_contact
+    - node.type.SCC-50th-Event-Type
+id: node.SCC-50th-Event-Type.field_event_contact
+field_name: field_event_contact
+entity_type: node
+bundle: SCC-50th-Event-Type
+label: event_contact
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

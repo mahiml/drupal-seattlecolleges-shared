@@ -1,0 +1,16 @@
+scc50th-library:
+  css:
+    theme:
+      css/50thCentral.css: {}
+  js:
+    js/functions.js: {}
+
+vimeo.player:
+  remote: https://github.com/vimeo/player.js
+  version: 1.0.6
+  license:
+    name: BSD
+    url: https://github.com/vimeo/player.js/blob/master/LICENSE.md
+    gpl-compatible: true
+  js:
+    https://player.vimeo.com/api/player.js: { type: external, minified: true }

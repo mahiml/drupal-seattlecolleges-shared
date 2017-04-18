@@ -1,0 +1,40 @@
+uuid: 8c278a61-0f8d-4178-8dec-3db3ab162631
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.front_page_stats.body
+    - field.field.node.front_page_stats.field_stat_key
+    - field.field.node.front_page_stats.field_stat_summary
+    - field.field.node.front_page_stats.field_stat_value
+    - node.type.front_page_stats
+  module:
+    - text
+    - user
+id: node.front_page_stats.teaser
+targetEntityType: node
+bundle: front_page_stats
+mode: teaser
+content:
+  field_stat_key:
+    type: text_default
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_stat_summary:
+    type: text_default
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_stat_value:
+    type: text_default
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  links: true

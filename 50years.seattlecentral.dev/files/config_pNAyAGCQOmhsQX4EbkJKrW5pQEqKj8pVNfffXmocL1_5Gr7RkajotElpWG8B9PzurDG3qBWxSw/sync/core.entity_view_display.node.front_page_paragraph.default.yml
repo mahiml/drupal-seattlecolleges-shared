@@ -1,0 +1,45 @@
+uuid: 924c75ef-2e92-4055-b00d-09e5da04f3bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.front_page_paragraph.field_action_url
+    - field.field.node.front_page_paragraph.field_for
+    - field.field.node.front_page_paragraph.field_rank
+    - node.type.front_page_paragraph
+  module:
+    - link
+    - text
+    - user
+id: node.front_page_paragraph.default
+targetEntityType: node
+bundle: front_page_paragraph
+mode: default
+content:
+  field_action_url:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+  field_for:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_rank:
+    type: number_integer
+    weight: 2
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+hidden:
+  links: true

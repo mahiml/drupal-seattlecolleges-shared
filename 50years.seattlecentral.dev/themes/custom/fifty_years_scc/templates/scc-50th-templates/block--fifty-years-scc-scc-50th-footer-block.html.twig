@@ -1,0 +1,28 @@
+<section class="container-fluid bg-white sc-negative-space">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <p class="sc-sponsor-text">Thanks to our 50th Anniversary sponsor.</p>
+            <div class="sc-sponsor">
+                {% set tokens = content['field_donors']['#object'].field_donors[0].alt|split('::') %}
+                {% set alt = tokens[0] %}
+                {% set url = tokens[1] %}
+                <a target="_blank" href="{{ url }}"> <img class="img-responsive"
+                                                          src="{{ file_url(content['field_donors']['#object'].field_donors[0].entity.uri.value) }}"
+                                                          alt="{{ alt }}"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid bg-blue">
+    <div class="row text-center sc-spacing-bottom">
+        <div class="col-md-12 sc-logo-container">
+            <h2 class="text-white">{{ content['field_block_title'][0]['#text'] }}.</h2>
+            <div class="sc-cta-centered">
+                <a target="_blank" href="https://sccd.ejoinme.org/MyPages/DonationPage/tabid/108196/Default.aspx"
+                   class="img-responsive btn btn-primary btn-lg" role="button">Give Now</a>
+            </div>
+        </div>
+    </div>
+</section>

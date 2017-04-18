@@ -1,0 +1,22 @@
+uuid: 5e3c5ba1-f71a-49b7-b9b7-996814cabd68
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.faces_of_central
+id: node.faces_of_central.promote
+field_name: promote
+entity_type: node
+bundle: faces_of_central
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

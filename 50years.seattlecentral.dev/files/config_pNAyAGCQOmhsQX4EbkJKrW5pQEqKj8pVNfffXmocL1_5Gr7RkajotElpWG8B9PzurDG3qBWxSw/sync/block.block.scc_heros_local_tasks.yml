@@ -1,0 +1,22 @@
+uuid: ada6f73e-4a89-4836-aca0-0df03a6b98e6
+langcode: en
+status: false
+dependencies:
+  theme:
+    - scc_heros
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: scc_heros_local_tasks
+theme: scc_heros
+region: '-1'
+weight: -6
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

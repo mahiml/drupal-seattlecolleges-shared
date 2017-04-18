@@ -1,0 +1,133 @@
+.parallax-bas-network {
+    /* The image used */
+    background-image: url("../it-images/bph-on-campus-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-network {
+    /* The image used */
+    background-image: url("../it-images/campus-seattlecentral.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-programming {
+    /* The image used */
+    background-image: url("../it-images/broadway-musician-near-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-database {
+    /* The image used */
+    background-image: url("../it-images/fountain-cal-anderson-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-web-design {
+    /* The image used */
+    background-image: url("../it-images/cal-anderson-park-across-from-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-web-development {
+    /* The image used */
+    background-image: url("../it-images/soccer-field-across-from-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-top {
+    /* The image used */
+    background-image: url("../it-images/seattle-central-in-the-city.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media only screen and (max-width: 1024px) {
+    .parallax-bas-network,
+    .parallax-network,
+    .parallax-programming,
+    .parallax-database,
+    .parallax-web-design, 
+    .parallax-web-development, 
+    .parallax-top {
+        height: 420px;
+        background-attachment: inherit;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .parallax-bas-network,
+    .parallax-network,
+    .parallax-programming,
+    .parallax-database,
+    .parallax-web-design, 
+    .parallax-web-development, 
+    .parallax-top {
+        height: 360px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .parallax-bas-network,
+    .parallax-network,
+    .parallax-programming,
+    .parallax-database,
+    .parallax-web-design, 
+    .parallax-web-development, 
+    .parallax-top {
+        height: 320px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .parallax-bas-network,
+    .parallax-network,
+    .parallax-programming,
+    .parallax-database,
+    .parallax-web-design, 
+    .parallax-web-development, 
+    .parallax-top {
+        height: 250px;
+    }
+}

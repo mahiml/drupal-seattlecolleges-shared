@@ -1,0 +1,20 @@
+uuid: 377ab5cb-aa3a-4068-8820-63293d79984a
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - nestor
+id: nestor_user_login
+theme: nestor
+region: sidebar_first
+weight: 0
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: ''
+  provider: user
+  label_display: '0'
+visibility: {  }

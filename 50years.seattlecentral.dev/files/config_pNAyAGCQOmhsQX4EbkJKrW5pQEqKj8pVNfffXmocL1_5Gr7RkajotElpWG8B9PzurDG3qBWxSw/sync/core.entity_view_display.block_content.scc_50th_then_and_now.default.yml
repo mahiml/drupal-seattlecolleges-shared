@@ -1,0 +1,30 @@
+uuid: f6894121-eb92-4543-b4da-5d1a46039f6d
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scc_50th_then_and_now
+    - field.field.block_content.scc_50th_then_and_now.body
+    - field.field.block_content.scc_50th_then_and_now.field_then_and_now_imag
+    - responsive_image.styles.narrow
+  module:
+    - entity_test
+    - responsive_image
+third_party_settings:
+  entity_test:
+    foo: bar
+id: block_content.scc_50th_then_and_now.default
+targetEntityType: block_content
+bundle: scc_50th_then_and_now
+mode: default
+content:
+  field_then_and_now_imag:
+    weight: 1
+    label: hidden
+    settings:
+      responsive_image_style: narrow
+      image_link: ''
+    third_party_settings: {  }
+    type: responsive_image
+hidden:
+  body: true

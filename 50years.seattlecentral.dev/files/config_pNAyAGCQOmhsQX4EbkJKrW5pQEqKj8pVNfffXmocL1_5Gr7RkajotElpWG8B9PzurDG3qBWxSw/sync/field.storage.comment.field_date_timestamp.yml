@@ -1,0 +1,20 @@
+uuid: 4b2f166b-5766-4228-8016-2d4d2ca9cb29
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - datetime
+id: comment.field_date_timestamp
+field_name: field_date_timestamp
+entity_type: comment
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

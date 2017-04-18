@@ -1,0 +1,9 @@
+{% if  content['field_event_logo']['#object'] %}
+    <img src="{{ file_url(content['field_event_logo']['#object'].field_student_.0.entity.uri.value) }}"
+         alt="{{ content['field_event_logo']['#object'].field_event_logo.0.alt }}" class="img-thumbnail"/>
+{% endif %}
+<h2>{{ label }}</h2>
+{% if  content['field_time']['#items'][0].value %}
+    <p><strong> {{ content['field_time']['#items'][0].value }} </strong> <br/></p>
+{% endif %}
+{{ content['body'] }}

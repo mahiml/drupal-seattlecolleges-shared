@@ -1,0 +1,24 @@
+uuid: 83347da1-9379-4770-941c-2289e8046adb
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.scc_50th_guestbook_comment_type
+    - field.storage.comment.field_date_time
+  module:
+    - datetime
+id: comment.scc_50th_guestbook_comment_type.field_date_time
+field_name: field_date_time
+entity_type: comment
+bundle: scc_50th_guestbook_comment_type
+label: date_time
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

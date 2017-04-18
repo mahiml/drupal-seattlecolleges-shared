@@ -1,0 +1,19 @@
+uuid: a7b3cbb5-1d22-4d84-9741-0c92f87af0b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.scc_50th_guestbook_comment_type
+    - field.storage.comment.field_comments
+id: comment.scc_50th_guestbook_comment_type.field_comments
+field_name: field_comments
+entity_type: comment
+bundle: scc_50th_guestbook_comment_type
+label: Comments
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

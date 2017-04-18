@@ -1,0 +1,17 @@
+uuid: b52caa54-3e40-495f-9f2d-2a518d4cdee2
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: main_menu_item
+type: main_menu_item
+description: 'this item will be shown on the splash main menu; will contain a group, text and an image which might be used later on.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

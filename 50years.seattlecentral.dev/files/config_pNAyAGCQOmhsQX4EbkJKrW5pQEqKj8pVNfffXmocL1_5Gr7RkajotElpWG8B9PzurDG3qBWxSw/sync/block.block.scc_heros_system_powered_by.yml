@@ -1,0 +1,22 @@
+uuid: fa414454-3a4a-4b02-b394-6547cd1142b7
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - scc_heros
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: scc_heros_system_powered_by
+theme: scc_heros
+region: '-1'
+weight: -12
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: ''
+  provider: system
+  label_display: '0'
+visibility: {  }

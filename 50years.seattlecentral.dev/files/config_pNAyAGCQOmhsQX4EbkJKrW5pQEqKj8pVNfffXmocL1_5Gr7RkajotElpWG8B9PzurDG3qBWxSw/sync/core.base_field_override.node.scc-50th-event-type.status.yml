@@ -1,0 +1,22 @@
+uuid: 9dffe3d1-2e36-4586-a93b-b21c2d697b21
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.SCC-50th-Event-Type
+id: node.SCC-50th-Event-Type.status
+field_name: status
+entity_type: node
+bundle: SCC-50th-Event-Type
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

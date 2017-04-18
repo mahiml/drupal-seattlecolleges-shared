@@ -1,0 +1,1204 @@
+body {
+    font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #111;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
+.h3, .h4, .h5, .h6, h3, h4, h5, h6 {
+    font-weight: 500;
+}
+
+.h1, h1 {
+    font-size: 36px;
+    margin-bottom: 1em;
+}
+
+.h2, h2 {
+    font-size: 24px;
+}
+
+.bg-blue {
+    background-color: #0074D9;
+    color: #111;
+}
+
+.bg-white {
+    background-color: #fff;
+    color: #111;
+}
+
+.bg-black {
+    background-color: #111;
+    color: #fff;
+}
+
+.bg-black-only {
+    background-color: #111;
+}
+
+.gold-border {
+    border-bottom: 4px solid #ffc628;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-white a {
+    color: #ffc628;
+}
+
+.text-black {
+    color: #111;
+}
+
+::selection {
+    background: #f012be;
+    color: #fff;
+}
+
+.panel-primary {
+    border-color: #111;
+}
+
+.well {
+    min-height: 20px;
+    padding: 19px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 2px 2px rgba(0, 0, 0, .05);
+}
+
+.well p {
+    color: #555;
+    font-size: 16px !important;
+    font-weight: 400;
+}
+
+.graf-layoutOutsetLeft {
+    margin: 0 20px 10px -280px;
+    width: 80%;
+    float: left;
+}
+
+.alignleft {
+    float: left;
+    margin: 0 20px 10px 0px;
+}
+
+.panel-primary > .panel-heading {
+    color: #fff;
+    background-color: #111;
+    border-color: #111;
+}
+
+.sc-embed-responsive .sc-embed-responsive-item,
+.sc-embed-responsive iframe,
+.sc-embed-responsive embed,
+.sc-embed-responsive object,
+.sc-embed-responsive video {
+    position: absolute;
+    /* bottom: 0; */
+    /* left: 0; */
+    /* width: 100%; */
+    /* height: 100%; */
+    border: 0;
+}
+
+.vimeo-player {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    border-bottom: .08em solid #111;
+    color: #0000ff;
+}
+
+.home-slider {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sc-fifty-home-header {
+    font-size: 4vw;
+    margin: 22px auto 0 auto;
+    font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+    color: #da0b00;
+}
+
+.btn {
+    border: 2px solid;
+    border-radius: 3px;
+    margin: 12px auto;
+}
+
+.btn-50 {
+    width: 50%;
+}
+
+.btn-group-lg > .btn, .btn-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 3px;
+}
+
+.btn-primary {
+    color: #000;
+    background-color: #ffc628;
+    border-color: #ffc628;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    color: #111;
+    background-color: #fff;
+    border-color: #111;
+}
+
+.btn-default {
+    color: #111;
+    background-color: #fff;
+    border-color: #111;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active {
+    color: #000;
+    background-color: #ffc628;
+    border-color: #ffc628;
+}
+
+.sc-50-logo {
+    vertical-align: middle;
+    margin: 10% auto 0 auto;
+    max-width: 500px;
+}
+
+.sc-single-column-text {
+    vertical-align: middle;
+    width: 85%;
+    margin: 1em auto 1em auto;
+    max-width: 700px;
+}
+
+.sc-interior-page-top {
+    margin-top: 120px;
+}
+
+.sc-single-column-teaser-text {
+    vertical-align: middle;
+    width: 95%;
+    margin: 1em auto 1em auto;
+    max-width: 1000px;
+}
+
+.sc-single-column-text p, .sc-single-column-text li {
+    font-size: 1.313em;
+    line-height: 1.5;
+    margin: 0 0 25px;
+}
+
+.sc-single-column-teaser-text p {
+    font-size: 1.438em;
+    line-height: 1.5;
+    color: #fff;
+    margin: 0 0 18px;
+    text-shadow: 2px 2px #111;
+    text-align: justify;
+}
+
+.sc-single-column-text ol, .sc-single-column-text ul {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.lead.mega-med-text {
+    vertical-align: middle;
+    width: 85%;
+    margin: 1em auto 1.5em auto;
+    max-width: 910px;
+    font-size: 1.875em;
+    line-height: 1.5em;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 15%;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, 0);
+    filter: alpha(opacity=50);
+    opacity: 1;
+}
+
+.sc-title-heading {
+    font-size: 2em;
+    line-height: 1.785714285714286em;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.sc-negative-space {
+    padding: 3em 2em;
+}
+
+.sc-centered-alignment {
+    max-width: 900px;
+    vertical-align: middle;
+    margin: 1em auto 1em auto;
+}
+
+.sc-logo-centered {
+    max-width: 150px;
+    vertical-align: middle;
+    margin: .2em auto 1em auto;
+}
+
+.sc-avatar {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 90px;
+    height: 90px;
+    margin-bottom: 30px;
+}
+
+p.sc-avatar-title {
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: #666;
+    max-width: 300px;
+}
+
+.sc-cta-centered {
+    max-width: 300px;
+    vertical-align: middle;
+    margin: 1em auto 1em auto;
+}
+
+.sc-med-contained {
+    max-width: 1400px;
+    margin: 4em auto;
+}
+
+.sc-slider {
+    max-width: 1800px;
+    margin: 4em auto;
+}
+
+.sc-img-space, .sc-text-space {
+    margin-top: 2em;
+}
+
+.carousel-caption {
+    background: #fff;
+    color: #111;
+}
+
+.parallax50 {
+    /* The image used */
+    background-image: url("images/building-broadway-edison.jpg");
+
+    /* Set a specific height */
+    min-height: 750px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax51 {
+    /* The image used */
+    background-image: url("images/2016-graduates-seattle-central.jpg");
+
+    /* Set a specific height */
+    min-height: 750px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax52 {
+    /* The image used */
+    background-image: url("images/jazz-class-student-seattle-central.jpg");
+
+    /* Set a specific height */
+    min-height: 750px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax53 {
+    /* The image used */
+    background-image: url("images/broadwayhigh-seattlecentral50.jpg");
+
+    /* Set a specific height */
+    min-height: 750px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax54 {
+    /* The image used */
+    background-image: url("images/broadway-2016-seattlecentral50.jpg");
+
+    /* Set a specific height */
+    min-height: 750px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.img-thumbnail {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    padding: 0;
+    line-height: 1.42857143;
+    background-color: #111;
+    border: none;
+    border-radius: 0;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+li.active {
+    height: 100%;
+}
+
+.sc-bg-full {
+    position: relative;
+    background: #000 url("images/SeattleCentral50.jpg") no-repeat center center;
+    background-position: top;
+    width: 100%;
+    min-height: 1300px;
+    background-size: cover;
+    overflow: hidden;
+    margin-bottom: 0;
+    /*z-index: -100;*/
+}
+
+.sc-bg-full h1, .sc-bg-full h2 {
+    color: #fff;
+    text-shadow: 3px 3px #111;
+}
+
+.navbar-inverse .navbar-toggle {
+    margin-top: 1.4em;
+    border: none;
+}
+
+.navbar-inverse {
+    border-style: none;
+    border-bottom: 4px solid #ffc628;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-brand {
+    float: left;
+    height: inherit;
+    padding: 1em;
+    font-size: 18px;
+    line-height: 20px;
+    border-radius: 0;
+}
+
+.navbar-brand > img {
+    display: block;
+    width: 250px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #ffc628;
+}
+
+.nav > li > a, a.navbar-brand {
+    border: none;
+}
+
+.nav > li {
+    margin-bottom: 0;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+    color: #111;
+    background-color: #ffc628;
+}
+
+.navbar-inverse .navbar-toggle,
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #0074d9;
+}
+
+blockquote {
+    margin-top: 1.5em;
+    border-left: 5px solid #ddd;
+}
+
+hr {
+    border-top: 2px solid #ddd;
+}
+
+li {
+    margin-bottom: .25em;
+}
+
+.sc-then-and-now-container, .sc-events-container{
+    margin: 50px auto;
+    vertical-align: middle;
+    margin: 2em auto 2em auto;
+    max-width: 1600px;
+}
+
+.sc-logo-container {
+    margin: 50px auto;
+    vertical-align: middle;
+    margin: 2em auto 2em auto;
+}
+
+.sc-fourteen-point-text p {
+    font-size: 14px;
+    line-height: 1.2;
+    margin: .5em 0 1em 0;
+}
+
+.sc-xsm-space-top {
+    margin-top: 0;
+}
+
+.sc-spacing-top {
+    margin-top: 4em;
+}
+
+.sc-spacing-bottom {
+    margin-bottom: 4em;
+}
+
+.navbar-toggle .icon-bar + .icon-bar {
+    margin-top: 5px;
+}
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    border-radius: 1px;
+}
+
+.navbar-toggle:before {
+    content: "Menu";
+    left: -50px;
+    top: 5px;
+    position: absolute;
+    width: 50px;
+    font-size: 19px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.sc-story-author h3 {
+    font-size: 21px !important;
+    font-weight: 600;
+}
+
+.sc-story-author .sc-post-date {
+    font-size: 12px !important;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.card-container, .sc-faces-container {
+    margin: 50px auto;
+    vertical-align: middle;
+    margin: 2em auto 2em auto;
+    max-width: 1200px;
+}
+
+.card-single {
+    border: 1px solid #e3e3e3;
+    border-radius: 0;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 2px 2px rgba(0, 0, 0, .05);
+    transition: 0.3s;
+    margin-bottom: 2em;
+}
+
+.card-single:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-single p {
+    font-size: 16px;
+    color: #555;
+    padding: 1em 0 .8em .8em;
+}
+
+.sc-sponsor img {
+    max-width: 280px;
+    vertical-align: middle;
+    margin: 1em auto 1.5em auto;
+}
+
+p.sc-sponsor-text {
+    color: #555;
+    padding-top: 1em;
+}
+
+@media only screen and (max-width: 2100px) {
+    .sc-50-logo {
+        margin: 12% auto 0 auto;
+        max-width: 350px;
+    }
+
+    .sc-bg-full {
+        min-height: 1000px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 5.2vw;
+        margin: 22px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 1.313em;
+    }
+
+    .home-slider {
+        height: 100vh;
+    }
+}
+
+@media only screen and (min-width: 1601px) {
+    .navbar-right {
+        float: right !important;
+        margin-top: 1.6em;
+        margin-right: -15px;
+    }
+}
+
+@media only screen and (max-width: 1600px) {
+
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-left, .navbar-right {
+        float: none !important;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 4px;
+    }
+
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-nav {
+        float: none !important;
+        margin-top: 7.5px;
+    }
+
+    .navbar-nav > li {
+        float: none;
+    }
+
+    .navbar-nav > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .collapse.in {
+        display: block !important;
+    }
+
+    .navbar-inverse .navbar-toggle {
+        margin-top: 1.8em;
+        border: none;
+    }
+
+    .sc-50-logo {
+        margin: 12% auto 0 auto;
+        max-width: 260px;
+    }
+
+    .sc-bg-full {
+        min-height: 1000px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 5.2vw;
+        margin: 22px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 1.313em;
+    }
+
+    .home-slider {
+        height: 100vh;
+    }
+
+    .parallax50 {
+        position: relative;
+        background: #000 url("images/building-broadway-edison.jpg") no-repeat center center;
+        background-position: top;
+        width: 100%;
+        min-height: 520px;
+        background-size: cover;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+
+    .parallax51 {
+        position: relative;
+        background: #000 url("images/2016-graduates-seattle-central.jpg") no-repeat center center;
+        background-position: top;
+        width: 100%;
+        min-height: 520px;
+        background-size: cover;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+
+    .parallax52 {
+        position: relative;
+        background: #000 url("images/jazz-class-student-seattle-central.jpg") no-repeat center center;
+        background-position: top;
+        width: 100%;
+        min-height: 520px;
+        background-size: cover;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+
+    .parallax53 {
+        position: relative;
+        background: #000 url("images/broadwayhigh-seattlecentral50.jpg") no-repeat center center;
+        background-position: top;
+        width: 100%;
+        min-height: 520px;
+        background-size: cover;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+
+    .parallax54 {
+        position: relative;
+        background: #000 url("images/broadway-2016-seattlecentral50.jpg") no-repeat center center;
+        background-position: top;
+        width: 100%;
+        min-height: 520px;
+        background-size: cover;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+
+}
+
+@media only screen and (max-width: 1500px) {
+
+    .sc-50-logo {
+        margin: 11% auto 0 auto;
+        max-width: 240px;
+    }
+
+    .sc-bg-full {
+        min-height: 900px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 5.9vw;
+        margin: 22px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 1.25em;
+    }
+
+}
+
+@media only screen and (max-width: 1400px) {
+
+    .sc-50-logo {
+        margin: 13% auto 0 auto;
+        max-width: 250px;
+    }
+
+    .sc-bg-full {
+        min-height: 900px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 5.9vw;
+        margin: 22px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 1.25em;
+    }
+
+}
+
+@media only screen and (max-width: 1300px) {
+
+    .sc-50-logo {
+        margin: 14% auto 0 auto;
+        max-width: 250px;
+    }
+
+    .sc-bg-full {
+        min-height: 800px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 5.9vw;
+        margin: 22px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 1em;
+    }
+
+}
+
+@media only screen and (max-width: 1100px) {
+
+    .sc-50-logo {
+        margin: 17% auto 0 auto;
+        max-width: 260px;
+    }
+
+    .sc-bg-full {
+        height: 500px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 5.8vw;
+        margin: 16px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 1em;
+    }
+
+    .parallax50, .parallax51, .parallax52, .parallax53, .parallax54 {
+        min-height: 540px;
+    }
+
+
+}
+
+@media only screen and (max-width: 900px) {
+
+    .sc-50-logo {
+        margin: 18% auto 0 auto;
+        max-width: 270px;
+    }
+
+    .sc-bg-full {
+        min-height: 740px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 6vw;
+        margin: 16px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+}
+
+
+
+@media only screen and (max-width: 1200px) {
+
+    .lead.mega-med-text {
+        font-size: 1.500em;
+        line-height: 1.5em;
+    }
+
+    .sc-title-heading {
+        font-size: 1.625em;
+        line-height: 1.5em;
+        letter-spacing: 1px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+    .lead.mega-med-text {
+        font-size: 1.313em;
+        line-height: 1.5em;
+    }
+
+    .sc-title-heading {
+        font-size: 1.500em;
+        line-height: 1.5em;
+    }
+
+    .navbar-brand > img {
+        display: block;
+        width: 220px;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+
+    .lead.mega-med-text {
+        margin: 1em auto 1em auto;
+        font-size: 1.125em;
+        line-height: 1.5em;
+        width: 95%;
+    }
+
+    .sc-negative-space {
+        padding: 2em 1.5em;
+    }
+
+    .sc-title-heading {
+        font-size: 1.50em;
+    }
+
+    .parallax50, .parallax51, .parallax52, .parallax53, .parallax54 {
+        min-height: 520px;
+    }
+
+}
+
+
+@media only screen and (max-width: 800px) {
+
+    .sc-fourteen-point-text p {
+        font-size: 11px;
+        line-height: 1;
+        margin: .5em 0 1em 0;
+    }
+
+    .parallax50, .parallax51, .parallax52, .parallax53, .parallax54 {
+        min-height: 410px;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 1.313em;
+    }
+
+    .sc-sponsor img {
+        max-width: 220px;
+        vertical-align: middle;
+        margin: 1em auto 1.5em auto;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+
+    .carousel-caption {
+        right: 20%;
+        left: 20%;
+        padding-bottom: 20px;
+    }
+
+    .navbar {
+        border-radius: 0;
+    }
+
+    .navbar-right {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next, .carousel-control .icon-prev {
+        width: 30px;
+        height: 30px;
+        margin-top: -10px;
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+
+    .lead {
+        font-size: 1em;
+    }
+
+    .sc-xsm-space-top {
+        margin-top: 2em;
+    }
+
+    .carousel-caption {
+        font-size: 14px;
+    }
+
+    .sc-single-column-text {
+        vertical-align: middle;
+        width: 95%;
+        margin: .5em auto .5em auto;
+    }
+
+    .sc-single-column-text p, .sc-single-column-text li {
+        font-size: 1em;
+        line-height: 1.5;
+        margin: 0 0 20px;
+    }
+
+    .navbar-brand > img {
+        display: block;
+        width: 200px;
+    }
+
+    p.sc-avatar-title {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+    .parallax50, .parallax51, .parallax52, .parallax53, .parallax54 {
+        min-height: 460px;
+    }
+
+    .navbar-inverse .navbar-toggle {
+        margin-top: 1.6em;
+        border: none;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 1em;
+    }
+
+    .sc-interior-page-top {
+        margin-top: 120px;
+    }
+
+    .sc-img-tagline {
+        max-width: 100px;
+    }
+
+    .btn-50 {
+        width: 70%;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+
+    .sc-50-logo {
+        margin: 25% auto 0 auto;
+        max-width: 210px;
+    }
+
+    .sc-bg-full {
+        min-height: 740px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 6vw;
+        margin: 16px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+    .btn {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .sc-bg-full{
+        height: 600px;
+    }
+
+    .lead.mega-med-text {
+        margin: .5em auto 1em auto;
+        font-size: 1em;
+        line-height: 1.5em;
+        width: 95%;
+    }
+
+    .sc-title-heading {
+        font-size: 1.313em;
+    }
+
+    .sc-fourteen-point-text p {
+        font-size: 7px;
+        line-height: 1;
+        margin: .5em 0 1em 0;
+    }
+
+    .h3, h3 {
+        font-size: 18px;
+    }
+
+    .parallax50, .parallax51, .parallax52, .parallax53, .parallax54 {
+        min-height: 200px;
+    }
+
+    .sc-avatar {
+        width: 85px;
+        height: 85px;
+    }
+
+    .navbar-brand > img {
+        display: block;
+        width: 180px;
+    }
+
+    .navbar-toggle .icon-bar + .icon-bar {
+        margin-top: 4px;
+    }
+
+    .navbar-toggle .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+    }
+
+    .navbar-toggle:before {
+        content: "Menu";
+        left: -42px;
+        top: 4px;
+        position: absolute;
+        width: 50px;
+        font-size: 16px;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    .sc-single-column-teaser-text p {
+        font-size: 14px;
+    }
+
+    .carousel-caption {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+
+    .sc-50-logo {
+        margin: 35% auto 0 auto;
+        max-width: 170px;
+    }
+
+    .sc-bg-full {
+        min-height: 640px;
+    }
+
+    .sc-fifty-home-header {
+        font-size: 6vw;
+        margin: 16px auto 0 auto;
+        font-family: "futura-pt", Futura, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: 1px;
+    }
+
+}

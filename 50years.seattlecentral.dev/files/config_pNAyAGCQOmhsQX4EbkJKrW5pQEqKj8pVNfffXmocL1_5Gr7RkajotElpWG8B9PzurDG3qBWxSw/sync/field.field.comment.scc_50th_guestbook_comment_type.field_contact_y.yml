@@ -1,0 +1,23 @@
+uuid: 01d509d1-38a2-48ad-9c9c-a4518d898b0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.scc_50th_guestbook_comment_type
+    - field.storage.comment.field_contact_y
+id: comment.scc_50th_guestbook_comment_type.field_contact_y
+field_name: field_contact_y
+entity_type: comment
+bundle: scc_50th_guestbook_comment_type
+label: ' Yes, I can be contacted to share my story and experience.'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: ' Yes, I can be contacted to share my story and experience.'
+  off_label: 'No, thank you.'
+field_type: boolean

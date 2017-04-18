@@ -1,0 +1,17 @@
+uuid: 4b38d23c-b4b3-4224-a82f-dd983597f92d
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: geolocation_footer
+type: geolocation_footer
+description: 'Google map widget for Drupal 8'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

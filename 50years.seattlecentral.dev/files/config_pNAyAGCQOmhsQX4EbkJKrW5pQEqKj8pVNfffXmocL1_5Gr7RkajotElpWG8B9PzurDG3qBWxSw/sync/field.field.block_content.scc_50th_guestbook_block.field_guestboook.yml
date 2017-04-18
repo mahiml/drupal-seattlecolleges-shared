@@ -1,0 +1,33 @@
+uuid: 332643c9-8f98-4f94-8464-5a260c29e3ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scc_50th_guestbook_block
+    - field.storage.block_content.field_guestboook
+  module:
+    - comment
+id: block_content.scc_50th_guestbook_block.field_guestboook
+field_name: field_guestboook
+entity_type: block_content
+bundle: scc_50th_guestbook_block
+label: guestbook
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    status: 2
+    cid: 0
+    last_comment_timestamp: 0
+    last_comment_name: null
+    last_comment_uid: 0
+    comment_count: 0
+default_value_callback: ''
+settings:
+  default_mode: 1
+  per_page: 50
+  anonymous: 1
+  form_location: true
+  preview: 0
+field_type: comment

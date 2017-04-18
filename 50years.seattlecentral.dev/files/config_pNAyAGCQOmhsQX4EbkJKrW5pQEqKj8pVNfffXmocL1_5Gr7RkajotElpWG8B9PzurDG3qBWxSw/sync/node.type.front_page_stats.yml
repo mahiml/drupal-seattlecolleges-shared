@@ -1,0 +1,17 @@
+uuid: 804424c2-607c-4d70-a6f5-fe53c9b6bb1f
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: front_page_stats
+type: front_page_stats
+description: 'content type for stats shown on front page'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

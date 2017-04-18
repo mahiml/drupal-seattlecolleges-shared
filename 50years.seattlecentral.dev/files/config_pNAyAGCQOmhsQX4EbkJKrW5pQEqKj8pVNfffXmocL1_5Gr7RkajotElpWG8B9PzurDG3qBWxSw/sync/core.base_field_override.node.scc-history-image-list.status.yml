@@ -1,0 +1,22 @@
+uuid: 0358b62a-010e-4524-bee2-f1d5f2c9eacd
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.SCC-History-Image-List
+id: node.SCC-History-Image-List.status
+field_name: status
+entity_type: node
+bundle: SCC-History-Image-List
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

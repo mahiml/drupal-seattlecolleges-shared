@@ -1,0 +1,38 @@
+uuid: 9f04e372-e24e-4614-88dc-c072f895a3bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scc_50th_then_and_now
+    - field.storage.block_content.field_then_and_now_imag
+  module:
+    - image
+id: block_content.scc_50th_then_and_now.field_then_and_now_imag
+field_name: field_then_and_now_imag
+entity_type: block_content
+bundle: scc_50th_then_and_now
+label: then_and_now_images
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

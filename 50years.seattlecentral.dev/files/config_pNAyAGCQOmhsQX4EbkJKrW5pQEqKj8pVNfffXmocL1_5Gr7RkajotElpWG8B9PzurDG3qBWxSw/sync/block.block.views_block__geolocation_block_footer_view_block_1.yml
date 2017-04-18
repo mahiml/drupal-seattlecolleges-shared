@@ -1,0 +1,30 @@
+uuid: bee8fe2e-811d-4f3b-a560-3596be7e1b67
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.geolocation_block_footer_view
+  module:
+    - system
+    - views
+  theme:
+    - scc_heros
+id: views_block__geolocation_block_footer_view_block_1
+theme: scc_heros
+region: footer
+weight: -9
+provider: null
+plugin: 'views_block:geolocation_block_footer_view-block_1'
+settings:
+  id: 'views_block:geolocation_block_footer_view-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '*'
+    negate: true
+    context_mapping: {  }

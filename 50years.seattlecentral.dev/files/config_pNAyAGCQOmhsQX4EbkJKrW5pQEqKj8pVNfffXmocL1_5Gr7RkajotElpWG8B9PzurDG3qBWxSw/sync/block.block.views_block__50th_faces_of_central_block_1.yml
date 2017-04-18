@@ -1,0 +1,30 @@
+uuid: 713847b6-a83c-4da6-9f07-6f2df2b3e6c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.50th_faces_of_central
+  module:
+    - system
+    - views
+  theme:
+    - scc_heros
+id: views_block__50th_faces_of_central_block_1
+theme: scc_heros
+region: content
+weight: -9
+provider: null
+plugin: 'views_block:50th_faces_of_central-block_1'
+settings:
+  id: 'views_block:50th_faces_of_central-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /50thCelebration
+    negate: false
+    context_mapping: {  }

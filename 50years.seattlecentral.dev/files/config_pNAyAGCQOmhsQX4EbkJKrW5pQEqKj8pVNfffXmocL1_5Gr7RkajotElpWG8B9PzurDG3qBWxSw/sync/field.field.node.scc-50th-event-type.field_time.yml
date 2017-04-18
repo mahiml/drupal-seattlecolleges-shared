@@ -1,0 +1,19 @@
+uuid: 9bbe20f4-4ade-4016-88b1-e9e914dcb237
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time
+    - node.type.SCC-50th-Event-Type
+id: node.SCC-50th-Event-Type.field_time
+field_name: field_time
+entity_type: node
+bundle: SCC-50th-Event-Type
+label: time
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,8 @@
+uuid: d7c33e0b-76ff-4786-bd98-2d0bb5865630
+langcode: en
+status: true
+dependencies: {  }
+id: search_block
+label: search_block
+revision: 0
+description: 'Block for search button for the front-page navigation collapse'

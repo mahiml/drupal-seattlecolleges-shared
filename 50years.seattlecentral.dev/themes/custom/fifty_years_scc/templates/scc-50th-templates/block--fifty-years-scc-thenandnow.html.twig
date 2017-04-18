@@ -1,0 +1,65 @@
+{% set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+'clearfix','container-fluid','bg-black','sc-negative-space'
+] %}
+{% set size =  content['field_then_and_now_imag']['#items']|length -1 %}
+<div class="parallax50 img-responsive"></div>
+<section id="then-and-now" {{ attributes.addClass(classes) }}>
+    <header>
+        <h2 class="sc-title-heading">{{ label }}</h2>
+    </header>
+    {% set index = 0 %}
+    {% set secondIndex = 0 %}
+    {% set isClosed = 0 %}
+    <div class="row sc-slider">
+        <div class="col-md-12">
+            <div id="then-and-now-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner" role="listbox">
+                    {% for i in 0..size %}
+                    {% if i == 0 %}
+                    <div class="item active">
+                        {% else %}
+                        <div class="item">
+                            {% endif %}
+                            <img src="{{ file_url(content['field_then_and_now_imag']['#object'].field_then_and_now_imag[i].entity.uri.value) }}"
+                                 alt="{{ content['field_then_and_now_imag']['#object'].field_then_and_now_imag[i].alt }} "/>
+                            <div class="carousel-caption">
+                                <p>{{ content['field_then_and_now_imag']['#object'].field_then_and_now_imag[i].alt }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a class="left carousel-control" href="#then-and-now-carousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#then-and-now-carousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="parallax51 img-responsive"></div>
+<section class="container-fluid sc-negative-space sc-negative-space">
+    <header>
+        <h2 class="sc-title-heading">Join the Celebration</h2>
+    </header>
+    <div class="row sc-single-column-text">
+        <div class="col-md-12">
+            <p class="text-center">Seattle Central College, a fixture of education and career training in the city, is celebrating its 50th Anniversary. You are invited to join students, staff, faculty and the community at our upcoming events and activities!</p>
+            <h2 class="text-center">Central to Inspiration</h2>
+            <p class="text-center">Student Showcase &amp; Open House<br />Wednesday, June 14, 2017 | 4 to 8 p.m.</p>
+            <p class="text-center"><a
+                        href="/events"
+                        class="btn btn-primary btn-lg btn-block btn-50" role="button">Learn More</a> {#<a
+                        href="/events" class="btn btn-default btn-lg btn-block btn-50" role="button">Other Events</a>#}
+            </p>
+        </div>
+    </div>
+</section>
+<div class="parallax52 img-responsive"></div>

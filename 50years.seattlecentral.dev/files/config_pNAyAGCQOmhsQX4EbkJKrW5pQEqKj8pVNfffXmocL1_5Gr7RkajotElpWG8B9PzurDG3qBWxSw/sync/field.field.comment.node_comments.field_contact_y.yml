@@ -1,0 +1,23 @@
+uuid: a6e63fad-9b2c-44df-bd64-e283b59100be
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.node_comments
+    - field.storage.comment.field_contact_y
+id: comment.node_comments.field_contact_y
+field_name: field_contact_y
+entity_type: comment
+bundle: node_comments
+label: ' Yes, I can be contacted by the Public Information Office to share my story and experience.'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

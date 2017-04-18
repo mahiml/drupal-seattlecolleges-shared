@@ -1,0 +1,21 @@
+uuid: 5fa94ef1-2381-4916-9409-7da8b3a60e5c
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.node_comments
+    - field.storage.comment.field_relationship
+  module:
+    - options
+id: comment.node_comments.field_relationship
+field_name: field_relationship
+entity_type: comment
+bundle: node_comments
+label: 'Please describe your relationship with Seattle Central (optional): '
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,8 @@
+uuid: e0db5e85-23fc-46c6-9cd3-aebefa0d7f59
+langcode: en
+status: true
+dependencies: {  }
+id: scc-50th-menu
+label: SCC_50th_Menu
+description: 'Menu for the 50th anniversary celerbration website'
+locked: false

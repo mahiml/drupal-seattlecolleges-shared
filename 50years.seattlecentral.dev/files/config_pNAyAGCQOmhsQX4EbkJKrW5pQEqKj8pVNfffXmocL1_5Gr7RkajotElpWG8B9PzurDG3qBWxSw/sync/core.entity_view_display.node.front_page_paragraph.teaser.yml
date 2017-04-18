@@ -1,0 +1,47 @@
+uuid: d7dbdc53-85c4-42c0-9a25-add5383f4558
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.front_page_paragraph.field_action_url
+    - field.field.node.front_page_paragraph.field_for
+    - field.field.node.front_page_paragraph.field_rank
+    - node.type.front_page_paragraph
+  module:
+    - link
+    - text
+    - user
+id: node.front_page_paragraph.teaser
+targetEntityType: node
+bundle: front_page_paragraph
+mode: teaser
+content:
+  field_action_url:
+    type: link
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_for:
+    type: text_trimmed
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  field_rank:
+    type: number_integer
+    weight: 2
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+hidden:
+  links: true

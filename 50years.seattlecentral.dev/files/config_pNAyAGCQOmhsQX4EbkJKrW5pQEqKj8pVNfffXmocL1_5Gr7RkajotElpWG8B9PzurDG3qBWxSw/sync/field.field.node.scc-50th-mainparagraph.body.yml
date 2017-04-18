@@ -1,0 +1,22 @@
+uuid: 8fc02966-141f-4ca6-9042-6df778e8e125
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.SCC-50th-MainParagraph
+  module:
+    - text
+id: node.SCC-50th-MainParagraph.body
+field_name: body
+entity_type: node
+bundle: SCC-50th-MainParagraph
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

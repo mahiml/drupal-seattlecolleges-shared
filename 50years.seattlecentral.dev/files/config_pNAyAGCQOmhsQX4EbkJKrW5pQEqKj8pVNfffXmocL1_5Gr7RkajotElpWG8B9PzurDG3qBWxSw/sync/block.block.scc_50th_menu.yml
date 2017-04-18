@@ -1,0 +1,29 @@
+uuid: f965b31e-95b8-4e1b-9eb0-499ae346a4c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.scc-50th-menu
+  module:
+    - system
+  theme:
+    - scc_heros
+id: scc_50th_menu
+theme: scc_heros
+region: navigation_collapsible
+weight: -15
+provider: null
+plugin: 'system_menu_block:scc-50th-menu'
+settings:
+  id: 'system_menu_block:scc-50th-menu'
+  label: SCC_50th_Menu
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/president\r\n/history\r\n/events"
+    negate: false
+    context_mapping: {  }

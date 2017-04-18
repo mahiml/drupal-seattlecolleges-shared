@@ -1,0 +1,52 @@
+uuid: 5ded9f83-f270-481c-9717-2859fa32ea61
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment
+    - field.field.comment.comment.comment_body
+    - field.field.comment.comment.field_contact_y
+    - field.field.comment.comment.field_date_timestamp
+    - field.field.comment.comment.field_email
+    - field.field.comment.comment.field_guest_name
+    - field.field.comment.comment.field_relationship
+  module:
+    - datetime
+    - entity_test
+    - text
+third_party_settings:
+  entity_test:
+    foo: bar
+_core:
+  default_config_hash: 1yBeJcGufCbnbSolmaYgTIXZWYUaO7kw6xszGA8TYs8
+id: comment.comment.default
+targetEntityType: comment
+bundle: comment
+mode: default
+content:
+  comment_body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+  field_date_timestamp:
+    weight: 2
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_guest_name:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden:
+  field_contact_y: true
+  field_email: true
+  field_relationship: true
+  links: true

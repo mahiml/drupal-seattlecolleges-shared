@@ -1,0 +1,446 @@
+body {
+    background-color: #fff;
+    font-family: "proxima-nova", Helvetica, Arial, sans-serif !important;
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+    margin: .25em 0 .15em 0;
+}
+
+h1, .h1 {
+    font-size: 36px;
+}
+
+h2, .h2 {
+    font-size: 24px;
+}
+
+h3, .h3 {
+    font-size: 22px;
+}
+
+h4, .h4 {
+    font-size: 22px;
+}
+
+.sc-img-tagline {
+    max-width: 150px;
+}
+
+.alignleft {
+    float: left;
+    margin: 24px 20px 10px 0px;
+}
+
+hr {
+    border: 0 !important;
+    border-top: 2px solid #eee !important;
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
+}
+
+.programs-module {
+    border-radius: 2px;
+    margin: 2px 0 16px 0;
+    min-height: 250px;
+}
+
+h3.programs-module-title {
+    color: #fff !important;
+    font-size: 21px;
+    font-weight: 700;
+    margin: 0;
+    padding: 16px;
+    text-shadow: 2px 2px #000;
+}
+
+.programs-module a:hover {
+    color: #fff !important;
+}
+
+.bg-white {
+    background-color: #fff !important;
+    color: #111 !important;
+}
+
+.bg-blue {
+    background-color: #004e6a !important;
+    color: #fff !important;
+}
+
+.bg-black {
+    background-color: #111 !important;
+    color: #fff !important;
+    padding: 20px;
+}
+
+.bg-black p {
+    font-weight: 300;
+}
+
+.bg-gold-content {
+    color: #000;
+    margin-top: 40px;
+    text-shadow: 1px 1px #ffc628;
+}
+
+.bg-grey {
+    background: #eee;
+    background: -webkit-linear-gradient(#fff, #eee);
+    background: -o-linear-gradient(#fff, #eee);
+    background: -moz-linear-gradient(#fff, #eee);
+    background: linear-gradient(#fff, #eee);
+    color: #111 !important;
+}
+
+.bg-grey-d {
+    background-color: #ddd !important;
+    color: #111 !important;
+    padding: 20px;
+}
+
+
+.bg-opacity {
+    background-image: url("../svi-images/opacity.png");
+    color: #111 !important;
+    padding: 30px;
+}
+
+.sc-single-column {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+::selection {
+    background: #74bb01;
+    color: #111;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.well {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    color: #555;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    min-height: 20px;
+    padding: 19px;
+}
+
+.well h4 {
+    color: #555;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: .6em;
+    margin-top: .4em;
+}
+
+.well a {
+    color: #0000ff;
+    text-decoration: none;
+}
+
+.well a:hover {
+    background-color: #eee;
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+.panel {
+    border-radius: 2px;
+}
+
+.panel, 
+.panel-heading {
+    border-radius: 2px;
+}
+
+.panel-title {
+    font-size: 21px;
+}
+
+.panel-title a, 
+.panel-title a:hover {
+    color: #111 !important;
+    font-weight: 500;
+}
+
+.btn {
+    border: 2px solid transparent;
+    border-radius: 2px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.49;
+}
+
+.btn-info {
+    color: #222;
+    background-color: #eee;
+    border: 1px solid #eee !important;
+}
+
+.btn-info:focus,
+.btn-info.focus {
+    color: #0a181d;
+    background-color: #73ba01;
+    border-color: #73ba01 !important;
+}
+
+.btn-info:hover {
+    color: #0a181d;
+    background-color: #73ba01;
+    border-color: #73ba01 !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #346094;
+    border: 1px solid #346094 !important;
+}
+
+.btn-success:focus,
+.btn-success.focus {
+    color: #0a181d;
+    background-color: #73ba01;
+    border-color: #73ba01 !important;
+}
+
+.btn-success:hover {
+    color: #0a181d;
+    background-color: #73ba01;
+    border-color: #73ba01 !important;
+}
+
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success {
+    color: #0a181d;
+    background-color: #73ba01;
+    border-color: #73ba01 !important;
+}
+
+.btn-success:active:hover,
+.btn-success.active:hover,
+.open > .dropdown-toggle.btn-success:hover,
+.btn-success:active:focus,
+.btn-success.active:focus,
+.open > .dropdown-toggle.btn-success:focus,
+.btn-success:active.focus,
+.btn-success.active.focus,
+.open > .dropdown-toggle.btn-success.focus {
+    color: #0a181d;
+    background-color: #73ba01;
+    border-color: #73ba01 !important;
+}
+
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success {
+    background-image: none;
+}
+
+.btn-primary {
+    color: #0a181d;
+    background-color: #73ba01;
+    border: 1px solid #73ba01;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    color: #fff;
+    background-color: #346094;
+    border: 1px solid #346094;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #346094;
+    border: 1px solid #346094;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #346094;
+    border: 1px solid #346094;
+}
+
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.open > .dropdown-toggle.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary.focus {
+    color: #fff;
+    background-color: #346094;
+    border: 1px solid #346094;
+}
+
+.thumbnail {
+    display: block;
+    padding: 4px;
+    border-radius: 2px;
+}
+
+.thumbnail .caption {
+    padding: 0 9px;
+}
+
+.thumbnail .caption h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.meet-the-team-intro {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    padding-bottom: 1.5em;
+    padding-top: 1.25em;
+}
+
+.jumbotron-stats {
+    position: relative;
+    /*    background: #000 url("images/broadway-seattle-central-at-night.jpg") no-repeat center center; */
+    background-position: top;
+    width: 100%;
+    min-height: 725px;
+    background-size: cover;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+p.sc-stats-number {
+    color: #FFF;
+    font-family: Futura;
+    font-size: 5em;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 1px;
+}
+
+p.sc-stats-text {
+    color: #FFF;
+    font-size: 1.5em;
+}
+
+.google-maps {
+    position: relative;
+    padding-bottom: 55%; // This is the aspect ratio
+height: 0;
+    overflow: hidden;
+}
+
+.google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@media only screen and (max-width: 1250px) {
+    .well {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        min-height: 20px;
+        padding: 16px;
+    }
+
+    .well h4 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: .4em;
+        margin-top: .5em;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .well, .well h4 {
+        font-size: 16px;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .well, .well h4 {
+        font-size: 14px;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .well, .well h4 {
+        font-size: 12px;
+    }
+}
+
+
+.parallax-cos {
+    /* The image used */
+    background-image: url("../svi-images/SVI-cosmetology.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-top {
+    /* The image used */
+    background-image: url("../svi-images/seattle-vocational-institute-graduates.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media only screen and (max-width: 1024px) {
+    .parallax-cos, 
+    .parallax-top {
+        height: 420px;
+        background-attachment: inherit;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .parallax-cos, 
+    .parallax-top {
+        height: 360px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .parallax-cos, 
+    .parallax-top {
+        height: 320px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .parallax-cos, 
+    .parallax-top {
+        height: 250px;
+    }
+}

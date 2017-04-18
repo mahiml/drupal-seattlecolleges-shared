@@ -1,0 +1,12 @@
+uuid: 725e8026-eb25-41dc-b9c3-3f88820212ee
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: c4zaT5cyPxuTXI6JOWt3qRtMvICT9tHB6d9a5VG-CmQ
+id: feedback
+label: 'Website feedback'
+recipients:
+  - mahim.lakhani@seattlecolleges.edu
+reply: ''
+weight: 0

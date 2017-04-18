@@ -1,0 +1,23 @@
+uuid: fccaa0d6-94b9-4fde-80c4-dc3da1ff3b4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_action_url
+    - node.type.front_page_paragraph
+  module:
+    - link
+id: node.front_page_paragraph.field_action_url
+field_name: field_action_url
+entity_type: node
+bundle: front_page_paragraph
+label: action_url
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

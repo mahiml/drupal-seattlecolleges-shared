@@ -1,0 +1,22 @@
+uuid: 091010e6-782a-418a-be47-7e64f003bf68
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.scc_50th_president_timeline
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.scc_50th_president_timeline.body
+field_name: body
+entity_type: block_content
+bundle: scc_50th_president_timeline
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

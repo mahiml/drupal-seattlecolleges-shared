@@ -1,0 +1,33 @@
+uuid: 5356179a-4117-466b-aef1-ab7fda2a2362
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.geolocation_footer.body
+    - field.field.node.geolocation_footer.field_google_map_field
+    - node.type.geolocation_footer
+  module:
+    - geolocation
+    - text
+    - user
+id: node.geolocation_footer.full
+targetEntityType: node
+bundle: geolocation_footer
+mode: full
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_google_map_field:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+  links:
+    weight: 100
+hidden: {  }

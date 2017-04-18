@@ -1,0 +1,34 @@
+<article  class="container sc-negative-space">
+    <h2>Presidents through the Years</h2>
+{% set size =  content['field_president_images']['#items']|length -1 %}
+    {% set index = 0 %}
+    {% set secondIndex = 0 %}
+    {% set isClosed = 0 %}
+    {% for i in 0..size %}
+        {% if index is divisible by(6) %}
+            <div class="row sc-fourteen-point-text">
+            {% set secondIndex = 1 %}
+            {% set isClosed = 1 %}
+            {% set index = index+1 %}
+        {% else %}
+            {% set index = index+1 %}
+            {% set secondIndex =  secondIndex + 1 %}
+        {% endif %}
+        <div class="col-xs-4 col-sm-2">
+            {% set aboutYear =  content['field_president_images']['#object'].field_president_images[i].alt | split(':::') %}
+            <img src="{{ file_url(content['field_president_images']['#object'].field_president_images[i].entity.uri.value) }}"
+                 class="img-responsive"
+                 alt="{{ aboutYear[0] }} "/>
+            <p>{{ aboutYear[0] }}<br/>{{ aboutYear[1] }}</p>
+        </div>
+        {% if not(secondIndex == 0) and (secondIndex is divisible by(6)) %}
+            </div>
+        {% else %}
+            {% set isClosed = 0 %}
+        {% endif %}
+        {% if isClosed == 1 %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</article>
+<div class="parallax50 img-responsive"></div>

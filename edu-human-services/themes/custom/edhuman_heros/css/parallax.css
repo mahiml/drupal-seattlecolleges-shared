@@ -1,0 +1,100 @@
+.parallax-early-childhood-family {
+    /* The image used */
+    background-image: url("../eduhum-images/first-day-of-class-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-chemical-dependency {
+    /* The image used */
+    background-image: url("../eduhum-images/broadway-campus-lawn-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-social-human-services {
+    /* The image used */
+    background-image: url("../eduhum-images/cherry-blossoms-broadway-campus-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-bas {
+    /* The image used */
+    background-image: url("../eduhum-images/cal-anderson-park-near-seattle-central-campus.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-top {
+    /* The image used */
+    background-image: url("../eduhum-images/broadway-campus-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media only screen and (max-width: 1024px) {
+    .parallax-early-childhood-family,
+    .parallax-social-human-services, 
+    .parallax-bas, 
+    .parallax-top {
+        height: 420px;
+        background-attachment: inherit;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .parallax-early-childhood-family,
+    .parallax-chemical-dependency,
+    .parallax-social-human-services,
+    .parallax-bas, 
+    .parallax-top {
+        height: 360px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .parallax-early-childhood-family,
+    .parallax-chemical-dependency,
+    .parallax-social-human-services,
+    .parallax-bas, 
+    .parallax-top {
+        height: 320px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .parallax-early-childhood-family,
+    .parallax-chemical-dependency,
+    .parallax-social-human-services,
+    .parallax-bas, 
+    .parallax-top {
+        height: 250px;
+    }
+}

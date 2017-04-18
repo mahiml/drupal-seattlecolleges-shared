@@ -1,0 +1,22 @@
+uuid: d6b1f33a-e9b1-4dfc-998e-7eae1ad83150
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.SCC-History-Image-List
+id: node.SCC-History-Image-List.promote
+field_name: promote
+entity_type: node
+bundle: SCC-History-Image-List
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

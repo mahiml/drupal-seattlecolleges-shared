@@ -1,0 +1,9 @@
+{% if items %}
+    {% for item in items %}
+        <li>
+            <a href="{{ item.url }}" data-target="{{ item.url.options['attributes']['title'] }}">{{ item.title }}</a>
+        </li>
+    {% endfor %}
+{% endif %}
+
+

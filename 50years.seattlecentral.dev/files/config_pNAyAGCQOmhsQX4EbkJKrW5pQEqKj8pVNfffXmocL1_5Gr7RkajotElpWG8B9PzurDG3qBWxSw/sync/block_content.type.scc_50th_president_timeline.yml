@@ -1,0 +1,8 @@
+uuid: ddefbad5-da1d-4116-9fd8-e1fd238bd13e
+langcode: en
+status: true
+dependencies: {  }
+id: scc_50th_president_timeline
+label: scc_50th_president_timeline
+revision: 0
+description: 'block for showing president''s timeline'

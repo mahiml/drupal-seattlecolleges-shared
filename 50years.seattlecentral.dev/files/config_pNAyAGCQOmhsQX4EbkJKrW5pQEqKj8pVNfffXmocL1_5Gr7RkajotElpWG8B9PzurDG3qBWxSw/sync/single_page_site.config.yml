@@ -1,0 +1,11 @@
+menu: scc-50th-menu
+menuclass: '#50thSpaMenu'
+class: ''
+title: '50th Celebration'
+tag: h2
+homepage: 1
+down: '50'
+up: '200'
+smoothscrolling: 1
+updatehash: 0
+offsetselector: ''

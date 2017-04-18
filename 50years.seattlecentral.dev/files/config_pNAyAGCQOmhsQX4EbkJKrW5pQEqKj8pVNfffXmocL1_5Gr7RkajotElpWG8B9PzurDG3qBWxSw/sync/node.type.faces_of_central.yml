@@ -1,0 +1,17 @@
+uuid: 1abd7d2f-dd56-496a-a80c-88083754a8e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: faces_of_central
+type: faces_of_central
+description: 'text, img background, quotes of our students'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

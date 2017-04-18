@@ -1,0 +1,21 @@
+uuid: 9f0ac2ef-e259-415c-8cf3-e63f058d176d
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.scc_50th_guestbook_comment_type
+    - field.storage.comment.field_relationship
+  module:
+    - options
+id: comment.scc_50th_guestbook_comment_type.field_relationship
+field_name: field_relationship
+entity_type: comment
+bundle: scc_50th_guestbook_comment_type
+label: 'Please describe your relationship with Seattle Central (optional): '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,21 @@
+uuid: bbc37f59-08ab-4a73-89f9-08e25b170cb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.entity_test_mulrev.field_test_text
+  module:
+    - entity_test
+    - text
+id: entity_test_mulrev.entity_test_mulrev.field_test_text
+field_name: field_test_text
+entity_type: entity_test_mulrev
+bundle: entity_test_mulrev
+label: 'Test text-field'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

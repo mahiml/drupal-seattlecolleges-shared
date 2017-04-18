@@ -1,0 +1,37 @@
+<div class="sc-header-home-page-links navbar-right">
+    {#{% set size =  content['field_profiles']['#items']|length -1 %}
+    {% for index in 0..size %}
+        {% set tokens =  content['field_profiles']['#object'].field_profiles[index].title|split("***") %}
+        <a class="btn btn-default" href="{{ tokens[1] }}" role="button">{{ tokens[0] }}</a>
+    {% endfor %}#}
+    <form class="navbar-form svi-invisible-1200" action="/search/node" method="get" id="search-block-form" accept-charset="UTF-8"
+          role="search">
+        <div class="input-group add-on">
+            <input class="form-search form-control" placeholder="Search SVI" type="text"
+                   placeholder="Search Seattle Vocational Institute" type="search" id="edit-keys" name="keys">
+            <div class="input-group-btn">
+                <button class="btn btn-info" name="search" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+    </form>
+    <div class="btn-group" role="toolbar">
+        {#<div class="svi-header-global-menu-search">
+            <a tabindex="0" class="btn btn-default" role="button" data-toggle="collapse"
+               data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch"><i class="icon ion-search"></i></a>
+        </div>#}
+        <button type="button" class="btn btn-default dropdown-toggle svi-invisible-1200" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+            Quick Links <span class="caret"></span>
+        </button>
+        {% set size =  content['field_quick_links_menu']['#items']|length - 1 %}
+        <ul class="dropdown-menu">
+            {% for index in 0..size %}
+                <li>
+                    <a target="_blank"
+                       href="{{ content.field_quick_links_menu[index]['#url'] }}">{{ content.field_quick_links_menu[index]['#title'] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

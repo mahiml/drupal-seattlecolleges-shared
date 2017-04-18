@@ -1,0 +1,628 @@
+.bg-white {
+    background-color: #fff !important;
+    color: #111 !important;
+}
+
+.bg-cream {
+    background-color: #ebe5e1 !important;
+    color: #111 !important;
+}
+
+.bg-lt-cream {
+    background-color: #f1ebe8 !important;
+    color: #111 !important;
+}
+
+.bg-blue {
+    background-color: #0074d9 !important;
+    color: #fff !important;
+}
+
+.bg-black {
+    background-color: #111 !important;
+    color: #fff !important;
+    padding: 20px;
+}
+
+.bg-black p {
+    font-weight: 300;
+}
+
+.bg-opacity {
+    background-image: url("../foundation-images/opacity.png");
+    color: #111 !important;
+    padding: 30px;
+}
+
+.enroll-now-smallscreens {
+    display: none;
+}
+
+.enroll-now-desktop {
+    border-radius: 2px 2px 0 0;
+    display: block;
+    margin-top: 775px;
+    max-width: 570px;
+    margin-left: 80px;
+}
+
+h1.site-section-title {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 100%;
+    margin-top: 0;
+    margin-bottom: 18px;
+    text-shadow: 2px 2px #000;
+}
+
+.impact-statement-spacing {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.impact-statement-type {
+    font-size: 24px;
+}
+
+.foundation-branding {
+    position: absolute;
+    top: 0;
+    right: 80px;
+}
+
+.foundation-branding img {
+    border-radius: 0;
+    width: 150px;
+}
+
+.jumbotron {
+    background-color: #eee;
+    background-image: url("../foundation-images/foundation-about-1.jpg");
+    background-size: cover;
+    color: inherit;
+    height: 1000px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+p.enroll-cta {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.parallax-top {
+    /* The image used */
+    background-image: url("../foundation-images/front-page-parallax.jpg");
+
+    /* Set a specific height */
+    height: 600px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.programs-title,
+.news-feed-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 auto;
+    padding: 20px 10px 7px 0;
+    text-transform: uppercase;
+}
+
+.programs-title {
+    border-bottom: 2px solid #111;
+    color: #111;
+}
+
+.news-feed-title {
+    border-bottom: 2px solid #111;
+    color: #111;
+}
+
+.jumbotron-news {
+    background-color: #eee;
+    background-image: url("../foundation-images/news-background.jpeg");
+    background-size: cover;
+    color: inherit;
+    margin-bottom: 0;
+    padding-bottom: 70px;
+}
+
+.program-page-main-content,
+.program-page-secondary-content {
+    font-size: 21px;
+    line-height: 1.5;
+    padding-bottom: 1.5em;
+    padding-top: 1.25em;
+}
+
+.program-page-main-content .basic-title,
+.program-page-secondary-content .basic-title  {
+    margin-bottom: 24px;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 700;
+}
+
+.program-page-secondary-content p a, .program-page-secondary-content address a {
+    color: #0000ff;
+    text-decoration: none;
+}
+
+.program-page-secondary-content p a:hover,
+.program-page-secondary-content p a:focus,
+.program-page-secondary-content address a:hover,
+.program-page-secondary-content address a:focus {
+    background-color: #eee;
+    color: #0000ff;
+    text-decoration: none;
+}
+
+.program-page-main-content h2, .program-page-secondary-content h2,
+.program-page-main-content h3, .program-page-secondary-content h3,
+.program-page-main-content h4, .program-page-secondary-content h4,
+.program-page-main-content h5, .program-page-secondary-content h5,
+.program-page-main-content h6, .program-page-secondary-content h6 {
+    font-weight: 700;
+    font-style: normal;
+}
+
+.program-page-main-content h2,
+.program-page-secondary-content h2 {
+    font-size: 22px;
+    line-height: 30px;
+    margin-top: 36px;
+    margin-bottom: 30px;
+}
+
+.program-page-main-content h3,
+.program-page-secondary-content h3 {
+    font-size: 22px;
+    line-height: 30px;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.program-page-main-content p, .program-page-secondary-content p,
+.program-page-main-content ol, .program-page-secondary-content ol,
+.program-page-main-content ul, .program-page-secondary-content ul {
+    margin: 0 0 1em;
+}
+
+.program-page-main-content ol, .program-page-secondary-content ol,
+.program-page-main-content ul, .program-page-secondary-content ul {
+    margin: 0 0 1em -12px;
+}
+
+.program-page-main-content ul li, .program-page-secondary-content ul li,
+.program-page-main-content ol li, .program-page-secondary-content ol li {
+    margin-bottom: 8px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    margin: 18px 0 30px 0;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.card img {
+    border-radius: 2px 2px 0 0;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+    border-radius: 2px;
+}
+
+.card-container {
+    padding: 2px 16px;
+}
+
+.cards-bottom {
+    margin-bottom: 30px;
+}
+
+.article-headline {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.article-headline a {
+    color: #222;
+}
+
+.sc-quote-text {
+    font-size: 21px;
+    line-height: 36px;
+    margin-top: 24px !important;
+}
+
+.sc-person-quote {
+    font-size: 16px;
+    font-style: italic;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1550px) {
+    .jumbotron {
+        height: 520px;
+    }
+
+    .enroll-now-desktop {
+        display: block;
+        margin-top: 283px;
+        max-width: 660px;
+        margin-left: 0;
+    }
+
+    h1.site-section-title {
+        font-size: 36px;
+    }
+
+    .foundation-branding {
+        right: 40px;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .jumbotron {
+        height: 420px;
+    }
+
+    .enroll-now-desktop {
+        margin-top: 201px;
+        max-width: 460px;
+    }
+
+    h1.site-section-title {
+        font-size: 30px;
+    }
+
+    .foundation-branding {
+        right: 20px;
+    }
+
+    .foundation-branding img {
+        width: 125px;
+    }
+
+    .programs-title,
+    .news-feed-title {
+        font-size: 18px;
+    }
+
+    p.enroll-cta {
+        font-size: 16px;
+    }
+
+    .program-page-main-content,
+    .program-page-secondary-content,
+    .program-page-main-content p.enroll-cta {
+        font-size: 16px;
+        padding-top: 1.15em;
+    }
+
+    .program-page-main-content .basic-title {
+        margin-bottom: 21px;
+        margin-top: 4px;
+        font-size: 30px;
+        line-height: 36px;
+        font-weight: 700;
+    }
+
+    .program-page-main-content h2,
+    .program-page-secondary-content h2 {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 26px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+    }
+
+    .program-page-main-content h3,
+    .program-page-secondary-content h3 {
+        color: #111;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .program-page-sidebar h4.list-group-item-heading {
+        font-size: 18px;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+    }
+
+    .breadcrumb>.active {
+        font-size: 13px;
+    }
+
+    p.sc-person-quote {
+        font-size: 14px;
+        text-align: center !important;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .jumbotron {
+        height: 420px;
+    }
+
+    .parallax-top {
+        height: 420px;
+        background-attachment: inherit;
+    }
+
+    .enroll-now-desktop {
+        display: none;
+    }
+
+    .enroll-now-smallscreens {
+        display: block;
+    }
+
+    h1.site-section-title {
+        color: #111;
+        font-size: 30px;
+        text-shadow: none;
+    }
+
+    .programs-title,
+    .news-feed-title {
+        font-size: 21px;
+    }
+
+    .article-headline {
+        font-size: 16px;
+    }
+
+    p.enroll-cta {
+        font-size: 18px;
+    }
+
+    .sc-quote-text {
+        font-size: 18px;
+        line-height: 30px;
+        margin-top: 20px !important;
+    }
+
+    .sc-person-quote {
+        font-size: 14px;
+    }
+
+    .program-page-main-content,
+    .program-page-secondary-content,
+    .program-page-main-content p.enroll-cta {
+        font-size: 18px;
+        padding: 0 24px 24px 24px;
+    }
+
+    .program-page-main-content .small-screen-section-title {
+        display: block;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .program-page-main-content .small-screen-section-title a {
+        background-color: #eee;
+        border-bottom: none;
+        color: #111;
+        font-weight: 500;
+    }
+
+    .program-page-main-content .small-screen-section-title a:hover {
+        background-color: #eee;
+        border-bottom: none;
+        color: #666;
+        font-weight: 500;
+    }
+
+    .program-page-main-content .basic-title {
+        margin-bottom: 24px;
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+        font-weight: 700;
+    }
+
+    .program-page-main-content h2,
+    .program-page-secondary-content h2 {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 28px;
+        margin-top: 26px;
+        margin-bottom: 12px;
+    }
+
+    .program-page-main-content h3,
+    .program-page-secondary-content h3 {
+        color: #111;
+        font-size: 18px;
+        line-height: 26px;
+        margin-top: 26px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .foundation-branding {
+        top: 235px;
+        right: 20px;
+    }
+
+    .foundation-branding img {
+        width: 100px;
+    }
+
+    .impact-statement-spacing {
+        padding-top: 30px;
+        padding-bottom: 0;
+    }
+
+    .impact-statement-type {
+        font-size: 18px;
+    }
+
+    .parallax-top {
+        height: 360px;
+    }
+
+    .programs-title,
+    .news-feed-title {
+        font-size: 18px;
+    }
+
+    p.enroll-cta {
+        font-size: 16px;
+    }
+
+    .sc-quote-text {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 18px !important;
+    }
+
+    .sc-person-quote {
+        font-size: 14px;
+    }
+
+    .program-page-main-content,
+    .program-page-secondary-content,
+    .article-headline {
+        font-size: 16px;
+    }
+
+    .program-page-main-content .basic-title {
+        margin-bottom: 21px;
+        margin-top: 16px;
+        font-size: 30px;
+        line-height: 36px;
+        font-weight: 700;
+    }
+
+    .program-page-main-content h2,
+    .program-page-secondary-content h2 {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 26px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+    }
+
+    .program-page-main-content h3,
+    .program-page-secondary-content h2 {
+        font-size: 16px;
+        line-height: 22px;
+        margin-top: 22px;
+        margin-bottom: 8px;
+    }
+
+    .jumbotron-news {
+        padding-bottom: 40px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .foundation-branding {
+        top: 163px;
+        right: 10px;
+    }
+
+    .jumbotron {
+        height: 300px;
+    }
+
+    .parallax-top {
+        height: 320px;
+    }
+
+    h1.site-section-title {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
+    .programs-title,
+    .news-feed-title {
+        font-size: 16px;
+    }
+
+    p.enroll-cta {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .sc-quote-text {
+        font-size: 14px;
+        line-height: 24px;
+        margin-top: 18px !important;
+    }
+
+    .sc-person-quote {
+        font-size: 12px;
+    }
+
+    .program-page-main-content,
+    .program-page-secondary-content,
+    .article-headline {
+        font-size: 14px;
+    }
+
+    .program-page-main-content .small-screen-section-title,
+    .program-page-main-content p.enroll-cta {
+        font-size: 12px;
+    }
+
+    .details-page-main-content .basic-title {
+        margin-bottom: 21px;
+        margin-top: 10px;
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .program-page-main-content h2,
+    .program-page-secondary-content h2 {
+        font-size: 17px;
+        line-height: 22px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+    }
+
+    .program-page-main-content h3,
+    .program-page-secondary-content h3 {
+        font-size: 14px;
+        line-height: 14px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .parallax-top {
+        height: 250px;
+    }
+
+    .enroll-now-smallscreens .btn,
+    .read-more-smallscreens .btn {
+        display: block;
+        margin-top: 10px;
+    }
+}

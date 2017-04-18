@@ -1,0 +1,44 @@
+uuid: 28f4e147-848a-44ad-847d-515892431216
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.SCC-50th-Event-Type.body
+    - field.field.node.SCC-50th-Event-Type.field_event_contact
+    - field.field.node.SCC-50th-Event-Type.field_event_logo
+    - field.field.node.SCC-50th-Event-Type.field_time
+    - node.type.SCC-50th-Event-Type
+  module:
+    - entity_test
+    - text
+    - user
+third_party_settings:
+  entity_test:
+    foo: bar
+id: node.SCC-50th-Event-Type.teaser
+targetEntityType: node
+bundle: SCC-50th-Event-Type
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 1
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  field_time:
+    type: string
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  links:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_event_contact: true
+  field_event_logo: true

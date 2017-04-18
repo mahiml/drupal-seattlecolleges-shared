@@ -1,0 +1,24 @@
+uuid: 87a4c1f1-288e-4c83-aeaf-e01f4d81138f
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment
+    - field.storage.comment.field_date_timestamp
+  module:
+    - datetime
+id: comment.comment.field_date_timestamp
+field_name: field_date_timestamp
+entity_type: comment
+bundle: comment
+label: date_time
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

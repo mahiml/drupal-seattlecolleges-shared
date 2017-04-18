@@ -1,0 +1,628 @@
+body {
+    font-family: "proxima-nova", Helvetica, Arial, sans-serif;
+}
+
+/* blog styles */
+.media {
+    border-top: 1px solid #ddd;
+    padding-top: 40px;
+}
+
+.media-left, .media>.pull-left {
+    padding-right: 36px;
+}
+
+.blog-list-page-main-content, .blog-list-page-sidebar {
+    font-size: 21px;
+    line-height: 1.5;
+    padding-top: 1.25em;
+}
+
+.blog-list-page-main-content {
+    color: #111;
+    padding-bottom: 1.8em;
+}
+
+.blog-list-page-main-content .small-screen-section-title {
+    display: none;
+}
+
+.blog-list-page-main-content .basic-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 48px;
+    margin-bottom: 16px;
+}
+
+.blog-list-page-main-content .img-hero {
+    border-radius: 2px 2px 0 0;
+    margin-top: 10px;
+}
+
+.blog-list-page-main-content .caption {
+    background-color: #eee;
+    border-radius: 0 0 2px 2px;
+    color: #444;
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.blog-list-page-main-content h2, .blog-list-page-main-content h3, .blog-list-page-main-content h4, .blog-list-page-main-content h5, .blog-list-page-main-content h6 {
+    font-weight: 700;
+    font-style: normal;
+}
+
+.blog-list-page-main-content h2 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-bottom: 16px;
+}
+
+.blog-list-page-main-content h3 {
+    color: #111;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.blog-list-page-main-content a, .well a {
+    text-decoration: none;
+    color: #0000ff;
+}
+
+.blog-list-page-main-content a:hover, .well a:hover {
+    background-color: #eee;
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+.blog-list-page-main-content p, .blog-list-page-main-content ol, .blog-list-page-main-content ul {
+    margin: 0 0 1.5em 0;
+}
+
+.blog-list-page-main-content ol, .blog-list-page-main-content ul {
+    margin: 0 0 1em -20px;
+}
+
+.blog-list-page-main-content ul li, .blog-list-page-main-content ol li {
+    margin-bottom: 14px;
+}
+
+.blog-list-page-sidebar {
+    padding-left: 1.5em;
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin-top: 40px !important;
+    margin-left: 0 !important;
+    border-radius: 2px;
+}
+
+.pagination-lg>li:first-child>a, .pagination-lg>li:first-child>span {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.pagination-lg>li:last-child>a, .pagination-lg>li:last-child>span {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #555;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #0066a1;
+    border-color: #0066a1;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.pager-nav {
+    background: #eee;
+    border-radius: 2px;
+}
+
+/* blog styles end */
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+    margin: 1.15em 0 .75em 0;
+}
+
+h1, .h1 {
+    color: #111;
+    font-size: 36px;
+    margin-bottom: .15em;
+    margin-top: 0;
+}
+
+h3, .h3 {
+    color: #111;
+    font-size: 21px;
+}
+
+h4, .h4 {
+    color: #111;
+    font-size: 21px;
+}
+
+hr {
+    border: 0;
+    border-top: 3px solid #eee;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+::selection {
+    background: #ffc628;
+    color: #111;
+}
+
+.jumbotron {
+    /*background-image: url("images/seattle-maritime-academy.jpg");*/
+    background-size: cover;
+    height: 500px;
+    margin: 0;
+}
+
+.breadcrumb-container {
+    padding-top: 30px;
+}
+
+.breadcrumb {
+    background-color: #fff;
+    border-radius: 2px;
+    color: #555;
+    font-size: 16px;
+    margin: 0;
+    padding: 0 0 0 4px;
+}
+
+.breadcrumb a {
+    color: #555;
+}
+
+.breadcrumb>.active {
+    color: #555;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.well {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    color: #555;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    min-height: 20px;
+    padding: 19px;
+}
+
+.well h4 {
+    color: #555;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: .6em;
+    margin-top: .4em;
+}
+
+.btn, .panel {
+    border-radius: 2px;
+}
+
+.btn-info {
+    color: #444;
+    background-color: #ddd;
+    border-color: #ddd;
+    border-radius:  2px 2px 0 0
+}
+
+.btn-info:focus,
+.btn-info.focus {
+    color: #fff;
+    background-color: #555;
+    border-color: #555;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #555;
+    border-color: #555;
+}
+
+.btn-info:active,
+.btn-info.active,
+.open > .dropdown-toggle.btn-info {
+    color: #fff;
+    background-color: #555;
+    border-color: #555;
+}
+
+.btn-info:active:hover,
+.btn-info.active:hover,
+.open > .dropdown-toggle.btn-info:hover,
+.btn-info:active:focus,
+.btn-info.active:focus,
+.open > .dropdown-toggle.btn-info:focus,
+.btn-info:active.focus,
+.btn-info.active.focus,
+.open > .dropdown-toggle.btn-info.focus {
+    color: #fff;
+    background-color: #555;
+    border-color: #555;
+}
+
+.btn-info:active,
+.btn-info.active,
+.open > .dropdown-toggle.btn-info {
+    background-image: none;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #0074d9;
+    border: 1px solid #0074d9 !important;
+    border-radius: 2px 2px 0 0 !important;
+    font-family: "futura-pt", Futura, Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.btn-success:focus,
+.btn-success.focus {
+    color: #fff;
+    background-color: #111;
+    border-color: #111 !important;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #111;
+    border-color: #111 !important;
+}
+
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success {
+    color: #fff;
+    background-color: #111;
+    border-color: #111 !important;
+}
+
+.btn-success:active:hover,
+.btn-success.active:hover,
+.open > .dropdown-toggle.btn-success:hover,
+.btn-success:active:focus,
+.btn-success.active:focus,
+.open > .dropdown-toggle.btn-success:focus,
+.btn-success:active.focus,
+.btn-success.active.focus,
+.open > .dropdown-toggle.btn-success.focus {
+    color: #fff;
+    background-color: #111;
+    border-color: #111 !important;
+}
+
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success {
+    background-image: none;
+}
+
+.blog-post {
+    margin-bottom: 60px;
+}
+
+.blog-post-title {
+    margin-bottom: 5px;
+    font-size: 40px;
+}
+
+.blog-post-meta {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.media-object {
+    padding-right: 20px;
+    width: 150px;
+}
+
+@media only screen and (max-width: 1600px) {
+    .jumbotron {
+        height: 450px;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 1450px) {
+    .jumbotron {
+        height: 420px;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    .jumbotron {
+        height: 360px;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .jumbotron {
+        height: 300px;
+    }
+
+    .media-left, .media>.pull-left {
+        padding-right: 20px;
+    }
+
+    .media {
+        border-top: 1px solid #ddd;
+        padding-top: 30px;
+    }
+
+    .blog-list-page-main-content p, .blog-list-page-main-content ol, .blog-list-page-main-content ul {
+        margin: 0 0 .7em 0;
+    }
+
+    .jumbotron {
+        height: 300px;
+    }
+
+    .blog-list-page-sidebar {
+        padding-right: 1.15em;
+    }
+
+    .blog-list-page-main-content, .details-page-sidebar {
+        font-size: 16px;
+        padding-top: 1.15em;
+    }
+
+    .blog-list-page-main-content .basic-title {
+        margin-bottom: 21px;
+        margin-top: 4px;
+        font-size: 30px;
+        line-height: 36px;
+        font-weight: 700;
+    }
+
+    .blog-list-page-main-content .caption {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .blog-list-page-main-content h2 {
+        color: #111;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 26px;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .blog-list-page-main-content h3 {
+        color: #111;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .blog-list-page-sidebar h4.list-group-item-heading {
+        font-size: 18px;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+    }
+
+    .breadcrumb>.active {
+        font-size: 13px;
+    }
+
+    .well {
+        color: #555;
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        min-height: 20px;
+        padding: 16px;
+    }
+
+    .well h4 {
+        color: #555;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: .4em;
+        margin-top: .5em;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .jumbotron {
+        height: 250px;
+    }
+
+    .breadcrumb-container {
+        padding: 24px 24px 0 24px;
+    }
+
+    .blog-list-page-main-content {
+        font-size: 18px;
+        padding: 0 24px 10px 24px;
+    }
+
+    .blog-list-page-sidebar {
+        padding: 0 15px 20px 15px;
+    }
+
+    .blog-list-page-main-content .basic-title {
+        margin-bottom: 24px;
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+        font-weight: 700;
+    }
+
+    .blog-list-page-main-content h2 {
+        color: #111;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 28px;
+    }
+
+    .blog-list-page-main-content h3 {
+        color: #111;
+        font-size: 18px;
+        line-height: 26px;
+        margin-top: 26px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+
+    .well, .well h4 {
+        font-size: 16px;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .jumbotron {
+        height: 200px;
+    }
+
+    .media-object {
+        padding-right: 10px;
+        width: 100px;
+    }
+
+    .breadcrumb-container {
+        padding: 30px 50px 0 50px;
+    }
+
+    .blog-list-page-main-content {
+        font-size: 16px;
+        padding: 0 50px 0 50px;
+    }
+
+    .blog-list-page-main-content .basic-title {
+        margin-bottom: 21px;
+        margin-top: 16px;
+        font-size: 30px;
+        line-height: 36px;
+        font-weight: 700;
+    }
+
+    .blog-list-page-main-content h2 {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 26px;
+    }
+
+    .blog-list-page-main-content h3 {
+        font-size: 16px;
+        line-height: 22px;
+        margin-top: 22px;
+        margin-bottom: 8px;
+    }
+
+    .blog-list-page-sidebar {
+        padding: 20px 50px;
+    }
+
+    .well, .well h4 {
+        font-size: 14px;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .jumbotron {
+        height: 150px;
+    }
+
+    .breadcrumb-container {
+        padding: 25px 25px 2px 25px;
+    }
+
+    .breadcrumb {
+        font-size: 10px;
+    }
+
+    .breadcrumb>.active {
+        font-size: 11px;
+    }
+
+    .blog-list-page-main-content .caption {
+        font-size: 10px;
+        margin-bottom: 20px;
+    }
+
+    .blog-list-page-main-content {
+        font-size: 14px;
+        padding: 0 25px 20px 25px;
+    }
+
+    .blog-list-page-sidebar {
+        padding: 0 25px 25px 25px;
+    }
+
+    .blog-list-page-main-content .basic-title {
+        font-size: 24px;
+        line-height: 30px;
+        margin-bottom: 14px;
+        margin-top: 10px;
+    }
+
+    .blog-list-page-main-content h2 {
+        font-size: 17px;
+        line-height: 22px;
+    }
+
+    .blog-list-page-main-content h3 {
+        font-size: 14px;
+        line-height: 14px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+
+    .well, .well h4 {
+        font-size: 12px;
+    }
+
+}

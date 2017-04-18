@@ -1,0 +1,38 @@
+uuid: bb04cfa8-a37a-49c0-8bd1-0c2e79a70b77
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_history_image
+    - node.type.SCC-History-Image-List
+  module:
+    - image
+id: node.SCC-History-Image-List.field_history_image
+field_name: field_history_image
+entity_type: node
+bundle: SCC-History-Image-List
+label: history_image
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

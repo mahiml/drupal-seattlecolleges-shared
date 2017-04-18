@@ -1,0 +1,20 @@
+uuid: cf370bec-e40f-4276-93bb-513402ade692
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_stat_summary
+field_name: field_stat_summary
+entity_type: node
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

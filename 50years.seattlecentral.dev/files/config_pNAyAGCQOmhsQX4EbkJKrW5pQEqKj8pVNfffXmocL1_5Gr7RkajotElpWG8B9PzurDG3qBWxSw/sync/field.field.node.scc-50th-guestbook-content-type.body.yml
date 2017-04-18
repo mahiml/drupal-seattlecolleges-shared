@@ -1,0 +1,22 @@
+uuid: 317180cc-6dc6-4dd0-9183-0e65cf07eeb8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.SCC-50th-Guestbook-Content-Type
+  module:
+    - text
+id: node.SCC-50th-Guestbook-Content-Type.body
+field_name: body
+entity_type: node
+bundle: SCC-50th-Guestbook-Content-Type
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

@@ -1,0 +1,608 @@
+.bg-black {
+    background-color: #111 !important;
+    color: #fff !important;
+    padding: 20px;
+}
+
+.jumbotron {
+    background-color: #eee;
+    background: -webkit-linear-gradient(#fff, #eee);
+    background: -o-linear-gradient(#fff, #eee);
+    background: -moz-linear-gradient(#fff, #eee);
+    background: linear-gradient(#fff, #eee);
+    color: #111 !important;
+    background-size: cover;
+    color: inherit;
+    height: 1000px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+
+.enroll-now-smallscreens {
+    display: none;
+}
+
+.enroll-now-desktop {
+    border-radius: 2px 2px 0 0;
+    display: block;
+    margin-top: 775px;
+    max-width: 570px;
+    margin-left: 80px;
+}
+
+.enroll-now-desktop-ca {
+    border-radius: 2px 2px 0 0;
+    display: block;
+    margin-top: 823px;
+    max-width: 570px;
+    margin-left: 80px;
+}
+
+.enroll-now-desktop-cw {
+    border-radius: 2px 2px 0 0;
+    display: block;
+    margin-top: 775px;
+    max-width: 670px;
+    margin-left: 80px;
+}
+
+.space-top-for-column {
+        margin-top: 0;
+    }
+
+h1.site-section-title {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 100%;
+    margin-top: 0;
+    margin-bottom: 18px;
+    text-shadow: 2px 2px #000;
+}
+
+.programs-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 auto;
+    padding: 20px 10px 7px 0;
+    text-transform: uppercase;
+}
+
+.programs-title {
+    border-bottom: 2px solid #111;
+    color: #111;
+}
+
+.program-page-main-content, 
+.program-page-secondary-content {
+    font-size: 21px;
+    line-height: 1.5;
+    padding-bottom: 1.5em;
+    padding-top: 1.25em;
+}
+
+.program-page-main-content .basic-title, 
+.program-page-secondary-content .basic-title  {
+    margin-bottom: 24px;
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 700;
+}
+
+.program-page-main-content h2, .program-page-secondary-content h2,
+.program-page-main-content h3, .program-page-secondary-content h3,
+.program-page-main-content h4, .program-page-secondary-content h4,
+.program-page-main-content h5, .program-page-secondary-content h5,
+.program-page-main-content h6, .program-page-secondary-content h6 {
+    font-weight: 700;
+    font-style: normal;
+}
+
+.program-page-main-content h2, 
+.program-page-secondary-content h2 {
+    font-size: 22px;
+    line-height: 30px;
+    margin-top: 36px;
+    margin-bottom: 30px;
+}
+
+.program-page-main-content h3, 
+.program-page-secondary-content h3 {
+    color: #555;
+    font-size: 22px;
+    line-height: 30px;
+    margin-top: 36px;
+    margin-bottom: 12px;
+}
+
+.program-page-main-content p, .program-page-secondary-content p, 
+.program-page-main-content ol, .program-page-secondary-content ol, 
+.program-page-main-content ul, .program-page-secondary-content ul {
+    margin: 0 0 1em;
+}
+
+.program-page-main-content ol, .program-page-secondary-content ol, 
+.program-page-main-content ul, .program-page-secondary-content ul {
+    margin: 0 0 1em -10px;
+}
+
+.program-page-main-content ul li, .program-page-secondary-content ul li, 
+.program-page-main-content ol li, .program-page-secondary-content ol li {
+    margin-bottom: 14px;
+}
+
+.program-page-main-content .btn-primary,
+.program-page-secondary-content .btn-primary {
+    color: #0a181d;
+    background-color: #73ba01;
+    border: 1px solid #73ba01;
+}
+
+.program-page-main-content .btn-primary:focus,
+.program-page-main-content .btn-primary.focus,
+.program-page-secondary-content .btn-primary:focus,
+.program-page-secondary-content .btn-primary.focus {
+    color: #fff;
+    background-color: #1a3e4c;
+    border: 1px solid #1a3e4c;
+    text-decoration: none;
+}
+
+.program-page-main-content .btn-primary:hover,
+.program-page-secondary-content .btn-primary:hover {
+    color: #fff;
+    background-color: #1a3e4c;
+    border: 1px solid #1a3e4c;
+    text-decoration: none;
+}
+
+.program-page-main-content a, 
+.program-page-secondary-content a {
+    text-decoration: none;
+    color: #0000ff;
+}
+
+.program-page-main-content a:hover, 
+.program-page-secondary-content a:hover {
+    background-color: #eee;
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    margin: 18px 0 30px 0;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+    border-radius: 2px;
+}
+
+.card-container {
+    padding: 2px 16px;
+}
+
+.cards-bottom {
+    margin-bottom: 30px;
+}
+
+.article-headline {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.article-headline a {
+    color: #222;
+}
+
+.sc-person-quote {
+    font-size: 16px;
+    font-style: italic;
+    text-align: center;
+}
+
+.sc-quote-text {
+    font-size: 21px;
+    line-height: 36px;
+    margin-top: 24px !important;
+}
+
+@media only screen and (max-width: 1920px) {
+    .jumbotron {
+        height: 920px;
+    }
+
+    .enroll-now-desktop {
+        display: block;
+        margin-top: 695px;
+        max-width: 520px;
+    }
+
+    .enroll-now-desktop-ca {
+        display: block;
+        margin-top: 743px;
+        max-width: 520px;
+    }
+
+    .enroll-now-desktop-cw {
+        display: block;
+        margin-top: 695px;
+        max-width: 660px;
+    }
+}    
+
+@media only screen and (max-width: 1680px) {
+    .jumbotron {
+        height: 840px;
+    }
+
+    .enroll-now-desktop {
+        display: block;
+        margin-top: 627px;
+    }
+
+    .enroll-now-desktop-ca {
+        display: block;
+        margin-top: 669px;
+    }
+
+    .enroll-now-desktop-cw {
+        display: block;
+        margin-top: 627px;
+    }
+
+    h1.site-section-title {
+        font-size: 42px;
+    }
+}
+
+@media only screen and (max-width: 1600px) {
+    .jumbotron {
+        height: 740px;
+    }
+
+    .enroll-now-desktop {
+        display: block;
+        margin-top: 527px;
+        max-width: 520px;
+    }
+
+    .enroll-now-desktop-ca {
+        display: block;
+        margin-top: 569px;
+        max-width: 520px;
+    }
+
+    .enroll-now-desktop-cw {
+        display: block;
+        margin-top: 527px;
+        max-width: 600px;
+    }
+
+    h1.site-section-title {
+        font-size: 42px;
+    }
+}
+
+@media only screen and (max-width: 1440px) {
+    .jumbotron {
+        height: 740px;
+    }
+
+    .enroll-now-desktop,
+    .enroll-now-desktop-ca,
+    .enroll-now-desktop-cw {
+        margin-left: 0;
+    }
+
+    h1.site-section-title {
+        font-size: 42px;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    .jumbotron {
+        height: 600px;
+    }
+
+    .enroll-now-desktop {
+        margin-top: 387px;
+        max-width: 450px;
+    }
+
+    .enroll-now-desktop-ca {
+        margin-top: 429px;
+        max-width: 450px;
+    }
+
+    .enroll-now-desktop-cw {
+        margin-top: 387px;
+        max-width: 560px;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    .jumbotron {
+        height: 630px;
+    }
+
+    .enroll-now-desktop {
+        margin-top: 429px;
+        max-width: 450px;
+    }
+
+    .enroll-now-desktop-ca {
+        margin-top: 465px;
+        max-width: 450px;
+    }
+
+    .enroll-now-desktop-cw {
+        margin-top: 429px;
+        max-width: 490px;
+    }
+
+    h1.site-section-title {
+        font-size: 36px;
+    }
+
+    .programs-title {
+        font-size: 19px;
+    }
+
+    p.enroll-cta {
+        font-size: 17px;
+    }
+
+    .program-page-main-content, 
+    .program-page-secondary-content, 
+    .program-page-main-content p.enroll-cta {
+        font-size: 17px;
+        padding-top: 1.15em;
+    }
+
+    .program-page-main-content .basic-title {
+        margin-bottom: 21px;
+        margin-top: 4px;
+        font-size: 31px;
+        line-height: 36px;
+        font-weight: 700;
+    }
+
+    .program-page-main-content h2, 
+    .program-page-secondary-content h2 {
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 26px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+    }
+
+    .program-page-main-content h3, 
+    .program-page-secondary-content h3 {
+        color: #111;
+        font-size: 17px;
+        line-height: 24px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .program-page-sidebar h4.list-group-item-heading {
+        font-size: 19px;
+    }
+
+    p.sc-person-quote {
+        font-size: 15px;
+        text-align: center !important;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .jumbotron {
+        height: 420px;
+    }
+
+    .enroll-now-desktop, 
+    .enroll-now-desktop-ca, 
+    .enroll-now-desktop-cw   {
+        display: none;
+    }
+
+    .enroll-now-smallscreens {
+        display: block;
+        padding: 20px;
+    }
+
+    h1.site-section-title {
+        color: #111;
+        font-size: 30px;
+        text-shadow: none;
+    }
+
+    .programs-title {
+        font-size: 22px;
+    }
+
+    p.enroll-cta {
+        font-size: 19px;
+    }
+
+    .program-page-main-content, 
+    .program-page-secondary-content, 
+    .program-page-main-content p.enroll-cta {
+        font-size: 18px;
+        padding: 0 24px 24px 24px;
+    }
+
+    .program-page-main-content .small-screen-section-title {
+        display: block;
+        font-size: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .program-page-main-content .small-screen-section-title a {
+        background-color: #eee;
+        border-bottom: none;
+        color: #111;
+        font-weight: 500;
+    }
+
+    .program-page-main-content .small-screen-section-title a:hover {
+        background-color: #eee;
+        border-bottom: none;
+        color: #666;
+        font-weight: 500;
+    }
+
+    .program-page-main-content .basic-title {
+        font-size: 33px;
+        font-weight: 700;
+        line-height: 36px;
+        margin-bottom: 24px;
+        margin-top: 20px;
+    }
+
+    .program-page-main-content h2, 
+    .program-page-secondary-content h2 {
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 28px;
+        margin-top: 26px;
+        margin-bottom: 12px;
+    }
+
+    .program-page-main-content h3, 
+    .program-page-secondary-content h3 {
+        color: #111;
+        font-size: 19px;
+        line-height: 26px;
+        margin-top: 26px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+
+    .programs-title {
+        font-size: 19px;
+    }
+
+    p.enroll-cta {
+        font-size: 17px;
+    }
+
+    .space-top-for-column {
+        margin-top: 15px;
+    }
+
+    .program-page-secondary-content img {
+        padding: 0;
+    }
+
+    .program-page-main-content, 
+    .program-page-secondary-content, 
+    .article-headline {
+        font-size: 17px;
+    }
+
+    .program-page-main-content .basic-title {
+        margin-bottom: 22px;
+        margin-top: 16px;
+        font-size: 30px;
+        line-height: 36px;
+        font-weight: 700;
+    }
+
+    .program-page-main-content h2, 
+    .program-page-secondary-content h2 {
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 26px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+    }
+
+    .program-page-main-content h3, 
+    .program-page-secondary-content h2 {
+        font-size: 17px;
+        line-height: 22px;
+        margin-top: 22px;
+        margin-bottom: 8px;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .jumbotron {
+        height: 300px;
+    }
+
+    h1.site-section-title {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
+    .programs-title, 
+    .news-feed-title {
+        font-size: 17px;
+    }
+
+    p.enroll-cta {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .program-page-main-content, 
+    .program-page-secondary-content, 
+    .article-headline {
+        font-size: 15px;
+    }
+
+    .program-page-main-content .small-screen-section-title, 
+    .program-page-main-content p.enroll-cta {
+        font-size: 13px;
+    }
+
+    .details-page-main-content .basic-title {
+        margin-bottom: 22px;
+        margin-top: 10px;
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .program-page-main-content h2, 
+    .program-page-secondary-content h2 {
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+    }
+
+    .program-page-main-content h3, 
+    .program-page-secondary-content h3 {
+        font-size: 15px;
+        line-height: 14px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .enroll-now-smallscreens .btn, 
+    .read-more-smallscreens .btn {
+        display: block;
+        margin-top: 10px;
+    }
+}

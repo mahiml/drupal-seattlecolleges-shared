@@ -1,0 +1,21 @@
+uuid: 8280d251-ccdb-40b3-81bc-04b1f30053b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_posted_on
+    - node.type.SCC-50th-Guestbook-Content-Type
+  module:
+    - datetime
+id: node.SCC-50th-Guestbook-Content-Type.field_posted_on
+field_name: field_posted_on
+entity_type: node
+bundle: SCC-50th-Guestbook-Content-Type
+label: posted_on
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

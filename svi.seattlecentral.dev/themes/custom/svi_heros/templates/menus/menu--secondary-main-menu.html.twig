@@ -1,0 +1,22 @@
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+<div class="list-group">
+    {{ menus.menu_links(items, attributes, 0,current_path) }}
+</div>
+{% macro menu_links(items, attributes, menu_level,current_path) %}
+    {% import _self as menus %}
+    {% if items %}
+        {% for item in items %}
+            {% set isActive = current_path == url_path(item.url) %}
+            {% set classes =['list-group-item', isActive ? 'active'] %}
+            <a{{ attributes.removeClass('active').addClass(classes) }} href="{{ item.url }}" data-toggle="collapse" data-target=".navbar-collapse">{{ item.title }}</a>
+            {% if item.below %}
+                {{ menus.menu_links(item.below,  attributes, menu_level + 1,current_path) }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}

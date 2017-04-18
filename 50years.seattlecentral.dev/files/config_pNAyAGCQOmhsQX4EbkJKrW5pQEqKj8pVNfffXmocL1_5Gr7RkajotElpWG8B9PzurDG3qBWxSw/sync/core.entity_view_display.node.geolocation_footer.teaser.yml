@@ -1,0 +1,41 @@
+uuid: 9709e7b9-fd42-465f-bd43-1c7f83ef38de
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.geolocation_footer.body
+    - field.field.node.geolocation_footer.field_google_map_field
+    - node.type.geolocation_footer
+  module:
+    - geolocation
+    - user
+id: node.geolocation_footer.teaser
+targetEntityType: node
+bundle: geolocation_footer
+mode: teaser
+content:
+  field_google_map_field:
+    type: geolocation_map
+    weight: 0
+    label: above
+    settings:
+      title: ''
+      info_text: ''
+      google_map_settings:
+        type: ROADMAP
+        zoom: '10'
+        mapTypeControl: 1
+        streetViewControl: 1
+        zoomControl: 1
+        scrollwheel: 1
+        disableDoubleClickZoom: 0
+        draggable: 1
+        height: 400px
+        width: 100%
+        info_auto_display: 1
+        style: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  links: true

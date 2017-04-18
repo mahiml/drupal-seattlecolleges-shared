@@ -1,0 +1,21 @@
+uuid: aa724fb9-b809-4679-9982-7cac5669daa7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_google_map_field
+    - node.type.geolocation_footer
+  module:
+    - geolocation
+id: node.geolocation_footer.field_google_map_field
+field_name: field_google_map_field
+entity_type: node
+bundle: geolocation_footer
+label: google_map_field
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation

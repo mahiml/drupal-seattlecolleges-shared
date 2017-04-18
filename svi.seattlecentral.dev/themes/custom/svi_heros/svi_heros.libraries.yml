@@ -1,0 +1,46 @@
+header-styling:
+  css:
+    theme:
+      css/common.css: {}
+      css/header.css: {}
+      css/footer.css: {}
+  js:
+      js/svi.js: {}
+  dependencies:
+      - bootstrap/theme
+
+page-details-styling:
+  css:
+    theme:
+      css/page-details.css: {}
+  js:
+      js/svi.js: {}
+
+top-page-styling:
+  css:
+    theme:
+      css/top-page.css: {}
+  js:
+      js/svi.js: {}
+
+program-page-styling:
+  css:
+    theme:
+      css/program-page.css: {}
+  js:
+      js/svi.js: {}
+
+blog-styling:
+  css:
+    theme:
+      css/blog.css: {}
+  js:
+      js/svi.js: {}
+
+table-styling:
+  css:
+    theme:
+      css/dataTables.bootstrap.min.css: {}
+  js:
+      js/jquery.dataTables.min.js: {}
+      js/dataTables.bootstrap.min.js: {}

@@ -1,0 +1,104 @@
+<?php
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+
+function mac_heros_preprocess_breadcrumb(&$variables)
+{
+    $request = \Drupal::request();
+    $route_match = \Drupal::routeMatch();
+    $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+
+    //this variable will avaliable in twig file.
+    $variables['current_page_title'] = $page_title;
+}
+
+/**
+ * @param array $suggestions
+ * @param array $variables
+ */
+function mac_heros_theme_suggestions_page_alter(array &$suggestions, array $variables)
+{
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $content_type = $node->bundle();
+        if (!empty($content_type)) {
+            $tokens = explode('-', trim($content_type));
+            $twigName = implode('__', $tokens);
+            $suggestions[] = 'page__' . $twigName;
+        }
+        $node_name = $node->getTitle();
+        if (isset($node_name)) {
+            $tokens = explode('-', trim($node_name));
+            $twigName = implode('__', $tokens);
+            $suggestions[] = 'page__' . $twigName;
+
+        }
+    }
+}
+
+
+function mac_heros_theme_suggestions_block_alter(array &$suggestions, array $variables)
+{
+    $content = $variables['elements']['content'];
+    if (isset($content['#block_content']) && $content['#block_content'] instanceof \Drupal\block_content\BlockContentInterface) {
+        $suggestions[] = 'block__' . $content['#block_content']->bundle();
+    }
+}
+
+
+function mac_heros_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+
+    if (strpos($form_id, 'contact_message_trainer_contact_form_form') !== FALSE || strpos($form_id, 'contact_message_trainer_signup_form_form') !== FALSE || strpos($form_id, 'contact_message_therapeutic_chair_massage_form') !== FALSE) {
+        $form['actions']['preview']['#access'] = FALSE;
+        $form['field_trainer_bio']['#disabled'] = TRUE;
+        // Submit
+        $form['actions']['submit']['#attributes']['class'][] = 'btn';
+        $form['actions']['submit']['#attributes']['class'][] = 'btn-success';
+        array_unshift($form['actions']['submit']['#submit'], 'mac_heros_hidden_form_data');
+    }elseif (isset($form_id) && strcmp($form_id, 'search_form') == 0) {
+        $form['#method'] = "get";
+    }
+
+
+}
+
+function mac_heros_hidden_form_data($form, \Drupal\Core\Form\FormStateInterface $form_state)
+{
+    $subject = '';
+    $form_id = $form['#form_id'];
+    if(strpos($form_id,'contact_message_trainer_contact_form_form') !== FALSE) {
+        $subject = 'Trainer Contact Form Response';
+    }elseif(strpos($form_id, 'contact_message_trainer_signup_form_form') !== FALSE){
+        $subject = 'Trainer Signup Form Response';
+    }elseif(strpos($form_id, 'contact_message_therapeutic_chair_massage_form') !== FALSE){
+        $subject = 'Therapeutic Chair Massage Form Response';
+    }else
+    {
+        $subject = 'Contact Form Inquiry';
+    }
+    $form_state->setValue('subject', $subject);
+}
+
+
+function mac_heros_theme_suggestions_form_alter(array &$suggestions, array $variables)
+{
+    if ($variables['element']['#form_id']) {
+        $suggestions[] = 'form__' . $variables['element']['#form_id'];
+    }
+}
+
+function mac_heros_preprocess_page_title(&$variables)
+{
+    $request = \Drupal::request();
+    if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+        $title = \Drupal::service('title_resolver')->getTitle($request, $route);
+        if (strcmp($title, 'Search') == 0) {
+            $variables['title'] = 'Search Mitchell Activity Center';
+        }
+    }
+}

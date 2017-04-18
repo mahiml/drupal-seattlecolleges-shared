@@ -1,0 +1,70 @@
+.parallax-bph {
+    /* The image used */
+    background-image: url("../bph-images/black-lives-matter-at-bph-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-erickson {
+    /* The image used */
+    background-image: url("../bph-images/specialty-desserts-and-breads-pastries.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-top {
+    /* The image used */
+    background-image: url("../bph-images/jazz-ensemble-at-bph-at-seattle-central.jpg");
+    /* Set a specific height */
+    height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .parallax-bph, 
+    .parallax-erickson, 
+    .parallax-top {
+        height: 420px;
+        background-attachment: inherit;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .parallax-bph, 
+    .parallax-erickson, 
+    .parallax-top {
+        height: 360px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .parallax-bph, 
+    .parallax-erickson, 
+    .parallax-top {
+        height: 320px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .parallax-bph, 
+    .parallax-erickson, 
+    .parallax-top {
+        height: 250px;
+    }
+}

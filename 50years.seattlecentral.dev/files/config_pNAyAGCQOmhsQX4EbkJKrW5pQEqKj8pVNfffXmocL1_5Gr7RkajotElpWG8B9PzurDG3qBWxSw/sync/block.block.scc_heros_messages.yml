@@ -1,0 +1,22 @@
+uuid: f52b3321-ad0a-4b3d-b2bb-4e93a91301af
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - scc_heros
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: scc_heros_messages
+theme: scc_heros
+region: '-1'
+weight: -7
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

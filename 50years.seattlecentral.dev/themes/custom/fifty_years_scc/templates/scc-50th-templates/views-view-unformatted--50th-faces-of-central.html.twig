@@ -1,0 +1,26 @@
+{% if title %}
+    <h3>{{ title }}</h3>
+{% endif %}
+{% set index = 0 %}
+{% set secondIndex = 0 %}
+{% set isClosed = 0 %}
+{% for row in rows %}
+    {% if index is divisible by(4) %}
+        <div class="row sc-faces-container">
+        {% set secondIndex = 1 %}
+        {% set isClosed = 1 %}
+        {% set index = index+1 %}
+    {% else %}
+        {% set index = index+1 %}
+        {% set secondIndex =  secondIndex + 1 %}
+    {% endif %}
+    {{ row.content }}
+    {% if not(secondIndex == 0) and (secondIndex is divisible by(4)) %}
+        </div>
+    {% else %}
+        {% set isClosed = 0 %}
+    {% endif %}
+{% endfor %}
+{% if isClosed == 1 %}
+    </div>
+{% endif %}

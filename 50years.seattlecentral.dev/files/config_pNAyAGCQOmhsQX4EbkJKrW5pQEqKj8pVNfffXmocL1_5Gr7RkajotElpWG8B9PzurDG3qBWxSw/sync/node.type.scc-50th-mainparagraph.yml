@@ -1,0 +1,17 @@
+uuid: 00234104-1ed3-4282-9ba9-1469c23577d9
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: SCC-50th-MainParagraph
+type: SCC-50th-MainParagraph
+description: 'This is the front page paragraph for SCC''s 50th anniversary celebration'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

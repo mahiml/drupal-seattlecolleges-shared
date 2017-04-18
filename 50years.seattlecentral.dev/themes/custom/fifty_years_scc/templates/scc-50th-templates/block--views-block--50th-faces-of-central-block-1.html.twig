@@ -1,0 +1,25 @@
+{% set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+'clearfix','container-fluid','bg-black-only','sc-negative-space'
+] %}
+<section id="faces-of-central" {{ attributes.addClass(classes) }}>
+    <div class="container">
+        <header>
+            <h2 class="sc-title-heading text-white" }}>{{ label }}</h2>
+            <div class="row sc-single-column-text">
+                <div class="col-md-12">
+                    <p class="text-white">For over 50 years, we have been central to empowerment, activism,
+                        inspiration and transformation. We invite you to share your Seattle Central College story by
+                        emailing <a href="mailto:PIO.Seattle@seattlecolleges.edu" target="_top"> PIO.Seattle@seattlecolleges.edu </a> or posting to social media using <a href="/#tagboard">#SeattleCentral50</a>.</p>
+                </div>
+            </div>
+        </header>
+    </div>
+    <div class="row sc-faces-container">
+        {% block content %}
+            {{ content }}
+        {% endblock %}
+    </div>
+</section>
