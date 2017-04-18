@@ -1,0 +1,4 @@
+fetch_from_news_center:
+  title: 'Fetch Data from NEWS CENTER'
+  description: 'With this permission user can import contents from NEWS CENTER'
+  restrict access: TRUE

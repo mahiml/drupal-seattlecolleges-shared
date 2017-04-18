@@ -1,0 +1,32 @@
+your_module.admin_settings:
+  path: '/admin/config/newscenter_rest_services'
+  defaults:
+    _form: 'Drupal\newscenter_rest_services\Form\NewsCenterClientConfigurationForm'
+    _title: 'Configuration form for News Center Client'
+  requirements:
+    _permission: 'administer site configuration'
+
+news_center.fetch_blog:
+  path: '/getNewsBlogs'
+  defaults: { _controller: '\Drupal\newscenter_rest_services\Controller\NewsCenterClient::getNewsBlogs' }
+  requirements:
+    _permission: 'fetch_from_news_center'
+
+news_center.fetch_news_appearance:
+  path: '/getNewsAppearances'
+  defaults: { _controller: '\Drupal\newscenter_rest_services\Controller\NewsCenterClient::getNewsAppearances' }
+  requirements:
+    _permission: 'fetch_from_news_center'
+
+news_center.fetch_important_announcements:
+  path: '/getImportantAnnouncements'
+  defaults: { _controller: '\Drupal\newscenter_rest_services\Controller\NewsCenterClient::getImportantAnnouncements' }
+  requirements:
+    _permission: 'fetch_from_news_center'
+
+# Process all queue items with batch
+news_center.fetch_all_data:
+  path: '/getAll'
+  defaults: { _controller: '\Drupal\newscenter_rest_services\Controller\NewsCenterClient::processAllItems' }
+  requirements:
+    _permission: 'fetch_from_news_center'

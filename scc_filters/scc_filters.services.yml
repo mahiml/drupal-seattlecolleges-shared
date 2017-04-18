@@ -1,0 +1,10 @@
+services:
+  scc_filters.twig_extension:
+    class: Drupal\scc_filters\TwigExtension\ObjectToArray
+    tags:
+      - { name: twig.extension }
+  scc_filters.php_function:
+    class: Drupal\scc_filters\TwigExtension\PhpFunctionExtension
+    tags:
+      - { name: twig.extension }
+
