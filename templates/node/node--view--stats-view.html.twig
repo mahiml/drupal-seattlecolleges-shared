@@ -1,0 +1,15 @@
+{%
+set classes = [
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+]
+%}
+<article{{ attributes.addClass(classes) }}>
+        <p class="sc-stats-number">{{ content["field_stat_value"][0]["#text"] | striptags('<b>')|raw}}</p>
+        <p class="sc-stats-text">{{ content["field_stat_key"][0]["#text"] |title }}</p>
+        <hr />
+</article>

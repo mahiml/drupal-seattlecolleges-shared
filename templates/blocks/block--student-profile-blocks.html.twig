@@ -1,0 +1,21 @@
+<div class="sc-header-home-page-links navbar-right">
+    {% set size =  content['field_profiles']['#items']|length -1 %}
+    {% for index in 0..size %}
+        {% set tokens =  content['field_profiles']['#object'].field_profiles[index].title|split("***") %}
+        <a class="btn btn-default" href="{{ tokens[1] }}" target="_blank" role="button" tabindex="0">{{ tokens[0] }}</a>
+    {% endfor %}
+    <div class="btn-group" role="toolbar" aria-label="Quick Links button group in the toolbar">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false" tabindex="0">
+            Quick Links <span class="caret"></span>
+        </button>
+        {% set size =  content['field_quick_links_menu']['#items']|length - 1 %}
+        <ul class="dropdown-menu">
+            {% for index in 0..size %}
+                <li>
+                    <a target="_blank" href="{{ content.field_quick_links_menu[index]['#url'] }}">{{ content.field_quick_links_menu[index]['#title'] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

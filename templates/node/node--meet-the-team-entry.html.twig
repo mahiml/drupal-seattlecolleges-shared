@@ -1,0 +1,11 @@
+<article{{ attributes }}>
+    <div{{ content_attributes.addClass('content') }}>
+        {{ content['field_img'] }}
+        <div class="program-page-secondary-content">
+            <h2 class="program-page-main-content">{{ content['field_member_name'] }}</h2>
+            {{ content['field_member_title'] }} <br/>
+            {{ content['field_member_blurb'] }} <br/>
+        </div>
+        {{ content['body'] }}
+    </div>
+</article>

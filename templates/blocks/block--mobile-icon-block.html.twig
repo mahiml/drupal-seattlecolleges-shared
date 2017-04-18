@@ -1,0 +1,23 @@
+{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+{% set classes = ['navbar', 'navbar-inverse'] %}
+
+{#
+<nav role="navigation" style="padding-bottom: 4px;"
+     aria-labelledby="{{ heading_id }}" {{ attributes.addClass(classes).removeClass('clearfix')|without('role', 'aria-labelledby') }}>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span><i class="icon ion-navicon"></i>
+            </button>
+            <a class="navbar-left sc-brand-small-screens" href="#"><img
+                        src="{{ file_url(content['field_img']['#object'].field_img.0.entity.uri.value) }} "
+                        alt="{{ content['field_img']['#object'].field_img.0.alt }}"/></a>
+            <span class="sc-search sc-search-mobile navbar-rightsearch-top-mobile" data-toggle="collapse"
+                  data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch"><i
+                        class="icon ion-search"></i></span>
+            <span class="sc-quick-links sc-quick-links-mobile navbar-right-top-mobile" style="cursor:pointer"
+                  onclick="openNav()"><span class="sr-only">Open side navigation</span> <i
+                        class="icon ion-ios-arrow-forward"></i></span>
+        </div>
+#}

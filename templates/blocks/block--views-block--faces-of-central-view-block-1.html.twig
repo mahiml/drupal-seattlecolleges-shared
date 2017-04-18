@@ -1,0 +1,24 @@
+
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+'clearfix',
+]
+%}
+<section{{ attributes.addClass(classes) }}>
+    <div class="container">
+        <div class="row sc-front-faces-of-central-hashtag">
+            <div class="col-md-12">
+                <h2 class="sc-front-title">#FacesOfCentral</h2>
+            </div>
+        </div>
+        <div class="row sc-front-faces-of-central-spotlight">
+    {% block content %}
+        {{ content }}
+    {% endblock %}
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,200 @@
+{{ attach_library('scc_heros/nav02-styling') }}
+
+    <div id="scSidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="icon ion-close"></i><span class="sr-only">Close side navigtion</span></a>
+      <h3>Quick Links</h3>
+      <a href="#">Class Schedule</a>
+      <a href="#">Calendar &amp; Events</a>
+      <a href="#">Contact Seattle Central</a>
+      <a href="#">Maps &amp; Directions</a>
+      <a href="#">News &amp; Updates</a>
+    </div>
+
+    <div id="scSearch" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeSearch()"><i class="icon ion-close"></i><span class="sr-only">Close search box</span></a>
+      <div class="overlay-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>Search Seattle Central</h1>
+              <form>
+                <div class="form-group sc-search-form-container">
+                  <input type="email" class="form-control" id="exampleInputSearch" placeholder="Type to search and hit enter">
+                </div>
+              </form>
+              <p>Popular search terms: <a href="#">Application</a>, <a href="#">MyCentral</a>, <a href="#">Transcripts</a>, <a href="#">FAFSA</a></p>
+            </div>
+          </div>
+
+        </div> <!-- /container -->
+      </div>
+    </div>
+
+    <div id="main">
+
+    <header> 
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-inverse">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Seattle Central College</a>
+            
+            <span class="sc-quick-links sc-info-tools-small-screens" style="cursor:pointer" onclick="openNav()"><span class="sr-only">Open side navigation</span> More <i class="icon ion-chevron-right"></i></span>
+            <span class="sc-search sc-info-tools-small-screens" style="cursor:pointer" onclick="openSearch()"><span class="sr-only">Open search form</span> <i class="icon ion-search"></i></span>
+          </div>
+          
+            <ul class="nav navbar-nav navbar-right-top">
+              <li class="sc-desktop-user-profiles-nav-items"><a href="#">Current Student</a></li>
+              <li class="sc-desktop-user-profiles-nav-items"><a href="#">International</a></li>
+              <li class="sc-desktop-user-profiles-nav-items"><a href="#">Community</a></li>
+              <li class="sc-desktop-user-profiles-nav-items"><a href="#">Employees</a></li>
+              <li class="sc-search" style="cursor:pointer" onclick="openSearch()"><span class="sr-only">Open search form</span> <i class="icon ion-search"></i></li>
+              <li class="sc-quick-links" style="cursor:pointer" onclick="openNav()"><span class="sr-only">Open side navigation</span> <i class="icon ion-chevron-right"></i></li>
+            </ul>
+                     
+        </div>
+      </nav>
+
+      <nav class="navbar navbar-default">
+        <div class="container">  
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <i class="icon ion-navicon-round"></i> Menu
+            </button>
+            <button type="button" class="btn btn-primary sc-get-started-small-screens">Get Started</button>
+            <div class="btn-group sc-more-tools-small-screens">
+              <button type="button" class="btn btn-more-mobile dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Open more tools</span> <i class="icon ion-grid"></i>
+              </button>
+              <ul class="dropdown-menu sc-profiles" style="min-width: 252px; padding: 10px;">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <img class="img-responsive" src="{{ file_url(node.field_icons[1].entity.uri.value) }}" alt="{{ node.field_icons[1].alt }}" style="width: 30px; margin: 20px auto 10px auto;" />
+                      <p class="text-center" style="font-size: 12px;">Current Students</p>
+                    </div>
+                    <div class="col-xs-6">
+                      <img class="img-responsive" src="{{ file_url(node.field_icons[3].entity.uri.value) }}" alt="{{ node.field_icons[3].alt }}" style="width: 30px; margin: 20px auto 10px auto;" />
+                      <p class="text-center" style="font-size: 12px;">International</p>
+                    </div>    
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <img class="img-responsive" src="{{ file_url(node.field_icons[0].entity.uri.value) }}" alt="{{ node.field_icons[0].alt }}" style="width: 30px; margin: 20px auto 10px auto;" />
+                      <p class="text-center" style="font-size: 12px;">Community</p>
+                    </div>
+                    <div class="col-xs-6">
+                      <img class="img-responsive" src="{{ file_url(node.field_icons[2].entity.uri.value) }}" alt="{{ node.field_icons[2].alt }}" style="width: 30px; margin: 20px auto 10px auto;" />
+                      <p class="text-center" style="font-size: 12px;">Employees</p>
+                    </div>    
+                  </div>    
+                </ul>
+            </div>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Programs <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Bachelor's Degrees</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">College Transfer</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Career Training</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Basic &amp; Transitional Studies</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Finish High School</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Alternate Programs</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Continuing Education</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">International Student Programs</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Enrollment &amp; Funding <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Enrollment &amp; Admissions</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Financial Aid &amp; Funding</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Registration</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Graduation</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Campus Life <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Student Support &amp; Resources</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Student Leadership &amp; Activities</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Explore Campus</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Administrative Services</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">About Seattle Central</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">News &amp; Events</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Leadership</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Policies &amp; Proceduress</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Visit Seattle Central</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Contact Seattle Central</a></li>
+                </ul>
+              </li>
+              <a href="#" class="btn btn-primary sc-cta-desktop-get-started pull-right" role="button">Get Started</a> 
+            </ul>
+          </div>  
+          </div><!--/.nav-collapse -->
+        </nav>
+
+    </header>
+
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Corduroy</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eros dui, commodo a est vel, volutpat scelerisque eros. Cras dignissim risus viverra felis pharetra mattis. Nullam rutrum vehicula quam vel molestie.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Primary Button</a>
+        </p>
+      </div>
+
+    </div> <!-- /container -->
+
+    </div> <!-- /main -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+    function openNav() {
+        document.getElementById("scSidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("scSidenav").style.width = "0";
+    }
+
+    function openSearch() {
+    document.getElementById("scSearch").style.height = "100%";
+    }
+
+    function closeSearch() {
+    document.getElementById("scSearch").style.height = "0%";
+    }
+    </script>

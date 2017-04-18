@@ -1,0 +1,37 @@
+<article{{ attributes }}>
+    <div{{ content_attributes }}>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-md-offset-2 program-page-secondary-content">
+                    <h2 class="program-page-main-content">{{ label }}</h2>
+                    {{ content['body'] }}
+                </div>
+                {% set size =  content['field_members']['#items']|length -1 %}
+                {% set should_close = 0 %}
+                {% for index in 0..size %}
+                    {% if index >= 0 and index is divisible by(4) %}
+                        <div class="row">
+                        {% set should_close = 1 %}
+                    {% endif %}
+                    <div class="col-xs-6 col-sm-3">
+                        <a href="{{ path('entity.node.canonical', {'node': content['field_members']['#items'][index].entity.nid.0.value }) }}">
+                            <div class="thumbnail">
+                                <img src="{{ file_url(content['field_members']['#items'][index].entity.field_img.0.entity.uri.value) }}"
+                                     alt="{{ content['field_members']['#items'][index].entity.field_img.0.alt }}">
+                                <div class="caption">
+                                    <h3> {{ content['field_members']['#items'][index].entity.field_member_name.0.value }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% if (index+1) is divisible by(4) and should_close == 1 %}
+                        {% set should_close = 0 %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {% if should_close == 1 %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</article>

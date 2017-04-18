@@ -1,0 +1,9 @@
+{% set size =  content['field_student_types']['#items']|length - 1%}
+<div class="nav navbar-nav pull-left">
+    {% for index in 0..size %}
+        <a class= "btn btn-default" href="{{ content['field_student_types'][index]['#url'] }}">
+            {{ content['field_student_types'][index]['#title'] }}
+        </a>
+            {% if not loop.last %}&#x0002F;{% endif %}
+    {% endfor %}
+</div>
