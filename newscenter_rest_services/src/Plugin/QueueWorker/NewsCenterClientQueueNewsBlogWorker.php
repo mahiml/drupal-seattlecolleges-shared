@@ -37,9 +37,9 @@ class NewsCenterClientQueueNewsBlogWorker extends NewsCenterClientQueue
         // Query for newscenter_blog_entry type node using unique identifier; if none exists, create one else update
         $nid = $entity_query_service->condition('status', 1)->condition('type', 'newscenter_blog_entry')
             ->condition('field_unique_identifier', $unique_identifier)->execute();
-        $node = null;
         if (empty($nid)) {
             //create a new node
+            $node = null;
             $node = Node::create(array(
                 'type' => 'newscenter_blog_entry',
                 'body' => array(
@@ -51,23 +51,38 @@ class NewsCenterClientQueueNewsBlogWorker extends NewsCenterClientQueue
                 'promote' => 0,
                 'created' => REQUEST_TIME,
             ));
-
+            $node->title = $content['news_title'];
+            $node->body->value = $content['news_body'];
+            $node->field_unique_identifier = $content['news_db_key'];
+            $node->field_author = $content['news_author'];
+            $node->field_newscenter_image_url = $content['news_img_details']['url'];
+            $node->field_newscenter_url = $content['news_external_url'];
+            $node->field_subtitle = $content['news_subtitle'];
+            $node->field_newscenter_node_id = $content['news_node_id'];
+            $this->upsertTags($node, $content['news_tag_array']);
+            $node->changed = REQUEST_TIME;
+            $node->validate();
+            $node->save();
         } else {
-            $node = $entity_load_service->load($nid);
+            foreach($nid as $node_id){
+                $node = null;
+                $node = $entity_load_service->load($node_id);
+                $node->title = $content['news_title'];
+                $node->body->value = $content['news_body'];
+                $node->field_unique_identifier = $content['news_db_key'];
+                $node->field_author = $content['news_author'];
+                $node->field_newscenter_image_url = $content['news_img_details']['url'];
+                $node->field_newscenter_url = $content['news_external_url'];
+                $node->field_subtitle = $content['news_subtitle'];
+                $node->field_newscenter_node_id = $content['news_node_id'];
+                $this->upsertTags($node, $content['news_tag_array']);
+                $node->changed = REQUEST_TIME;
+                $node->validate();
+                $node->save();
+            }
         }
-        $node->title = $content['news_title'];
-        $node->body->value = $content['news_body'];
-        $node->field_unique_identifier = $content['news_db_key'];
-        $node->field_author = $content['news_author'];
-        $node->field_newscenter_image_url = $content['news_img_details']['url'];
-        $node->field_newscenter_url = $content['news_external_url'];
-        $node->field_subtitle = $content['news_subtitle'];
-        $node->field_newscenter_node_id = $content['news_node_id'];
-        $this->upsertTags($node, $content['news_tag_array']);
-        $node->changed = REQUEST_TIME;
 
-        $node->validate();
-        $node->save();
+
     }
 
 
