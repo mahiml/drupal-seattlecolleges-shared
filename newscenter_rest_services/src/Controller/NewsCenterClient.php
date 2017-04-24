@@ -28,15 +28,13 @@ class NewsCenterClient extends ControllerBase
     /**
      * @var QueueWorkerManager
      */
-    protected $queueManager;
 
     /**
      * {@inheritdoc}
      */
-    public function __construct(QueueFactory $queue_factory, QueueWorkerManager $queue_manager)
+    public function __construct(QueueFactory $queue_factory)
     {
         $this->queueFactory = $queue_factory;
-        $this->queueManager = $queue_manager;
     }
 
     /**
@@ -45,19 +43,42 @@ class NewsCenterClient extends ControllerBase
     public static function create(ContainerInterface $container)
     {
         $queue_factory = $container->get('queue');
-        $queue_manager = $container->get('plugin.manager.queue_worker');
-
-        return new static($queue_factory, $queue_manager);
+        return new static($queue_factory);
     }
 
     /**
      * Fetch data from URL and create it to entities based on flag
      */
-    protected function getContents(Url $get_url)
+    protected function getContents($get_url)
     {
         // fetch data from get_url
         $contents = array();
-        print_r($get_url);
+        $raw_data = file_get_contents($get_url);
+        $json = json_decode($raw_data, true);
+        foreach($json as $key=>$value) {
+            $data = [];
+            $data['news_node_id'] = $value['nid'][0]['value'];
+            $data['news_body'] = $value['body'][0]['value'];
+            $data['news_author'] = $value['field_author'][0]['value'];
+            $raw_tag_array = $value['field_blog_tags'];
+            $tag_array=[];
+            foreach($raw_tag_array as $key1=>$data1){
+                if(!empty($data1['url'])){
+                    $tag_url = $data1['url'];
+                    $exploded_tag_url = explode('/', $tag_url);
+                    $tag_array[strtoupper(end($exploded_tag_url))]= $tag_url;
+                }
+            }
+            $data['news_tag_array'] = $tag_array;
+            $data['news_date_posted'] = $value['field_date_posted'][0]['value'];
+            $data['news_external_url'] = $value['field_external_url'][0]['uri'];
+            $data['news_img_details'] = $value['field_img'][0];
+            $data['news_subtitle'] = $value['field_subtitle'][0]['value'];
+            $data['news_db_key'] = $value['field_unique_identifier'][0]['value'];
+            $data['news_title']= $value['title'][0]['value'];
+            $contents[] = $data;
+        }
+     //   print_r($contents);
         // Return with the contents
         return $contents;
     }
@@ -69,7 +90,7 @@ class NewsCenterClient extends ControllerBase
     {
         $url = \Drupal::config('newscenter_rest_services.settings')->get('news_center_blog_url');
         // Get contents array
-        $contents = $this->getContents(Url::fromUri($url));
+        $contents = $this->getContents($url);
         if(!empty($contents)) {
             foreach ($contents as $content) {
                 // Get the queue implementation news blogs
