@@ -12,15 +12,9 @@ news_center.fetch_blog:
   requirements:
     _permission: 'fetch_from_news_center'
 
-news_center.fetch_news_appearance:
-  path: '/getNewsAppearances'
-  defaults: { _controller: '\Drupal\newscenter_rest_services\Controller\NewsCenterClient::getNewsAppearances' }
-  requirements:
-    _permission: 'fetch_from_news_center'
-
 news_center.fetch_important_announcements:
-  path: '/getImportantAnnouncements'
-  defaults: { _controller: '\Drupal\newscenter_rest_services\Controller\NewsCenterClient::getImportantAnnouncements' }
+  path: '/getStudentStories'
+  defaults: { _controller: '\Drupal\newscenter_rest_services\Controller\NewsCenterClient::getStudentStories' }
   requirements:
     _permission: 'fetch_from_news_center'
 

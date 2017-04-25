@@ -11,7 +11,8 @@
 */
 function newscenter_stamper_node_presave(Drupal\Core\Entity\EntityInterface $entity)
 {
-    if (isset($entity) && $entity->getType() == 'news_blog') {
+    if (isset($entity) && (($entity->getType() == 'newscenter_blog_newsmention')
+    || ($entity->getType() == 'newscenter_student_story'))) {
         if (empty($entity->get('field_unique_identifier')->get(0))) {
             $unique_identifier = uniqid();
             $entity->field_unique_identifier->value = $unique_identifier;

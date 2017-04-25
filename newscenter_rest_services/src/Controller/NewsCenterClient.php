@@ -54,13 +54,14 @@ class NewsCenterClient extends ControllerBase
         // fetch data from get_url
         $contents = array();
         $raw_data = file_get_contents($get_url);
+        $parsed = parse_url($get_url);
         $json = json_decode($raw_data, true);
         foreach($json as $key=>$value) {
             $data = [];
             $data['news_node_id'] = $value['nid'][0]['value'];
             $data['news_body'] = $value['body'][0]['value'];
-            $data['news_author'] = $value['field_author'][0]['value'];
-            $raw_tag_array = $value['field_blog_tags'];
+            $data['news_author'] = isset($value['field_author']) && !empty($value['field_author']) ? $value['field_author'][0]['value'] : '';
+            $raw_tag_array = $value['field_newscenter_tags'];
             $tag_array=[];
             foreach($raw_tag_array as $key1=>$data1){
                 if(!empty($data1['url'])){
@@ -71,9 +72,14 @@ class NewsCenterClient extends ControllerBase
             }
             $data['news_tag_array'] = $tag_array;
             $data['news_date_posted'] = $value['field_date_posted'][0]['value'];
-            $data['news_external_url'] = $value['field_external_url'][0]['uri'];
-            $data['news_img_details'] = $value['field_img'][0];
-            $data['news_subtitle'] = $value['field_subtitle'][0]['value'];
+            if(!empty( $value['field_external_url'][0]['uri'])){
+                $data['news_external_url'] = $value['field_external_url'][0]['uri'];
+            }else if(!empty( $data['news_node_id'])){
+                $new_url = $parsed['scheme'].'://'.$parsed['host'].':'.$parsed['port'].'/node/'.$data['news_node_id'];
+                $data['news_external_url'] = $new_url;
+            }
+            $data['news_img_details'] = isset($value['field_img']) && !empty($value['field_img']) ? $value['field_img'][0] : array();
+            $data['news_subtitle'] = isset($value['field_subtitle']) && !empty($value['field_subtitle']) ? $value['field_subtitle'][0]['value'] : '';
             $data['news_db_key'] = $value['field_unique_identifier'][0]['value'];
             $data['news_title']= $value['title'][0]['value'];
             $contents[] = $data;
@@ -82,6 +88,7 @@ class NewsCenterClient extends ControllerBase
         // Return with the contents
         return $contents;
     }
+
 
     /**
      * Page where the fetched data is queued for news blogs
@@ -108,17 +115,16 @@ class NewsCenterClient extends ControllerBase
     }
 
     /**
-     * Page where the fetched data is queued for news appearances
-     */
-    public function getNewsAppearances()
+     * Page where the fetched data is queued for news mentions
+     /
+    public function getNewsMentions()
     {
-        $url = \Drupal::config('newscenter_rest_services.settings')->get('appearance_in_news_url');
-        // Get contents array
+        $url = \Drupal::config('newscenter_rest_services.settings')->get('mention_in_news_url');
         $contents = $this->getContents(Url::fromUri($url));
         if(!empty($contents)) {
             foreach ($contents as $content) {
                 // Get the queue implementation news blogs
-                $queue = $this->queueFactory->get('news_appearance_creation_queue');
+                $queue = $this->queueFactory->get('news_mention_creation_queue');
                 // Create new queue item
                 $item = new \stdClass();
                 $item->data = $content;
@@ -130,19 +136,19 @@ class NewsCenterClient extends ControllerBase
             '#markup' => $this->t('@count queue items are created.', array('@count' => count($contents))),
         );
     }
-
+    */
     /**
-     * Page where the fetched data is queued for important announcements
+     * Page where the fetched data is queued for student stories
      */
-    public function getImportantAnnouncements()
+    public function getStudentStories()
     {
-        $url = \Drupal::config('newscenter_rest_services.settings')->get('important_announcements_url');
+        $url = \Drupal::config('newscenter_rest_services.settings')->get('student_stories_url');
         // Get contents array
         $contents = $this->getContents(Url::fromUri($url));
         if(!empty($contents)) {
             foreach ($contents as $content) {
                 // Get the queue implementation news blogs
-                $queue = $this->queueFactory->get('important_announcement_creation_queue');
+                $queue = $this->queueFactory->get('student_stories_creation_queue');
                 // Create new queue item
                 $item = new \stdClass();
                 $item->data = $content;
@@ -174,17 +180,13 @@ class NewsCenterClient extends ControllerBase
 
         for ($i = 0; $i < $queue->numberOfItems() ; $i++) {
             // Create batch operations
-            $batch['operations'][] = array('Drupal\newscenter_rest_services\Controller\NewsCenterClient::batchProcess', array(null,news_article_creation_queue));
+            $batch['operations'][] = array('Drupal\newscenter_rest_services\Controller\NewsCenterClient::batchProcess', array(null,'news_article_creation_queue'));
         }
-        $queue = $queue_factory->get('news_appearance_creation_queue');
+
+        $queue = $queue_factory->get('student_stories_creation_queue');
         for ($i = 0; $i < $queue->numberOfItems() ; $i++) {
             // Create batch operations
-            $batch['operations'][] = array('Drupal\newscenter_rest_services\Controller\NewsCenterClient::batchProcess', array(null,news_appearance_creation_queue));
-        }
-        $queue = $queue_factory->get('important_announcement_creation_queue');
-        for ($i = 0; $i < $queue->numberOfItems() ; $i++) {
-            // Create batch operations
-            $batch['operations'][] = array('Drupal\newscenter_rest_services\Controller\NewsCenterClient::batchProcess', array(null,important_announcement_creation_queue));
+            $batch['operations'][] = array('Drupal\newscenter_rest_services\Controller\NewsCenterClient::batchProcess', array(null,'student_stories_creation_queue'));
         }
         // Adds the batch sets
         batch_set($batch);
@@ -215,7 +217,6 @@ class NewsCenterClient extends ControllerBase
                     $queue->deleteItem($item);
                 } catch (SuspendQueueException $e) {
                     $queue->releaseItem($item);
-                    break;
                 }
             }
         }

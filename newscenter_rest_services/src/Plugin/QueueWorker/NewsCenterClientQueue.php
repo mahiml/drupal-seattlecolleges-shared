@@ -11,8 +11,8 @@ namespace Drupal\newscenter_rest_services\Plugin\QueueWorker;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\Entity\Term;
-
+use \Drupal\taxonomy\Entity\Term;
+use \Drupal\taxonomy\Entity\Vocabulary;
 
 abstract class NewsCenterClientQueue extends QueueWorkerBase implements ContainerFactoryPluginInterface
 {
@@ -43,5 +43,54 @@ abstract class NewsCenterClientQueue extends QueueWorkerBase implements Containe
         $content = $item->data;
         // Create node from the array
         $this->createContent($content);
+    }
+
+    protected function upsertTags(&$node, $new_tags)
+    {
+        $taxonomy_query_service = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+
+        if (!isset($node->field_newscenter_tags)) {
+            $node->field_newscenter_tags = [];
+        }
+        $tags_to_create = $new_tags;
+        $tags_to_add = [];
+
+        $all_vocabularies = Vocabulary::loadMultiple();
+        foreach ($all_vocabularies as $tag_vocabulary) {
+            if ($tag_vocabulary->label() == 'Tags') {
+                $terms = $taxonomy_query_service->loadTree($tag_vocabulary->id());
+                if (!empty($terms)) {
+                    foreach ($terms as $term) {
+                        foreach ($tags_to_create as $key_to_create => $value_to_create) {
+                            if ($key_to_create == $term->name) {
+                                unset($tags_to_create[$key_to_create]);
+                                $tags_to_add[] = $term;
+                            }
+                        }
+                    }
+                }
+            }
+            //create the ones which are not in the vocabulary and add it to the node
+            foreach ($tags_to_create as $tbcK => $tbcV) {
+                $term = Term::create([
+                    'vid' => 'tags',
+                    'langcode' => 'en',
+                    'name' => $tbcK,
+                    'description' => [
+                        'value' => '<p>Created Automatically after It was detected from the News Center</p>',
+                        'format' => 'full_html',
+                    ],
+                    'weight' => -1,
+                    'parent' => array(0),
+                ]);
+                $term->save();
+                $tags_to_add[] = $term;
+            }
+            //add newly created tags to this node now
+            $node->field_newscenter_tags = array();
+            foreach($tags_to_add as $term_to_add){
+                $node->field_newscenter_tags[] = array( 'target_id' => $term_to_add->tid );
+            }
+        }
     }
 }
