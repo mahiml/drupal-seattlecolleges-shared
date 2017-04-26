@@ -1,0 +1,7 @@
+news_center.admin_settings:
+  path: '/admin/config/newscenter_delete_url_collection'
+  defaults:
+    _form: 'Drupal\newscenter_stamper\Form\DeleteURLConfigurationForm'
+    _title: 'Configuration form to all collect all the host urls that will be affected when we delete data in news center'
+  requirements:
+    _permission: 'administer site configuration'

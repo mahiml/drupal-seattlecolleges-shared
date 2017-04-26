@@ -31,6 +31,7 @@ class NewsCenterClientQueueNewsBlogWorker extends NewsCenterClientQueue
         $entity_query_service = \Drupal::entityQuery('node');
         $entity_load_service = \Drupal::entityTypeManager()->getStorage('node');
         $unique_identifier = $content['news_db_key'];
+        $uuid = $content['news_uuid'];
         // Query for newscenter_blog_entry type node using unique identifier; if none exists, create one else update
         $nid = $entity_query_service->condition('status', 1)->condition('type', 'newscenter_blog_entry')
             ->condition('field_unique_identifier', $unique_identifier)->execute();
@@ -44,6 +45,7 @@ class NewsCenterClientQueueNewsBlogWorker extends NewsCenterClientQueue
                 ),
                 'revision' => 1,
                 'status' => TRUE,
+                'uuid' => $uuid,
                 'uid' => 1,
                 'promote' => 0,
                 'created' => REQUEST_TIME,

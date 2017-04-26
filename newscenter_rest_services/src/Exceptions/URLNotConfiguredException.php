@@ -1,13 +1,12 @@
 <?php
 namespace Drupal\rest_services\Exceptions;
-use \Exception as Exception;
 /**
  * Created by PhpStorm.
  * User: mahim
  * Date: 4/7/17
  * Time: 10:29 AM
  */
-class URLNotConfiguredException extends Exception
+class URLNotConfiguredException extends \RuntimeException
 {
     protected $title;
 
