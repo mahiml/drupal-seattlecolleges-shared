@@ -1,4 +1,0 @@
-name: News Center Unique Identifier Stamper
-description: Generates a Unique Identifier and set it in the entity - THIS NEEDS TO ENABLED ONLY IN NEWS CENTER
-core: 8.x
-type: module
