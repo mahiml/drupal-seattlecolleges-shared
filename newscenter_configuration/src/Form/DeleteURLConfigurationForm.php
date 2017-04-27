@@ -18,7 +18,7 @@ class DeleteURLConfigurationForm extends ConfigFormBase
      * {@inheritdoc}
      */
     public function getFormId() {
-        return 'newscenter_stamper_deleteURLs_configuration_form';
+        return 'newscenter_configuration_deleteURLs_configuration_form';
     }
 
     /**
@@ -26,7 +26,7 @@ class DeleteURLConfigurationForm extends ConfigFormBase
      */
     protected function getEditableConfigNames() {
         return [
-            'newscenter_stamper.settings',
+            'newscenter_configuration.settings',
         ];
     }
 
@@ -34,7 +34,7 @@ class DeleteURLConfigurationForm extends ConfigFormBase
      * {@inheritdoc}
      */
     public function buildForm(array $form, FormStateInterface $form_state) {
-        $config = $this->config('newscenter_stamper.settings');
+        $config = $this->config('newscenter_configuration.settings');
 
         $form['maritime_host_url'] = array(
             '#type' => 'url',
@@ -92,11 +92,11 @@ class DeleteURLConfigurationForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
         // Retrieve the configuration
-        $this->config('newscenter_stamper.settings')->set('maritime_host_url', $form_state->getValue('maritime_host_url'))->save();
-        $this->config('newscenter_stamper.settings')->set('it_host_url', $form_state->getValue('it_host_url'))->save();
-        $this->config('newscenter_stamper.settings')->set('btm_host_url', $form_state->getValue('btm_host_url'))->save();
-        $this->config('newscenter_stamper.settings')->set('culinary_host_url', $form_state->getValue('culinary_host_url'))->save();
-        $this->config('newscenter_stamper.settings')->set('foundation_host_url', $form_state->getValue('foundation_host_url'))->save();
+        $this->config('newscenter_configuration.settings')->set('maritime_host_url', $form_state->getValue('maritime_host_url'))->save();
+        $this->config('newscenter_configuration.settings')->set('it_host_url', $form_state->getValue('it_host_url'))->save();
+        $this->config('newscenter_configuration.settings')->set('btm_host_url', $form_state->getValue('btm_host_url'))->save();
+        $this->config('newscenter_configuration.settings')->set('culinary_host_url', $form_state->getValue('culinary_host_url'))->save();
+        $this->config('newscenter_configuration.settings')->set('foundation_host_url', $form_state->getValue('foundation_host_url'))->save();
         $url = Url::fromRoute('system.modules_list');
         $form_state->setRedirectUrl($url);
         parent::submitForm($form, $form_state);

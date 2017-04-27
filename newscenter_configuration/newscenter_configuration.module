@@ -11,11 +11,39 @@
 */
 function newscenter_configuration_node_presave(Drupal\Core\Entity\EntityInterface $entity)
 {
-    if (isset($entity) && (($entity->getType() == 'newscenter_blog_newsmention')
-    || ($entity->getType() == 'newscenter_student_story'))) {
+    if (isset($entity) && (($entity->getType() == 'newscenter_blog_entry')
+            || ($entity->getType() == 'newscenter_student_story'))
+    ) {
         if (empty($entity->get('field_unique_identifier')->get(0))) {
             $unique_identifier = uniqid();
             $entity->field_unique_identifier->value = $unique_identifier;
+        }
+
+    }
+}
+
+
+function newscenter_configuration_node_delete(Drupal\Core\Entity\EntityInterface $entity)
+{
+    if (isset($entity) && (($entity->getType() == 'newscenter_blog_entry')
+            || ($entity->getType() == 'newscenter_student_story'))
+    ) {
+        //call the delete urls ; pass the $nodetype and $uuid
+        $config = \Drupal::config('newscenter_configuration.settings');
+        $entity_uuid = $entity->uuid();
+        $headers = array('headers' => ['Authorization' => ['Basic bWxha2hhbmk6U3lyYWN1c2VVdGljYTFAIw=='],'Content-Type' => 'application/hal+json', 'Accept' => 'application/json']);
+        $node_type = $entity->getType();
+        $url_array_from_config = array('maritime_host_url', 'it_host_url', 'btm_host_url', 'culinary_host_url', 'foundation_host_url');
+        foreach ($url_array_from_config as $key) {
+            $delete_url = $config->get($key) . '/newscenter_rest_services/delete_data';
+            $delete_url = $delete_url . '/' . $node_type . '/' . $entity_uuid;
+            try {
+                $response = \Drupal::httpClient()->request('DELETE', $delete_url, $headers);
+                print_r($response);
+            } catch (\Exception $ex) {
+                \Drupal::logger('newscenter_configuration')->error($ex->getMessage());
+                continue;
+            }
         }
 
     }
