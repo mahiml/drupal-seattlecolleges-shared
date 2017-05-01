@@ -1,0 +1,6 @@
+newscenter_rest_services.admin:
+  title: 'Fetch From NewsCenter'
+  description: 'Form for fetching data from Newscenter'
+  parent: system.admin_config_development
+  route_name: fetch_data_from_newscenter.form
+  weight: 100

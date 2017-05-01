@@ -89,7 +89,7 @@ class NewsCenterClient extends ControllerBase
                     $data['news_external_url'] = $value['field_external_url'][0]['uri'];
                 } else if (!empty($data['news_node_id'])) {
                     $new_url = $parsed['scheme'] . '://' . $parsed['host'];
-                    if ($parsed['port']) {
+                    if (isset($parsed['port']) && !empty($parsed['port'])) {
                         $new_url = $new_url . ':' . $parsed['port'];
                     }
                     $new_url = $new_url . '/node/' . $data['news_node_id'];
@@ -139,7 +139,8 @@ class NewsCenterClient extends ControllerBase
         }
         return array(
             '#type' => 'markup',
-            '#markup' => $this->t('@count queue items are created.', array('@count' => count($contents))),
+            '#markup' => $this->t('@count queue items are created. <a role="button" href="/admin/config/system/cron">Run the Cron Job</a></div>'
+                , array('@count' => count($contents))),
         );
     }
 

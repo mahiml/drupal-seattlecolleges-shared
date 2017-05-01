@@ -19,15 +19,15 @@ use Psr\Log\LoggerInterface;
  * Provides a REST Resource
  *
  * @RestResource(
- *   id = "delete_newscenter_data",
+ *   id = "unpublish_newscenter_data",
  *   serialization_class = "Drupal\node\Entity\Node",
- *   label = @Translation("Delete News Center Data Resource"),
+ *   label = @Translation("Unpublish News Center Data Resource"),
  *   uri_paths = {
- *     "canonical" = "/newscenter_rest_services/delete_data/{content_type}/{uuid}"
+ *     "canonical" = "/newscenter_rest_services/unpublish_data/{content_type}/{uuid}"
  *   }
  * )
  */
-class DeleteUsingUUIDResource extends ResourceBase
+class UnpublishUsingUUIDResource extends ResourceBase
 {
 
     /**
@@ -69,13 +69,13 @@ class DeleteUsingUUIDResource extends ResourceBase
     }
 
     /**
-     * Responds to entity DELETE requests.
+     * Responds to entity PUT requests.
      * @param $content_type
      * @param $uuid
      * @return \Drupal\rest\ResourceResponse
      * Throws exception expected.
      */
-    public function delete($content_type, $uuid)
+    public function put($content_type, $uuid)
     {
         if (empty($content_type) || empty($uuid)) {
             throw new HttpException(400,"UUID or Content Type is empty");
@@ -92,7 +92,8 @@ class DeleteUsingUUIDResource extends ResourceBase
             foreach ($nid as $node_id) {
                 $node = null;
                 $node = $entity_load_service->load($node_id);
-                $node->delete();
+                $node->status = 0;
+                $node->save();
             }
         }
         $response = ['message' => 'Request completed successfully'];

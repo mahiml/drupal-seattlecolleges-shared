@@ -24,3 +24,11 @@ news_center.fetch_all_data:
   defaults: { _controller: '\Drupal\newscenter_rest_services\Controller\NewsCenterClient::processAllItems' }
   requirements:
     _permission: 'fetch_from_news_center'
+
+fetch_data_from_newscenter.form:
+ path: '/fetch-from-newscenter/myform'
+ defaults:
+   _title: 'Application form'
+   _form: '\Drupal\newscenter_rest_services\Form\FetchFromNewsCenterForm'
+ requirements:
+   _permission: 'access content'
