@@ -26,7 +26,7 @@ news_center.fetch_all_data:
     _permission: 'fetch_from_news_center'
 
 fetch_data_from_newscenter.form:
- path: '/fetch-from-newscenter/myform'
+ path: '/fetch-from-newscenter'
  defaults:
    _title: 'Application form'
    _form: '\Drupal\newscenter_rest_services\Form\FetchFromNewsCenterForm'

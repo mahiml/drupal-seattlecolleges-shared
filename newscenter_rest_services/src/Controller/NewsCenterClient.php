@@ -58,71 +58,75 @@ class NewsCenterClient extends ControllerBase
     {
         // fetch data from get_url
         $contents = array();
-        $raw_data = file_get_contents($get_url);
-        $parsed = parse_url($get_url);
-        $json = json_decode($raw_data, true);
-        foreach ($json as $key => $value) {
-            try {
-                $data = [];
-                if (empty($value['nid'][0]['value'])) {
-                    throw new MissingRequiredFieldException("Missing Fields in JSON", "Node ID was not set in" . json_encode($value));
-                }
-                $data['news_node_id'] = $value['nid'][0]['value'];
-                if (empty($value['uuid'][0]['value'])) {
-                    throw new MissingRequiredFieldException("Missing Fields in JSON", "UUID was not set in" . json_encode($value));
-                }
-                $data['news_uuid'] = $value['uuid'][0]['value'];
-                $data['news_body'] = $value['body'][0]['value'];
-                $data['news_author'] = isset($value['field_author']) && !empty($value['field_author']) ? $value['field_author'][0]['value'] : '';
-                $raw_tag_array = $value['field_newscenter_tags'];
-                $tag_array = [];
-                foreach ($raw_tag_array as $key1 => $data1) {
-                    if (!empty($data1['url'])) {
-                        $tag_url = $data1['url'];
-                        $exploded_tag_url = explode('/', $tag_url);
-                        $tag_array[strtoupper(end($exploded_tag_url))] = $tag_url;
+        try {
+            $raw_data = file_get_contents($get_url);
+            $parsed = parse_url($get_url);
+            $json = json_decode($raw_data, true);
+            foreach ($json as $key => $value) {
+                try {
+                    $data = [];
+                    if (empty($value['nid'][0]['value'])) {
+                        throw new MissingRequiredFieldException("Missing Fields in JSON", "Node ID was not set in" . json_encode($value));
                     }
-                }
-                $data['news_tag_array'] = $tag_array;
-                $data['news_date_posted'] = $value['field_date_posted'][0]['value'];
-                if (!empty($value['field_external_url'][0]['uri'])) {
-                    $data['news_external_url'] = $value['field_external_url'][0]['uri'];
-                } else if (!empty($data['news_node_id'])) {
-                    $new_url = $parsed['scheme'] . '://' . $parsed['host'];
-                    if (isset($parsed['port']) && !empty($parsed['port'])) {
-                        $new_url = $new_url . ':' . $parsed['port'];
+                    $data['news_node_id'] = $value['nid'][0]['value'];
+                    if (empty($value['uuid'][0]['value'])) {
+                        throw new MissingRequiredFieldException("Missing Fields in JSON", "UUID was not set in" . json_encode($value));
                     }
-                    $new_url = $new_url . '/node/' . $data['news_node_id'];
-                    $data['news_external_url'] = $new_url;
-                }
-                if (empty($data['news_external_url'])) {
-                    throw new MissingRequiredFieldException("Missing Fields in JSON", "NewsCenter External URL was not set in" . json_encode($value));
-                }
-                $data['news_img_details'] = isset($value['field_img']) && !empty($value['field_img']) ? $value['field_img'][0] : array();
-                $data['news_subtitle'] = isset($value['field_subtitle']) && !empty($value['field_subtitle']) ? $value['field_subtitle'][0]['value'] : '';
-                if (empty($value['field_unique_identifier'][0]['value'])) {
-                    throw new MissingRequiredFieldException("Missing Fields in JSON", "NewsCenter Uniqueidentifier was not set in" . json_encode($value));
+                    $data['news_uuid'] = $value['uuid'][0]['value'];
+                    $data['news_body'] = $value['body'][0]['value'];
+                    $data['news_author'] = isset($value['field_author']) && !empty($value['field_author']) ? $value['field_author'][0]['value'] : '';
+                    $raw_tag_array = $value['field_newscenter_tags'];
+                    $tag_array = [];
+                    foreach ($raw_tag_array as $key1 => $data1) {
+                        if (!empty($data1['url'])) {
+                            $tag_url = $data1['url'];
+                            $exploded_tag_url = explode('/', $tag_url);
+                            $tag_array[strtoupper(end($exploded_tag_url))] = $tag_url;
+                        }
+                    }
+                    $data['news_tag_array'] = $tag_array;
+                    $data['news_date_posted'] = $value['field_date_posted'][0]['value'];
+                    if (!empty($value['field_external_url'][0]['uri'])) {
+                        $data['news_external_url'] = $value['field_external_url'][0]['uri'];
+                    } else if (!empty($data['news_node_id'])) {
+                        $new_url = $parsed['scheme'] . '://' . $parsed['host'];
+                        if (isset($parsed['port']) && !empty($parsed['port'])) {
+                            $new_url = $new_url . ':' . $parsed['port'];
+                        }
+                        $new_url = $new_url . '/node/' . $data['news_node_id'];
+                        $data['news_external_url'] = $new_url;
+                    }
+                    if (empty($data['news_external_url'])) {
+                        throw new MissingRequiredFieldException("Missing Fields in JSON", "NewsCenter External URL was not set in" . json_encode($value));
+                    }
+                    $data['news_img_details'] = isset($value['field_img']) && !empty($value['field_img']) ? $value['field_img'][0] : array();
+                    $data['news_subtitle'] = isset($value['field_subtitle']) && !empty($value['field_subtitle']) ? $value['field_subtitle'][0]['value'] : '';
+                    if (empty($value['field_unique_identifier'][0]['value'])) {
+                        throw new MissingRequiredFieldException("Missing Fields in JSON", "NewsCenter Uniqueidentifier was not set in" . json_encode($value));
 
+                    }
+                    $data['news_db_key'] = $value['field_unique_identifier'][0]['value'];
+                    $data['news_title'] = $value['title'][0]['value'];
+                    $contents[] = $data;
+                } catch (Exception $ex) {
+                    \Drupal::logger('newscenter_rest_services')->error($ex->getMessage());
+                    continue;
                 }
-                $data['news_db_key'] = $value['field_unique_identifier'][0]['value'];
-                $data['news_title'] = $value['title'][0]['value'];
-                $contents[] = $data;
-            } catch (Exception $ex) {
-                \Drupal::logger('newscenter_rest_services')->error($ex->getMessage());
-                continue;
             }
-
+        } catch (Exception $ex) {
+            \Drupal::logger('newscenter_rest_services')->error($ex->getMessage());
         }
-        //   print_r($contents);
-        // Return with the contents
         return $contents;
     }
+    //   print_r($contents);
+    // Return with the contents
 
 
     /**
      * Page where the fetched data is queued for news blogs
      */
-    public function getNewsBlogs()
+    public
+    function getNewsBlogs()
     {
         $url = \Drupal::config('newscenter_rest_services.settings')->get('news_center_blog_url');
         // Get contents array
@@ -170,7 +174,8 @@ class NewsCenterClient extends ControllerBase
     /**
      * Page where the fetched data is queued for student stories
      */
-    public function getStudentStories()
+    public
+    function getStudentStories()
     {
         $url = \Drupal::config('newscenter_rest_services.settings')->get('student_stories_url');
         // Get contents array
@@ -194,7 +199,8 @@ class NewsCenterClient extends ControllerBase
     /**
      * Process all queue items with batch
      */
-    public function processAllItems()
+    public
+    function processAllItems()
     {
 
         // Create batch which collects all the specified queue items and process them one after another
@@ -227,7 +233,8 @@ class NewsCenterClient extends ControllerBase
     /**
      * Common batch processing callback for all operations.
      */
-    public static function batchProcess(&$context, $queueName)
+    public
+    static function batchProcess(&$context, $queueName)
     {
 
         $queue_factory = \Drupal::service('queue');
@@ -255,7 +262,8 @@ class NewsCenterClient extends ControllerBase
     /**
      * Batch finished callback.
      */
-    public static function batchFinished($success, $results, $operations)
+    public
+    static function batchFinished($success, $results, $operations)
     {
         if ($success) {
             drupal_set_message(t("ALL contents are successfully imported from the NEWS CENTER."));

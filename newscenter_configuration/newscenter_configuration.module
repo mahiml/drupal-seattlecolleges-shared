@@ -16,7 +16,7 @@ function newscenter_configuration_node_presave(Drupal\Core\Entity\EntityInterfac
             || ($entity->getType() == 'newscenter_student_story'))
     ) {
         $publish_option_key = $entity->get('field_publish_options')->get(0)->value;
-        if ($publish_options_key_array[$publish_option_key] === 'publish') {
+        if ($publish_options_key_array[$publish_option_key] === 'broadcast') {
             if (empty($entity->get('field_unique_identifier')->get(0))) {
                 $unique_identifier = uniqid();
                 $entity->field_unique_identifier->value = $unique_identifier;
