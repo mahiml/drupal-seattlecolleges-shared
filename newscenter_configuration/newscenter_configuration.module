@@ -25,7 +25,7 @@ function newscenter_configuration_node_presave(Drupal\Core\Entity\EntityInterfac
             //call the unpublish urls ; pass the $nodetype and $uuid
             $config = \Drupal::config('newscenter_configuration.settings');
             $entity_uuid = $entity->uuid();
-            $headers = array('headers' => ['Authorization' => ['Basic bWxha2hhbmk6U3lyYWN1c2VVdGljYTFAIw=='], 'Content-Type' => 'application/hal+json', 'Accept' => 'application/json']);
+            $headers = array('headers' => ['Authorization' => ['INSERT HEADER HERE'], 'Content-Type' => 'INSERT TYPE HERE', 'Accept' => 'INSERT ACCEPT HERE']);
             $node_type = $entity->getType();
             $url_array_from_config = array('maritime_host_url', 'it_host_url', 'btm_host_url', 'culinary_host_url', 'foundation_host_url');
             foreach ($url_array_from_config as $key) {
@@ -51,7 +51,7 @@ function newscenter_configuration_node_delete(Drupal\Core\Entity\EntityInterface
         //call the delete urls ; pass the $nodetype and $uuid
         $config = \Drupal::config('newscenter_configuration.settings');
         $entity_uuid = $entity->uuid();
-        $headers = array('headers' => ['Authorization' => ['Basic bWxha2hhbmk6U3lyYWN1c2VVdGljYTFAIw=='], 'Content-Type' => 'application/hal+json', 'Accept' => 'application/json']);
+        $headers = array('headers' => ['Authorization' =>  ['INSERT HEADER HERE'], 'Content-Type' => 'INSERT TYPE HERE', 'Accept' => 'INSERT ACCEPT HERE']);
         $node_type = $entity->getType();
         $url_array_from_config = array('maritime_host_url', 'it_host_url', 'btm_host_url', 'culinary_host_url', 'foundation_host_url');
         foreach ($url_array_from_config as $key) {
