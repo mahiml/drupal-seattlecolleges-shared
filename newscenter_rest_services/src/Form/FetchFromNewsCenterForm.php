@@ -55,11 +55,6 @@ class FetchFromNewsCenterForm extends ConfigFormBase
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
         // Retrieve the configuration
-        $this->config('newscenter_rest_services.settings')->set('news_center_blog_url', $form_state->getValue('news_center_blog_url'))->save();
-        $this->config('newscenter_rest_services.settings')->set('important_announcements_url', $form_state->getValue('important_announcements_url'))->save();
-        $this->config('newscenter_rest_services.settings')->set('student_stories_url', $form_state->getValue('student_stories_url'))->save();
-        $url = Url::fromRoute('system.modules_list');
-        $form_state->setRedirectUrl($url);
         parent::submitForm($form, $form_state);
     }
 }
