@@ -1,0 +1,6 @@
+newscenter_rest_services.admin:
+  title: 'Delete on Recall Configuration'
+  description: 'Form for putting host URLs from which a newsblog would need to be deleted if recalled'
+  parent: system.admin_config_development
+  route_name: news_center.admin_settings
+  weight: 200

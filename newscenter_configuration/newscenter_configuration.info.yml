@@ -2,3 +2,4 @@ name: NewsCenter REST Services initial configuration
 description: Configuration for REST Services of NewsCenter - THIS NEEDS TO ENABLED ONLY IN NEWS CENTER
 core: 8.x
 type: module
+configure: news_center.admin_settings

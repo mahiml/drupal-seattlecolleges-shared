@@ -75,7 +75,7 @@ class DeleteURLConfigurationForm extends ConfigFormBase
         $form['mac_host_url'] = array(
             '#type' => 'url',
             '#title' => $this->t('MAC Endpoint for deleting data from NewsCenter when it is deleted there'),
-            '#default_value' => $config->get('machost_url'),
+            '#default_value' => $config->get('mac_host_url'),
         );
 
         $form['alliedhealth_host_url'] = array(
