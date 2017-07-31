@@ -20,7 +20,6 @@ use Psr\Log\LoggerInterface;
  *
  * @RestResource(
  *   id = "unpublish_newscenter_data",
- *   serialization_class = "Drupal\node\Entity\Node",
  *   label = @Translation("Unpublish News Center Data Resource"),
  *   uri_paths = {
  *     "canonical" = "/newscenter_rest_services/unpublish_data/{content_type}/{uuid}"

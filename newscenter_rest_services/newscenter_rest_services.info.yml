@@ -2,4 +2,4 @@ name: News Center Client
 description: Client which runs every day to get related News Center Entries
 core: 8.x
 type: module
-configure: newscenter_rest_services.configuration_settings
+configure: news_center.admin_settings

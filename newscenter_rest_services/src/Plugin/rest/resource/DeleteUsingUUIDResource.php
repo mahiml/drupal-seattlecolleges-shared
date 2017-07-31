@@ -20,7 +20,6 @@ use Psr\Log\LoggerInterface;
  *
  * @RestResource(
  *   id = "delete_newscenter_data",
- *   serialization_class = "Drupal\node\Entity\Node",
  *   label = @Translation("Delete News Center Data Resource"),
  *   uri_paths = {
  *     "canonical" = "/newscenter_rest_services/delete_data/{content_type}/{uuid}"
@@ -29,44 +28,6 @@ use Psr\Log\LoggerInterface;
  */
 class DeleteUsingUUIDResource extends ResourceBase
 {
-
-    /**
-     * Constructs a Drupal\rest\Plugin\ResourceBase object.
-     *
-     * @param array $configuration
-     *   A configuration array containing information about the plugin instance.
-     * @param string $plugin_id
-     *   The plugin_id for the plugin instance.
-     * @param mixed $plugin_definition
-     *   The plugin implementation definition.
-     * @param array $serializer_formats
-     *   The available serialization formats.
-     * @param \Psr\Log\LoggerInterface $logger
-     *   A logger instance.
-     */
-    public function __construct(
-        array $configuration,
-        $plugin_id,
-        $plugin_definition,
-        array $serializer_formats,
-        LoggerInterface $logger)
-    {
-        parent::__construct($configuration, $plugin_id, $plugin_definition, $serializer_formats, $logger);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition)
-    {
-        return new static(
-            $configuration,
-            $plugin_id,
-            $plugin_definition,
-            $container->getParameter('serializer.formats'),
-            $container->get('logger.factory')->get('newscenter_rest_services')
-        );
-    }
 
     /**
      * Responds to entity DELETE requests.

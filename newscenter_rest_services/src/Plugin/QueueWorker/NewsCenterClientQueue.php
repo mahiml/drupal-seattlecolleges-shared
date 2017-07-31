@@ -62,8 +62,8 @@ abstract class NewsCenterClientQueue extends QueueWorkerBase implements Containe
                 if (!empty($terms)) {
                     foreach ($terms as $term) {
                         foreach ($tags_to_create as $key_to_create => $value_to_create) {
-                            if ($key_to_create == $term->name) {
-                                unset($tags_to_create[$key_to_create]);
+                            $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/'.$term->tid);
+                            if ($value_to_create == $alias) {
                                 $tags_to_add[] = $term;
                             }
                         }
@@ -71,7 +71,7 @@ abstract class NewsCenterClientQueue extends QueueWorkerBase implements Containe
                 }
             }
             //create the ones which are not in the vocabulary and add it to the node
-            foreach ($tags_to_create as $tbcK => $tbcV) {
+         /*   foreach ($tags_to_create as $tbcK => $tbcV) {
                 $term = Term::create([
                     'vid' => 'tags',
                     'langcode' => 'en',
@@ -86,7 +86,8 @@ abstract class NewsCenterClientQueue extends QueueWorkerBase implements Containe
                 $term->save();
                 $tags_to_add[] = $term;
             }
-            //add newly created tags to this node now
+         */
+            //add ONLY TAGS WHICH EXIST IN THE SITE
             $node->field_newscenter_tags = array();
             foreach($tags_to_add as $term_to_add){
                 $node->field_newscenter_tags[] = array( 'target_id' => $term_to_add->tid );

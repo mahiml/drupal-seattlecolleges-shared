@@ -60,7 +60,7 @@ class NewsCenterClientQueueStudentStoriesWorker extends NewsCenterClientQueue
         $node->field_newscenter_url = $content['news_external_url'];
         $node->field_subtitle = $content['news_subtitle'];
         $node->field_newscenter_node_id = $content['news_node_id'];
-        $this->upsertTags($node, $content['news_tag_array']);
+      //  $this->upsertTags($node, $content['news_tag_array']);
         $node->changed = REQUEST_TIME;
         $node->validate();
         $node->save();

@@ -11,6 +11,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Queue\QueueWorkerManager;
 use Drupal\Core\Queue\QueueFactory;
 use \Exception as Exception;
+use Drupal\Core\Queue\SuspendQueueException;
 
 
 /**
@@ -77,13 +78,18 @@ class NewsCenterClient extends ControllerBase
                     $data['news_author'] = isset($value['field_author']) && !empty($value['field_author']) ? $value['field_author'][0]['value'] : '';
                     $raw_tag_array = $value['field_newscenter_tags'];
                     $tag_array = [];
+                    $is_faces_of_central = false;
                     foreach ($raw_tag_array as $key1 => $data1) {
                         if (!empty($data1['url'])) {
+                            if($data1['url'] == '/category/faces-central'){
+                                $is_faces_of_central = true;
+                            }
                             $tag_url = $data1['url'];
                             $exploded_tag_url = explode('/', $tag_url);
                             $tag_array[strtoupper(end($exploded_tag_url))] = $tag_url;
                         }
                     }
+                    $data['is_face_of_central'] = $is_faces_of_central;
                     $data['news_tag_array'] = $tag_array;
                     $data['news_date_posted'] = $value['field_date_posted'][0]['value'];
                     if (!empty($value['field_external_url'][0]['uri'])) {
