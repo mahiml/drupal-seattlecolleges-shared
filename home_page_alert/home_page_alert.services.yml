@@ -1,0 +1,3 @@
+services:
+  home_alert_service:
+    class: 'Drupal\home_page_alert\AlertClient'

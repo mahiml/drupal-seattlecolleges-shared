@@ -1,0 +1,7 @@
+name: Home_Page_Alerts
+type: module
+description: 'This will be used to configure alerts that will be shown selectively on current student; faculty and staff and community pages'
+package: Custom
+version: 8.x
+core: 8.x
+configure: home_page_alert.config_settings

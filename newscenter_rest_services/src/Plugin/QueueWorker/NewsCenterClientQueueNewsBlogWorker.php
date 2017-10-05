@@ -65,6 +65,7 @@ class NewsCenterClientQueueNewsBlogWorker extends NewsCenterClientQueue
         $node->body->value = $content['news_body'];
         $node->field_unique_identifier = $content['news_db_key'];
         $node->field_author = $content['news_author'];
+        $node->field_date_posted = $content['news_date_posted'];
         if(isset($content['news_img_details']['url'])) {
             $node->field_newscenter_image_url = $content['news_img_details']['url'];
         }

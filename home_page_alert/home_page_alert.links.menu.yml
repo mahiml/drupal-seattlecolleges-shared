@@ -1,0 +1,6 @@
+newscenter_rest_services.admin:
+  title: 'Get HomePage Alerts'
+  description: 'Form for fetching Student, Community and Employee HomePage Alerts from Newscenter'
+  parent: system.admin_config_development
+  route_name: home_page_alert.config_settings
+  weight: 100

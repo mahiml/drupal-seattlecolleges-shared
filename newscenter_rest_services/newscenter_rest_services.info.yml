@@ -1,4 +1,4 @@
-name: News Center Client
+name: NewsCenter Client
 description: Client which runs every day to get related News Center Entries
 core: 8.x
 type: module

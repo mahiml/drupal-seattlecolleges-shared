@@ -1,0 +1,7 @@
+news_center.admin_settings:
+  path: '/admin/config/newscenter_rest_services'
+  defaults:
+    _form: 'Drupal\enrollment_rest_services\Form\FetchEnrollmentContentForm'
+    _title: 'Fetch Enrollment Data'
+  requirements:
+    _permission: 'administer site configuration'

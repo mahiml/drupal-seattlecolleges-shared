@@ -1,0 +1,4 @@
+name: Enrollment Process Rest Services
+description: This plugin exposes the different types of enrollment stpes data as rest endpoints
+core: 8.x
+type: module

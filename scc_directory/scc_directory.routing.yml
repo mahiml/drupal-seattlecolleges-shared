@@ -1,0 +1,7 @@
+scc_directory_search_contribute:
+  path: '/about/directory/search'
+  defaults:
+    _form: '\Drupal\scc_directory\Form\SCCSearchWebForm'
+    _title: 'Search Seattle Central Directory'
+  requirements:
+    _access: 'TRUE'

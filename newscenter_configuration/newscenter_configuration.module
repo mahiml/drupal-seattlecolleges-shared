@@ -1,5 +1,5 @@
 <?php
-
+module_load_include('inc', 'newscenter_configuration', 'newscenter_configuration.tokens');
 /**
  * @file
  * This module adds a unique identifier to the news_blog entity.

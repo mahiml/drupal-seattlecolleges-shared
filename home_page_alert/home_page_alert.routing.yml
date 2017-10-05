@@ -1,0 +1,7 @@
+home_page_alert.config_settings:
+  path: '/admin/config/home_page_alert'
+  defaults:
+    _form: 'Drupal\home_page_alert\Form\AlertConfigurationForm'
+    _title: 'Configuration form for getting endpoint URLs where alerts will be read from'
+  requirements:
+    _permission: 'administer site configuration'
