@@ -28,7 +28,7 @@ class SCCSearchWebForm extends FormBase
      */
     public function buildForm(array $form, FormStateInterface $form_state)
     {
-        $form['#prefix'] = '<div id="errMsg"><span id="err_msg_text"></span></div><h1>Search Seattle Central Directory</h1>';
+        $form['#prefix'] = '<h1>Search Seattle Central Directory</h1><div class="bg-danger" id="errMsg"><span id="err_msg_text"></span></div>';
         $form['last_name'] = array(
             '#id' => 'form_last_name',
             '#type' => 'textfield',

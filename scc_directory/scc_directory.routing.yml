@@ -1,5 +1,5 @@
 scc_directory_search_contribute:
-  path: '/about/directory/search'
+  path: '/about/contact-us/directory/search'
   defaults:
     _form: '\Drupal\scc_directory\Form\SCCSearchWebForm'
     _title: 'Search Seattle Central Directory'
