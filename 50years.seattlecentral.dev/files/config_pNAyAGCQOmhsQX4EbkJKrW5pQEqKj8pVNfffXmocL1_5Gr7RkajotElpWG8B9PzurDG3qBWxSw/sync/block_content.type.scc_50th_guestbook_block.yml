@@ -1,8 +1,0 @@
-uuid: 525de40a-2272-4e27-b934-de0d73285019
-langcode: en
-status: true
-dependencies: {  }
-id: scc_50th_guestbook_block
-label: SCC_50th_Guestbook_block
-revision: 1
-description: 'Guestbook comment block'

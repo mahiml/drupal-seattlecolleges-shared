@@ -1,8 +1,0 @@
-uuid: adc41d8e-ecd5-44c9-9075-cb14cb75253c
-langcode: en
-status: true
-dependencies: {  }
-id: scc_50th_guestbook_comment_type
-label: SCC_50th_Guestbook_comment_type
-target_entity_type_id: block_content
-description: 'scc 50th anniversary celebration comment type'

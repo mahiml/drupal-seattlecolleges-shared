@@ -1,8 +1,0 @@
-uuid: 58384733-4db9-4821-9919-cb9638feb751
-langcode: en
-status: true
-dependencies: {  }
-id: front_page_student_types_nav
-label: front_page_student_types_nav
-revision: 0
-description: 'current students, prospective students, alumni etc'
