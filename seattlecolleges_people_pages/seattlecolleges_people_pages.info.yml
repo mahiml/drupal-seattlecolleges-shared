@@ -1,0 +1,6 @@
+name: SeattleColleges_District_People_Pages
+type: module
+description: 'People Pages Module ported from D6 to be used across the board for D8 for SeattleColleges District'
+package: Custom
+version: 8.1
+core: 8.x
