@@ -1,7 +1,0 @@
-/* Corrective Styles for IE < 8 */
-
-#nscc-feed-picker-form { height: 1%; }
-
-/* Hide from IE 7+ \*/
-* html #block-nscc_feed-0 .content li { height: 1%; }
-/* end hiding */

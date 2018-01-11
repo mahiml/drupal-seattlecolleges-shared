@@ -1,9 +1,0 @@
-; $Id$
-name = NSCC_ContinuingEd
-description = Data providers and custom processing to support Continuing Ed site.
-package = NSCC
-version = VERSION
-core = 6.x
-version = 0.1
-dependencies[] = nscc
-;dependencies[] = nscc_schedule

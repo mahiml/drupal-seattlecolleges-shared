@@ -1,5 +1,0 @@
-$(function() { 
- 
- $("img[rel]").overlay();
-
-});

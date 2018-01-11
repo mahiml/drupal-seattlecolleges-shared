@@ -1,9 +1,0 @@
-@import "/sites/all/themes/nscc_960/css/global.css";
-@import "itservices.css";
-
-body {
-  background-image: none;
-  background-color: white;
-}
-
-p, li { font: normal 14px/1.5 DroidSerif, Georgia, "Times New Roman", Times, serif; }

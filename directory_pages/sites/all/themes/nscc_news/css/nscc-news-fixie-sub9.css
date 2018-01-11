@@ -1,3 +1,0 @@
-/* Corrective Styles for IE < 9 */
-
-.views_slideshow_main { background-color: rgb(255, 255, 255); } /* fix bold text anti-aliasing problem (IE 6 - 8) */

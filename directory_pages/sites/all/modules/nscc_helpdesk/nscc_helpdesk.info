@@ -1,8 +1,0 @@
-name = NSCC Helpdesk
-description = NSCC trouble ticket management system
-package = NSCC
-version = VERSION
-core = 6.x
-
-version = "0.5"
-project = "NSCC"
