@@ -1,1 +1,0 @@
-Drupal.locale = { 'pluralFormula': function($n) { return Number((($n==1)?(0):(($n==0)?(1):(($n==2)?(2):(((($n%100)>=3)&&(($n%100)<=10))?(3):(((($n%100)>=11)&&(($n%100)<=99))?(4):5)))))); }, 'strings': { "Automatic alias": "بديل آلي" } };
