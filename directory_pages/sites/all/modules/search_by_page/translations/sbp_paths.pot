@@ -1,0 +1,162 @@
+# $Id: sbp_paths.pot,v 1.1.2.2 2009/08/12 00:54:10 jhodgdon Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sbp_paths.module,v 1.1.2.2 2009/08/12 00:46:57 jhodgdon
+#  sbp_paths.info,v 1.1.2.1 2009/06/11 17:05:21 jhodgdon
+#  sbp_paths.install,v 1.1.2.1 2009/06/09 21:15:04 jhodgdon
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-08-11 17:51-0700\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: sbp_paths.module:166 sbp_paths.info:0
+msgid "Search by Page Paths"
+msgstr ""
+
+#: sbp_paths.module:188
+msgid "This page allows you to define pages on your site to be indexed by the Search by Page module."
+msgstr ""
+
+#: sbp_paths.module:193
+msgid "Add new path"
+msgstr ""
+
+#: sbp_paths.module:203
+msgid "Path"
+msgstr ""
+
+#: sbp_paths.module:203
+msgid "Title"
+msgstr ""
+
+#: sbp_paths.module:204
+msgid "Operations"
+msgstr ""
+
+#: sbp_paths.module:212
+msgid "edit"
+msgstr ""
+
+#: sbp_paths.module:213
+msgid "delete"
+msgstr ""
+
+#: sbp_paths.module:246
+msgid "Page to index"
+msgstr ""
+
+#: sbp_paths.module:249
+msgid "Specify a page on your site that you want to index"
+msgstr ""
+
+#: sbp_paths.module:257
+msgid "Title of page"
+msgstr ""
+
+#: sbp_paths.module:260
+msgid "Title to display in search results for this page"
+msgstr ""
+
+#: sbp_paths.module:266
+msgid "Type of page"
+msgstr ""
+
+#: sbp_paths.module:269
+msgid "Type to display in search results for this page"
+msgstr ""
+
+#: sbp_paths.module:275
+msgid "Snippet"
+msgstr ""
+
+#: sbp_paths.module:279
+msgid "Enter \"yes\" (without the quotes, in English) to show a \"snippet\" of this page in search results, extracted from the page (it should show a portion of the page that contains the search results). Enter \"no\" (without the quotes, in English) to omit the snippet entirely. Or, enter any other text to use that custom text as the snippet for search results display."
+msgstr ""
+
+#: sbp_paths.module:286
+msgid "Enter the title, type, and snippet above in your site's default language. If you have a multi-lingual site with the Internationalization project's String Translation module installed and enabled, you can use Drupal's translation interface to translate them."
+msgstr ""
+
+#: sbp_paths.module:292
+msgid "Update indexed page"
+msgstr ""
+
+#: sbp_paths.module:295
+msgid "Create new indexed page"
+msgstr ""
+
+#: sbp_paths.module:299
+msgid "Cancel"
+msgstr ""
+
+#: sbp_paths.module:332
+msgid "The page to index has been saved"
+msgstr ""
+
+#: sbp_paths.module:351
+msgid "Are you sure you want to stop indexing %path?"
+msgstr ""
+
+#: sbp_paths.module:128
+msgid "Paths"
+msgstr ""
+
+#: sbp_paths.module:136
+msgid "Edit path"
+msgstr ""
+
+#: sbp_paths.module:143
+msgid "Add path"
+msgstr ""
+
+#: sbp_paths.module:150
+msgid "Delete path"
+msgstr ""
+
+#: sbp_paths.module:0
+msgid "sbp_paths"
+msgstr ""
+
+#: sbp_paths.install:14
+msgid "Contains paths to be indexed by sbp_paths module"
+msgstr ""
+
+#: sbp_paths.install:17
+msgid "Primary key"
+msgstr ""
+
+#: sbp_paths.install:24
+msgid "Path to index"
+msgstr ""
+
+#: sbp_paths.install:29
+msgid "Title of this page"
+msgstr ""
+
+#: sbp_paths.install:35
+msgid "Type to display for this page"
+msgstr ""
+
+#: sbp_paths.install:40
+msgid "Yes, no, or some custom snippet text"
+msgstr ""
+
+#: sbp_paths.info:0
+msgid "Sub-Module for Search by Page: Allows you to enter Drupal paths to pages such as Views, for search indexing in Search by Page."
+msgstr ""
+
+#: sbp_paths.info:0
+msgid "Search by Page"
+msgstr ""
+

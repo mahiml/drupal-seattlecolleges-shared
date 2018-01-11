@@ -1,0 +1,60 @@
+/**
+ *		NSCC Library styles
+ */
+
+
+
+
+
+/*
+-----------------------------
+BANNER TITLES
+-----------------------------
+*/
+
+.title-color-dark {
+  color: rgb(51, 51, 51);
+  background: transparent url(../imgs/bg-banner-title-dark.png) bottom left no-repeat;
+}
+
+.title-color-light {
+  color: rgb(255, 255, 255);
+  background: transparent url(../imgs/bg-banner-title-light.png) bottom left no-repeat;
+}
+
+
+
+
+/*
+--------------------------
+BLOCKS
+--------------------------
+*/
+
+.region-right .block {
+	clear: both;
+  padding: 6px;
+	border: solid 1px rgb(240, 237, 230);
+	background-color: rgb(250, 247, 240);
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px 6px 6px 6px;
+}
+
+.region-right .block-aggregator .more-link {
+  margin-top: 15px;
+  font-size: 10px;
+}
+
+.region-right .block-aggregator ul {
+  list-style: none;
+  margin: 0 0 9px;
+  padding: 0;
+}
+
+.region-right .block-aggregator li {
+  list-style: none;
+  margin-bottom: 9px;
+  padding: 0;
+  line-height: 12px;
+}

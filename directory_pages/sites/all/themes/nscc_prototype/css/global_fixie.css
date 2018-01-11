@@ -1,0 +1,9 @@
+/* Corrective Styles for IE < 8 */
+
+#block-nscc-1 #user-login-form { background-color:  rgb(99,141,159); }
+
+
+/* Hide from IE 7 \*/
+* html #block-nscc-1 { height: 1%; }
+* html #block-nscc-1 #edit-submit-1 { float: left; }
+/* end hiding */

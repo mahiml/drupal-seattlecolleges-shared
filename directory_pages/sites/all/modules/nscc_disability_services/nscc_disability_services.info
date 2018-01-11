@@ -1,0 +1,12 @@
+; $Id: nscc_disability_services.info,v 1.4 2007/06/08 05:50:55 dries Exp $
+name = NSCC Disability Services
+description = Handles Disability Services Forms.
+package = NSCC
+version = VERSION
+core = 6.x
+dependencies[] = nscc_wts
+dependencies[] = nscc_schedule
+
+; Information added by drupal.org packaging script on 2009-01-14
+version = "0.5"
+project = "NSCC"

@@ -1,0 +1,150 @@
+<?php
+
+function nscc_helpdesk_menu(){
+//User Interface:
+//GeneralServiceRequest
+	$items['helpdesk/request'] = array(
+    'title' => 'General Service Request',
+	  'description'=> 'Make a General Service Request',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_gsr'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+//MediaServiceRequest
+	$items['helpdesk/request-media'] = array(
+    'title' => 'Media Service Request',
+	  'description'=> 'Make a Media Services Request',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_msr'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+//newnetid
+	$items['helpdesk/request-netid'] = array(
+    'title' => 'Request a New Netid',
+	  'description'=> 'Request an Admin NetID',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_nn'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+
+//new share
+	$items['helpdesk/request-share'] = array(
+    'title' => 'Request Shared Network File Storage',
+	  'description'=> 'Request a new M: drive share',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_ns'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+//addusertogroup
+	$items['helpdesk/request-usergroupadd'] = array(
+    'title' => 'Add a User to Group',
+	  'description'=> 'Add a User to an existing Group',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_aug'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+//viewgroup
+	$items['helpdesk/request-viewgroup'] = array(
+    'title' => 'View Current Group Memberships',
+	  'description'=> 'View all current members of a group you are a member of.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_vg'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+//deluserfromgroup
+	$items['helpdesk/request-usergroupdel'] = array(
+    'title' => 'Remove a User from a Group',
+	  'description'=> 'Remove a User from an existing Group',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_dug'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+//new webshare
+	$items['helpdesk/request-webshare'] = array(
+    'title' => 'Request Shared Web Publishing Space',
+	  'description'=> 'Request a new WebShare',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_ns'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+//new mailing list
+	$items['helpdesk/request-maillist'] = array(
+    'title' => 'Request a New Mailing List',
+	  'description'=> 'Request a new Mailman mailing list',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_nml'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+//Surveilance Incident Report
+	$items['helpdesk/request-sir'] = array(
+    'title' => 'Submit a Surveilance Incident Report',
+	  'description'=> 'Request that IT Services violate a student\'s (or staff member\'s) privacy',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_helpdesk_nsir'),
+    'type' => MENU_NORMAL_ITEM,
+	);
+
+//Technician Interface:
+//GSR for other
+//Media for other
+//update contact info for other
+//manage calls:
+//	view unassigned
+//	assign/dibs call
+//  view my calls
+//  search calls
+//  view single call
+//	tag call
+//	comment call
+// 	close/reopen call
+
+//Executive interface
+//CSV dump
+  
+  
+	return $items;
+
+
+}
+
+function nscc_helpdesk_block(){
+}
+
+function _checkadd_helpdesk_db() {
+
+	global $db_url;
+
+	// If current $db_url is not an array make it one (and don't forget to insert the default connection)
+	if (!is_array($db_url)) {
+		$default = $db_url;
+		$db_url = array();
+		$db_url['default'] = $default;
+	}
+
+  // Add the new reference
+	if(!$db_url['helpdesk']){
+		$db_url['helpdesk'] = 'pgsql://helpdesk:glibble-wumpus_fruitbat14@10.0.12.10/auth';
+	}
+}
+
+function _checkadd_helpdesk_ldap(){
+	global $helpdesk_ldap_connection;
+	
+	if(!$helpdesk_ldap_connection){	
+		
+		$helpdesk_ldap_connection = ldap_connect("10.0.12.5",389);
+		if ( !$helpdesk_ldap_connection){
+					$error_msg = "An LDAP connect error occured. Contact NetID administrator.\n";
+					return false;	
+		}
+		$rootdn="cn=Manager,dc=instructdom,dc=northseattle,dc=edu";
+		$ldappw="secretbooger";
+					$ldap_binding = ldap_bind($helpdesk_ldap_connection,$rootdn,$ldappw);
+		if (!$ldap_binding){
+			$error_msg = "An LDAP binding error occured. Contact NetID administrator.\n";
+			return false;
+		}
+	}
+	return true;
+	
+}

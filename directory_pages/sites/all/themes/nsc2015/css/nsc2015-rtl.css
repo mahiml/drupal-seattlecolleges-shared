@@ -1,0 +1,41 @@
+/**
+ *		NSCC Main Site - RTL language overrides
+ *
+ *		Base style Overrides to support design adjustments needed for
+ *		right-to-left languages (e.g. Arabic, Hebrew, etc).
+ *
+ */
+
+
+
+
+/*
+--------------------------
+BASIC STRUCTURE (supplimental)
+--------------------------
+*/
+
+.sidenav-program {
+	background-image: url(../imgs/rtl/bg-program.png);
+	background-position: right top;
+}
+
+
+
+/*
+-----------------------------
+BANNER TITLES (supplimental)
+-----------------------------
+*/
+
+#photo-header-program .banner-title-text {
+	right: 0;
+}
+
+#photo-header-program .title-color-dark {
+	background: transparent url(../imgs/rtl/bg-prgm-title-dark.png) bottom right no-repeat;
+}
+
+#photo-header-program .title-color-light {
+	background: transparent url(../imgs/rtl/bg-prgm-title-light.png) bottom right no-repeat;
+}

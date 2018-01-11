@@ -1,0 +1,191 @@
+<?php
+
+function nscc_erc_menu(){
+	$items['marketing-public-relations/readerboard_request'] = array(
+		'type' => MENU_CALLBACK,
+		'title' => 'Readerboard Request',
+		'description' => 'Readerboard Request form.',
+    'page callback' => 'drupal_get_form',
+    'page arguments'=>array('nscc_erc_readerboard_form'),
+		'access callback'=>true,
+	);
+	return $items;
+}
+
+function nscc_erc_perm(){
+	return array('request readerboard posting');
+}
+function nscc_erc_cron(){
+}
+
+function nscc_erc_block($op='list', $delta=0,$edit=array()){
+		switch ($op){			
+
+			case 'view':
+				$block=array();
+				switch($delta) {
+					case 0:
+						drupal_add_css(drupal_get_path('module', 'nscc_erc') .'/nscc_erc.css');
+						$block['subject']='';
+						$block['content']='<a href="https://inside.seattlecolleges.com" title="District Intranet. Features include district-wide announcements, the instructor briefcase, purchasing, travel, payroll, benefits, and district policies and procedures."><img src="/'.drupal_get_path('module', 'nscc_erc') .'/images/inside-seattle-logo.jpg'.'" alt="https://inside.seattlecolleges.com"></a>';
+						return $block;
+					case 1:
+						drupal_add_css(drupal_get_path('module', 'nscc_erc') .'/nscc_erc.css');
+						$block['subject']='';
+						$block['content']='<a href="https://searchforpresident.northseattle.edu">Help Choose North\'s Next President<a>';
+						return $block;
+				}
+		
+			case 'list':	
+				$blocks[0]['info'] = t('Inside Seattle Colleges Ad');
+				$blocks[0]['cache'] = BLOCK_CACHE_GLOBAL;
+				$blocks[1]['info'] = t('Search For President Ad');
+				$blocks[1]['cache'] = BLOCK_CACHE_GLOBAL;
+				return $blocks;
+		}
+}
+
+function nscc_erc_readerboard_form(){
+	global $user;
+	$target_user = user_load($user->uid);
+	watchdog('nscc_erc',"Global user:<pre>".print_r($user,true)."</pre>\nLoaded user: <pre>".print_r($target_user,true)."</pre>");
+	drupal_add_js(drupal_get_path('module', 'nscc_erc') .'/nscc_erc.js');
+	drupal_add_css(drupal_get_path('module', 'nscc_erc') .'/nscc_erc.css');
+	$form['policy_statement'] = array(
+		'#type'=>'markup',
+		'#value'=>'<div class="policy-statement"><p>Management of the readerboards are the responsibility of the Marketing and Public Information Office.  Please make requests in writing <em>three weeks prior to the event</em>.</p><p>Due to limited space on the board, request must be concise and complete. Postings will be determined by the Marketing and Public Relations Office.</p><p>Requests are posted by the following priorities and on a first-come/first-served basis:</p><ol><li>All-campus events</li><li>College sponsored activities</li></ol></div>'
+	);
+	$form['event_name'] = array(
+		'#title'=>'Event',
+		'#type'=>'textfield',
+		'#description'=>'Enter the name of the event or activity.',
+		'#maxlength'=>60,
+		'#required'=>true,
+		'#size'=>60,		
+	);
+	$form['event_date'] = array(
+		'#title'=>'Date of Event',
+		'#type'=>'date',
+		'#description'=>'Enter the event date.',
+		'#required'=>true,
+	);
+	$form['contact'] = array(
+		'#title'=>'Contact',
+		'#type'=>'fieldset',
+		'#collapsible'=>true,
+		'#collapsed'=>false,
+	);
+	$form['contact']['person'] = array(
+		'#title'=>'Name',
+		'#type'=>'textfield',
+		'#description'=>'Tell us who to contact concerning this request',
+		'#maxlength'=>60,
+		'#required'=>true,
+		'#size'=>30,
+	);
+	if($target_user->uid >1){
+		$form['contact']['person']['#default_value'] = $target_user->nscc_profile_first_name." ".$target_user->nscc_profile_last_name;
+	}
+	$form['contact']['phone'] = array(
+		'#title'=>'Phone',
+		'#type'=>'textfield',
+		'#description'=>'Enter the contact phone number.',
+		'#maxlength'=>13,
+		'#required'=>true,
+		'#size'=>13,		
+	);
+	if($target_user->uid >1){
+		$form['contact']['phone']['#default_value'] = $target_user->nscc_profile_phone;
+	}
+	$form['contact']['email'] = array(
+		'#title'=>'Email',
+		'#type'=>'textfield',
+		'#description'=>'Enter the contact email address.',
+		'#maxlength'=>100,
+		'#required'=>true,
+		'#size'=>60,		
+	);
+	if($target_user->uid >1){
+		$form['contact']['email']['#default_value'] = $target_user->nscc_profile_email_address;
+	}
+	$form['message'] = array(
+		'#title'=>'Message',
+		'#type'=>'fieldset',
+		'#collapsible'=>true,
+		'#collapsed'=>false,
+	);
+	$form['message']['line_1'] = array(
+		'#title'=>'Line 1',
+		'#type'=>'textfield',
+		'#description'=>'Enter the first line of text (Up to 16 characters). Suggestion: Event Title.',
+		'#maxlength'=>16,
+		'#required'=>true,
+		'#size'=>16,
+	);
+	$form['message']['line_2'] = array(
+		'#title'=>'Line 2',
+		'#type'=>'textfield',
+		'#description'=>'Enter the second line of text (Up to 16 characters). Suggestion: Event Date.',
+		'#maxlength'=>16,
+		'#required'=>true,
+		'#size'=>16,
+	);
+	$form['message']['line_3'] = array(
+		'#title'=>'Line 3',
+		'#type'=>'textfield',
+		'#description'=>'Enter the third line of text (Up to 16 characters). Suggestion: Event Location',
+		'#maxlength'=>16,
+		'#required'=>false,
+		'#size'=>16,
+	);
+	$form['message']['preview'] = array(
+		'#type'=>'markup',
+		'#value'=>'<div class="readerboard-preview"><table class="preview-table"><tr class="preview-row"><td id="r1c1"></td><td id="r1c2"></td><td id="r1c3"></td><td id="r1c4"></td><td id="r1c5"></td><td id="r1c6"></td><td id="r1c7"></td><td id="r1c8"></td><td id="r1c9"></td><td id="r1c10"></td><td id="r1c11"></td><td id="r1c12"></td><td id="r1c13"></td><td id="r1c14"></td><td id="r1c15"></td><td id="r1c16"></td></tr><tr class="preview-row"><td id="r2c1"></td><td id="r2c2"></td><td id="r2c3"></td><td id="r2c4"></td><td id="r2c5"></td><td id="r2c6"></td><td id="r2c7"></td><td id="r2c8"></td><td id="r2c9"></td><td id="r2c10"></td><td id="r2c11"></td><td id="r2c12"></td><td id="r2c13"></td><td id="r2c14"></td><td id="r2c15"></td><td id="r2c16"></td></tr><tr class="preview-row"><td id="r3c1"></td><td id="r3c2"></td><td id="r3c3"></td><td id="r3c4"></td><td id="r3c5"></td><td id="r3c6"></td><td id="r3c7"></td><td id="r3c8"></td><td id="r3c9"></td><td id="r3c10"></td><td id="r3c11"></td><td id="r3c12"></td><td id="r3c13"></td><td id="r3c14"></td><td id="r3c15"></td><td id="r3c16"></td></tr></table></div>',
+	);
+	$form['send_request'] = array(
+		'#type'=>'submit',
+		'#value'=>'Send Request'
+	);	
+	return $form;
+}
+
+function nscc_erc_readerboard_form_validate($form,&$form_state){
+ if (!valid_email_address($form_state['values']['email'])) {
+    form_set_error('email', t('That e-mail address is not valid.'));
+  }
+}
+
+function nscc_erc_readerboard_form_submit($form,&$form_state){
+	//$readerboard_destination_email = "sam.bayne@seattlecolleges.edu";
+	$readerboard_destination_email = "Katherine.Morse@seattlecolleges.edu";
+	$body_params = array(
+		'event'=>check_plain($form_state['values']['event_name']),
+		'date'=>date('dMY',strtotime($form_state['values']['event_date']['month']."/".$form_state['values']['event_date']['day']."/".$form_state['values']['event_date']['year'])),
+		'contact'=>check_plain($form_state['values']['person']),
+		'email'=>check_plain($form_state['values']['email']),
+		'phone'=>check_plain($form_state['values']['phone']),
+		'line_1'=>check_plain($form_state['values']['line_1']),
+		'line_2'=>check_plain($form_state['values']['line_2']),
+		'line_3'=>check_plain($form_state['values']['line_3']),
+	);
+	drupal_mail('nscc_erc','readerboard_request',$readerboard_destination_email,language_default(),$body_params,check_plain($form_state['values']['email']));
+	//$form_state['redirect'] = 'online-orientation/conclusion';
+	drupal_set_message('Your request has been submitted. Thank you.');
+}
+
+function nscc_erc_mail($key, &$message, $params){
+	switch($key){
+		case 'readerboard_request':
+			$message['subject'] = 'Readerboard Request for '.$params['event'];
+			//$message['headers']['Reply-to'] = $params['email'];
+			$message['body']  = "Someone has requested a readerboard posting.\n\n";
+			$message['body'] .= 'Contact: '.$params['contact']."\n";
+			$message['body'] .= 'Phone: '.$params['phone']."\n\n";
+			$message['body'] .= 'Event: '.$params['event']."\n";
+			$message['body'] .= 'Event Date: '.$params['date']."\n\n";
+			$message['body'] .= 'line 1: '.$params['line_1']."\n";
+			$message['body'] .= 'line 2: '.$params['line_2']."\n";
+			$message['body'] .= 'line 3: '.$params['line_3']."\n";
+		break;
+	}
+}

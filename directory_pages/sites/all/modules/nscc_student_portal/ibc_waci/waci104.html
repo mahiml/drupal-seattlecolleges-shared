@@ -1,0 +1,189 @@
+<HTML>
+  <HEAD>
+	<style>
+	<!--
+		th{font-family:arial,helvetica;font-weight:900;font-size:10pt}
+		body{font-family:arial,helvetica;font-size:10pt}	
+		caption{font-family:arial,helvetica;font-weight:900}	
+	//-->
+	</style>
+
+
+    <SCRIPT Language="JavaScript">
+    <!-- // Activate cloak
+
+// date 03/18/98 13:00 fixed leading space problem
+
+function clicked(x){
+   top.changeNavbar()
+   var     lastPage="";
+   document.grRoster.yrq.value=top.yearQtr;
+   document.grRoster.tkt.value=top.ticket;
+   document.grRoster.item.value=""+top.section[x].itemNum;
+   document.grRoster.rostrkey.value=""+top.section[x].rostrKey;
+   document.grRoster.pages.value=""+top.section[x].pageRange;
+   document.grRoster.indx.value=x;
+   lastPage=""+top.section[x].lastPg;
+
+/* pad last page with leading zeros*/
+   if ( top.section[x].lastPg.lastIndexOf(" ") == 0)
+   {
+     lastPage="0"+top.section[x].lastPg.substring(1,4);
+   }
+   if ( top.section[x].lastPg.lastIndexOf(" ")==1 )
+   {
+      lastPage="00"+top.section[x].lastPg.substring(2,4);
+   }
+
+   if ( top.section[x].lastPg.lastIndexOf(" ")==2 )
+   {
+      lastPage="000"+top.section[x].lastPg.substring(3,4);
+   }
+
+   document.grRoster.lastpg.value=""+lastPage;
+   document.grRoster.submit();
+}    // end of function clicked()
+
+
+function substuRostr(x){         //submit request for student based roster
+   top.changeNavbar()
+   document.sturostr.tkt.value=top.ticket;
+   document.sturostr.stuyrqitm.value=""+top.sturostr[x].stuyrqitm;
+   document.sturostr.indx.value="00"
+   document.sturostr.submit();
+}
+
+
+function subRoster(x){         //submit request for class roster
+   top.changeNavbar()
+   document.roster.yrq.value=top.yearQtr;
+   document.roster.tkt.value=top.ticket;
+   document.roster.item.value=""+top.roster[x].ritemNum;
+  document.roster.submit();
+}
+
+
+    // Deactivate cloak -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <FORM Name='grRoster' Method=post  Action='https://sccdweb.sccd.ctc.edu/scripts/rq063.exe' Target='content'>
+      <INPUT Type=hidden Name='request'  Value='grrostr' Size=7 Maxlength=7>
+      <INPUT Type=hidden Name='tkt'      Value='' Size=16 Maxlength=16>
+      <INPUT Type=hidden Name='goodBrowser' Value='1'>
+      <INPUT Type=hidden Name='yrq'      Value='' Size=4  Maxlength=4>
+      <INPUT Type=hidden Name='item'     Value='' Size=4  Maxlength=4>
+      <INPUT Type=hidden Name='rostrkey' Value='' Size=10 Maxlength=10>
+      <INPUT Type=hidden Name='lastpg'   Value='' Size=4  Maxlength=4>
+      <INPUT Type=hidden Name='pages'    Value='' Size=13 Maxlength=13>
+      <INPUT Type=hidden Name='indx'     Value='' Size=2  Maxlength=2>
+    </FORM>
+
+    <FORM Name='sturostr' Method=post  Action='https://sccdweb.sccd.ctc.edu/scripts/rq063.exe' Target='content'>
+      <INPUT Type=hidden Name='request'  Value='sturostr' Size=9 Maxlength=9>
+      <INPUT Type=hidden Name='tkt'      Value='' Size=16 Maxlength=16>
+      <INPUT Type=hidden Name='stuyrqitm' Value='' Size=18  Maxlength=18>
+      <INPUT Type=hidden Name='stuName' Value='' Size=22  Maxlength=18>
+      <INPUT Type=hidden Name='indx'     Value='' Size=2  Maxlength=2>
+    </FORM>
+
+    <FORM Name='roster' Method=post  Action='https://sccdweb.sccd.ctc.edu/scripts/rq063.exe' Target='content'>
+      <INPUT Type=hidden Name='request'  Value='roster' Size=7 Maxlength=7>
+      <INPUT Type=hidden Name='tkt'      Value='' Size=16 Maxlength=16>
+      <INPUT Type=hidden Name='yrq'      Value='' Size=4  Maxlength=4>
+      <INPUT Type=hidden Name='item'     Value='' Size=4  Maxlength=4>
+    </FORM>
+
+    <CENTER>
+    <FONT Size=4 Color=#8E236B><B>Briefcase Contents</B></FONT>
+    <BR>
+    <SCRIPT>
+    document.writeln("<FONT size=2 Color=#8E236B><B>"+top.termTitle+"</B></FONT><HR>");
+    document.writeln("<FONT Size=2><B>Grade Rosters</B></FONT><BR>");
+    document.write("<TABLE Cellpadding=0>");
+
+      if (top.numClasses==0){
+      document.writeln("<BR>No ungraded rosters");
+      }
+
+      for (var x=0; x<top.numClasses; x++) {        /*display class lines */
+
+         if ( top.section[x].lineType=="1") {
+           document.writeln("<TR><TD><font size=2>");
+           document.writeln("<a href='javascript:clicked("+x+")'>"+top.section[x].itemNum+"</a>");
+           document.writeln("</TD><TD nowrap><font size=2 color='blue'>"+top.section[x].courseID+"</TD>");
+
+           if (top.section[x].rostrVisited==1){
+              document.writeln("<TD><IMG Src='check1.gif' width=15 heigth=15 Border=0></TD>");
+           } else {
+              document.writeln("<TD></TD>");
+           }
+            document.writeln("</TR>");
+         }
+
+         if ( top.section[x].lineType=="2") {
+            document.writeln("<TR><TD><font size=2>");
+            document.writeln(top.section[x].itemNum+"</a>");
+            document.writeln("</TD><TD nowrap><font size=2 color='black'>"+top.section[x].courseID);
+            document.writeln("</TD><TD></TD></TR>");
+         }
+
+         if ( top.section[x].lineType=="3") {
+            document.writeln("<TR><TD></TD><TD><font size=2>");
+            document.writeln("<A href='javascript:clicked("+x+")'>"+top.section[x].pageRange+"</a>");
+            if (top.section[x].rostrVisited==1){
+               document.writeln("<TD><IMG Src='check1.gif' width=15 heigth=15 Border=0></TD>"); 
+         } else {
+            document.writeln("<TD></TD>");
+         }
+            document.writeln("</TR>");
+         }
+      }
+
+      document.writeln("</TABLE><HR>");
+
+
+  document.writeln("<FONT Size=2 color='black'><B>Class Rosters</B></FONT><BR>");
+  document.write("<TABLE Cellpadding=0>");
+
+  if (top.numRosters==0){
+      document.writeln("<BR>No active classes");
+  }
+
+  for (var x=0; x<top.numRosters; x++) {  /*display class lines */
+    document.writeln("<TR><TD><font size=2>");
+    document.writeln("<A href='javascript:subRoster("+x+")'>"+top.roster[x].ritemNum+"</a>");
+    document.writeln("</TD><TD nowrap><font size=2 color='blue'>"+top.roster[x].rcourseID+"</TD>");
+    document.writeln("</TR>");
+  }
+
+  document.writeln("</TABLE><HR>");
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript">
+function clickHandler() {
+  var targetId, srcElement, targetElement;
+  srcElement = window.event.srcElement;
+  if (srcElement.className == "Outline") {
+     targetId = srcElement.id + "d";
+     targetElement = document.all(targetId);
+     if (targetElement.style.display == "none") {
+        targetElement.style.display = "";
+        srcElement.src = "ofolder.gif";
+     } else {
+        targetElement.style.display = "none";
+        srcElement.src = "folder.gif";
+     }
+  }
+}
+
+document.onclick = clickHandler;
+
+</SCRIPT>
+
+    <P><FONT Size=2><B><A Href='waci108.html'
+      Target='content' Onclick='top.changeNavbar()'>PIN Change</A></B></FONT>
+      </CENTER>
+  </BODY>
+</HTML>

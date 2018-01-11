@@ -1,0 +1,326 @@
+/*    NSCC NEWS   */
+
+
+
+/*
+--------------------------
+LAYOUT
+--------------------------
+*/
+
+#side-nav {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-left: solid 1px rgb(230, 227, 220);
+  border-right: solid 1px rgb(230, 227, 220);
+}
+
+#side-nav > div { margin: 0 3px 18px; }
+
+#side-column1 { margin: 10px 0; }
+
+#main-column { margin-top: 10px; }
+
+
+
+
+/*
+--------------------------
+NODES
+--------------------------
+*/
+
+.node {
+  margin-bottom: 18px;
+  border-bottom: solid 1px rgb(230, 227, 220);
+  padding-bottom: 12px;
+}
+
+.node .content,
+.node .content p,
+.node .content li {
+  font: normal 15px/1.5 DroidSerif, Georgia, "Times New Roman", Times, serif;
+}
+
+.node .full-photo {
+  position: relative;
+  float: left;
+  max-width: 540px;
+  margin: 0 10px 10px 0;
+  padding: 3px;
+  overflow: hidden;
+}
+
+.node .full-photo img {
+/*  max-width: 540px;*/
+  height: auto;
+}
+
+.node .teaser-photo {
+  position: relative;
+  float: right;
+  max-width: 160px;
+  margin: 0 0 12px 12px;
+/*  padding: 3px;*/
+  overflow: hidden;
+}
+
+.node .teaser-photo img {
+/*  max-width: 194px;*/
+  height: auto;
+  border: 0;
+}
+
+.front .node .teaser-photo {
+  position: relative;
+  float: right;
+  max-width: 320px;
+  margin: 0 0 12px 12px;
+/*  padding: 3px;*/
+  overflow: hidden;
+}
+
+.node p.photo-attribution {
+  font-size: 9px;
+  line-height: 10px;
+  color: rgb(111, 111, 111);
+  text-align: right;
+}
+
+.node p.photo-caption {
+  margin: 0;
+  font-size: 10px;
+  line-height: 12px;
+  color: rgb(111, 111, 111);
+}
+
+.terms,
+.nscc-feeds-links,
+.nscc-feeds-dates {
+  clear: both;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: right;
+}
+
+.terms li,
+.nscc-feeds-links li,
+.nscc-feeds-dates li {
+  display: inline;
+  padding: 0 .5em 0 0;
+}
+
+.node .submitted,
+.node .links-label,
+.node .dates-label {
+  font-size: 10px;
+  color: rgb(143, 143, 143);
+}
+
+.node .event-meta {
+	font: normal 12px/15px "Lucida Grande", Tahoma, Arial, sans-serif;
+}
+
+table.calendar-legend { background-color: transparent; }
+
+table.calendar-legend tbody tr { border-bottom: dotted 1px rgb(230, 227, 220); }
+
+table.calendar-legend tbody tr.odd,
+table.calendar-legend tbody tr.even { background-color: transparent; }
+
+table.calendar-legend thead th {
+	font-weight: normal;
+	font-size: 10px;
+	color: rgb(175, 171, 164);
+}
+
+
+
+
+/*
+---------------------------
+SECTION HEADLINES
+---------------------------
+*/
+
+#block-block-2,
+#block-nscc_feed-1 {
+/*  margin: 12px 0 0;*/
+  clear: both;
+}
+
+#block-block-2 h2,
+#block-nscc_feed-1 h2 {
+  margin: 0;
+  padding: 0 0 12px;
+}
+
+#block-block-2 ul,
+#block-nscc_feed-1 ul {
+  list-style-type: none;
+  -moz-column-count: 3;
+  -moz-column-gap: 12px;
+  -moz-column-rule: solid 1px rgb(220,220, 220);
+  -webkit-column-count: 3;
+  -webkit-column-gap: 12px;
+  -webkit-column-rule: solid 1px rgb(220, 220, 220);
+}
+
+#block-block-2 li,
+#block-nscc_feed-1 li {
+  margin: 0 0 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+#block-block-2 li ul,
+#block-nscc_feed-1 li ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0 0 9px;
+  -moz-column-count: 1;
+  -webkit-column-count: 1;
+}
+
+#block-block-2 li li,
+#block-nscc_feed-1 li li {
+  list-style-type: none;
+  margin: 0 0 3px;
+  border: 0;
+  font-weight: normal;
+}
+
+#block-nscc_feed-1 a:link,
+#block-nscc_feed-1 a:visited,
+#block-block-2 a:link,
+#block-block-2 a:visited { text-decoration: none; }
+
+#block-nscc_feed-1 a:hover,
+#block-block-2 a:hover { text-decoration: underline; }
+
+
+
+/*
+--------------------------
+FEED-PICKER (Hork Form)
+--------------------------
+*/
+
+.node .feed-picker { margin: 0; }
+
+.node .feed-picker h2 {
+  margin: 0 0 6px;
+  font: bold 110%/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.node .feed-picker h2 a {
+  border: solid 1px rgb(157, 185, 75);
+  padding: 0 6px;
+  text-decoration: none;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.node .feed-picker h2 a:link,
+.node .feed-picker h2 a:visited {
+  color: rgb(255, 255, 255);
+  background-color: rgb(157, 185, 75);
+}
+
+.node .feed-picker h2 a:hover {
+  color: rgb(157, 185, 75);
+  background-color: rgb(255, 255, 255);
+}
+
+.node .feed-picker form {
+  padding: 6px 9px;
+  border: solid 1px rgb(157, 185, 75);
+  background-color: rgb(232, 239, 209);
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.node .feed-picker div {
+  margin: 0;
+  padding: 0;
+}
+
+.node .feed-picker .form-item { margin: 0 0 12px; }
+
+.node .feed-picker .form-item .description,
+.node .feed-picker label { color: rgb(79, 79, 79); }
+
+.node .feed-picker label,
+.node .feed-picker select { margin-bottom: .5em; }
+
+
+
+/*
+---------------------------
+BLOCKS & VIEWS
+---------------------------
+*/
+
+#block-views-screensaver_view-block_1 .views-field-description {
+  font: normal 12px/1.5 DroidSerif, Georgia, "Times New Roman", Times, serif;
+}
+
+.views-field-timestamp {
+  font-size: 10px;
+  color: rgb(127, 127, 127);
+}
+
+#side-nav .block .pager li {
+  display: inline;
+  margin: 0;
+  font-size: 10px;
+  font-weight: normal;
+  color: rgb(111, 111, 111);
+}
+
+#side-nav .block .pager li a {
+  display: inline;
+  padding: 0 4px;
+}
+
+
+/* Upcoming Events */
+
+#block-views-calendar_date-block_1 { background-color: rgb(222, 229, 200); }
+
+#block-views-calendar_date-block_1 ul { padding: 0; }
+
+#block-views-calendar_date-block_1 li { list-style: none; }
+
+#block-views-calendar_date-block_1 .views-field-title {
+  margin: 0 0 3px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+
+/* Feed List */
+
+#block-nscc_feed-0 li { margin: 0; }
+
+#block-nscc_feed-0 li a:link,
+#block-nscc_feed-0 li a:visited,
+#block-views-recent_content-block_1 a:link,
+#block-views-recent_content-block_1 a:visited { text-decoration: none; }
+
+#block-nscc_feed-0 li a:hover,
+#block-views-recent_content-block_1 a:hover { text-decoration: underline; }
+
+
+
+
+/*
+---------------------------
+SPECIAL-PURPOSE FORMATS
+---------------------------
+*/
+
+body.section-slideshow {
+	background: white;
+}

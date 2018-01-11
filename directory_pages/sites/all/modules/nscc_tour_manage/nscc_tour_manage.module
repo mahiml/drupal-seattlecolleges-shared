@@ -1,0 +1,356 @@
+<?php
+
+function nscc_tour_manage_perm(){
+	return array('administer campus tours');
+}
+
+function nscc_tour_manage_menu(){
+  $items['tools/%/tours'] = array(
+		'title'=>'Schedule Tours',
+    'page callback' => '_tours_list',
+		'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'access arguments'=> array('administer campus tours'),
+  );
+  $items['tools/%/tours/add'] = array(
+		'title'=>'Add a Tour',
+    'page callback' => '_tour_add',
+		'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'access arguments'=> array('administer campus tours'),
+  );
+  $items['tools/%/tours/%/view'] = array(
+		'title'=>'Tour Details',
+    'page callback' => '_tour_view',
+		'page arguments' => array(1,3),
+    'type' => MENU_CALLBACK,
+    'access arguments'=> array('administer campus tours'),
+  );
+  $items['tools/%/tours/%/edit'] = array(
+		'title'=>'Edit Tour Details',
+    'page callback' => '_tour_edit',
+		'page arguments' => array(1,3),
+    'type' => MENU_CALLBACK,
+    'access arguments'=> array('administer campus tours'),
+  );
+  $items['tools/%/tours/%/delete'] = array(
+		'title'=>'Delete Tour',
+    'page callback' => '_tour_delete',
+		'page arguments' => array(1,3),
+    'type' => MENU_CALLBACK,
+    'access arguments'=> array('administer campus tours'),
+  );
+
+	return $items;
+}
+
+function nscc_tour_manage_block($op = 'list', $delta = 0, $edit = array()) {
+	switch($op){
+		case 'list':
+			$blocks[0]['info']= t('Tour Manage Menu');
+			$blocks[0]['cache'] = BLOCK_CACHE_PER_PAGE | BLOCK_CACHE_PER_ROLE;
+			return $blocks;
+			break;
+		case 'configure':
+			break;
+		case 'save':
+			break;
+		case 'view':
+			switch($delta){
+				case 0:
+					//Tour Manage Menu
+					$block['subject'] = '';
+					$active='';
+					if( user_access('administer campus tours') ){
+						if (arg(2)=='tours'){
+							$active=' active';
+						}
+						$block['content'] = '<ul class="tools-menu"><li class="tools-leaf'.$active.'"><a  title="Manage Campus Tours" href="/tools/'.arg(1).'/tours">Tours</a></li></ul>';
+					} else {
+						$block['content']='';
+					}
+					return $block;
+					break;
+				
+			}		
+	}
+}	
+
+function _tours_list($uname){
+	//lists the tours
+  drupal_add_css(drupal_get_path('module', 'nscc_tour_manage') .'/nscc_tour_manage.css');
+	$sql = "SELECT * FROM {nscc_campus_tours} ORDER BY tour_yrq DESC, tour_datetime DESC;";
+	$result = db_query(db_rewrite_sql($sql));
+	if($result){
+		$output .= l('Add New Tour','tools/'.arg(1).'/tours/add',array('atttributes'=>array('class'=>'add-tour-link')));
+		$output .= "<table class=\"tours-list\">\n";
+		$output .="<tr class=\"column-heads\"><td class=\"column-id\">ID</td><td class=\"column-yrq\">Year/Quarter</td><td class=\"column-dtg\">Date/Time</td><td class=\"column-cap\">Cap</td><td class=\"column-controls\">Controls</td></tr>\n";
+		$yrq_array = _nscc_tour_get_yrq_list();
+		while ($data = db_fetch_object($result)){
+			$row_classes='';
+			if($data->tour_datetime<time()){
+				$row_classes .= ' old';
+			}
+			$output .="<tr class=\"$row_classes\"><td class=\"column-id\">".$data->tour_id."</td><td class=\"column-yrq\">".$yrq_array[$data->tour_yrq]."</td><td class=\"column-dtg\"><span class=\"date\">".date('M d, Y',$data->tour_datetime)."</span> <span class=\"time\">".date('h:i',$data->tour_datetime)."</span></td><td class=\"column-cap\">".$data->tour_cap."</td>";
+			if(user_access('administer campus tours')){
+				$edit_link = '<a href="/tools/'.arg(1).'/tours/'.$data->tour_id.'/edit">Edit</a>';
+			}
+			if(user_access('administer campus tours')){
+					$view_roster_link = '<a href="/tools/'.arg(1).'/tours/'.$data->tour_id.'/view">View Roster</a>';
+			}
+			$output .="<td class=\"column-controls\">$edit_link $view_roster_link</td></tr>\n";
+		}
+		$output .= "</table>\n";
+	} else {
+		//actually this only occurs if there's a db error.
+		$output = "No Tours scheduled.";
+		$output .= l('Add New Tour','tools/'.arg(1).'/tours/add',array('atttributes'=>array('class'=>'add-tour-link')));
+	}
+	return $output;
+}
+
+function _tour_add($uname){
+	//displays form to schedule new tour
+	return drupal_get_form('_tour_form','add');
+}
+
+function _tour_view($uname,$tour_id){
+	//displays tour details, including roster
+  drupal_add_css(drupal_get_path('module', 'nscc_tour_manage') .'/nscc_tour_manage.css');
+	$get_tour_sql = "SELECT * FROM {nscc_campus_tours} where tour_id = %d;";
+	$tour_details = db_fetch_object(db_query(db_rewrite_sql($get_tour_sql),$tour_id));
+	$get_tour_participants_sql = "SELECT * FROM {nscc_tour_participant} WHERE tour_id=%d;";
+	$tour_participants = db_query(db_rewrite_sql($get_tour_participants_sql),$tour_id);
+	//tour details line
+	$output ='<h3>Details</h3><table class="tour-details"><thead><tr><th>Tour ID</th><th>Yrq</th><th>Date/Time</th><th>cap</th></tr></thead>';
+	$output .='<tr><td>'.$tour_details->tour_id.'</td><td>'.$tour_details->tour_yrq.'</td><td>'.format_date($tour_details->tour_datetime,'custom','jMY H:i').'</td><td>'.$tour_details->tour_cap.'</td></tr></table>';
+	//roster table
+	if ($tour_participants) {
+		$output .='<h3>Roster</h3><table class="tour-roster"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Signup Date</th><th>Action</th></tr></thead>';
+		$output .='</table>';
+	} else {
+		$output .= "DB Error fetching participants.";
+	}	
+	return $output;
+}
+
+function _tour_edit($uname,$tour_id){
+	//displays form to edit existing tour
+	return drupal_get_form('_tour_form','edit',$tour_id);
+}
+
+function _tour_delete($uname,$tour_id){
+	//deletes a specific tour
+	return drupal_get_form('_tour_delete_confirm_form',$tour_id);
+}
+
+function _tour_form($form_state,$action=null,$tour_id=null){
+	//watchdog('tours','Silent Death -- action='.$action.', tour_id='.$tour_id);
+  drupal_add_css(drupal_get_path('module', 'nscc_tour_manage') .'/nscc_tour_manage.css');
+	if ($tour_id){
+		$get_tour_sql = "SELECT * FROM {nscc_campus_tours} where tour_id = %d;";
+		$tour_data = db_fetch_object(db_query(db_rewrite_sql($get_tour_sql),$tour_id));
+		//watchdog('tours','Silent Death -- tour_data:'."\n <pre>\n".print_r($tour_data,true).'</pre>');
+		
+		$form['tour_id']= array(
+			'#type'=>'value',
+			'#value'=>$tour_id,
+		);
+		$tour_yrq_default = $tour_data->tour_yrq;
+		$tour_date_default = array(
+			'month'=> format_date($tour_data->tour_datetime, 'custom','n'),
+			'day'  => format_date($tour_data->tour_datetime, 'custom','j'),
+			'year' => format_date($tour_data->tour_datetime, 'custom','Y'),
+		);
+		$tour_time_default = date( 'H:i',$tour_data->tour_datetime);
+		$tour_cap_default = $tour_data->tour_cap;
+		$add_save_value = "Save";
+	} else {
+		$tour_yrq_default = '';
+		$tour_date_default = array(
+			'month'=>format_date(time(), 'custom','n'),
+			'day'=>format_date(time(), 'custom','j'),
+			'year'=>format_date(time(), 'custom','Y'),
+		);
+		$tour_time_default = '08:00';
+		$tour_cap_default = '';
+		$add_save_value = "Add";
+	}
+
+
+	//$form['#redirect'] = 'tools/'.arg(1).'/tours';
+	$form['tour_yrq'] = array(
+		'#title' => t('Year/Quarter'),
+		'#type' => 'select',
+		'#description' => t('Select the Year/Quarter.'),
+		'#required' => true,
+		'#default_value'=>$tour_yrq_default,
+		'#options' => _nscc_tour_get_yrq_list(),
+	);
+	$form['tour_date'] = array(
+		'#title' => t('Date'),
+		'#type' => 'date',
+		'#description' => t('Indicate the date of this tour.'),
+		'#default_value'=>$tour_date_default,
+		'#required' => true,		
+	);
+	$form['tour_time'] = array(
+		'#title' => t('time'),
+		'#type' => 'select',
+		'#description' => t('Select the time.'),
+		'#required' => true,
+		'#default_value'=>$tour_time_default,
+		'#options' => array(
+			'08:00'=>'08:00',
+			'08:30'=>'08:30',
+			'09:00'=>'09:00',
+			'09:30'=>'09:30',
+			'10:00'=>'10:00',
+			'10:30'=>'10:30',
+			'11:00'=>'11:00',
+			'11:30'=>'11:30',
+			'12:00'=>'12:00',
+			'12:30'=>'12:30',
+			'13:00'=>'1:00',
+			'13:30'=>'1:30',
+			'14:00'=>'2:00',
+			'14:30'=>'2:30',
+			'15:00'=>'3:00',
+			'15:30'=>'3:30',
+			'16:00'=>'4:00',
+			'16:30'=>'4:30',
+			'17:00'=>'5:00',
+			'17:30'=>'5:30',
+			'18:00'=>'6:00',
+			'18:30'=>'6:30',
+			'19:00'=>'7:00',
+			'19:30'=>'7:30',
+		),
+	);
+	$form['tour_cap'] = array(
+		'#title'=>t('Cap'),
+		'#type'=>'textfield',
+		'#size'=>2,
+		'#description'=>t('Maximum attendees.'),
+		'#required'=>true,
+		'#default_value'=>$tour_cap_default,
+	);
+	$form['submit'] = array(
+		'#type'=>'submit',
+		'#value'=>$add_save_value,
+	);
+	if($add_save_value=='Save'){
+		$form['Delete'] = array(
+			'#type'=>'submit',
+			'#value'=>'Delete',
+			'#submit'=>array('_tour_form_submit_delete'),
+		);
+	}
+
+	return $form;
+}
+
+function _tour_form_validate($form,&$form_state){
+}
+
+function _tour_form_submit_delete($form,&$form_state){
+	$form_state['redirect'] = '/tools/'.arg(1).'/tours/'.$form_state['values']['tour_id'].'/delete';
+	drupal_set_message("Deleting Tour id#".$form_state['values']['tour_id']);
+}
+
+function _tour_form_submit($form,&$form_state){
+	$tour_yrq = $form_state['values']['tour_yrq'];
+	$datetime_string = $form_state['values']['tour_date']['year']."/".$form_state['values']['tour_date']['month']."/".$form_state['values']['tour_date']['day']." ".$form_state['values']['tour_time'].":00";
+	$datetime_int = strtotime($datetime_string);
+	$tour_cap = $form_state['values']['tour_cap'];
+	
+	$record = new stdClass();
+	$record->tour_yrq = $tour_yrq;
+	$record->tour_datetime = $datetime_int;
+	$record->tour_cap = $tour_cap;	
+	
+	if($form_state['values']['tour_id']){
+
+		$record->tour_id = $form_state['values']['tour_id'];
+		if (drupal_write_record('nscc_campus_tours',$record,array('tour_id')) ){	
+			$form_state['redirect'] = 'tools/'.arg(1).'/tours';
+			drupal_set_message("Tour id#".$record->tour_id." Updated.");
+		}	
+		
+	}else {
+	
+		if (drupal_write_record('nscc_campus_tours',$record) ){	
+			$form_state['redirect'] = 'tools/'.arg(1).'/tours';
+			drupal_set_message("Tour id#".$record->tour_id." Saved.");
+		}
+
+	}
+	
+}
+
+function _tour_delete_confirm_form($questionable_garbage,$tour_id=null){
+	$form['tour_id'] = array(
+		'#type'=>'value',
+		'#value'=>$tour_id,
+	);
+	$form['submit'] = array(
+		'#type'=>'submit',
+		'#value'=>'Delete this tour Permanently and Completely',
+	);								
+	return $form;
+}
+
+function _tour_delete_confirm_form_validate($form,&$form_state){
+	if(!$form_state['values']['tour_id']){
+		form_set_error('submit','A Tour ID is required.');
+	}
+}
+
+function _tour_delete_confirm_form_submit($form,&$form_state){
+	//delete all session participants
+	$delete_participant_sql = "DELETE FROM {nscc_tour_participant} WHERE tour_id = %d;";
+	$result = db_query($delete_participant_sql,$form_state['values']['tour_id']);
+	//delete the session itself
+	$delete_session_sql = "DELETE FROM {nscc_campus_tours} WHERE tour_id = %d;";
+	$result = db_query($delete_session_sql,$form_state['values']['tour_id']);
+	//redirect to session listing
+	$form_state['redirect'] = 'tools/'.arg(1).'/tours';
+	drupal_set_message("Tour id#".$form_state['values']['tour_id']." Deleted.");	
+}
+
+
+function _nscc_tour_get_yrq_list(){
+	require_once('/var/www/people/sites/all/modules/nscc_schedule/nscc_schedule.module');
+	/*
+	$yrq_array = array(
+		'B012'=>'Fall 2010',
+		'B013'=>'Winter 2011',
+		'B014'=>'Spring 2011',
+		'B111'=>'Summer 2011',
+		'B112'=>'Fall 2011',
+	);
+	return $yrq_array;
+	*/
+	$how_far_to_go = 6;
+	$current_yrq = _schedule_get_next_starting_yrq('all');
+	$quarter_list = array();
+	$quarter_name_list = array();
+	for($i = 1; $i <= $how_far_to_go; $i++) {
+		$quarter_details = _schedule_get_quarter_details($current_yrq);
+		if($quarter_details){
+			$quarter_list[$i] = $current_yrq;
+			$qtr_name = _schedule_yrq_to_quarter($current_yrq);
+			//$qtr_start = date('M j', strtotime($quarter_details->first_day_yrq));
+			$qtr_start = date('M j',_schedule_hpdate_to_date($quarter_details->first_day_yrq));
+			//$qtr_end = date('M j', strtotime($quarter_details->last_day_yrq));
+			$qtr_end = date('M j',_schedule_hpdate_to_date($quarter_details->last_day_yrq));
+			//$quarter_name_list[$i] = "$qtr_name ($qtr_start - $qtr_end)";
+			$quarter_name_list[$i] = $qtr_name;
+		}
+		$current_yrq = _schedule_increment_yrq($current_yrq,false);
+  }
+
+  return array_combine($quarter_list,$quarter_name_list);
+}
+
+

@@ -1,0 +1,105 @@
+<?php
+/**
+* implementation of hook_install()
+*/
+
+function nscc_running_start_install(){
+	drupal_install_schema('nscc_running_start');
+}
+
+function nscc_running_start_schema(){
+	$schema['nscc_running_start_session'] = array(
+		'description' => t('Stores the running start sessions.'),
+		'fields'=> array( 'session_id'=>array(
+													'type'=>'serial',
+													'unsigned'=>TRUE,
+													'size'=>'medium',
+													'not null'=>TRUE,
+													'description'=>t('unique record id.'),
+												),
+											'session_yrq'=>array(
+													'type'=>'varchar',
+													'length'=>'4',
+													'not null'=>TRUE,
+													'description'=>t('Quarter to which this session applies'),
+											),
+											'session_datetime'=>array(
+													'type' => 'int',
+        									'unsigned' => TRUE,
+        									'not null' => TRUE,
+        									'default' => 0,
+        									'description' => 'Unix timestamp for session',
+											),
+											'session_location'=>array(
+													'type'=>'varchar',
+													'length'=>'10',
+													'not null'=>TRUE,
+													'description'=>t('Session room number.'),
+											),
+											'session_cap'=>array(
+													'type'=>'varchar',
+													'length'=>'2',
+													'not null'=>TRUE,
+													'description'=>t('Session cap.'),
+											),
+								),
+		'primary key'=> array('session_id'),
+		'indexes'=> array(
+			 'session_id' => array('session_id'),
+			 'session_yrq' => array('session_yrq'),
+			),
+	);
+	$schema['nscc_running_start_participant'] = array(
+		'description' => t('Stores the rosters for the running start orientation sessions'),
+		'fields'=> array( 'participant_id'=>array(
+													'type'=>'serial',
+													'unsigned'=>TRUE,
+													'size'=>'medium',
+													'not null'=>TRUE,
+													'description'=>t('unique record id.'),
+												),
+											'session_id'=>array(
+													'type' => 'int',
+        									'unsigned' => TRUE,
+        									'not null' => TRUE,
+        									'default' => 0,
+        									'description' => 'Foreign Key: nscc_running_start_session.session_id.',
+												),
+											'participant_name'=>array(
+													'type'=>'varchar',
+													'length'=>'255',
+													'not null'=>TRUE,
+													'description'=>t('Participant name'),
+												),
+											'participant_email'=>array(
+													'type'=>'varchar',
+													'length'=>'255',
+													'not null'=>TRUE,
+													'description'=>t('Participant email address'),
+												),
+											'signup_datetime'=>array(
+													'type' => 'int',
+        									'unsigned' => TRUE,
+        									'not null' => TRUE,
+        									'default' => 0,
+        									'description' => 'Unix timestamp for record_create',
+											),
+											'sid'=>array(
+													'type'=>'char',
+													'length'=>'9',
+													'not null'=>TRUE,
+													'description'=>t('Participant sid'),
+												),
+								),
+		'primary key'=> array('participant_id'),
+		'indexes'=> array(
+			 'participant_id' => array('participant_id'),
+			 'session_id' => array('session_id'),
+		),		
+	);
+	return $schema;
+}
+
+function nscc_running_start_uninstall(){
+	drupal_uninstall_schema('nscc_running_start');
+}

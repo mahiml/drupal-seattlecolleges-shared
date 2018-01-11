@@ -1,0 +1,53 @@
+# $Id: sbp_users.pot,v 1.1.2.1 2009/08/12 00:54:10 jhodgdon Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sbp_users.module,v 1.1.2.3 2009/08/12 00:46:57 jhodgdon
+#  sbp_users.info,v 1.1.2.1 2009/06/11 17:05:21 jhodgdon
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-08-11 17:50-0700\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: sbp_users.module:98
+msgid "User"
+msgstr ""
+
+#: sbp_users.module:126
+msgid "Users"
+msgstr ""
+
+#: sbp_users.module:143
+msgid "User roles to index"
+msgstr ""
+
+#: sbp_users.module:146
+msgid "Choose which user roles you would like to have indexed by Search by Page. If you select \"authenticated user\", you will get all users registered on your site."
+msgstr ""
+
+#: sbp_users.module:0
+msgid "sbp_users"
+msgstr ""
+
+#: sbp_users.info:0
+msgid "Search by Page Users"
+msgstr ""
+
+#: sbp_users.info:0
+msgid "Sub-Module for Search by Page: Allows you to choose user roles for search indexing in Search by Page."
+msgstr ""
+
+#: sbp_users.info:0
+msgid "Search by Page"
+msgstr ""
+

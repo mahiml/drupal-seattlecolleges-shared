@@ -1,0 +1,214 @@
+/**
+ *		Text styles for NSCC Main Site theme
+ *
+ *		Defines the presentation of content inside the widget interface
+ *		and selectable style-groups for specific content elements (e.g. tables)
+ *		to simplify formatting standardization for content managers.
+ *
+ *		These styles need to be included by the 960 theme's base stylesheet to
+ *		to ensure they are also applied to the public view of the content.
+ *
+ */
+
+
+
+/* Start with base theme styles */
+
+@import "/sites/all/themes/nscc_960/css/tiny-mce.css";
+
+
+/* Override here as needed */
+
+h4, h5, h6 {
+	margin: 24px 0 6px;
+	font-weight: normal;
+	line-height: 1;
+	color: rgb(139, 165, 66);
+}
+
+h4 { font-size: 14px; }
+h5 { font-size: 13px; }
+h6 { font-size: 12px; }
+
+
+
+/*
+--------------------------
+CURRICULUM CONTENT
+--------------------------
+*/
+
+.curriculum table,
+table.curriculum {
+  margin: 20px 0;
+  border-collapse:collapse;
+  font-size: 12px;
+  width: 100%;
+}
+
+.curriculum caption,
+table.curriculum caption {
+  font-size: 16px;
+  text-align: left;
+  margin: 0 0 10px 0;
+}
+
+.curriculum th,
+.curriculum td,
+table.curriculum th, table.curriculum td {
+  border-top:1px solid #ccc;
+  border-bottom:1px solid #ccc;
+  padding: 5px;
+  text-align:left;
+  vertical-align:top;
+}
+
+.curriculum th,
+table.curriculum th {
+  color: #b94c26;
+  padding: 8px 5px; 
+}
+
+.curriculum tr.altRow,
+table.curriculum tr.altRow {
+  background: #dfe8ea;
+}
+
+.curriculum td + td + td,
+.curriculum th + th + th,
+table.curriculum td + td + td,
+table.curriculum th + th + th {
+  text-align:right;
+  vertical-align:middle;
+}
+
+.curriculum tfoot td,
+table.curriculum tfoot td {
+  text-align:right;
+  font-weight: bold;
+}
+
+.node-type-certificate .sequence ul,
+.node-type-certificate .sequence ol,
+.node-type-degree-proftech .sequence ul,
+.node-type-degree-proftech .sequence ol {
+  list-style-type: none;
+}
+
+.node-type-certificate p.total-credits,
+.node-type-degree-proftech p.total-credits {
+  font-size: 14px;
+  text-align: right;
+}
+
+.node-type-certificate p.total-credits .amount,
+.node-type-degree-proftech p.total-credits .amount {
+  font-weight: bold;
+}
+
+.node-type-certificate p.total-credits .caveats,
+.node-type-degree-proftech p.total-credits .caveats {
+  display: block;
+  font-size: 10px;
+  color: rgb(143, 143, 143);
+}
+
+
+
+/* Webform */
+
+.webform-client-form th { text-align: center; }
+
+
+/* Images */
+
+img.left-align {
+	float: left;
+	margin-right: 10px;
+}
+
+img.right-align {
+	float: right;
+	margin-left: 10px;
+}
+
+
+
+
+/*
+--------------------------
+USER-SELECTABLE STYLES (Tiny-MCE)
+--------------------------
+*/
+
+
+/* Table: plain */
+
+table.table-plain {
+	width: 100%;
+	margin: 15px 0;
+	border: none 0;
+}
+
+table.table-plain caption {
+	margin: 0 0 10px;
+	font-size: 15px;
+	text-align: left;
+}
+
+table.table-plain td {
+	padding: .25em .5em;
+	font-size: 12px;
+}
+
+table.table-plain th {
+	padding: .25em .5em;
+	font-size: 11px;
+	font-weight: normal;
+	color: rgb(111, 111, 111);
+	border-bottom: solid 1px rgb(230, 227, 220);
+	text-align: left;
+}
+
+
+/* Table: grid */
+
+table.table-grid,
+table.table-grid th,
+table.table-grid td {
+	padding: 6px;
+	border: solid 1px;
+	border-collapse: collapse;
+}
+
+
+/* Typeface: serif */
+
+p.serif-font,
+li.serif-font { font: 13px/1.5 DroidSerif, Georgia, "Times New Roman", Times, serif; }
+
+
+/* List: no-marker */
+
+ul.no-marker,
+ol.no-marker,
+ul.no-marker li,
+ol.no-marker li,
+li.no-marker {
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none outside none;
+}
+
+
+/* Images */
+
+img.left-align {
+	float: left;
+	margin-right: 10px;
+}
+
+img.right-align {
+	float: right;
+	margin-left: 10px;
+}

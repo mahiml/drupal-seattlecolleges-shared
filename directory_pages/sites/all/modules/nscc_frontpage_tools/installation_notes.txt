@@ -1,0 +1,11 @@
+--
+-- to create table for featured articles, execute:
+--
+CREATE TABLE shared_featured_articles (
+	featured_location varchar(20),
+	news_nid_1 int,
+	news_nid_2 int,
+	news_nid_3 int,
+	news_nid_4 int
+);
+GRANT ALL ON shared_featured_articles TO websites_user;

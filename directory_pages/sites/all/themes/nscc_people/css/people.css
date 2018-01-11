@@ -1,0 +1,531 @@
+/**
+ *		NSCC People styles
+ *
+ *		Base stylesheet for theme. Most of the text specifications are contained
+ *		in the imported stylesheet to make them available to the RTF widget used
+ *		by content managers.
+ *
+ */
+
+@import "tiny-mce.css";
+
+
+
+
+/*
+--------------------------
+BASIC STRUCTURE (supplimental)
+--------------------------
+*/
+
+.region-main {
+  position: relative;
+  min-height: 300px;
+}
+
+
+
+
+/*
+--------------------------
+FRONT PAGE
+--------------------------
+*/
+
+/* Directory Search Block */
+
+.front .region-main .block-nscc_profile .content {
+  padding: 6px 12px 0;
+  border: solid 1px rgb(220, 220, 220);
+  background: rgb(223, 232, 234) url(../imgs/bg-people-search.png) bottom right no-repeat;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.front #nscc-profile-form-usersearch { position: relative; }
+
+.front #nscc-profile-form-usersearch .form-item .description {
+  margin: 6px 0 0;
+  padding: 0;
+  color: rgb(97, 109, 111);
+  font-size: 10px;
+}
+
+.front #nscc-profile-form-usersearch #edit-search-text { width: 419px; }
+
+.front #nscc-profile-form-usersearch .form-submit {
+  position: absolute;
+  top: 0;
+  left: 433px;
+}
+
+.front #nscc-profile-form-usersearch #autocomplete {
+  border: solid 1px rgb(129, 141, 159);
+  border-color: rgba(129, 141, 159, .8);
+  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, .8);
+  z-index: 999;
+}
+
+.front #nscc-profile-form-usersearch #autocomplete li {
+  margin: 0;
+  padding: 3px 6px;
+  background-color: transparent;
+}
+
+.front #nscc-profile-form-usersearch #autocomplete li.selected {
+  color: white;
+  background-color: rgb(21, 63, 175);
+  background-color: rgba(21, 63, 175, .8);
+}
+
+
+/* Directory Browse Block */
+
+.front .region-main #block-block-1 { min-height: 120px; }
+
+.front .region-main #block-block-1 ul { padding: 0; }
+
+.front .region-main #block-block-1 .content li {
+  display: block;
+  float: left;
+  margin: 0 18px 0 0;
+  padding: 0;
+}
+
+.front .region-main #block-block-1 .content li+li { margin-right: 0; }
+
+.front .region-main #block-block-1 .content li a {
+  display: block;
+  width: 316px;
+  height: 36px;
+  padding: 12px;
+  overflow: hidden;
+  font: normal 27px/1 Optima, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.front .region-main #block-block-1 .content li a:link,
+.front .region-main #block-block-1 .content li a:visited {
+  text-decoration: none;
+  color: rgb(26, 88, 143);
+  background: rgb(209, 220, 239);
+}
+
+.front .region-main #block-block-1 .content li a:hover {
+  text-decoration: none;
+  color: rgb(116, 166, 207);
+  background: rgb(223, 232, 255);
+}
+
+.front .region-main #block-block-1 .content li.alpha-list a:link,
+.front .region-main #block-block-1 .content li.alpha-list a:visited {
+  background: rgb(223, 232, 234) url(../imgs/bg-people-az.png) bottom right no-repeat;
+}
+
+.front .region-main #block-block-1 .content li.alpha-list a:hover {
+  color: rgb(255, 255, 255);
+  background: rgb(73, 144, 179) url(../imgs/bg-people-az-hover.png) bottom right no-repeat;
+}
+
+.front .region-main #block-block-1 .content li.org-list a:link,
+.front .region-main #block-block-1 .content li.org-list a:visited {
+  background: rgb(223, 232, 234) url(../imgs/bg-people-org.png) bottom right no-repeat;
+}
+
+.front .region-main #block-block-1 .content li.org-list a:hover {
+  color: rgb(255, 255, 255);
+  background: rgb(73, 144, 179) url(../imgs/bg-people-org-hover.png) bottom right no-repeat;
+}
+
+
+/* Photo */
+
+.front #block-block-2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+.front #block-block-2 p {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+/*
+--------------------------
+ORGANIZATIONAL LIST
+--------------------------
+*/
+
+.page-depts .region-main h2 {
+  margin: 15px 0 5px;
+  font-size: 18px;
+}
+
+.page-depts .region-main a { font-size: 12px; }
+
+.page-depts .region-main ul {
+  list-style: none;
+  margin: 0 0 12px;
+}
+
+.page-depts .region-main ul ul {
+  margin: 0 0 0 18px;
+}
+
+.page-depts .region-main li {
+  font-size: 12px;
+  margin: 3px 0;
+  padding: 0;
+}
+
+.page-depts #orgchart-disclaimer { font-size: 12px; }
+
+.page-depts .org-units div {
+	margin: 15px 0;
+	padding: 6px 12px;
+	border: solid 1px rgb(240, 237, 230);
+	background-color: rgb(250, 247, 240);
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.page-depts .org-units .office-hq { margin: 0; }
+
+.page-depts .org-units h2 { margin: 0 0 5px; }
+
+.page-depts .org-units .description {
+	margin-top: 0;
+	font-size: 10px;
+	line-height: 12px;
+	color: rgb(111, 111, 111);
+}
+
+
+
+
+/*
+--------------------------
+USER PROFILES
+--------------------------
+*/
+
+#people-header h1 { margin-bottom: 3px; }
+
+#people-header h1 .user_title,
+#people-header h1 .user_degrees {
+  font-weight: normal;
+  font-size: 12px;
+  color: rgb(143, 133, 89);
+}
+
+#people-header .job_title {
+  font-size: 15px;
+  color: rgb(127, 127, 127);
+}
+
+#people-header .tabs { margin-top: 15px; }
+
+#people-header .block { margin: 0; }
+
+.nscc-profile { margin: 0 12px 12px; }
+
+.nscc-profile .picture {
+  float: right;
+  margin: 0 0 6px 6px;
+  padding: 12px;
+  border: solid 1px rgb(179, 181, 191);
+  background-color: rgb(239, 241, 255);
+}
+
+.nscc-profile h2 { display: none; } /* profile category headings not helpful */
+
+.nscc-profile h3 {
+  margin: 24px 0 5px;
+  font-size: 14px;
+  color: rgb(143, 133, 89);
+}
+
+div.nscc_profile-nscc_profile_departments {
+  font-size: 12px;
+}
+
+.nscc-profile p {
+  font-size: 12px;
+  margin: 0 0 18px;
+}
+
+.nscc-profile li { font-size: 12px; }
+
+.nscc-profile .vcard ul {
+  list-style-type: none;
+  margin: 0 0 1em;
+  padding: 0;
+}
+
+.nscc-profile .vcard li {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Profile Block */
+
+#block-nscc_profile-2 {
+  margin-bottom: 12px;
+  border: 0;
+  padding: 0;
+  background-color: inherit;
+}
+#block-nscc_profile-2 .picture img {
+  margin: 0 0 12px;
+  padding: 7px;
+  border: solid 1px rgb(179, 181, 191);
+  background-color: rgb(223, 232, 234);
+}
+#block-nscc_profile-2 .contact ul { padding: 0; }
+#block-nscc_profile-2 .contact li {
+  margin: 0;
+  padding: 0 0 2px;
+}
+#block-nscc_profile-2 .contact .label { color: rgb(143, 133, 89); }
+
+
+
+
+/*
+--------------------------
+PROFILES LISTS
+--------------------------
+*/
+
+.section-nscc-profile #content-title h1 .range { font-size: 14px; }
+
+#nscc-profiles {
+  border-top: solid 1px;
+}
+
+.nscc-profile_letter-divider {
+  position: relative;
+}
+
+.nscc-profile_letter-divider .index-anchor {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1;
+  color: rgb(240, 238, 230);
+}
+
+.nscc-profile_list-item {
+  position: relative;
+  margin-left: 40px;
+  clear: both;
+  padding: 6px;
+  min-height: 96px;
+}
+
+.altRow { background-color: rgb(250, 248, 240); }
+
+.nscc-profile_list-item a:link,
+.nscc-profile_list-item a:visited { text-decoration: none; }
+
+.nscc-profile_list-item a:hover { text-decoration: underline; }
+
+.nscc-profile_list-item h2 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.nscc-profile_list-item img {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  max-height: 96px;
+}
+
+.nscc-profile_list-item .job-title {
+  font-size: 12px;
+  line-height: 14px;
+  color: rgb(143, 133, 89);
+}
+
+.nscc-profile_list-item .depts {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.nscc-profile_list-item .contacts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nscc-profile_list-item .contacts li {
+  margin: 0;
+  padding: 0;
+  line-height: 14px;
+}
+
+.nscc-profile_list-item .contacts .label {
+  color: rgb(143, 133, 89);
+  font-size: 10px;
+}
+
+
+/* Profile Listings Index */
+
+#nscc-profile_listing-index {
+  position: relative;
+  margin: 12px 0;
+}
+
+#nscc-profile_listing-index li a:link,
+#nscc-profile_listing-index li a:visited { color: rgb(26, 88, 143); }
+
+
+
+
+/*
+--------------------------
+BLOGS
+--------------------------
+*/
+
+.section-blogs .region-main .item-list ul {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+
+.section-blogs .region-main .item-list li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+
+
+
+
+/*
+--------------------------
+TOOLS
+--------------------------
+*/
+
+#tools-sidebar {
+	background-color: rgb(223, 232, 234);
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-o-border-radius: 6px;
+	-ms-border-radius: 6px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+#tools-sidebar .block {
+	margin: 0;
+}
+
+ul.tools-menu {
+	padding: 0;
+	list-style: none outside none;
+}
+
+.tools-menu ul {
+	padding: 0;
+}
+
+.tools-menu li {
+	margin: 0;
+	padding: 0;
+	list-style: none outside none;
+}
+
+.tools-menu .menu {}
+
+.tools-menu .menu li {
+	margin: 0;
+}
+
+.tools-menu li a {
+	display: block;
+	padding: .5em 1em;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.tools-menu li a:link,
+.tools-menu li a:visited {
+	color: rgb(42, 116, 144);
+}
+
+.tools-menu li a:hover,
+.tools-menu li.active {
+	color: rgb(51, 51, 51);
+	background-color: rgb(255, 255, 255);
+}
+
+.tool-group {}
+
+.tool-group .menu-group-title {
+	display: block;
+	padding: .5em 1em;
+	border-bottom: dotted 1px rgb(255, 255, 255);
+	color: rgb(42, 116, 144);
+	line-height: 1;
+	cursor: pointer;
+	background: transparent url(/sites/all/themes/nscc_960/imgs/bullet-links-down.png) 98% 7px no-repeat;
+}
+
+.tool-group .menu-group-title.closed {
+	background: transparent url(/sites/all/themes/nscc_960/imgs/bullet-links-left.png) 98% 7px no-repeat;
+}
+
+.tool-group .menu-group-title:hover {
+	color: rgb(51, 51, 51);
+	background-color: rgb(255, 255, 255);
+	background-position: 98% -43px;
+}
+
+.tool-group .menu-group-title.closed:hover {
+	background-position: 98% -42px;
+}
+
+.tool-group .menu {}
+
+li.tools-category,
+li.tools-leaf,
+.tool-group li.leaf {
+	border-bottom: dotted 1px rgb(255, 255, 255);
+}
+
+li.tool-group:last-of-type .menu li.leaf:last-of-type {
+	border: 0 none;
+}
+
+.tool-group .menu li {
+	background-color: rgb(235, 239, 240);
+}
+
+.tool-group .menu li a {
+	padding-left: 2em;
+}
+
+.tool-group .menu li a:link,
+.tool-group .menu li a:visited {}
+
+.tool-group .menu li a:hover {}

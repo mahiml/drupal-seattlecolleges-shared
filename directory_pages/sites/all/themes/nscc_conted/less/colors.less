@@ -1,0 +1,107 @@
+//
+//	Colors for NSCC Continuing Education site
+//
+
+
+// Color constants
+
+@color-link: rgb(42, 116, 144);
+@color-visited: rgb(102, 102, 102);
+@color-hover: rgb(34, 34, 34);
+@color-text: rgb(51, 51, 51);
+@color-pg-bg: rgb(230, 227, 220);
+@color-steam: rgb(255, 255, 250);
+@color-bluegrey: rgb(134, 142, 167);
+@color-warmgrey: rgb(216, 215, 210);
+@color-grey35: rgb(89, 89, 89);
+@color-grey44: rgb(111, 111, 111);
+@color-midgrey: rgb(127, 127, 127);
+@color-grey56: rgb(143, 143, 143);
+@color-grey69: rgb(175, 175, 175);
+@color-grey86: rgb(220, 220, 220);
+@color-grey96: rgb(245, 245, 245);
+@color-bc-bg: rgb(252, 250, 246);
+@color-bc-link: rgb(129, 45, 91);
+@color-bc-hover: rgb(69, 55, 83);
+@color-nav-text: rgb(68, 68, 68);
+@color-nav-link: rgb(45, 98, 138);
+@color-menu-bg: rgb(223, 230, 244);		//Top level items
+@color-menu2-bg: rgb(210, 220, 239);	//2nd level items
+@color-menu3-bg: rgb(193, 211, 233);	//3rd level items
+@color-menu4-bg: rgb(204, 213, 224);	//4th level items
+@color-pager-text: rgb(159, 159, 159);
+@color-pager-link: rgb(42, 116, 144);
+@color-pager-hover: rgb(34, 34, 34);
+@color-footer-link: rgb(215, 212, 227);
+@color-fieldset-bg: rgb(250, 248, 240);		//Top level fs
+@color-fieldset2-bg: rgb(240, 237, 230);	//2nd level fs
+@color-fieldset3-bg: rgb(223, 223, 209);	//3rd level fs
+@color-fieldset4-bg: rgb(228, 230, 219);	//4th level fs
+@color-legend-text: rgb(143, 133, 89);
+@color-help-text: rgb(95, 95, 95);
+@color-login-bg: rgb(222, 229, 200);
+@color-toolbox-link: rgb(143, 178, 191);
+@color-toolbox-li-border: rgb(69, 101, 111);
+@color-login-form-labels: rgb(38, 47, 46);
+@color-block-borders: rgb(220, 220, 240);
+@color-new-marker: rgb(100, 191, 0);
+@color-unpublished-marker: rgb(188, 0, 116);
+@color-user-signature: rgb(159, 156, 149);
+@color-comment-border: rgb(239, 234, 224);
+@color-unpublished-bg: rgb(252, 232, 244);
+@color-booknav-link: rgb(185, 76, 38);
+@color-slide-bg: rgb(207, 203, 194);
+@color-toolbox-bg: rgb(13, 35, 74);
+@color-rust: rgb(185, 76, 38);
+@color-lime: rgb(139, 165, 66);
+@color-midnight: rgb(25, 54, 76);
+@color-fructose: rgb(129, 45, 91);
+@color-miasma: rgb(38, 207, 156);
+@color-thirsty: rgb(120, 55, 223);
+@color-kahuna: rgb(186, 141, 20);
+@color-vapid: rgb(238, 255, 191);
+@color-canary: rgb(255, 255, 219);
+@color-active-odd: rgb(236, 243, 217);
+@color-active-even: rgb(245, 252, 233);
+
+
+// Gradient mixins
+
+.footer-gradient() {
+	background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.66) 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.66)));
+	background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.66) 100%);
+	background: -o-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.66) 100%);
+	background: -ms-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.66) 100%);
+	background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.66) 100%);
+}
+
+.courseinfo-gradient() {
+	background: rgb(237,237,237);
+	background: -moz-linear-gradient(top, rgb(237,237,237) 0%, rgb(246,246,246) 45%, rgb(255,255,255) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(237,237,237)), color-stop(45%,rgb(246,246,246)), color-stop(100%,rgb(255,255,255)));
+	background: -webkit-linear-gradient(top, rgb(237,237,237) 0%,rgb(246,246,246) 45%,rgb(255,255,255) 100%);
+	background: -o-linear-gradient(top, rgb(237,237,237) 0%,rgb(246,246,246) 45%,rgb(255,255,255) 100%);
+	background: -ms-linear-gradient(top, rgb(237,237,237) 0%,rgb(246,246,246) 45%,rgb(255,255,255) 100%);
+	background: linear-gradient(to bottom, rgb(237,237,237) 0%,rgb(246,246,246) 45%,rgb(255,255,255) 100%);
+}
+
+.submit-btn-gradient() {
+	background: rgb(181,201,80);
+	background: -moz-linear-gradient(top, rgb(181,201,80) 0%, rgb(150,168,69) 50%, rgb(107,147,31) 51%, rgb(139,165,66) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(181,201,80)), color-stop(50%,rgb(150,168,69)), color-stop(51%,rgb(107,147,31)), color-stop(100%,rgb(139,165,66)));
+	background: -webkit-linear-gradient(top, rgb(181,201,80) 0%,rgb(150,168,69) 50%,rgb(107,147,31) 51%,rgb(139,165,66) 100%);
+	background: -o-linear-gradient(top, rgb(181,201,80) 0%,rgb(150,168,69) 50%,rgb(107,147,31) 51%,rgb(139,165,66) 100%);
+	background: -ms-linear-gradient(top, rgb(181,201,80) 0%,rgb(150,168,69) 50%,rgb(107,147,31) 51%,rgb(139,165,66) 100%);
+	background: linear-gradient(to bottom, rgb(181,201,80) 0%,rgb(150,168,69) 50%,rgb(107,147,31) 51%,rgb(139,165,66) 100%);
+}
+
+.soft-btn-gradient() {
+	background: @color-pg-bg;
+	background: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(220,227,230) 42%, rgb(216,213,208) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,255,255)), color-stop(42%,rgb(220,227,230)), color-stop(100%,rgb(216,213,208)));
+	background: -webkit-linear-gradient(top, rgb(255,255,255) 0%,rgb(220,227,230) 42%,rgb(216,213,208) 100%);
+	background: -o-linear-gradient(top, rgb(255,255,255) 0%,rgb(220,227,230) 42%,rgb(216,213,208) 100%);
+	background: -ms-linear-gradient(top, rgb(255,255,255) 0%,rgb(220,227,230) 42%,rgb(216,213,208) 100%);
+	background: linear-gradient(to bottom, rgb(255,255,255) 0%,rgb(220,227,230) 42%,rgb(216,213,208) 100%);
+}

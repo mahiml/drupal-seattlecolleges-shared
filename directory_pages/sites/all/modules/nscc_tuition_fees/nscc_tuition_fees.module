@@ -1,0 +1,300 @@
+<?php
+
+function nscc_tuition_fees_menu(){
+	$items['tuition-fees/fee-table'] = array(
+    'title callback' => 'nscc_tuition_fees_quarter_title',
+    'title arguments' => array('fee_table'),	
+    'page callback' => 'nscc_tuition_fees_fee_table',
+	  'access callback'=> TRUE,
+    'type' => MENU_CALLBACK,
+	);
+	$items['tuition-fees/fee-table/%'] = array(
+    'title callback' => 'nscc_tuition_fees_quarter_title',
+    'title arguments' => array('fee_table',2),	
+    'page callback' => 'nscc_tuition_fees_fee_table',
+    'page arguments'=>array(2),
+	  'access callback'=> TRUE,
+    'type' => MENU_CALLBACK,
+	);
+	$items['tuition-fees/tuition-table'] = array(
+	);
+	$items['tuition-fees/tuition-table/%'] = array(
+	);
+	
+	return $items;
+}
+
+function nscc_tuition_fees_block($op='list', $delta=0,$edit=array()){
+	switch ($op){
+			
+		case 'view':
+			$block=array();
+			switch($delta) {
+				
+				// Quarter selector
+				case 0:
+					if(arg(0) == 'tuition-fees'){
+						$yrq = arg(2);
+					}
+					if(!$yrq){
+						$yrq = _schedule_get_current_yrq();
+					}
+					$block['content']=_build_fee_quarter_selector_block_content($yrq);
+					return $block;
+				
+				// Fake section menu for the pages output.
+				case 1:
+					$section_nid = 690;
+					$count = db_result(db_query('select count(*) from sqlview_prod_section_menus where section_nid=%d;',$section_nid));
+					if($count){	
+					 $result = db_query('select * from sqlview_prod_section_menus where section_nid=%d;',$section_nid);
+					 if ($result){
+						$output = '<div class="block block-menu"><ul class="menu">'."\n";
+						$first = true;
+						$index=0;
+						while($row = db_fetch_object($result)){
+							$li_classes = 'leaf ';
+							if($row->related_nid == $node->nid){
+								$a_classes ='active ';
+							} else {
+								$a_classes = '';
+							}
+							if($first){
+								$li_classes .='first ';
+								$first = false;
+							}
+							if(($index == $count-1)  && !($section_node->field_assoc_tid[0]['value'] > 0 && $section_nid != 690)){
+								$li_classes .='last ';
+							}
+							if(preg_match('/^Home --/',$row->title)){
+								$title = 'Section Home';
+							} else {
+								$title = $row->title;
+							}
+							$output .= '	 <li class="'.$li_classes.'"><a href="/'.$row->dst.'" title="'.check_plain($title).'" class="'.$a_classes.'">'.check_plain($title).'</a></li>'."\n";	
+							$index++;
+						}
+						//fee tables link
+						if($section_nid==690){
+								$li_classes .='last ';
+								$output .= '	 <li class="'.$li_classes.'">'.l('Fee Table','tuition-fees/fee-table',array('attributes'=>array('class'=>'active')))."</li>\n";
+						}
+						//related people link
+						if($section_node->field_assoc_tid[0]['value'] > 0){
+								$li_classes .='last ';
+								$output .= '	 <li class="'.$li_classes.'">'.l('Staff','https://people.northseattle.edu/profile/nscc_profile_departments/'.$section_node->field_assoc_tid[0]['value'])."</li>\n";
+						}
+						$output .= '</ul></div>'."\n";
+					}
+				}	
+				$block['content'] = $output;
+				return $block;
+				
+			// Refund deadlines tables
+			case 2:
+				$block['subject'] = t('Refund Deadlines and Amounts');
+				$block['content'] = '<p>Except for classes canceled by the college, refunds are subject to a quarterly administrative fee. See the <a href="/tuition-fees/fee-table">Fees Table</a> for specific fee amount.</p>' . nscc_tuition_fees_refund_deadlines_tables() . <<<SPECIAL_PGMS
+
+<table class="tuition-refund-deadlines">
+   <caption>One-Time-Only Classes</caption>
+   <thead>
+      <tr>
+         <th>Deadline</th>
+         <th>Refund</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>Prior to first class</td>
+         <td>Full Refund</td>
+      </tr>
+      <tr>
+         <td>After first class</td>
+         <td>No refund</td>
+      </tr>
+   </tbody>
+</table>
+
+<table class="tuition-refund-deadlines">
+   <caption>One-Day-Only Classes</caption>
+   <thead>
+      <tr>
+         <th>Deadline<br></th>
+         <th>Refund</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>48 hours or more prior to class</td>
+         <td>Full Refund</td>
+      </tr>
+      <tr>
+         <td>Less than 48 hours prior to class</td>
+         <td>No refund</td>
+      </tr>
+   </tbody>
+</table>
+SPECIAL_PGMS;
+
+				return $block;
+			}
+			
+
+		case 'list':
+			$blocks[0]['info'] = t('Fee Quarter Selector');
+			$blocks[0]['cache'] = BLOCK_CACHE_PER_PAGE;
+			$blocks[1]['info'] = t('Tuition and Fees section menu block ');
+			$blocks[1]['cache'] = BLOCK_CACHE_PER_PAGE;
+			$blocks[2]['info'] = t('Tuition Refunds Deadlines');
+			$blocks[2]['cache'] = BLOCK_CACHE_GLOBAL;
+			return $blocks;
+		}			
+}
+
+function nscc_tuition_fees_quarter_title($type,$yrq=null){
+	if(!$yrq){
+		$yrq = _schedule_get_current_yrq();
+	}
+	switch($type){
+		case 'fee_table':
+			return _schedule_yrq_to_quarter($yrq).' Fee Table';
+		case 'tuition':
+			return _schedule_yrq_to_quarter($yrq).' Tuition';
+	}
+}
+
+
+function _build_fee_quarter_selector_block_content($yrq){
+	$target_quarter_title = _schedule_yrq_to_quarter($yrq);
+	$prev_quarter = _schedule_get_prev_yrq($yrq);
+	$prev_quarter_title = _schedule_yrq_to_quarter($prev_quarter);
+	$next_quarter = _schedule_get_next_yrq($yrq);
+	$next_quarter_title = _schedule_yrq_to_quarter($next_quarter);
+
+	$output .='<div class="prev-quarter-button grid-2 alpha">';
+	if ($prev_quarter){
+		$output .='<a title="Previous Quarter" href="/tuition-fees/fee-table/'.$prev_quarter.'">'.$prev_quarter_title.'</a>';
+	} else {
+		$output .= '&nbsp;';
+	}
+	$output .='</div>';
+	$output .='<div class="current-quarter-title grid-5"><h1>'.$target_quarter_title.' Fee Table</h1></div>';
+	$output .='<div class="next-quarter-button grid-2 omega">';
+	if ($next_quarter){
+		$output .='<a title="Next Quarter" href="/tuition-fees/fee-table/'.$next_quarter.'">'.$next_quarter_title.'</a>';
+	} else {
+		$output .='&nbsp;';
+	}
+	$output .='</div>';
+	$output .='<div class="clearfix">&nbsp;</div>';
+	return $output;
+
+}
+
+function nscc_tuition_fees_fee_table($yrq=null){
+	if(!$yrq){
+		$yrq = _schedule_get_current_yrq();
+	}
+	$fees = _nscc_tuition_fee_get_fees($yrq);
+	if(is_array($fees)){
+		foreach($fees as $fee){
+			$output .='<div class="fee">'.$fee['fee_node']."</div>\n";
+		}
+	} else {
+			$output .='<div class="nofee">Fees information is not available for this quarter.</div>'."\n";
+	}
+
+	//breadcrumb mod
+	$bc = drupal_get_breadcrumb();
+	$bc[] = l(t('Financial'), 'financial');
+	$bc[] = l(t('Tuition & Fees'), 'tuition-fees');
+	drupal_set_breadcrumb($bc);
+
+	return $output;
+}
+
+function _nscc_tuition_fee_get_fees($yrq){
+	$sql  = "SELECT nid, fees.field_fee_code_value as fee_code ";
+	$sql .= "FROM {content_type_fee} AS fees ";
+	$sql .= "JOIN (SELECT field_fee_code_value, max(field_fee_first_quarter_value) AS field_fee_first_quarter_value  FROM {content_type_fee} WHERE field_fee_first_quarter_value <= '%s' GROUP BY field_fee_code_value) AS applicable_fees ";
+	$sql .= "USING (field_fee_code_value,field_fee_first_quarter_value) ";
+	$sql .= "JOIN {node} as node using (nid) ";
+	$sql .= "WHERE (fees.field_fee_last_quarter_value IS NULL OR fees.field_fee_last_quarter_value ='' OR fees.field_fee_last_quarter_value >= '%s') ORDER BY node.title ASC;";
+	
+	$result = db_query($sql,$yrq,$yrq);
+	while($record = db_fetch_object($result)){
+		$fee_node = node_load($record->nid,null,true);
+		$fee_node->target_display = 'fee_table';
+		$themed_node = theme('node',$fee_node);
+		$fees_array[$record->fee_code] = array(
+			'fee_code'=>$record->fee_code,
+			'fee_nid'=>$record->nid,
+			'fee_node'=>$themed_node	
+		);
+	}
+	return $fees_array;
+}
+
+
+function nscc_tuition_fees_preprocess(&$variables){
+	if(preg_match('/^\/tuition-fees\/fee-table/',$_SERVER["REQUEST_URI"])){
+		$variables['title'] = '';
+	}
+}
+
+
+
+/**
+ *	Builds HTML tables of refund deadlines for all future quarters.
+ * @return string
+ */
+function nscc_tuition_fees_refund_deadlines_tables() {
+	$deadlines = nscc_tuition_fees_refund_deadlines();
+	foreach($deadlines as $key=>$val) {
+		$row = array();
+		foreach($val['events'] as $event) {
+			$date = date('M j, Y', $event['dtstart']);
+			$desc = check_plain(trim($event['summary']));
+			$row[] = "<tr><td>$date</td><td>$desc</td></tr>";
+		}
+		$rows = implode("\n", $row);
+		$qtr_title = _schedule_yrq_to_quarter($key);
+		$tables[] = <<<DEADLINE_TABLE
+
+<table class="tuition-refund-deadlines">
+	<caption>$qtr_title</caption>
+	<thead>
+	  <tr>
+		 <th>Deadline</th>
+		 <th>Refund</th>
+	  </tr>
+	</thead>
+	<tbody>
+		$rows
+	</tbody>
+</table>
+DEADLINE_TABLE;
+	}
+	return implode("\n", $tables);
+}
+
+
+
+/**
+ *	Extracts tuition refund deadlines from academic calendar and groups them by quarter
+ *	@return array
+ */
+function nscc_tuition_fees_refund_deadlines() {
+	$curr_yrq = _schedule_get_current_yrq();
+	$events =  _schedule_ical_to_array('http://facweb.northseattle.edu/mvellines/calendars/Academic.ics');
+	$deadlines = array();
+	foreach ($events as $event) {
+		$event_yrq = strtoupper($event['categories']);
+		if (($event_yrq >= $curr_yrq) && (strpos(strtolower($event['summary']), 'refund') !== false)) {
+			$event_ts = $event['dtstart'];
+			$deadlines[$event_yrq]['events'][$event_ts] = $event;
+		}
+	}
+	ksort($deadlines);
+	return $deadlines;
+}

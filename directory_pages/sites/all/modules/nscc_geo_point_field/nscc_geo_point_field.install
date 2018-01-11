@@ -1,0 +1,23 @@
+<?php
+/**
+ * Implementations of hook_install(),hook_uninstall(),hook_enable(), and hook_disable().
+ * 
+ * Lets CCK take care of this.
+ */
+function nscc_geo_point_field_install(){
+  drupal_load('module', 'content');
+	content_notify('install','point_coordinates');
+}
+function nscc_geo_point_field_uninstall(){
+  drupal_load('module', 'content');
+	content_notify('uninstall','point_coordinates');
+}
+
+function nscc_geo_point_field_enable(){
+  drupal_load('module', 'content');
+	content_notify('enable','point_coordinates');
+}
+function nscc_geo_point_field_disable(){
+  drupal_load('module', 'content');
+	content_notify('disable','point_coordinates');
+}

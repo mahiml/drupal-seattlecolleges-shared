@@ -1,0 +1,388 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Theatre
+X-WR-TIMEZONE:America/Vancouver
+X-WR-CALDESC:Performances on campus at the NSCC Theatres
+BEGIN:VTIMEZONE
+TZID:America/Vancouver
+X-LIC-LOCATION:America/Vancouver
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20110226T193000
+DTEND;TZID=America/Vancouver:20110226T213000
+RRULE:FREQ=WEEKLY;UNTIL=20110226T075959Z;BYDAY=SA
+DTSTAMP:20160930T173003Z
+UID:73u7gs3qr3olusk9iofkbqorm8@google.com
+CREATED:20110112T231728Z
+DESCRIPTION:Examines the changing role of journalism in our new media envir
+ onment.  This time with songs!  This will be another world premiere product
+ ion directed by NSCC's own Dawson Nichols.
+LAST-MODIFIED:20150911T072204Z
+LOCATION:Stage 1 Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The New New News! A Living Newspaper
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20110226T193000
+DTEND;TZID=America/Vancouver:20110226T213000
+RRULE:FREQ=WEEKLY;UNTIL=20110313T033000Z;BYDAY=SA
+DTSTAMP:20160930T173003Z
+UID:ji1mmir9dtclsvet8ndotg2opc@google.com
+CREATED:20110112T231728Z
+DESCRIPTION:Examines the changing role of journalism in our new media envir
+ onment.  This time with songs!  This will be another world premiere product
+ ion directed by NSCC's own Dawson Nichols.
+LAST-MODIFIED:20150911T072204Z
+LOCATION:Stage One Theatre
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:"The New New News! A Living Newspaper"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20111120T140000
+DTEND;TZID=America/Vancouver:20111120T160000
+DTSTAMP:20160930T173003Z
+UID:ao7uipfsb4sah2k0nqpb15gth4@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Theatr
+ e;X-NUM-GUESTS=0:mailto:northseattle.edu_ntk7l7naj6cth2t9pfh53in8f8@group.c
+ alendar.google.com
+RECURRENCE-ID;TZID=America/Vancouver:20111120T140000
+CREATED:20111021T150811Z
+DESCRIPTION:While struggling to make ends meet during an economic depressio
+ n\, a family tries to hold onto their dignity and keep their dreams alive. 
+ This award-winning play form 1935 is a message in a bottle to our own times
+LAST-MODIFIED:20150911T072204Z
+LOCATION:Stage One Theatre
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:"Awake and Sing" by Clifford Odets (Sundays 2pm)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20111106T140000
+DTEND;TZID=America/Vancouver:20111106T160000
+RRULE:FREQ=WEEKLY;UNTIL=20111120T220000Z;BYDAY=SU
+EXDATE;TZID=America/Vancouver:20111113T140000
+EXDATE;TZID=America/Vancouver:20111106T140000
+DTSTAMP:20160930T173003Z
+UID:ao7uipfsb4sah2k0nqpb15gth4@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Theatr
+ e;X-NUM-GUESTS=0:mailto:northseattle.edu_ntk7l7naj6cth2t9pfh53in8f8@group.c
+ alendar.google.com
+CREATED:20111021T150811Z
+DESCRIPTION:
+LAST-MODIFIED:20150911T072204Z
+LOCATION:Stage One Theatre
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:"Awake and Sing" by Clifford Odets (Sundays 2pm)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120530T190000Z
+DTEND:20120530T200000Z
+DTSTAMP:20160930T173003Z
+UID:8ceel4n9i1r2gt03s0m2qr78p0@google.com
+CREATED:20120417T211107Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T211122Z
+LOCATION:Stage One Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Julius Caesar by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20120603T140000
+DTEND;TZID=America/Vancouver:20120603T150000
+RRULE:FREQ=WEEKLY;UNTIL=20120610T210000Z;BYDAY=SU
+DTSTAMP:20160930T173003Z
+UID:g2qih6ar553eftubap61252b5c@google.com
+CREATED:20120417T211040Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T211040Z
+LOCATION:Stage One Theatre
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Julius Caesar by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20120526T193000
+DTEND;TZID=America/Vancouver:20120526T210000
+RRULE:FREQ=WEEKLY;UNTIL=20120610T023000Z;BYDAY=SA
+DTSTAMP:20160930T173003Z
+UID:7u9n5ntnhbn9519l0era48prkg@google.com
+CREATED:20120417T210914Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T210914Z
+LOCATION:Stage One Theatre
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Julius Caesar by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20120525T193000
+DTEND;TZID=America/Vancouver:20120525T210000
+RRULE:FREQ=WEEKLY;UNTIL=20120602T023000Z;BYDAY=FR
+DTSTAMP:20160930T173003Z
+UID:9kjsek1ev6fq3qcvfcsig9rreo@google.com
+CREATED:20120417T210450Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T210450Z
+LOCATION:Stage One Theatre
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Julius Caesar by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111116T200000Z
+DTEND:20111116T210000Z
+DTSTAMP:20160930T173003Z
+UID:im32if8v0c8jv36hf05ojbhsv4@google.com
+CREATED:20111021T152828Z
+DESCRIPTION:While struggling to make ends meet during an economic depressio
+ n\, a family tries to hold onto their dignity and keep their dreams alive. 
+ This award-winning play form 1935 is a message in a bottle to our own times
+LAST-MODIFIED:20111021T152850Z
+LOCATION:Stage One Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:"Awake and Sing" by Clifford Odets
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20111104T193000
+DTEND;TZID=America/Vancouver:20111104T213000
+DTSTAMP:20160930T173003Z
+UID:985b9g06u3rdtutqmg6gj5k6ps@google.com
+RECURRENCE-ID;TZID=America/Vancouver:20111105T193000
+CREATED:20111021T150457Z
+DESCRIPTION:While struggling to make ends meet during an economic depressio
+ n\, a family tries to hold onto their dignity and keep their dreams alive. 
+ This award-winning play form 1935 is a message in a bottle to our own times
+ .
+LAST-MODIFIED:20111021T150534Z
+LOCATION:Stage One Theatre
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:"Awake and Sing" by Clifford Odets (Friday & Saturday 7:30pm
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20111105T193000
+DTEND;TZID=America/Vancouver:20111105T213000
+RRULE:FREQ=WEEKLY;UNTIL=20111120T033000Z;BYDAY=FR,SA
+DTSTAMP:20160930T173003Z
+UID:985b9g06u3rdtutqmg6gj5k6ps@google.com
+CREATED:20111021T150457Z
+DESCRIPTION:While struggling to make ends meet during an economic depressio
+ n\, a family tries to hold onto their dignity and keep their dreams alive. 
+ This award-winning play form 1935 is a message in a bottle to our own times
+ .
+LAST-MODIFIED:20111021T150457Z
+LOCATION:Stage One Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:"Awake and Sing" by Clifford Odets (Friday & Saturday 7:30pm
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110604T023000Z
+DTEND:20110605T043000Z
+DTSTAMP:20160930T173003Z
+UID:p2dch2qmklqabni9feutcs72tk@google.com
+CREATED:20110401T190917Z
+DESCRIPTION:All performances are Pay-What-You-Can\nFridays & Saturdays\, Ma
+ y 27 & 28\, June 3\, 4\, 10 & 11 at 7:30 pm\nSundays\, June 5 & 12 at 2pm\n
+ Special Wednesday matinee at noon on June 1\n
+LAST-MODIFIED:20110411T052620Z
+LOCATION:Stage One Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Comedy of Errors by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110611T023000Z
+DTEND:20110612T043000Z
+DTSTAMP:20160930T173003Z
+UID:9hpbeaput10o8832pcisqu1mi8@google.com
+CREATED:20110401T190946Z
+DESCRIPTION:All performances are Pay-What-You-Can\nFridays & Saturdays\, Ma
+ y 27 & 28\, June 3\, 4\, 10 & 11 at 7:30 pm\nSundays\, June 5 & 12 at 2pm\n
+ Special Wednesday matinee at noon on June 1\n
+LAST-MODIFIED:20110411T052620Z
+LOCATION:Stage One Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Comedy of Errors by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110528T023000Z
+DTEND:20110529T043000Z
+DTSTAMP:20160930T173003Z
+UID:527lol8qaugi3b5cdrs7ccegvc@google.com
+CREATED:20110401T190620Z
+DESCRIPTION:All performances are Pay-What-You-Can\nFridays & Saturdays\, Ma
+ y 27 & 28\, June 3\, 4\, 10 & 11 at 7:30 pm\nSundays\, June 5 & 12 at 2pm\n
+ Special Wednesday matinee at noon on June 1\n
+LAST-MODIFIED:20110411T052620Z
+LOCATION:Stage One Theatre
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:The Comedy of Errors by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110612T210000Z
+DTEND:20110612T223000Z
+DTSTAMP:20160930T173003Z
+UID:v1d9682rpi204b41qgkd2u456k@google.com
+CREATED:20110401T191141Z
+DESCRIPTION:All performances are Pay-What-You-Can\nFridays & Saturdays\, Ma
+ y 27 & 28\, June 3\, 4\, 10 & 11 at 7:30 pm\nSundays\, June 5 & 12 at 2pm\n
+ Special Wednesday matinee at noon on June 1\n
+LAST-MODIFIED:20110411T052620Z
+LOCATION:Stage One Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Comedy of Errors by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110605T210000Z
+DTEND:20110605T223000Z
+DTSTAMP:20160930T173003Z
+UID:h1ujjtlfqkuqfnf7tmssr9lbtc@google.com
+CREATED:20110401T191055Z
+DESCRIPTION:All performances are Pay-What-You-Can\nFridays & Saturdays\, Ma
+ y 27 & 28\, June 3\, 4\, 10 & 11 at 7:30 pm\nSundays\, June 5 & 12 at 2pm\n
+ Special Wednesday matinee at noon on June 1\n
+LAST-MODIFIED:20110411T052620Z
+LOCATION:Stage One Theatre
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:The Comedy of Errors by William Shakespeare
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110601T190000Z
+DTEND:20110601T200000Z
+DTSTAMP:20160930T173003Z
+UID:nb50q8oo0a6pk1ler6evjm6g3k@google.com
+CREATED:20110401T191302Z
+DESCRIPTION:All performances are Pay-What-You-Can\nFridays & Saturdays\, Ma
+ y 27 & 28\, June 3\, 4\, 10 & 11 at 7:30 pm\nSundays\, June 5 & 12 at 2pm\n
+ Special Wednesday matinee at noon on June 1\n
+LAST-MODIFIED:20110411T052620Z
+LOCATION:Stage One Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Comedy of Errors by William Shakespeare
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110305T033000Z
+DTEND:20110305T053000Z
+DTSTAMP:20160930T173003Z
+UID:96fk9f7cfhm5b0mqo46ateco08@google.com
+CREATED:20110125T183047Z
+DESCRIPTION:Examines the changing role of journalism in our new media envir
+ onment.  This time with songs! This will be another world premiere producti
+ on directed by NSCC's own Dawson Nichols.
+LAST-MODIFIED:20110208T034338Z
+LOCATION:Stage One Theatre
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:"The New New News! The Living News"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110312T033000Z
+DTEND:20110312T053000Z
+DTSTAMP:20160930T173003Z
+UID:5nsjoh9siutuq1gf8jbclk3t30@google.com
+CREATED:20110125T183241Z
+DESCRIPTION:Examines the changing role of journalism in our new media envir
+ onment.  This time with songs! This will be another world premiere producti
+ on directed by NSCC's own Dawson Nichols.
+LAST-MODIFIED:20110208T034338Z
+LOCATION:Stage One Theatre
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:The New New News! A Living Newspaper
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110204T200000Z
+DTEND:20110204T213000Z
+DTSTAMP:20160930T173003Z
+UID:e9ubhvvkn0iqb3rengas0pv7vc@google.com
+CREATED:20110112T235732Z
+DESCRIPTION:Still empowering\, enlightening\, and entertaining.  Back for i
+ ts fifth year!
+LAST-MODIFIED:20110112T235932Z
+LOCATION:Baxter Center
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:"The Vagina Monologues"
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20110306T140000
+DTEND;TZID=America/Vancouver:20110306T160000
+RRULE:FREQ=WEEKLY;UNTIL=20110313T210000Z;BYDAY=SU
+DTSTAMP:20160930T173003Z
+UID:foa5c31elr8grh6d6ebmm4lnm0@google.com
+CREATED:00001229T000000Z
+DESCRIPTION:Examines the changing role of journalism in our new media envir
+ onment.  This time with songs! This will be another world premiere producti
+ on directed by NSCC's own Dawson Nichols.
+LAST-MODIFIED:20110112T235009Z
+LOCATION:Stage One Theatre
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:"The New New News! A Living Newspaper"
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20110204T193000
+DTEND;TZID=America/Vancouver:20110204T213000
+RRULE:FREQ=WEEKLY;UNTIL=20110206T033000Z;BYDAY=FR,SA
+DTSTAMP:20160930T173003Z
+UID:mvh8m3alp8q0ueddc56dgbpjk8@google.com
+CREATED:00001229T000000Z
+DESCRIPTION:Still empowering\, enlightening\, and entertaining.  Back for i
+ ts fifth year!
+LAST-MODIFIED:20110112T234824Z
+LOCATION:Stage One Threatre
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:"The Vagina Monologues"
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

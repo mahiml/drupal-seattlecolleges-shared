@@ -1,0 +1,100 @@
+//
+//	Mixins for NSCC Continuing Education site
+//
+
+.boxspace (@m:0, @p:0) {
+	margin: @m;
+	padding: @p;
+}
+
+.link-icon-space () {
+	padding: 2px 0 2px 18px;
+	background-position: 0% 50%;
+	background-repeat: no-repeat;
+}
+
+
+.border-radius (@radius : 5px) {
+	-moz-border-radius: @radius;
+	-webkit-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.box-shadow (@x:0, @y:0, @blur:0, @spread:0, @color:rgb(0,0,0), ...) {
+	-moz-box-shadow: @arguments;
+	-webkit-box-shadow: @arguments;
+	box-shadow: @arguments;
+}
+
+.no-box-shadow () {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.column-count (@cols:0) {
+	-moz-column-count: @cols;
+	-webkit-column-count: @cols;
+	column-count: @cols;
+}
+
+.colors-pager-current () {
+	color: @color-grey56;
+	background-color: @color-pg-bg;
+}
+
+.colors-login-form () {
+  color: rgb(44, 57, 79);
+  background-color: rgb(155, 155, 181);
+  background-color: rgba(56, 56, 108, .6);
+}
+
+.button-left-arrow (@_) {
+	display: block;
+	width: 120px;
+	height: 32px;
+	line-height: 32px;
+	text-decoration: none;
+	background-image: url(/sites/all/themes/nscc_conted/imgs/bg-footer-button.png);
+	background-repeat: no-repeat;
+}
+
+.button-left-arrow (off) {
+	background-position: left top;
+}
+
+.button-left-arrow (on) {
+	background-position: left bottom;
+}
+
+.list-bullet (@_, @left:0, @top:0) {
+	padding: 0 0 0 1.2em;
+	background-color: transparent;
+	background-position: @left @top;
+	background-repeat: no-repeat;
+}
+
+.list-bullet (dark, ...) {
+	background-image: url(../imgs/bullet-dk.png);
+}
+
+.list-bullet (light, ...) {
+	background-image: url(../imgs/bullet-lt.png);
+}
+
+.grid (@units:1, @cols:16) {
+	position: relative;
+	display: inline;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+	width: (960px / @cols * @units - 20px);
+}
+
+.alpha () {
+	margin-left: 0;
+}
+
+.omega () {
+	margin-right: 0;
+}

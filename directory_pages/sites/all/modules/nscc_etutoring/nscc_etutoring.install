@@ -1,0 +1,65 @@
+<?php
+/**
+* implementation of hook_install()
+*/
+
+function nscc_etutoring_install(){
+	drupal_install_schema('nscc_etutoring');
+}
+
+function nscc_etutoring_schema(){
+
+	$schema['nscc_etutoring_accounts'] = array(
+		'description' => t('Stores the remote etutoring accounts, with references to our local SIDs or NetIDs'),
+		'fields'=> array(	'etutor_record_id'=>array('type'=>'serial',
+											'unsigned'=>TRUE,
+											'size'=>'medium',
+											'not null'=>TRUE,
+											'description'=>t('unique record id.'),
+											),
+							'sid'=>array('type'=>'varchar',
+											'length'=>'9',
+											'not null'=>FALSE,
+											'description'=>t('SID'),
+											),
+							'et_fname'=>array('type'=>'varchar',
+											'length'=>'100',
+											'not null'=>TRUE,
+											'description'=>t('bogus firstname for et account'),
+											),
+							'et_lname'=>array('type'=>'varchar',
+											'length'=>'100',
+											'not null'=>TRUE,
+											'description'=>t('bogus lastname for et account'),
+											),
+							'et_email'=>array('type'=>'varchar',
+											'length'=>'255',
+											'not null'=>TRUE,
+											'description'=>t('bogus email for et account'),
+											),
+							'et_uname'=>array('type'=>'varchar',
+											'length'=>'12',
+											'not null'=>TRUE,
+											'description'=>t('username for et account'),
+											),
+							'et_password'=>array('type'=>'varchar',
+											'length'=>'12',
+											'not null'=>TRUE,
+											'description'=>t('initital password for et account'),
+											),
+					),
+		'primary key'=> array('etutor_record_id'),
+		'indexes'=> array('et_record_id'=>array('etutor_record_id')),
+	);
+
+	return $schema;
+}
+
+function nscc_etutoring_uninstall(){
+	drupal_uninstall_schema('nscc_etutoring');
+}
+
+/*
+* The actual sql required to build the database is below -- the drupal schema api is insufficiently expressive
+
+*/

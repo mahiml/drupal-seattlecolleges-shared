@@ -1,0 +1,13 @@
+<?php
+/**
+ *		@file diningservices.module.incl
+ *
+ */
+
+
+function nscc_prod_render_current_menu(){
+	$target_nid = 2645;
+	$target_node = node_load(2645);
+	path_set_alias('node/2645/current','dining-menu');
+	drupal_goto('dining-menu');
+}

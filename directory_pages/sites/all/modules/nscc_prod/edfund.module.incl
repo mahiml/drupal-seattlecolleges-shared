@@ -1,0 +1,156 @@
+<?php
+
+/**
+ *		@file edfund.module.incl
+ *
+ *		Processing and output logic for EdFund forms. These functions are included
+ *		by the module's menu callback as needed.
+ */
+
+define('EDFUND_ALUMNI_ADDR', 'nsccalumni@seattlecolleges.edu');
+
+
+/**
+ *		Generate Alumni Recruitment Form page
+ *
+ *		This function is registered via module's HOOK_menu function and called by
+ *		Drupal's Menu Router.
+ */
+function alumni_recruitment_form_page() {
+	$out[] = drupal_get_form('alumni_recruitment_form');
+	return implode("\n", $out);
+}
+
+
+
+
+/**
+ *		Alumni Recruitment Form definition handler
+ */
+function alumni_recruitment_form($form_state) {
+
+	$form['preamble'] = array(
+		'#prefix' => '<p>',
+		'#suffix' => '</p>',
+		'#value' => t('Since its founding in 1970, North Seattle Community College has enjoyed strong relationships with its students.  We welcome and invite you to join the Alumni Association. Your involvement will help us to ensure your continued success, as well as that of fellow alumni and our current students. We hope North is included as one of those special places that      changed your life.'),
+	);
+
+	$form['instructions'] = array(
+		'#prefix' => '<p>',
+		'#suffix' => '</p>',
+		'#value' => t('To receive information on upcoming alumni events and functions, please use this form to join the NSCC alumni mailing list. Required items are marked !req-mark', array('!req-mark' => '<span title="This field is required." class="form-required">*</span>')),
+	);
+	
+	$form['fname'] = array(
+		'#type' => 'textfield',
+		'#title' => t('First Name'),
+		'#required' => true,
+	);
+
+	$form['lname'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Last Name'),
+		'#required' => true,
+	);
+
+	$form['dates'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Dates Attended'),
+		'#description' => t('The quarters and years you attended NSCC. Ex: <em>Fall 1983 - Spring 1984</em>'),
+		'#required' => true,
+	);
+
+	$form['email'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Email Address'),
+		'#description' => t('A confirmation message will be sent to this address.'),
+		'#maxlength' => 254,
+		'#required' => true,
+	);
+
+	$form['addr'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Mailing Address'),
+		'#description' => t('If you would like to receive printed material (event invitations, etc.) please include your full mailing address.'),
+		'#rows' => 5,
+	);
+
+	$form['phone'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Phone Number'),
+		'#description' => t('If you prefer to be contacted by telephone, please include your current number.'),
+	);
+
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Submit'),
+	);
+	
+	return $form;
+}
+
+
+
+
+/**
+ *		Alumni Recruitment Form validation handler
+ */
+function alumni_recruitment_form_validate($form, &$form_state) {
+	if (! email_address_is_valid($form_state['values']['email'])) {
+		form_set_error('email', t('The email address you provided does not appear to be valid.'));
+	}
+}
+
+
+
+
+/**
+ *		Alumni Recruitment Form submission handler
+ */
+function alumni_recruitment_form_submit($form, &$form_state) {
+
+	$clean_email_addr = '"'.addslashes(mime_header_encode($form_state['values']['fname'].' '.$form_state['values']['lname']))."\" <{$form_state['values']['email']}>";	//ensures RFC 2822 compliance.
+	
+	// Deliver form data to EdFund via email.
+	$data_sent = drupal_mail(
+		'nscc_prod',
+		'edfund-alumni-transmit-data',
+		EDFUND_ALUMNI_ADDR,
+		$GLOBALS['language'],
+		array(
+			'FName' => trim($form_state['values']['fname']),
+			'LName' => trim($form_state['values']['lname']),
+			'Dates' => trim($form_state['values']['dates']),
+			'Email' => trim($form_state['values']['email']),
+			'Phone' => trim($form_state['values']['phone']),
+			'Address' => trim($form_state['values']['addr']),
+		),
+		$clean_email_addr,
+		true
+	);
+	
+	// User acknowledgement
+	if ($data_sent) {
+		$ack_msg[] = '<p>' . t('Thank you for joining the NSCC Alumni Association!') . '</p>';
+		$ack_msg[] = '<p>' . t('We have received your information and look forward to keeping you informed about alumni-releated news and events. If you have any questions or need to contact us for any reason, you can reach us at !email-addr', array('!email-addr' => l(EDFUND_ALUMNI_ADDR, 'mailto:'.EDFUND_ALUMNI_ADDR, array('external'=>true)))) . '</p>';
+		drupal_set_message(implode("\n", $ack_msg));
+		
+		$ack_sent = drupal_mail(
+			'nscc_prod',
+			'edfund-alumni-usr-ack',
+			$clean_email_addr,
+			$GLOBALS['language'],
+			array('fname' => trim($form_state['values']['fname'])),
+			EDFUND_ALUMNI_ADDR,
+			true
+		);
+		
+		$form_state['redirect'] = 'edfund/alumni';
+		//watchdog('EdFund', "Alumni recruitment form submitted:<pre>\nEdFund msg:".print_r($data_sent,true)."\n\nUser ack:".print_r($ack_sent,true)."</pre>");
+	} else {
+		$errmsg = t('A system error prevented processing your form submission. Please try again. If this error continues to occur, please <a href="mailto:webmaster@northseattle.edu?subject=Alumni recruitment form submission problem&body=It would be helpful if you would include information the operating system and version, Web browser and version, and a brief description of what happened, please." title="Email us about this problem">report it to our Webmaster</a>. Sorry for the inconvenience.');
+		drupal_set_message($errmsg, 'warning');
+		$form_state['rebuild'] = true;
+		watchdog('EdFund', 'Alumni recruitment form submission failed to deliver data via email.', array(), WATCHDOG_ERROR);
+	}
+}

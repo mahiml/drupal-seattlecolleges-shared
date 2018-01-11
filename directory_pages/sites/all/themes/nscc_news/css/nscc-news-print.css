@@ -1,0 +1,86 @@
+/*	NEWS PRINT STYLES		*/
+
+
+#block-views-calendar_date-calendar_block_1,
+.node .feed-picker,
+.region-main #block-block-2,
+.node ul.links li.node_read_more {
+	display: none !important;
+}
+
+.node ul.links,
+.node ul.links li,
+.node ul.links li a,
+.node .nscc-feed-links ul.links,
+.node .nscc-feed-links ul.links li,
+.node .nscc-feed-links ul.links li a {
+	display: inline !important;
+	text-align: left;
+}
+
+.terms, .nscc-feeds-links {
+	display: block !important;
+	text-align: left;
+}
+
+#block-views-calendar_date-block_1 {
+	position: static;
+	display: block;
+	float: none;
+	width: auto;
+	height: auto;
+	min-height: 0;
+	overflow: visible;
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	color: black;
+	background: white none scroll 0 0 repeat;
+}
+
+.node .content, .node .content p, .node .content li,
+.node .event-meta {
+	font-family: Garamond, Baskerville, Times, "Times New Roman", serif !important;
+	color: black !important;
+	background: white none scroll 0 0 repeat;
+	text-decoration: none;
+}
+
+#block-views-calendar_date-block_1 .views-field-title,
+#block-views-calendar_date-block_1 .views-field-title span,
+#block-views-calendar_date-block_1 .views-field-title span a,
+.region-main #block-block-2 li, .region-main .block-nscc_feed li,
+.region-main #block-block-2 li, .region-main .block-nscc_feed li a,
+.node .submitted, .node .links-label {
+	font-family: MuseoSans, "Lucida Grande", Tahoma, Arial, sans-serif !important;
+	color: black;
+	background: white none scroll 0 0 repeat;
+}
+
+#block-views-calendar_date-block_1 .views-field-title {
+	font-size: 14pt !important;
+	line-height: 16pt;
+}
+
+.node ul.links li a,
+.node .nscc-feed-links ul.links li a {
+	font-size: 12pt !important;
+	line-heigt: 14pt;
+}
+
+.region-main #block-block-2 li li,
+.region-main .block-nscc_feed li li,
+.node .event-meta,
+.node .event-meta div {
+	font-size: 10pt !important;
+	line-height: 12pt;
+}
+
+.node .submitted,
+.node .links-label,
+.node p.photo-attribution,
+.node p.photo-caption {
+	font-size: 9pt !important;
+	line-height: 1;
+	text-align: left;
+}

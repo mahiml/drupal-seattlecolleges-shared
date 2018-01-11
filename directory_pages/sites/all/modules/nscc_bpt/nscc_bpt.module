@@ -1,0 +1,25 @@
+<?php
+// $Id: nscc_bpt.module,v 1.236.2.3 2009/01/12 10:09:19 goba Exp $
+
+//hooks
+function nscc_bpt_nodeapi(&$node, $op, $a3=null, $a4=null) {
+	switch($op) {
+		case 'rss item' :
+			$node->name = '';	// suppress author name.
+//			return array('enclosure' => array());
+//			unset($node->files);
+//			unset($node->content['#content_extra_fields']['attachments']);
+//			watchdog('bpt_feed_mod','A3: '.$a3.' A4: '.$a4.'<pre>'.print_r($node,true).'</pre>');
+/*
+			foreach ($node->files as &$f_obj) {
+				if (!empty($f_obj->filepath)) {
+					$path_parts = explode('/', $f_obj->filepath);
+					$path_parts[] = rawurlencode(array_pop($path_parts));
+					$f_obj->filepath = implode('/', $path_parts);
+//					watchdog('bpt-feedmod', 'Node mod:<pre>'.print_r($node,1).'</pre>');
+				}
+			}
+*/
+			break;
+	}
+}

@@ -1,0 +1,138 @@
+# $Id: search_by_page.pot,v 1.1.2.2 2009/08/12 00:54:10 jhodgdon Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  search_by_page.module,v 1.1.2.6 2009/08/12 00:46:57 jhodgdon
+#  search_by_page.info,v 1.1.2.1 2009/06/11 17:05:21 jhodgdon
+#  search_by_page.install,v 1.1.2.1 2009/06/09 21:15:04 jhodgdon
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-08-11 17:51-0700\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: search_by_page.module:193
+msgid "Pages"
+msgstr ""
+
+#: search_by_page.module:205;350 search_by_page.info:0;0
+msgid "Search by Page"
+msgstr ""
+
+#: search_by_page.module:208
+msgid "Configure Search by Page settings"
+msgstr ""
+
+#: search_by_page.module:328
+msgid "Search by Page search form"
+msgstr ""
+
+#: search_by_page.module:337;407;479;661
+msgid "Search"
+msgstr ""
+
+#: search_by_page.module:377
+msgid "results"
+msgstr ""
+
+#: search_by_page.module:382
+msgid "Search results"
+msgstr ""
+
+#: search_by_page.module:385
+msgid "Your search yielded no results"
+msgstr ""
+
+#: search_by_page.module:406;472;660
+msgid "Search for"
+msgstr ""
+
+#: search_by_page.module:435
+msgid "Please enter some keywords."
+msgstr ""
+
+#: search_by_page.module:458;296
+msgid "General settings"
+msgstr ""
+
+#: search_by_page.module:464
+msgid "Configure general search settings and see indexing status"
+msgstr ""
+
+#: search_by_page.module:471
+msgid "Label for keywords field in search form"
+msgstr ""
+
+#: search_by_page.module:478
+msgid "Text on button in search form"
+msgstr ""
+
+#: search_by_page.module:486
+msgid "Enter the labels above in your site's default language. If you have a multi-lingual site with the Internationalization project's String Translation module installed and enabled, you can use Drupal's translation interface to translate them."
+msgstr ""
+
+#: search_by_page.module:376;0
+msgid "search_by_page"
+msgstr ""
+
+#: search_by_page.module:376
+msgid "%keys"
+msgstr ""
+
+#: search_by_page.module:315
+msgid "search by page"
+msgstr ""
+
+#: search_by_page.module:315
+msgid "administer search by page"
+msgstr ""
+
+#: search_by_page.module:287
+msgid "Search by Page settings"
+msgstr ""
+
+#: search_by_page.module:288
+msgid "Configure settings for Search by Page"
+msgstr ""
+
+#: search_by_page.module:302
+msgid "Search this site's pages"
+msgstr ""
+
+#: search_by_page.install:14
+msgid "Contains path definitions for Search by Page module"
+msgstr ""
+
+#: search_by_page.install:17
+msgid "Primary key"
+msgstr ""
+
+#: search_by_page.install:23
+msgid "When this path was last indexed by search"
+msgstr ""
+
+#: search_by_page.install:32
+msgid "Path to index"
+msgstr ""
+
+#: search_by_page.install:38
+msgid "Module this path came from"
+msgstr ""
+
+#: search_by_page.install:44
+msgid "Identifier from module"
+msgstr ""
+
+#: search_by_page.info:0
+msgid "Sets up searching by page on your Drupal site. Must have at least one sub-module active for this module to actually do anything."
+msgstr ""
+

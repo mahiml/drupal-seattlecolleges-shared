@@ -1,0 +1,17 @@
+***************
+*** 86,92 ****
+  /**
+   * FormAPI theme function. Theme the output of an image field.
+   */
+- function theme_imagefield_crop_widget(&$element) {
+    return theme('form_element', $element, $element['#children']);
+  }
+  
+--- 86,92 ----
+  /**
+   * FormAPI theme function. Theme the output of an image field.
+   */
++ function theme_imagefield_crop_widget($element) {
+    return theme('form_element', $element, $element['#children']);
+  }
+  

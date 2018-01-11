@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Scholarships Events
+X-WR-TIMEZONE:America/Los_Angeles
+X-WR-CALDESC:
+BEGIN:VEVENT
+DTSTART:20110203T190000Z
+DTEND:20110203T210000Z
+DTSTAMP:20160930T173003Z
+UID:0j87bdq7bso3lp272q7eio6pgs@google.com
+CLASS:PUBLIC
+CREATED:20101005T182547Z
+DESCRIPTION:Interested in applying for scholarships & you just don’t know w
+ here to start?  \n\nCome to the NSCC Scholarship Fair and familiarize yours
+ elf with the NSCC scholarship web site\, online search engines including\, 
+ application tips\, The Education Fund Scholarship\, The Loft\, Phi Theta Ka
+ ppa and a chance to win a gift bag from \nUniversity District Trader Joe’s!
+ \n\nThe Baxter Student Events Center is located on the 1st floor of the Col
+ lege Center Building.  It is the auditorium between the Espresso bar and ca
+ feteria.\n\nhttps://www.northseattle.edu/scholarships  
+LAST-MODIFIED:20110122T004833Z
+LOCATION:Baxter Student Events Center
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Scholarship Fair
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

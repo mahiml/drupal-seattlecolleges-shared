@@ -1,0 +1,118 @@
+.accessibility-links {
+  position: absolute;
+  left: -9999px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font: .75em/1 Verdana, Helvetica, Arial, sans-serif;
+  color: black;
+  background-color: white;
+}
+#container {
+  position: relative;
+  margin: 0 auto;
+  background-color: rgb(240, 245, 250);
+  max-width: 1000px;
+}
+#content { position: relative; }
+#content .region {
+  position: relative;
+  float: left;
+}
+.region-header {
+  height: 120px;
+  background-color: rgb(239, 184, 89);
+}
+#navigation {
+  height: 32px;
+  background-color: rgb(131, 175, 162);
+}
+#content .region-main {
+  position: relative;
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(250, 240, 220);
+}
+#taxonomy {
+  height: 32px;
+  clear: both;
+  background-color: rgb(164, 219, 239);
+}
+.region-footer {
+  height: 120px;
+  clear: both;
+  background-color: rgb(198, 168, 207);
+}
+
+
+
+/* 2-column layout */
+
+.cols2 #container {
+  min-width: 400px;
+}
+.cols2 #content {
+  padding-left: 200px;
+  padding-right: 24px;
+}
+.cols2 #content .region-left {
+  width: 176px;
+  padding: 12px;
+  right: 224px;
+  margin-left: -100%;
+  background-color: rgb(203, 207, 168);
+}
+
+
+
+/* 3-column layout */
+
+.cols3 #container {
+  min-width: 624px;
+}
+.cols3 #content {
+  padding-left: 200px;
+  padding-right: 224px;
+}
+.cols3 #content .region-left {
+  width: 176px;
+  padding: 12px;
+  right: 224px;
+  margin-left: -100%;
+  background-color: rgb(203, 207, 168);
+}
+.cols3 #content .region-right {
+  width: 176px;
+  padding: 12px;
+  margin-right: -224px;
+  background-color: rgb(239, 209, 209);
+}
+
+
+
+/* Dashboard layout */
+
+.dashboard #container {
+  min-width: 400px;
+}
+.dashboard #content {
+  padding-left: 200px;
+  padding-right: 24px;
+}
+.dashboard .region-left {
+  width: 176px;
+  padding: 12px;
+  right: 224px;
+  margin-left: -100%;
+  background-color: rgb(203, 207, 168);
+}
+.dashboard-area {
+  width: 33%;
+  float: left;
+}
+.dashboard-widget {
+  margin: 6px;
+  border: solid 1px rgb(197, 197, 197);
+  background-color: white;
+}

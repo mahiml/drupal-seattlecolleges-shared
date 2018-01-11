@@ -1,0 +1,55 @@
+<HTML>
+  <HEAD><p>
+
+	<style>
+	<!--
+		body{font-family:arial,helvetica;font-size:10pt}
+		th{font-family:arial,helvetica;font-weight:900;font-size:10pt}
+		td{font-family:arial,helvetica;font-size:10pt}	
+		caption{font-family:arial,helvetica;font-weight:900}	
+	//-->
+	</style>
+
+
+    <SCRIPT>
+    function timeOutMsg(form) {
+
+    msg="\nAccess to your briefcase will expire in\n" +
+    "two minutes. Would you like more time?\n"
+    if(confirm(msg)){
+    form.tkt.value=top.ticket;
+    form.submit();
+    }
+    }
+    </SCRIPT>
+  </HEAD>
+  <BODY Bgcolor=#23238E onUnload='clearTimeout(top.tid)'>
+    <MAP Name="mymap1">
+      <AREA Shape="rect"
+      Coords="0,0,35,35"
+      Href="waci107.html">
+    </MAP>
+    <IMG Usemap="#mymap1" Src="timer.gif"
+    Border=0 width="24" height="26">
+
+    <FORM Method="post"    Action="https://sccdweb.sccd.ctc.edu/scripts/rq063.exe">
+      <INPUT Type="hidden" Name  ="request" Value="ipatimer" Size=8 Maxlength=8>
+      <INPUT Type="hidden" Name  ="tkt" Value="" Size=16 Maxlength=16>
+    </FORM>
+
+    <SCRIPT>
+    if(top.refresh == 1) {
+    top.refresh = 0;
+    alloc = top.timeout / 60000;
+    msg = "The amount of time you have to access your briefcase has been reset to " + alloc + " minutes.";
+    iko = setTimeout("window.status=msg",1000);
+    }
+
+    // set warning to display 2 minutes (measured in milliseconds)
+    // before actual timeout
+    tm = top.timeout - 120000;
+    tid = setTimeout('timeOutMsg(document.forms[0])',tm);
+
+    </SCRIPT>
+  </BODY>
+</HTML>

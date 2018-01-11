@@ -1,0 +1,82 @@
+<?php
+// $Id: nscc.module,v 1.236.2.3 2009/01/12 10:09:19 goba Exp $
+
+function nscc_library_menu() {
+  	$items['aal'] = array(
+		'title' => 'Ask a Librarian',
+		'page callback' => '_aal_callback',
+		'access callback'=> TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	return $items;
+}
+
+function _aal_callback(){
+	$widget_code = <<<End_of_Code
+<html>
+<head>
+<title>Ask a Librarian</title>
+</head>
+<body>
+
+
+<!-- New Widget -->
+<div id="qpchatwidget"></div>
+<script id="qp.bootstrap" type="text/javascript" src="https://www.questionpoint.org/crs/js/qwidget/qp.bootstrap.js?langcode=1&instid=13099&skin=blue&size=standard" charset="utf-8"></script>
+
+</body>
+</html>
+End_of_Code;
+	print $widget_code;
+	exit;
+}
+
+/**
+*	Implementation of hook_block()
+*/
+
+function nscc_library_block($op='list', $delta=0,$edit=array()){
+		switch ($op){
+			
+		case 'view':
+			$block=array();
+			switch($delta){
+				case 0:
+					$block['subject'] = t('Ask a Librarian');
+					$block['content'] = <<<End_of_Block
+<a target="_new" href="http://www.questionpoint.org/crs/servlet/org.oclc.admin.BuildForm?&amp;page=frame&amp;institution=13099&amp;type=2&amp;language=1" title="Online library assistance"><img src="/sites/library.northseattle.edu/files/askwa-logo-small.png" style="float:left; margin:0 12px 0 0;"></a>
+<div>
+	<p><a href="http://www.questionpoint.org/crs/servlet/org.oclc.admin.BuildForm?&amp;page=frame&amp;institution=13099&amp;type=2&amp;language=1" target="_new">Online help</a> with a librarian is available.</p>
+	<!-- <p>Click <a href="https://www.questionpoint.org/crs/servlet/org.oclc.home.TFSRedirect?virtcategory=13099" onclick="window.open('https://library.northseattle.edu/aal','chat','width=200, height=300, titlebar=no, menubar=no, toolbar=no, status=no, location=no, directories=no, scrollbars=no, resizable=yes, copyhistory=no, left=600, top=100, screenX=600, screenY=100');return false;">here</a> for online reference help.<br>(Opens in a new window.)</p>-->
+	<!-- <p>No one there? Click <a href="http://www.questionpoint.org/crs/servlet/org.oclc.home.TFSRedirect?virtcategory=13099" target="new">here</a> for help 24/7.</p> -->
+</div>
+End_of_Block;
+					return $block;
+				case 1:
+				$block['subject'] = '';
+				$get_highlight_sql = "select nid from {node} where type='highlight' and status=1 order BY changed desc limit 1;";
+				$highlight_nid = db_result(db_query($get_highlight_sql));
+				if($highlight_nid){
+					$highlight_node = node_load($highlight_nid,null,true);
+					$block['content'] = theme('node',$highlight_node);
+					return $block;
+				} else {
+					$block['content']='';
+					return $block;
+				}
+						
+					
+			}
+			
+		case 'list':
+			$blocks[0]['info'] = t('Ask a Librarian');
+			$blocks[0]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[1]['info'] = t('Frontpage Highlight');
+			$blocks[1]['cache'] = BLOCK_CACHE_GLOBAL;
+			return $blocks;
+	}
+}
+
+
+
+

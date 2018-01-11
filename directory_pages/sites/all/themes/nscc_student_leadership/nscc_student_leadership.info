@@ -1,0 +1,40 @@
+; $Id$
+
+name = NSCC Student Leadership
+description = Custom theme used for Student Leadership site. Inherits directly from Zen 960 theme, not standard NSCC 960.
+core = 6.x
+screenshot = imgs/screenshot.png
+base theme = zen_ninesixty
+
+regions[header] = Header
+regions[campus_alert] = Campus Alert
+regions[toolbox] = Toolbox
+regions[content_leader] = Content Leader
+regions[content] = Primary Content
+regions[content_follower] = Content Follower
+regions[left] = Left Sidebar
+regions[right] = Right Sidebar
+regions[footer] = Footer
+
+;features[] = logo
+features[] = name
+;features[] = slogan
+;features[] = mission
+;features[] = node_user_picture
+features[] = search
+features[] = favicon
+features[] = primary_links
+;features[] = secondary_links
+
+; Standard Stylesheets
+stylesheets[all][] = css/nscc_student_leadership.css
+stylesheets[print][] = css/nscc_student_leadership.print.css
+
+; IE conditional stylesheets
+; Functional support provided by conditional_styles module
+conditional-stylesheets[if lt IE 8][all][] = css/nscc_student_leadership.fixie.css
+conditional-stylesheets[if IE 8][all][] = css/nscc_student_leadership.fixie8.css
+
+; Global Script files
+scripts[] = js/nscc-student-leadership.js
+;scripts[] = js/google-analytics.js

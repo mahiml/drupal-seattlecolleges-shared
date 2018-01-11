@@ -1,0 +1,36 @@
+/* Corrective people styling for IE < 8 */
+
+
+#content-regions,
+.region-main,
+#nscc-feed-picker-form { height: 1%; }
+#user-login-form { width: 100%; }
+
+/* Autocomplete */
+.front #nscc-profile-form-usersearch #autocomplete {
+  border: solid 1px rgb(129, 141, 159);
+  background-color: rgb(255, 255, 255);
+}
+.front #nscc-profile-form-usersearch #autocomplete li {
+  margin: 0;
+  padding: 3px 6px;
+  background-color: rgb(255, 255, 255);
+}
+.front #nscc-profile-form-usersearch #autocomplete li.selected {
+  color: white;
+  background-color: rgb(21, 63, 175);
+}
+#toolbox #user-login-form { background-color: rgb(224, 229, 239); }
+
+
+
+/* Hide from IE 7 \*/
+* html #block-nscc-1,
+* html .region-main #content-title { height: 1%; }
+* html .two-sidebars .region-left { left: -185px; }
+* html .nscc-profile_list-item { height: 100px; }
+* html .nscc-profile_list-item img { height: 96px; }
+* html .front .region-main #block-block-1 { height: 120px; }
+* html .front .region-main #block-block-1 .content li.org-list { margin-right: 0; }
+* html #block-nscc-1 #edit-submit-1 { float: left; }
+/* end hiding */

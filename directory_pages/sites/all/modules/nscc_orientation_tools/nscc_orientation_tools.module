@@ -1,0 +1,302 @@
+<?php
+// $Id: nscc_people_tools.module,v 1.236.2.3 2009/01/12 10:09:19 goba Exp $
+
+
+
+/**
+ * @file
+ * Support for people site tools pages.
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function nscc_orientation_tools_menu() {
+  $items['tools/%/orientation-completions'] = array(
+  	'title' => 'NSCC Online Orientation completions tracking',
+  	'description' => 'Lists all NSCC Online Orientation completions with administrative controls.',
+  	'page callback' => '_nscc_orientation_tools_manage_completions',
+		'page arguments'=>array(''),
+  	'access arguments' => array('manage nscc online orientation tracking'),
+  	'type' => MENU_NORMAL_ITEM,
+  );
+  $items['tools/%/orientation-completions/%/show'] = array(
+  	'title' => 'Online Orientation completions for Year/Quarter',
+  	'description' => 'Lists completions for a specified YRQ code',
+  	'page callback' => '_nscc_orientation_tools_show_completions_for_yrq',
+		'page arguments'=>array(3),
+  	'access arguments' => array('manage nscc online orientation tracking'),
+  	'type' => MENU_NORMAL_ITEM,
+  );
+  $items['tools/%/orientation-completions/%/send'] = array(
+  	'title' => 'Download Online Orientation completions for Year/Quarter',
+  	'description' => 'Downloads completions for a specified YRQ code',
+  	'page callback' => '_nscc_orientation_tools_send_completions_for_yrq',
+		'page arguments'=>array(3),
+  	'access arguments' => array('manage nscc online orientation tracking'),
+  	'type' => MENU_NORMAL_ITEM,
+  );
+	return $items;
+}
+
+function nscc_orientation_tools_perm(){
+	return array('manage nscc online orientation tracking');
+}
+
+function nscc_orientation_tools_block($op = 'list', $delta = 0, $edit = array()) {
+	switch($op){
+		case 'list':
+			$blocks[0]['info']= t('Orientation Tools Menu');
+			$blocks[0]['cache'] = BLOCK_CACHE_PER_PAGE | BLOCK_CACHE_PER_ROLE;
+			return $blocks;
+			break;
+		case 'configure':
+			break;
+		case 'save':
+			break;
+		case 'view':
+			switch($delta){
+				case 0:
+					//People Tools Menu
+					$block['subject'] = '';
+					$active='';
+					if(user_access('manage nscc online orientation tracking')){
+							$block['content'] = '<ul class="tools-menu">';
+							if (arg(2)=='orientation-completions'){
+								$active=' active';
+							}
+							$block['content'] .= '<li class="tools-leaf'.$active.'"><a title="Track orientation completions" href="/tools/'.arg(1).'/orientation-completions">Orientation Completions</a></li>';
+						
+						$block['content'] .= '</ul>';
+					} else {
+						$block['content']='';
+					}
+					return $block;
+					break;
+			}		
+	}
+
+}
+
+function _nscc_orientation_tools_manage_completions(){
+
+	//$raw_table_columns = array('Entry ID','SID','YRQ','Completed','Sent','Name','Phone','E-mail');
+	//$raw_table = theme('table',$raw_table_columns,_nscc_orientation_tools_augment_completion_array(_nscc_orientation_tools_get_unsent_completions()));
+
+	$completion_count = _nscc_orientation_tools_get_count_unsent_completions();
+	if($completion_count > 0 ){
+		if ($completion_count == 1 ){
+			$count_msg = "<p>There is 1 unsent completion.</p>\n";
+		}else{
+			$count_msg = "<p>There are $completion_count total unsent completions.</p>\n";
+		}
+		
+		$quarterly_columns = array('YRQ','Count','Operations');
+		$quarterly_data = array();
+		$quarterly_data = _nscc_orientation_tools_get_count_unsent_completions_by_yrq();
+		foreach($quarterly_data as $yrq=>$data){
+			$quarterly_data[$yrq]['controls'] = '<a class="button" href="orientation-completions/'.$yrq.'/show">[Show]</a><a class="button" href="orientation-completions/'.$yrq.'/send">[Download]</a>';
+		}	
+		$quarterly_table = theme('table',$quarterly_columns,$quarterly_data);
+		
+		$output = $count_msg.$quarterly_table; 
+	} else {
+		$output = "There are no unsent completions at this time.";
+	}
+	return $output;
+}
+
+function _nscc_orientation_tools_show_completions_for_yrq($yrq){
+
+	$yrq_completions = _nscc_orientation_tools_augment_completion_array(_nscc_orientation_tools_get_unsent_completions_by_yrq($yrq));
+	if(is_array($yrq_completions)){
+		$raw_table_data = array();
+		foreach($yrq_completions as $sid=>$data){
+			$raw_table_data[] = array(
+				//'SID'=>$data['sid'],
+				'Name/SID'=>"<span class=\"fullname\">".$data['fullname']."</span><br><span class=\"sid\">".$data['sid']."</span>",
+				//'Phone'=>$data['daytimephone'],
+				'Contact'=>"<span class=\"email\"><a href=\"mailto:".$data['email']."\">".$data['email']."</a></span><br><span class=\"phone\">".$data['daytimephone']."</span>",
+				'Completed'=>"<span class=\"completion-date\">".$data['dtg_completed']."</span>",
+			);
+			$bcc_list[] = strtolower(trim($data['email'])); 
+		}
+		$raw_table_columns = array('Name/SID','Contact','Completed');
+		$raw_table = theme('table',$raw_table_columns,$raw_table_data);
+		$table_title   = "<h2 class=\"report-title\">Completions for ".$yrq."</h2>\n";
+		$global_mail_link = "<a href=\"mailto:advisornorth@seattlecolleges.edu?subject=NSCC Online Orientation&bcc=".implode(";",$bcc_list)."\">Email to this whole batch</a><br>";	
+		$download_link = "<a class=\"button\" href=\"../".$yrq."/send\">Download</a><br>";
+		return $table_title.$raw_table.$global_mail_link.$download_link;
+	} else {
+		return "No matching Completions could be found.";
+	}
+}
+
+function _nscc_orientation_tools_send_completions_for_yrq($yrq){
+	global $user;
+	//define('MP_BOUNDARY', '--'.sha1(microtime(true)));
+	//drupal_set_header('Content-Type: multipart/x-mixed-replace; boundary="'.MP_BOUNDARY.'"');
+	drupal_set_header('Content-Type: application/x-msexcel');
+  drupal_set_header("Content-Disposition: attachment; filename=Completed_Orientations.xls");
+	if (function_exists('mb_convert_encoding')) {
+    $output = chr(255) . chr(254);
+  }
+	$header_row = 'Entry_id'."\t".'SID'."\t".'Name'."\t".'Phone'."\t".'Email'."\t".'Completed'."\t".'Downloaded'."\n";	
+ 	if (function_exists('mb_convert_encoding')) {
+    $header_row = mb_convert_encoding($header_row, 'UTF-16LE', 'UTF-8');
+  }
+	$output .= $header_row;
+	
+	$yrq_completions = _nscc_orientation_tools_augment_completion_array(_nscc_orientation_tools_get_unsent_completions_by_yrq($yrq));
+	foreach($yrq_completions as $sid=>$data){
+		$row  = '"'.$data['entry_id']."\"\t";
+		$row .= '"'.$data['sid']."\"\t";
+		$row .= '"'.$data['fullname']."\"\t";
+		$row .= '"'.$data['daytimephone']."\"\t";
+		$row .= '"'.$data['email']."\"\t";
+		$row .= '"'.$data['dtg_completed']."\"\t";
+		$row .= '"'.$data['dtg_sent']."\"\n";
+		if (function_exists('mb_convert_encoding')) {
+    		$row = mb_convert_encoding($row, 'UTF-16LE', 'UTF-8');
+    }
+		$output .= $row;
+	}
+	_nscc_orientation_tools_mark_completions_sent($yrq_completions);
+	print $output;
+	//print MP_BOUNDARY;
+	//drupal_set_header("Content-Type: text/html");
+	//drupal_set_header("Location: /tools/".arg(1)."/orientation-completions");
+}
+
+
+
+function _nscc_orientation_tools_get_all_completions(){
+	$completion_array = array();
+	//dumps completion records as array of completion events
+	$sql = "SELECT * FROM prod_nscc_orientation_completions;";
+	$result = db_query($sql,$yrq,$item);
+	while($record=db_fetch_object($result)){
+		$completion_array[$record->victim_sid] = array(
+			'entry_id'      => $record->entry_id,
+			'sid'           => $record->victim_sid,
+			'yrq'           => $record->presumptive_yrq,
+			'dtg_completed' => $record->dtg_completed,
+			'dtg_sent'      => $record->dtg_sent,
+		);
+	}
+	return $completion_array;
+}
+
+function _nscc_orientation_tools_get_unsent_completions(){
+	//dumps completion records as array of completion events
+	$sql = "SELECT * FROM prod_nscc_orientation_completions WHERE dtg_sent IS NULL;";
+	$result = db_query($sql);
+	while($record=db_fetch_object($result)){
+		$completion_array[$record->victim_sid] = array(
+			'entry_id'      => $record->entry_id,
+			'sid'           => $record->victim_sid,
+			'yrq'           => $record->presumptive_yrq,
+			'dtg_completed' => $record->dtg_completed,
+			'dtg_sent'      => $record->dtg_sent,
+		);
+	}
+	return $completion_array;
+}
+
+function _nscc_orientation_tools_get_unsent_completions_by_yrq($yrq){
+	//dumps completion records as array of completion events
+	$sql = "SELECT * FROM prod_nscc_orientation_completions WHERE dtg_sent IS NULL AND presumptive_yrq='%s';";
+	$result = db_query($sql,$yrq);
+	while($record=db_fetch_object($result)){
+		$completion_array[$record->victim_sid] = array(
+			'entry_id'      => $record->entry_id,
+			'sid'           => $record->victim_sid,
+			'yrq'           => $record->presumptive_yrq,
+			'dtg_completed' => $record->dtg_completed,
+			'dtg_sent'      => $record->dtg_sent,
+		);
+	}
+	return $completion_array;
+}
+
+function _nscc_orientation_tools_get_count_unsent_completions(){
+	//dumps completion records as array of completion events
+	$sql = "SELECT count(*) FROM prod_nscc_orientation_completions WHERE dtg_sent IS NULL;";
+	$count = db_result(db_query($sql,$yrq,$item));
+	return $count;
+}
+
+function _nscc_orientation_tools_get_count_unsent_completions_by_yrq(){
+	//dumps completion records as array of completion events
+	$sql = "SELECT presumptive_yrq,count(*) as subtotal FROM prod_nscc_orientation_completions WHERE dtg_sent IS NULL group by presumptive_yrq;";
+	$result = db_query($sql);
+	while($record=db_fetch_object($result)){
+		$count_array[$record->presumptive_yrq] = array(
+			'yrq'           => $record->presumptive_yrq,
+			'subtotal'      => $record->subtotal,
+		);
+	}
+	return $count_array;
+}
+
+
+
+function _nscc_orientation_tools_mark_completions_sent($completion_array){
+	foreach($completion_array as $completion){
+		$entry_id_list .="'".$completion['entry_id']."',";
+	}
+	if($entry_id_list){
+		$entry_id_clause = "entry_id IN (".rtrim($entry_id_list,",").")"; 
+		if($entry_id_clause){
+			$sql = "UPDATE prod_nscc_orientation_completions SET dtg_sent=now() WHERE dtg_sent IS NULL AND $entry_id_clause;";
+			$result = db_query($sql);
+		}
+	}
+	return true;
+}
+
+function _nscc_orientation_tools_augment_completion_array($completion_array){
+	//augments completions with student biodata
+	//get sids and build sql where clause
+	if(is_array($completion_array)){
+		foreach($completion_array as $completion){
+			$sidlist .="'".$completion['sid']."',";
+		}
+		if($sidlist){
+			$sidclause = "\"SID\" IN (".rtrim($sidlist,",").")"; 
+		}
+		if($sidclause){
+			_nscc_orientation_tools_checkadd_sm_db();
+			db_set_active('sm');
+			$sql = "SELECT \"SID\" as sid,\"FullName\" as fullname,\"DaytimePhone\" as daytimephone,\"Email\" as email FROM sm.student_orientation_bioextract WHERE ".$sidclause.";";
+			$result = db_query($sql,$yrq,$item);
+			while($record=db_fetch_object($result)){
+				$completion_array[$record->sid][fullname] = $record->fullname;
+				$completion_array[$record->sid][daytimephone] = $record->daytimephone;
+				$completion_array[$record->sid][email] = $record->email;
+			}
+			db_set_active('default');
+		}
+	}
+	return $completion_array;
+}
+
+
+function _nscc_orientation_tools_checkadd_sm_db() {
+
+	global $db_url;
+
+	// If current $db_url is not an array make it one (and don't forget to insert the default connection)
+	if (!is_array($db_url)) {
+		$default = $db_url;
+		$db_url = array();
+		$db_url['default'] = $default;
+	}
+
+  // Add the new reference
+	if(!$db_url['sm']){
+		$db_url['sm'] = 'pgsql://sm_viewer:83jge94gledifl@onering.inf/nscc';
+	}
+}
+
+

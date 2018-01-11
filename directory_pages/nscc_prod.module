@@ -1,0 +1,1622 @@
+<?php
+// $Id: nscc_prod.module,v 1.236.2.3 2009/01/12 10:09:19 goba Exp $
+
+
+/**
+ *		HOOK_menu()
+ *
+ *		Registers paths in Menu Router (core) to define how URL requests are handled.
+ */
+function nscc_prod_menu(){
+	$items['ajax/profile'] = array(
+		'title' => 'Ajax profile dump',
+		'page callback' => 'nscc_prod_ajax_profile',
+		'access callback'=> TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items['net-price-calculator'] = array(
+		'type' => MENU_CALLBACK,
+		'title' => 'Net Price Calculator',
+		'description' => 'NSCC implementation of US Dept of Ed Net Price Calculator mandate.',
+		'page callback' => 'npcalc_page',
+		'access arguments' => array('access content'),
+		'file' => 'npcalc.module.incl',
+	);
+	$items['storm/recruiting/form'] = array(
+		'type' => MENU_CALLBACK,
+		'title' => 'Player Prospect Form',
+		'description' => 'Basketball recruitment eligibility form.',
+		'page callback' => 'storm_prospect_form_page',
+		'access arguments' => array('access content'),
+		'file' => 'basketball.module.incl',
+	);
+	$items['dining-services/current-menu'] = array(
+		'type' => MENU_CALLBACK,
+		'title' => 'Current Menu',
+		'description' => 'This week\'s cafeteria menu',
+		'page callback' => 'nscc_prod_render_current_menu',
+		'access arguments' => array('access content'),
+		'file' => 'diningservices.module.incl',
+	);
+	$items['edfund/alumni/join'] = array(
+		'type' => MENU_CALLBACK,
+		'title' => 'Alumni Membership Form',
+		'description' => 'Alumni recruitment form',
+		'page callback' => 'alumni_recruitment_form_page',
+		'access arguments' => array('access content'),
+		'file' => 'edfund.module.incl',
+	);
+
+	return $items;
+}
+
+
+
+/**
+ *		HOOK_block()
+ */
+function nscc_prod_block($op='list', $delta=0,$edit=array()){
+	switch ($op){
+
+		case 'list':
+			$blocks[0]['info'] = t('NSCC Orientation Survey Form');
+			$blocks[0]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[1]['info'] = t('Construction Cameras');
+			$blocks[1]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[2]['info'] = t('Frontpage Highlight');
+			$blocks[2]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[3]['info'] = t('Enroll Now');
+			$blocks[3]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[4]['info'] = t('Mural Camera');
+			$blocks[4]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[5]['info'] = t('Featured News');
+			$blocks[5]['cache'] = BLOCK_CACHE_GLOBAL;
+			return $blocks;
+
+		case 'view':
+			$block=array();
+			switch($delta){
+				case 0:
+					//orientation survey form
+					$block['subject'] = "Orientation Survey";
+					$block['content'] = drupal_get_form("orientation_survey_form");
+					return $block;
+				case 1:
+					//construction cameras
+					$block['subject'] = "Current Construction Views";
+					$block['content'] = _nscc_prod_construction_cam_block();
+					return $block;
+				case 2:
+					//Frontpage Highlight message
+					$block['subject'] = "";
+					$block['content'] = _nscc_prod_fp_highlight_block();
+					return $block;
+				case 3:
+					//Frontpage Highlight message
+					$block['subject'] = "";
+					$block['content'] = _nscc_prod_enroll_now_block();
+					return $block;
+				case 4:
+					//construction cameras
+					$block['subject'] = "Mural Timelapse";
+					$block['content'] = _nscc_prod_mural_cam_block();
+					return $block;
+				case 5:
+					//construction cameras
+					$block['subject'] = "";
+					$block['content'] = _nscc_prod_featured_news_block();
+					return $block;
+			}
+	}
+}
+
+
+function nscc_prod_filter($op,$delta=0,$format=-1,$text=''){
+	switch($op){
+		case 'list':
+			return array(
+				0=>t('Prod URL fixer filter, or PUff'),
+			);
+		
+		case 'description':
+			$descriptions = array(
+				0=>t('Modifies instances pointing at prod.northseatte.edu to point at northseattle.edu'),
+			);
+			return $descriptions[$delta];
+			break;
+			
+		case 'no cache':
+			$cache_settings = array(
+				0=>true,
+			);
+			return $cache_settings[$delta];
+			break;
+				
+		case 'prepare':
+			return $text;
+			break;
+			
+		case 'process':
+			switch($delta){
+				case '0':
+					return preg_replace("/prod\.northseattle\.edu/","northseattle.edu",$text);
+					break;
+			}
+			break;
+			
+		default:
+			return $text;				
+	}
+}
+
+
+function nscc_prod_cron(){
+
+	//determine the current week's menu, and set alias to it
+	$current_menu_sql  = "SELECT nodes.nid ";
+  $current_menu_sql .= "FROM (select * from prod_node where type='fs_weekly_menu' and status <> 0 ) as nodes LEFT JOIN prod_content_type_fs_weekly_menu content_fields ON nodes.vid = content_fields.vid "; 
+  $current_menu_sql .= "WHERE now() >=  TO_DATE(content_fields.field_fs_wm_date_value, 'FMYYYY-FMMM-FMDDTFMHH24:FMMI:FMSS') ORDER BY content_fields.field_fs_wm_date_value DESC, nodes.changed desc limit 1;";
+	$weekly_menu_nid = db_result(db_query($current_menu_sql));
+	path_set_alias("node/".$weekly_menu_nid."/current-menu",'dining-services/weekly-menu');
+
+}
+
+function _nscc_prod_construction_cam_block(){
+	drupal_add_css(drupal_get_path('module', 'nscc_prod') . '/nscc_prod.construction_photos.css');
+	//code to get time
+	$now = time();
+	/*
+	$output .= '<p class="construction-photo tilt-left">';
+	$output .= '<a title="Click for Live video" href="http://axis-cam1.northseattle.edu" target="nscc-cam1"><img src="/sites/prod.northseattle.edu/files/construction_cams/ib-roof.jpg?no-cache='.$now.'" alt="View of construction from the roof of the IB building" width="420" height="236"></a>';
+	#$output .= '<a title="Click for Live video" href="http://axis-cam1.northseattle.edu" target="nscc-cam1"><img src="http://axis-cam1.northseattle.edu/axis-cgi/mjpg/video.cgi?resolution=480x270&camera=4" alt="View of construction from the roof of the IB building" width="420" height="236"></a>';
+	$photo_time = date("g:ia F jS, Y", filemtime('/var/www/people/sites/prod.northseattle.edu/files/construction_cams/ib-roof.jpg'));
+	$output .= 'from the Instruction Building '.$photo_time;
+	$output .= '</p>';
+	*/
+	$output .= '<p class="construction-photo tilt-left">';
+	$output .= '<a title="Click for Live video" href="http://axis-cam2.northseattle.edu" target="nscc-cam2"><img src="/sites/prod.northseattle.edu/files/construction_cams/cc-roof.jpg?no-cache='.$now.'" alt="View of construction from the roof of the CC building" width="420" height="236"></a>';
+	$photo_time = date("g:ia F jS, Y", filemtime('/var/www/people/sites/prod.northseattle.edu/files/construction_cams/cc-roof.jpg'));
+	$output .= 'from the College Building '.$photo_time;
+	$output .= '</p>';
+	$output .= '<p class="construction-photo tilt-right">';
+	$output .= '<a title="Click for Live video" href="http://axis-cam3.northseattle.edu" target="nscc-cam3"><img src="/sites/prod.northseattle.edu/files/construction_cams/oc-roof.jpg?no-cache='.$now.'" alt="View of construction from inside the AH building" width="420" height="236"></a>';
+	$photo_time = date("g:ia F jS, Y", filemtime('/var/www/people/sites/prod.northseattle.edu/files/construction_cams/oc-roof.jpg'));
+	$output .= 'from inside the AH Building '.$photo_time;
+	$output .= '</p>';
+
+	return $output;
+}
+
+function _nscc_prod_mural_cam_block(){
+	drupal_add_css(drupal_get_path('module', 'nscc_prod') . '/nscc_prod.construction_photos.css');
+	//code to get time
+	//$now = time();
+	$output .= '<p class="construction-photo tilt-none">';
+	//$output .= '<a title="Click for Live video" href="http://axis-cam2.northseattle.edu" target="nsc-cam2"><img src="/sites/prod.northseattle.edu/files/mural_cam/nsc_mural.jpg?no-cache='.$now.'" alt="View of mural" width="340"></a>';
+	//$photo_time = date("g:ia F jS, Y", filemtime('/var/www/people/sites/prod.northseattle.edu/files/mural_cam/nsc_mural.jpg'));
+	//$output .= 'View of the Mural at '.$photo_time;
+	$output = '<iframe src="//player.vimeo.com/video/98749063?byline=0&amp;portrait=0&amp;color=008fc5" width="380" height="213" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/98749063">North Seattle College Mural Project</a> from <a href="http://vimeo.com/user29340495">North Seattle College</a> on <a href="https://vimeo.com">Vimeo</a>.';
+	$output .= '</p>';
+
+	return $output;
+}
+
+
+
+function _nscc_prod_fp_highlight_block(){
+	drupal_add_css(drupal_get_path('module', 'nscc_prod') . '/nscc_prod.fp_highlight.css');
+	$get_highlight_sql = "SELECT * FROM shared_highlights WHERE publish_date <= CURRENT_TIMESTAMP AND rescind_date > CURRENT_TIMESTAMP ORDER BY publish_date DESC LIMIT 1;";
+	$highlight = db_fetch_object(db_query($get_highlight_sql));
+	if($highlight){
+		if ($highlight->link_dest){
+			$output = '<a class="fp-highlight" href="'.$highlight->link_dest.'">'.$highlight->title.'</a>';
+		} else {
+			$output = '<div class="fp-highlight">'.$highlight->title.'</div>';
+		}
+	}
+	
+	return $output;
+}
+
+function _nscc_prod_enroll_now_block(){
+	drupal_add_css(drupal_get_path('module', 'nscc_prod') . '/nscc_prod.enroll_now.css');
+	$output = "<div class=\"enroll-now\"><a class=\"enroll-now\" href=\"/schedule/B344\">";
+	$output .="<img class=\"enroll-now\" alt=\"Enroll Now For Spring Quarter\" src=\"".drupal_get_path('module', 'nscc_prod') .'/imgs/enroll_now_spring.jpg'."\"></a>";
+	$output .="</div>\n";
+	return $output;
+}
+
+function _nscc_prod_featured_news_block(){
+	$get_feature_nids_query="SELECT news_nid_1,news_nid_2,news_nid_3,news_nid_4 FROM shared_featured_articles WHERE featured_location='front page';";
+	$get_feature_details_query="SELECT n.nid,n.changed,n.title,'https://news.northseattle.edu/'||COALESCE(u.dst,'node/'||n.nid) as url  FROM news_node n left join news_url_alias u ON ('node/'||n.nid = u.src) WHERE n.status=1 AND n.nid=%d;";
+	$result = db_query($get_feature_nids_query);
+	if (! $result) { return ""; }
+	$feature_record = db_fetch_array($result);
+	$features_array = array();
+	$features_array[0] = db_fetch_array(db_query($get_feature_details_query,$feature_record['news_nid_1']));
+	$features_array[2] = db_fetch_array(db_query($get_feature_details_query,$feature_record['news_nid_2']));
+	$features_array[3] = db_fetch_array(db_query($get_feature_details_query,$feature_record['news_nid_3']));
+	$features_array[4] = db_fetch_array(db_query($get_feature_details_query,$feature_record['news_nid_4']));
+
+
+	drupal_add_css(drupal_get_path('module', 'nscc_prod') . '/nscc_prod.featured_news.css');
+	
+	$output  = "<div class=\"clearfix\"></div>\n<h2 class=\"featured-articles-title grid-2\"><a href=\"//news.northseattle.edu\" title=\"NSCC news and events\"><span class=\"featured-articles-logo\"></span>News at North</a></h2>\n";
+	$output .= "<div class=\"featured-articles-content grid-8\">\n<ul class=\"featured-articles-list\">\n";
+	//insert news stories here.
+	$position = 1;
+	foreach($features_array as $current_feature){
+	  if ($current_feature){
+			$output .= "<li class=\"featured-article position-".$position."\">";
+			$output .= '<span class="featured-article-date">'.date('j F Y',$current_feature['changed']).'</span>';
+			$output .= '<span class="featured-article-title"><a href="'.$current_feature['url'].'">'.$current_feature['title'].'</a></span>';
+			$output .= "</li>\n";
+		} else {
+			$output .="<li class=\"featured-article grid-2 position-".$position."\"></li>";
+		}
+		$position++;
+	}
+	$output .= "</ul>\n";
+	$output .="</div>\n<div class=\"featured-articles-more\">\n";
+	$output .= "\t<a href=\"//news.northseattle.edu\" title=\"NSCC news and events\"><img src=\"/sites/all/themes/nscc_main/imgs/btn-morenews.png\" alt=\"Read more news and features...\" /></a>\n";
+	$output .= "</div>\n";
+	$output .= "<div class=\"clearfix\"></div>\n";
+	return $output;
+}
+
+//forms
+function orientation_survey_form(){
+	//$form['#ajax']=array('enabled'=>true,'disable_redirect'=>true,);
+	$form["orientation_helpful"] = array(
+		'#type'=>'radios',
+		'#title'=>'Was this orientation helpful?',
+		'#description'=>'Please select one.',
+		'#options'=>array('Yes'=>'Yes','No'=>'No'),
+		'#required'=>TRUE,
+	);
+	$form["comment"]=array(
+		'#title'=>'Feedback',
+		'#type'=>'textarea',
+		'#description'=>'Please enter any comments or ideas for the orientation site.',
+	);
+	$form["response_email"]=array(
+		'#title'=>'Your Email Address (Optional)',
+		'#type'=>'textfield',
+		'#description'=>'If you would like a response, please provide your e-mail address.',	
+	);
+	$form["submit"]=array(
+		'#type'=>'submit',
+		'#value'=>t('Submit')
+	);
+	return $form;
+}
+
+function orientation_survey_form_validate($form,&$form_state){
+	if( $form_state['values']['response_email'] && (! valid_email_address($form_state['values']['response_email'])) ){
+		form_set_error('response_email', 'Your Email Address is not required, but if you put anything in, it must be a valid email address.');
+	}
+	return true;
+}
+
+function orientation_survey_form_submit($form,&$form_state){
+	//$orientation_receiver = 'pitschner@sccd.ctc.edu';
+	$orientation_receiver = 'AdvisorNorth@sattlecolleges.edu';
+	$body_params = array(	'helpful'=>check_plain($form_state['values']['orientation_helpful']),
+												'comment'=>check_plain($form_state['values']['comment']),
+												'response_email'=>$form_state['values']['response_email'],
+											);	
+
+	drupal_mail('nscc_prod','orientation_survey',$orientation_receiver,language_default(),$body_params,'Orientation-robot@northseattle.edu');
+	$form_state['redirect'] = 'online-orientation/conclusion';
+	drupal_set_message('Thank you for your input!');
+}
+
+
+function custom_tour_request_form(){
+
+	$form['contact_info']= array(
+		'#title'=> '1. Contact Information',
+		'#type' =>'fieldset',
+		'#collapsible'=> true,
+		'#collapsed'=> false,
+	);
+	$form['contact_info']["name"]=array(
+		'#prefix'=>'<div>',
+		'#title'=>'Name',
+		'#type'=>'textfield',
+		'#description'=>'Your name, however you would like us to address you.',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['contact_info']["phone"]=array(
+		'#title'=>'Phone Number',
+		'#type'=>'textfield',
+		'#description'=>'Your complete phone number with country/area code.',	
+		'#required'=>true,
+		'#size'=> 12,
+		'#maxlength'=> 20,
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['contact_info']["response_email"]=array(
+		'#title'=>'Your Email Address (Optional)',
+		'#type'=>'textfield',
+		'#description'=>'If you would like an email response, please provide your e-mail address.',	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['contact_info']['tour_size']=array(
+		'#title'=>'Tour Size',
+		'#type'=>'textfield',
+		'#default_value'=>'1',
+		'#size'=> 3,
+		'#maxlength'=> 3,
+		'#description'=>'Please specify the number of people you expect for this tour.',	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['contact_info']['docent']=array(
+		'#prefix'=>'<div>',
+		'#title'=>'I\'d also like: ',
+		'#type'=>'checkboxes',
+		'#description'=>'',
+		'#options'=>array(
+			'Academic Advisor Appt'=>'An appointment with an academic advisor',
+			'Faculty visit'=>'A faculty visit',
+			),
+		'#suffix'=>'</div>',
+	);
+	$form['contact_info']['tour_date']=array(
+		'#prefix'=>'<div>',
+		'#title'=>'Requested Date',
+		'#type'=>'date',
+		'#description'=>'Please enter the day. (At least 5 business days from now)',
+		'#default_value'=>array(
+			'month' => format_date(time(),'custom','n'),
+			'day'   => format_date(time(),'custom','j'),
+			'year'  => format_date(time(),'custom','Y'),
+		),
+		'#suffix'=>'</div>',
+	);
+	$form['contact_info']['tour_time']=array(
+		'#prefix'=>'<div>',
+		'#title'=>'Requested Time',
+		'#type'=>'select',
+		'#description'=>'Please select the time. If none of these times work with your schedule, please contact us at inquirenorth@seattlecolleges.edu.',
+		'#options'=>array('10:00'=>'10:00','11:00'=>'11:00','12:00'=>'12:00','1:00'=>'1:00','2:00'=>'2:00'),
+		'#suffix'=>'</div>',
+	);
+	
+	$form['tour_interests']= array(
+		'#title'=> '2. Tour Interests',
+		'#type' =>'fieldset',
+		'#collapsible'=> true,
+		'#collapsed'=> false,
+	);
+	$form['tour_interests']["academic_interests"] = array(
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+		'#type'=>'checkboxes',
+		'#title'=>check_plain('Degrees & Academic Interests'),
+		'#description'=>'Please select all that apply.',
+		'#options'=>array(
+				'General College Information'=>'General College Information',
+				'Career Training Programs'=>'Career Training Programs',
+				'Transfer Programs'=>'Transfer Programs',
+				),
+		'#required'=>FALSE,
+	);
+	$form['tour_interests']["other_academic_interests"]=array(
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+		'#title'=>'Other academic interests:',
+		'#type'=>'textarea',
+	);
+	$form['tour_interests']["services_interests"] = array(
+		'#type'=>'checkboxes',
+		'#title'=>check_plain('Student Life and Services'),
+		'#description'=>'Please select all that apply.',
+		'#options'=>array(
+			'Arts and Lectures Series'=>'Arts and Lectures Series',
+			'Career Placement'=>'Career Placement',
+			'Child Care'=>'Child Care',
+			'Disability Resources'=>'Disability Resources',
+			'Financial Aid/Scholarships'=>'Financial Aid &amp; Scholarships',
+			'Multicultural Services'=>'Multicultural Services',
+			'Tutoring Services'=>'Tutoring Services',
+			'Wellness Center'=>'Wellness Center (Gym &amp; Sports)',
+			'Wetlands/Nature Walk'=>'Wetlands/Nature Walk',
+			'Veterans or Military Services'=>'Veterans or Military Services',
+			),
+		'#required'=>FALSE,
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['tour_interests']["other_services_interests"]=array(
+		'#title'=>'Other student life interests:',
+		'#type'=>'textarea',
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form["submit"]=array(
+		'#type'=>'submit',
+		'#value'=>t('Submit')
+	);
+	return $form;
+}
+
+function custom_tour_request_form_validate($form,&$form_state){
+	if( $form_state['values']['response_email'] && (! valid_email_address($form_state['values']['response_email'])) ){
+		form_set_error('response_email', 'Your Email Address is not required, but if you put anything in, it must be a valid email address.');
+	}
+	return true;
+}
+
+function custom_tour_request_form_submit($form,&$form_state){
+	$receiver = 'NSCCTours@sccd.ctc.edu';	
+	$body_params = array(	'name'=>check_plain($form_state['values']['name']),
+												'phone'=>check_plain($form_state['values']['phone']),
+												'response_email'=>$form_state['values']['response_email'],
+												'tour_size'=>check_plain($form_state['values']['tour_size']),
+												'additionally'=>check_plain("\n\t".implode(array_values($form_state['values']['docent']),"\n\t")."\n"),
+												'tour_date'=>check_plain($form_state['values']['tour_date']['month'].'/'.$form_state['values']['tour_date']['day'].'/'.$form_state['values']['tour_date']['year']),
+												'tour_time'=>check_plain($form_state['values']['tour_time']),
+												"academic_interests"=>check_plain("\n\t".implode(array_values($form_state['values']['academic_interests']),"\n\t")."\n"),
+												"other_academic_interests"=>check_plain($form_state['values']['other_academic_interests']),
+												"services_interests"=>check_plain("\n\t".implode(array_values($form_state['values']['services_interests']),"\n\t")."\n"),
+												"other_services_interests"=>check_plain($form_state['values']['other_services_interests']),
+											);	
+
+	drupal_mail('nscc_prod','custom_tour_request',$receiver,language_default(),$body_params,'Custom-Tour-robot@northseattle.edu');
+	drupal_set_message('Your request has been forwarded to our tour coordinator. You will be contacted by phone or email.');
+}
+
+
+
+function job_opening_form(){
+	$form['employer_overview']= array(
+		'#title'=> '1. Employer Overview',
+		'#type' =>'fieldset',
+		'#collapsible'=> true,
+		'#collapsed'=> false,
+	);
+	$form['employer_overview']['company_name']=array(
+		'#prefix'=>'<div>',
+		'#title'=>'Company Name',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_overview']['company_desc']=array(
+		'#title'=>'Brief Description of the Company',
+		'#type'=>'textarea',
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['employer_overview']['company_url']=array(
+		'#prefix'=>'<div>',
+		'#title'=>'Company Web Site',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_overview']['company_industry']=array(
+		'#prefix'=>'<div>',
+		'#title'=>'Industry',
+		'#type'=>'select',
+		'#description'=>'Choose all that apply.',	
+		'#required'=>false,
+		'#multiple'=>true,
+		'#options'=>array(
+			'Academic'=>'Academic',
+			'Acctng'=>'Accounting',
+			'Agriculture'=>'Agriculture/Farming/Agribusiness',
+			'Architecture'=>array(
+				'Architect_Comm'=>'Architecture - Commercial',
+				'Architect_Landsc'=>'Architecture - Landscape',
+				'Architect_Resident'=>'Architecture - Residential',
+				'Architect_Other'=>'Architecture - Other',
+				),
+			'Arts and Entertainment'=>array(
+				'AE_Film'=>'Arts and Entertainment - Film/Video',
+				'AE_Graphic'=>'Arts and Entertainment - Graphic Arts',
+				'AE_Music'=>'Arts and Entertainment - Music',
+				'AE_Perform'=>'Arts and Entertainment - Performing Arts',
+				'AE_Visual'=>'Arts and Entertainment - Visual Arts',
+				'AE_Other'=>'Arts and Entertainment - Other',
+				),					
+			'Automotive'=>'Automotive',
+			'Aviation'=>'Aviation',
+			'Biotech'=>'Biotechnology',
+			'Communications'=>array(
+				'Comm_Advert'=>'Communications/Media - Advertising',
+				'Comm_Journalism'=>'Communications/Media - Journalism',
+				'Comm_Marketing'=>'Communications/Media - Marketing/PR',
+				'Comm_Publish'=>'Communications/Media - Publishing/Print Media',
+				'Comm_Broadcast'=>'Communications/Media - TV/Radio Broadcasting',
+				'Comm_Other'=>'Communications/Media - Other',
+				),
+			'Construction'=>'Construction',
+			'Consulting'=>array(
+				'Consult_Environ'=>'Consulting - Environmental',
+				'Consult_Health'=>'Consulting - Healthcare',
+				'Consult_Policy'=>'Consulting - Policy',
+				'Consult_Strategy'=>'Consulting - Technology',
+				'Consult_Tech'=>'Consulting - Strategic/Change Management',
+				'Consult_Other'=>'Consulting - Other',
+			),
+			'Education/Academia'=>array(
+				'Ed_eChild'=>'Education/Academia - Early Childhd/Preschool',
+				'Ed_Elementary'=>'Education/Academia - Elementary',
+				'Ed_ESL'=>'Education/Academia - ESL',
+				'Ed_Overseas'=>'Education/Academia - Overseas/Intl- Education',
+				'Ed_PostSecond'=>'Education/Academia - Post-Secondary/Higher Ed',
+				'Ed_Secondary'=>'Education/Academia - Secondary',
+				'Ed_Special'=>'Education/Academia - Special Needs Education',
+				'Ed_Other'=>'Education/Academia - Other',
+			),
+			'Energy'=>'Energy/Utilities',
+			'Engineering'=>array(
+				'Eng_Aeronaut'=>'Engineering - Aeronautical',
+				'Eng_Biochem'=>'Engineering - Biochemical/Biomedical',
+				'Eng_Chem'=>'Engineering - Chemical',
+				'Eng_Civil'=>'Engineering - Civil',
+				'Eng_Computer'=>'Engineering - Computer',
+				'Eng_Electric'=>'Engineering - Electrical',
+				'Eng_Environ'=>'Engineering - Environmental',
+				'Eng_Industry'=>'Engineering - Industrial',
+				'Eng_Manufact'=>'Engineering - Manufacturing',
+				'Eng_Mechanic'=>'Engineering - Mechanical',
+				'Eng_Nuclear'=>'Engineering - Nuclear',
+				'Eng_Other'=>'Engineering - Other',
+			),						
+			'Environment'=>array(
+				'Enviro_Conserv'=>'Environment - Conservation',
+				'Enviro_Earth'=>'Environment - Environmental Science',
+				'Enviro_Fish'=>'Environment - Fisheries',
+				'Enviro_Land_Mgmt'=>'Environment - Land Management',
+				'Enviro_NaturalRes'=>'Environment - Natural Resources',
+				'Enviro_WasteMgmt'=>'Environment - Waste Management',
+				'Enviro_Wildlife'=>'Environment - Wildlife',
+				'Enviro_Other'=>'Environment - Other',
+			),
+			'Fashion'=>'Fashion',
+			'Finance/Banking'=>array(
+				'Finan_AssetMgmet'=>'Finance/Banking - Asset Management',
+				'Finan_Brokerage'=>'Finance/Banking - Brokerage',
+				'Finan_Commercial'=>'Finance/Banking - Commercial Banking',
+				'Finan_Consumer'=>'Finance/Banking - Consumer/Retail Banking',
+				'Finan_Corporate'=>'Finance/Banking - Corporate Finance',
+				'Finan_FinServices'=>'Finance/Banking - Financial Services/Planning',
+				'Finan_Investment'=>'Finance/Banking - Investment Banking',
+				'Finan_Venture'=>'Finance/Banking - Venture Capital',
+				'Finan_Other'=>'Finance/Banking - Other',
+			),
+			'Food_Bev'=>'Food and Beverage',
+			'Forestry'=>'Forestry',
+			'Foundation'=>'Foundation/Think Tank',
+			'Government'=>array(
+				'Gov_Federal'=>'Government - Federal',
+				'Gov_Foreign'=>'Government - Foreign Service/Diplomacy',
+				'Gov_Intelligence'=>'Government - Intelligence',
+				'Gov_Local'=>'Government - Local',
+				'Gov_Mil'=>'Government - Military',
+				'Gov_Overseas'=>'Government - Overseas/Intl - Government',
+				'Gov_PubPolicy'=>'Government - Public Policy',
+				'Gov_State'=>'Government - State',
+				'Gov_Other'=>'Government - Other',
+			),
+			'Healthcare'=>array(
+				'Health_Admin'=>'Healthcare - Administration',
+				'Health_AlliedHealth'=>'Healthcare - Allied Health/Technologies',
+				'Health_Athletic'=>'Healthcare - Athletic Training/Fitness',
+				'Health_Dentistry'=>'Healthcare - Dentistry',
+				'Health_Laboratory'=>'Healthcare - Laboratory/Research',
+				'Health_Med'=>'Healthcare - Medicine',
+				'Health_MentalHealth'=>'Healthcare - Mental Health',
+				'Health_Nursing'=>'Healthcare - Nursing',
+				'Health_Nutrition'=>'Healthcare - Nutrition',
+				'Health_Pharm'=>'Healthcare - Pharmacy',
+				'Health_PhysOccup'=>'Healthcare - Physical/Occupational Therapy',
+				'Health_PublicHealth'=>'Healthcare - Public Health',
+				'Health_Vet'=>'Healthcare - Veterinary',
+				'Health_Other'=>'Healthcare - Other',
+			),
+			'Hospitality'=>'Hospitality',
+			'Human_Resources'=>'Human Resources',
+			'Insurance'=>'Insurance',
+			'Intergov'=>'Intergovernmental',
+			'IntlNGO'=>'International/NGO',
+			'Law'=>array(
+				'Law_Correct'=>'Law - Corrections',
+				'Law_Enforce'=>'Law - Enforcement/Security',
+				'Law_Judic'=>'Law - Judicial/Law Counsel',
+				'Law_LegalService'=>'Law - Legal Services/Research',
+				'Law_Other'=>'Law - Other',
+			),
+			'Legal_Service'=>'Legal Services',
+			'Manufact'=>'Manufacturing',
+			'Non-Profit'=>array(
+				'NP_Assoc'=>'Non-Profit - Associations',
+				'NP_Commty'=>'Non-Profit - Community Organizations/Activism',
+				'NP_Foundation'=>'Non-Profit - Foundations',
+				'NP_HistPres'=>'Non-Profit - Historical Preservation',
+				'NP_Internat'=>'Non-Profit - International',
+				'NP_Museum'=>'Non-Profit - Museum and Libraries',
+				'NP_NGO'=>'Non-Profit - Non-Government Organizations',
+				'NP_ThinkTank'=>'Non-Profit - Think Tanks',
+				'NP_Other'=>'Non-Profit - Other',
+			),
+			'NonProfit'=>'Nonprofit Organization',
+			'Pharm'=>'Pharmaceutical',
+			'Priv_Firm'=>'Private Firm',
+			'Priv_PubInt'=>'Private Public Interest Firm',
+			'Prosecutor'=>'Prosecutor\'s Office',
+			'PubAffairs'=>'Public Affairs',
+			'PubDefend'=>'Public Defender',
+			'Real_Estate'=>'Real Estate',
+			'Recreate'=>'Recreation/Parks/Sports',
+			'Religion'=>'Religion',
+			'Research'=>'Research',
+			'Retail'=>'Retail/Merchandising',
+			'Sciences'=>array(
+				'Sci_Life'=>'Sciences - Life Sciences',
+				'Sci_Marine'=>'Sciences - Marine Sciences',
+				'Sci_Natural'=>'Sciences - Natural Sciences',
+				'Sci_Physical'=>'Sciences - Physical Sciences',
+				'Sci_Other'=>'Sciences - Other',
+			),
+			'Skilled_Labor'=>'Skilled Labor',
+			'Social/Human Services'=>array(
+				'Soc_Elder'=>'Social/Human Services - Elderly',
+				'Soc_Faith'=>'Social/Human Services - Faith Based',
+				'Soc_Family'=>'Social/Human Services - Family/child/youth',
+				'Soc_LowIncome'=>'Social/Human Services - Low Income',
+				'Soc_SocJustice'=>'Social/Human Services - Social Justice',
+				'Soc_SubstAbuse'=>'Social/Human Services - Substance Abuse',
+				'Soc_Women'=>'Social/Human Services - Women',
+				'Soc_Other'=>'Social/Human Services - Other',
+			),
+			'Technology'=>array(
+				'Tech_Electron'=>'Technology - Electronics',
+				'Tech_Hardw'=>'Technology - Hardware',
+				'Tech_InfoSys'=>'Technology - Information Systems',
+				'Tech_Internet'=>'Technology - Internet/E-commerce',
+				'Tech_NetAdmin'=>'Technology - Network Administration',
+				'Tech_Software'=>'Technology - Software',
+				'Tech_Other'=>'Technology - Other',
+			),
+			'Packaging'=>'Packaging',
+			'Telecomm'=>'Telecommunications',
+			'Textiles'=>'Textiles',
+			'Third_Party_Staff'=>'Third Party Staffing',
+			'Transport'=>'Transportation',
+			'Travel'=>'Travel and Tourism',
+			'Union'=>'Union',
+			'Wholesale'=>'Wholesale',
+			'Other'=>'Other',
+		),
+		'#suffix'=>'</div>',
+	);
+	
+	$form['employer_contact']= array(
+		'#title'=> '2. Employer Contact Profile',
+		'#type' =>'fieldset',
+		'#collapsible'=> true,
+		'#collapsed'=> false,
+	);
+	$form['employer_contact']['employer_first_name'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'First Name',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_last_name'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'Last Name',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	
+	$form['employer_contact']['employer_title'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'Contact\'s Title',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>false,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_dept'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'Department',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>false,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_address'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'Address',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_city'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'City',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_state'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'State',
+		'#type'=>'textfield',
+		'#size'=>2,
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_zip'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'Zip',
+		'#type'=>'textfield',
+		'#description'=>'',
+		'#size'=>10,	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_email'] = array(
+		'#title'=>'Email',
+		'#type'=>'textfield',
+		'#required'=>true,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',	);
+	$form['employer_contact']['employer_phone'] = array(
+		'#title'=>'Phone',
+		'#type'=>'textfield',
+		'#required'=>true,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_fax'] = array(
+		'#title'=>'Fax',
+		'#type'=>'textfield',
+		'#required'=>true,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_alumnus'] = array(
+		'#title'=>'NSCC Alumnus',
+		'#type'=>'checkboxes',
+		'#required'=>false,	
+		'#options'=>array('Yes'=>'I\'m an NSCC Alumnus.'),
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['employer_contact']['employer_grad_year'] = array(
+		'#title'=>'Graduation Year',
+		'#type'=>'textfield',
+		'#size'=>4,
+		'#required'=>false,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	
+	$form['job_profile']= array(
+		'#title'=> '3. Job Profile Details',
+		'#type' =>'fieldset',
+		'#collapsible'=> true,
+		'#collapsed'=> false,
+	);
+	$form['job_profile']['job_title'] = array(
+		'#title'=>'Job Title',
+		'#type'=>'textfield',
+		'#required'=>true,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['job_profile']['job_desc'] = array(
+		'#title'=>'Job Description',
+		'#required'=>true,
+		'#type'=>'textarea',
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['job_profile']['job_location'] = array(
+		'#title'=>'Work Location',
+		'#type'=>'textfield',
+		'#required'=>true,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['job_profile']['job_type'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'Opportunity Type',
+		'#type'=>'select',
+		'#multiple'=>true,
+		'#description'=>'Choose all that apply.',	
+		'#required'=>true,
+		'#options'=>array(
+			'Not_Specified'=>'Not Specified',
+			'Acct_Mgmt'=>'Account Management/Planning',
+			'Accounting'=>'Accounting/Auditing',
+			'Actuarial'=>'Actuarial',
+			'Admin'=>'Administration',
+			'Admin_Support'=>'Administrative/Support Services',
+			'Advertising'=>'Advertising',
+			'Advocacy'=>'Advocacy',
+			'Analyst'=>'Analyst',
+			'Animal_Care'=>'Animal Care',
+			'Architecture'=>'Architecture',
+			'Bookkeeping'=>'Bookkeeping',
+			'Brand_Mgmt'=>'Brand Management',
+			'Business_Dev'=>'Business Development',
+			'Buying'=>'Buying/Purchasing',
+			'Childcare'=>'Childcare',
+			'Coaching'=>'Coaching',
+			'Community_Serv'=>'Community Service',
+			'Conflict_Res'=>'Conflict Resolution',
+			'Construction'=>'Construction/Contracting',
+			'Consulting'=>'Consulting',
+			'Counseling'=>'Counseling',
+			'Creative'=>'Creative/Design',
+			'Curriculum_Development'=>'Curriculum Development',
+			'Customer_Service'=>'Customer Service',
+			'Database_Mgmt'=>'Database Management',
+			'Distribution'=>'Distribution',
+			'Domestic_Care'=>'Domestic Care/Services',
+			'Data_Entry'=>'Data Entry',
+			'Economic'=>'Economic/Community Development',
+			'Editorial'=>'Editorial',
+			'Engineering'=>'Engineering',
+			'Event_Planning'=>'Event Planning',
+			'Finance'=>'Finance',
+			'Fundraising'=>'Fundraising/Development',
+			'Health_Services'=>'Health Services/Healthcare',
+			'Hotel'=>'Hotel/Restaurant',
+			'HR'=>'Human Resources',
+			'Info_Mgmt'=>'Information Management',
+			'International'=>'International',
+			'Law'=>'Law',
+			'Lib_Science'=>'Library Science',
+			'Management'=>'Management',
+			'Marketing'=>'Marketing',
+			'Ministry'=>'Ministry/Clergy',
+			'Operations'=>'Operations',
+			'Performing'=>'Performing',
+			'Political_Org'=>'Political Organization/Lobbying',
+			'Product_Mgmt'=>'Product Management',
+			'Production'=>'Production',
+			'Programming'=>'Programming/Software Development',
+			'Project_Mgmt'=>'Project Management',
+			'Public_Relations'=>'Public Relations',
+			'Quality_Control'=>'Quality Control',
+			'Reporting'=>'Reporting',
+			'Research'=>'Research',
+			'Risk_Mgmt'=>'Risk Management/Assessment',
+			'Sales'=>'Sales',
+			'Scientist'=>'Scientist',
+			'Skilled_Labor'=>'Skilled Labor',
+			'Social_Work'=>'Social Work',
+			'Supply_Chain'=>'Supply Chain Management/Logistics',
+			'Teaching'=>'Teaching/Education',
+			'Technician'=>'Technician',
+			'Training'=>'Training',
+			'Translation'=>'Translation',
+			'Urban_Regional'=>'Urban and Regional Planning',
+			'Volunteer'=>'Volunteer',
+			'Warehouse'=>'Warehousing/Materials Management',
+			'Writing'=>'Writing',
+			'Other'=>'Other',
+		),
+		'#suffix'=>'</div>',		
+	);
+	$form['job_profile']['job_wage'] = array(
+		'#title'=>'Wage',
+		'#type'=>'textarea',
+		'#required'=>true,
+		'#description'=>'Example: Give wage/hour (i.e. $12-15/hour) or indicate "negotiable"',	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['job_profile']['job_comp_details'] = array(
+		'#title'=>'Compensation Details',
+		'#type'=>'textfield',
+		'#required'=>false,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['job_profile']['job_hours'] = array(
+		'#title'=>'Hours/Days Needed',
+		'#type'=>'textarea',
+		'#required'=>true,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['job_profile']['job_ged_required'] = array(
+		'#title'=>'GED Required',
+		'#type'=>'checkboxes',
+		'#required'=>false,	
+		'#options'=>array('Yes'=>'A GED or Highschool Diploma is required.'),
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['job_profile']['job_wadl_required'] = array(
+		'#title'=>'WADL Required',
+		'#type'=>'checkboxes',
+		'#required'=>false,	
+		'#options'=>array('Yes'=>'A valid Washington State Driver\'s license is required.'),
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['job_profile']['job_vehicle_required'] = array(
+		'#title'=>'Vehicle Required',
+		'#type'=>'checkboxes',
+		'#required'=>false,	
+		'#options'=>array('Yes'=>'Must Own a Vehicle.'),
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+
+	
+	$form['application_details']= array(
+		'#title'=> '4. Application Details',
+		'#type' =>'fieldset',
+		'#collapsible'=> true,
+		'#collapsed'=> false,
+	);
+	$form['application_details']['application_deadline'] = array(
+		'#title'=>'Application deadline',
+		'#type'=>'textfield',
+		'#required'=>false,	
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['application_details']['application_method'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'How to Apply',
+		'#type'=>'select',
+		'#multiple'=>true,
+		'#description'=>'Choose all that apply.',	
+		'#required'=>true,
+		'#options'=>array(
+			'In_Person'=>'Apply in Person at Company/Org.',
+			'Call_First'=>'Call First',
+			'Contact_NSCC_CS'=>'Contact Career Services at North Seattle CC',
+			'Transcripts'=>'Copy of School Transcripts',
+			'Cover_Letter'=>'Cover Letter',
+			'Download_App'=>'Download Application from Website and Submit',
+			'Email_Resume'=>'E-Mail Resume to Company/Organization',
+			'Fax_Resume'=>'Fax Resume to Company/Organization',
+			'Postal_Mail_Resume'=>'Mail Resume to Company/Organization',
+			'Portfolio'=>'Portfolio',
+			'References'=>'Professional References',		
+		),
+		'#suffix'=>'</div>',		
+	);
+	$form['application_details']['application_follow_email'] = array(
+		'#title'=>'',
+		'#type'=>'checkboxes',
+		'#required'=>false,	
+		'#options'=>array('Yes'=>'It is OK for the applicant to follow up via email.'),
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+	$form['application_details']['application_follow_phone'] = array(
+		'#title'=>'',
+		'#type'=>'checkboxes',
+		'#required'=>false,	
+		'#options'=>array('Yes'=>'It is OK for the applicant to follow up via phone.'),
+		'#prefix'=>'<div>',
+		'#suffix'=>'</div>',
+	);
+
+	$form["submit"]=array(
+		'#type'=>'submit',
+		'#value'=>t('Submit')
+	);
+	return $form;
+}
+
+function job_opening_form_validate($form,&$form_state){
+	if( ! valid_email_address($form_state['values']['employer_email']) ){
+		form_set_error('employer_email', 'A Valid employer contact email is required.');
+	}
+	return true;
+}
+
+function job_opening_form_submit($form,&$form_state){
+	$receiver = 'careerservices@sccd.ctc.edu';
+	$body_params = array(
+		'Company Name'=>check_plain($form_state['values']['company_name']),
+		'Company Description'=>check_plain($form_state['values']['company_desc']),
+		'Company Web Site'=>check_plain($form_state['values']['company_url']),
+		'Company Industry'=>check_plain("\n\t".implode(array_values($form_state['values']['company_industry']),"\n\t")),
+		'Employer First Name'=>check_plain($form_state['values']['employer_first_name']),
+		'Employer Last Name'=>check_plain($form_state['values']['employer_last_name']),
+		'Employer Title'=>check_plain($form_state['values']['employer_title']),
+		'Employer Department'=>check_plain($form_state['values']['employer_dept']),
+		'Employer Address'=>check_plain($form_state['values']['employer_address']),
+		'Employer City'=>check_plain($form_state['values']['employer_city']),
+		'Employer State'=>check_plain($form_state['values']['employer_state']),
+		'Employer Zip'=>check_plain($form_state['values']['employer_zip']),
+		'Employer Email'=>check_plain($form_state['values']['employer_email']),
+		'Employer Phone'=>check_plain($form_state['values']['employer_phone']),
+		'Employer Fax'=>check_plain($form_state['values']['employer_fax']),
+		'Employer NSCC Alumnus'=>check_plain(implode(array_values($form_state['values']['employer_alumnus']),"")),
+		'Employer Graduation Year'=>check_plain($form_state['values']['employer_grad_year']),
+		'Job Title'=>check_plain($form_state['values']['job_title']),
+		'Job Description'=>check_plain($form_state['values']['job_desc']),
+		'Job Location'=>check_plain($form_state['values']['job_location']),
+		'Job Opportunity Type'=>check_plain("\n\t".implode(array_values($form_state['values']['job_type']),"\n\t")),
+		'Job Wage'=>check_plain($form_state['values']['job_wage']),
+		'Job Compensation Details'=>check_plain($form_state['values']['job_comp_details']),
+		'Job Days/Hours'=>check_plain($form_state['values']['job_hours']),
+		'Job GED Required'=>check_plain(implode(array_values($form_state['values']['job_ged_required']),"")),
+		'Job WADL Required'=>check_plain(implode(array_values($form_state['values']['job_wadl_required']),"")),
+		'Job Vehicle Required'=>check_plain(implode(array_values($form_state['values']['job_vehicle_required']),"")),
+		'Application Deadline'=>check_plain($form_state['values']['application_deadline']),
+		'Application Method'=>check_plain("\n\t".implode(array_values($form_state['values']['application_method']),"\n\t")),
+		'Application Email Followups'=>check_plain(implode(array_values($form_state['values']['application_follow_email']),"")),
+		'Application Phone Followups'=>check_plain(implode(array_values($form_state['values']['application_follow_phone']),"")),
+	);
+
+	drupal_mail('nscc_prod','job_opening',$receiver,language_default(),$body_params,'job-opening-robot@northseattle.edu');
+	drupal_set_message('Thank you, Your posting has been forwarded to NSCC Career Services.');
+}
+
+//Running start orientation quiz
+//forms
+function rs_orientation_quiz_form(){
+  drupal_add_css(drupal_get_path('module', 'nscc_prod') .'/nscc_prod.rs_orientation.css');	
+	//$form['#ajax']=array('enabled'=>true,'disable_redirect'=>true,);
+	$form['contact']= array(
+		'#title'=> 'Your Contact Information',
+		'#type' =>'fieldset',
+		'#collapsible'=> true,
+		'#collapsed'=> false,
+	);
+	$form['contact']['first_name'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'First Name',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['contact']['last_name'] = array(
+		'#prefix'=>'<div>',
+		'#title'=>'Last Name',
+		'#type'=>'textfield',
+		'#description'=>'',	
+		'#required'=>true,
+		'#suffix'=>'</div>',
+	);
+	$form['contact']["response_email"]=array(
+		'#title'=>'Your Email Address',
+		'#type'=>'textfield',
+		'#required'=>true,
+		'#description'=>'If you would like a response, please provide your e-mail address.',	
+	);
+
+	$form['questions']= array(
+		'#title'=> 'The Questions',
+		'#type' =>'fieldset',
+		'#collapsible'=> true,
+		'#collapsed'=> false,
+	);
+	$form['questions']['question_1'] = array(
+		'#title'=>'1. Running Start students are responsible for the following',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Transportation, books, and class fees unless they are on the bookfund and one time student ID card',
+			'b'=>'B. All tuition and fees',
+			'c'=>'C. None, Running Start program covers all costs',
+			'd'=>'D. Both A and B',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_1_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_2'] = array(
+		'#title'=>'2. Running start students can participate in college sports',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			't'=>'True',
+			'f'=>'False',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_2_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_3'] = array(
+		'#title'=>'3. Before registration every quarter, Running Start students must',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Meet with their high school counselor',
+			'b'=>'B. Meet with a Running Start advisor',
+			'c'=>'C. Complete a verification form and have it signed by the high school counselor, Running Start advisor, your parent/guardian and yourself',
+			'd'=>'D. All of the above',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_3_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_4'] = array(
+		'#title'=>'4. Running Start students are responsible for paying for the following courses',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. College level classes (100 and above)',
+			'b'=>'B. Elective courses',
+			'c'=>'C. Below college level classes (below 100 level)',
+			'd'=>'D. Online courses',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_4_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_5'] = array(
+		'#title'=>'5. Running Start covers tuition for college level online courses. RS students are responsible for paying applicable online class fees unless they are on the bookfund program',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			't'=>'True',
+			'f'=>'False',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_5_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_6'] = array(
+		'#title'=>'6. To maintain satisfactory student progress',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Maintain a quarterly GPA of 2.5 or better',
+			'b'=>'B. Maintain a cumulative GPA of 2.0 or better and complete at least 75% of courses registered for',
+			'c'=>'C. Receive a passing grade of 0.7 in all classes',
+			'd'=>'D. There is no minimum required GPA to maintain satisfactory student progress',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_6_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_7'] = array(
+		'#title'=>'7. The verification form must be signed by',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Parent/guardian and high school counselor',
+			'b'=>'B. High school counselor and RS advisor',
+			'c'=>'C. Parent/guardian, high school counselor and RS advisor',
+			'd'=>'D. High school counselor, yourself, RS advisor and parent/guardian (even if you are 18 or older)',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_7_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_8'] = array(
+		'#title'=>'8. The NSCC quarterly class schedule',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Lists important dates',
+			'b'=>'B. Lists the classes offered for the quarter, but the online version is more updated',
+			'c'=>'C. Lists continuing education classes (non-credit), which are not paid for by Running Start',
+			'd'=>'D. All of the above',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_8_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_9'] = array(
+		'#title'=>'9. Online courses',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Require student to be highly motivated and not recommended for a student\'s first quarter',
+			'b'=>'B. Classes are rigorous and require discipline',
+			'c'=>'C. Most classes have more readings and assignments than on campus classes',
+			'd'=>'D. All of the above',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_9_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_10'] = array(
+		'#title'=>'10. Grades',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Will be mailed to your home address and to your high school',
+			'b'=>'B. Will be available online and not mailed home to you',
+			'c'=>'C. Will be on your college transcript and your high school transcript',
+			'd'=>'D. Both B and C',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_10_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_11'] = array(
+		'#title'=>'11. The Running Start Program is only in the fall, winter and spring quarters',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			't'=>'True',
+			'f'=>'False',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_11_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_12'] = array(
+		'#title'=>'12. The Counseling Center can provide help for',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Learning to manage stress',
+			'b'=>'B. Coping with tests or math anxiety',
+			'c'=>'C. Choosing a major or career path',
+			'd'=>'D. All of the above',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_12_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_13'] = array(
+		'#title'=>'13. The grades you earn at NSCC will be sent to your high school counselor and the credits you earn will count',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Only toward HS credit',
+			'b'=>'B. Only for college credit',
+			'c'=>'C. For both HS and college credit',
+			'd'=>'D. For what the RS student decides',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_13_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_14'] = array(
+		'#title'=>'14. Failure to officially withdraw from your class could result in a',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. 0.0 failing grade',
+			'b'=>'B. W grade',
+			'c'=>'C. NC grade',
+			'd'=>'D. Nothing showing on your transcript',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_14_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_15'] = array(
+		'#title'=>'15. To officially withdraw from class you must',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Contact or meet with an RS advisor to have the hold removed',
+			'b'=>'B. Officially withdraw online',
+			'c'=>'C. Contact your high school counselor',
+			'd'=>'D. All of the above',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_15_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_16'] = array(
+		'#title'=>'16. Every five college credits earned equals one high school credit',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			't'=>'True',
+			'f'=>'False',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_16_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_17'] = array(
+		'#title'=>'17. The last day to officially withdraw from class(es) without a W grade on your college transcripts is',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. 15th day of the quarter',
+			'b'=>'B. 10th day of the quarter',
+			'c'=>'C. 25th day of the quarter',
+			'd'=>'D. End of the 8th week of the quarter',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_17_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_18'] = array(
+		'#title'=>'18. On the NSCC homepage there is a link called Services (http://northseattle.edu/services/ ). It contains this/these links',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Running Start',
+			'b'=>'B. eLearning',
+			'c'=>'C. Phi Theta Kappa',
+			'd'=>'D. All of the above',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_18_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_19'] = array(
+		'#title'=>'19. The following services are available on the Online Services link on NSCC homepage at northseattle.edu',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Registering for classes',
+			'b'=>'B. Viewing your grades and unofficial transcripts',
+			'c'=>'C. Updating your address and phone number',
+			'd'=>'D. All of the above',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_19_answer" class="answer"></div></div>',
+	);
+	$form['questions']['question_20'] = array(
+		'#title'=>'20. Strategies for Success include',
+		'#type'=>'radios',
+		'#required'=>true,	
+		'#options'=>array(
+			'a'=>'A. Meeting and talking with the instructor during his/her office hours if you have questions or concerns',
+			'b'=>'B. Attending class',
+			'c'=>'C. Using NSCC campus resources (such as: the Loft/Writing Center, Math/Science Tutoring Center and Counseling Center)',
+			'd'=>'D. All of the above',
+		),
+		'#prefix'=>'<div>',
+		'#suffix'=>'<div id="question_20_answer" class="answer"></div></div>',
+	);
+
+	$form["submit"]=array(
+		'#type'=>'submit',
+		'#value'=>t('Score Me!')
+	);
+	return $form;
+}
+
+function rs_orientation_quiz_form_validate($form,&$form_state){
+	if(! valid_email_address($form_state['values']['response_email']) ){
+		form_set_error('response_email', 'Your Email Address must be a valid email address.');
+	}
+	
+	// When these change, also make corresponding update in nscc_prod.rs_orientation.js
+	$answers = array(
+		'question_1'=>array(
+			'correct_answer'=>'a',
+			'error_msg'=>'Running Start students are responsible for the one time student ID card fee, books, transportation, and class fees not associated with the class. The correct answer is A.',
+		),
+		'question_2'=>array(
+			'correct_answer'=>'f',
+			'error_msg'=>'Running Start students are not eligible to participate in college sports. You are still eligible to participate in high school sports at your high school. The correct answer is False.',
+		),
+		'question_3'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'Running Start students must meet with their high school counselor to have their pre-enrollment form completed. Meet with a Running Start advisor. Complete a pre-enrollment form and have it signed by the high school counselor, Running Start advisor, your parent/guardian and yourself. The correct answer is All of the above.',
+		),
+		'question_4'=>array(
+			'correct_answer'=>'c',
+			'error_msg'=>'Running Start students are responsible for paying for below college level classes (below the 100 level). The correct answer is Below college level classes (below 100 level).',
+		),
+		'question_5'=>array(
+			'correct_answer'=>'t',
+			'error_msg'=>'Running Start covers tuition for college level online courses. RS students are responsible for paying applicable online class fees unless they are on the bookfund program. The correct answer is True.',
+		),
+		'question_6'=>array(
+			'correct_answer'=>'b',
+			'error_msg'=>'All students at NSCC must maintain a cumulative GPA of 2.0 or better. A student pursuing an AA/AS Degree at NSCC, is required to complete at least 75% of the courses for which he/she is registered. The correct answer is Maintain a cumulative gpa of 2.0 or better and complete at least 75% of courses registered for.',
+		),
+		'question_7'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'The pre-enrollment form must be signed by your high school counselor, yourself, RS advisor and your parent/guardian (even if you are 18 or older).',
+		),
+		'question_8'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'The NSCC quarterly class schedule lists important dates, courses offered for the quarter and continuing education classes. The correct answer is All of the above.',
+		),
+		'question_9'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'Online courses require students to be highly motivated and self- disciplined. Most online courses may have more readings and assignments than on campus classes. The correct answer is All of the above.',
+		),
+		'question_10'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'Grades will be available for you to view online and will not be mailed to your home. Your official transcripts will be mailed to your high school. NSCC grades will be on your college transcript and your high school transcript. The correct answer is Both B and C.',
+		),
+		'question_11'=>array(
+			'correct_answer'=>'t',
+			'error_msg'=>'The Running Start Program is only in the fall, winter and spring quarters. If you are interested in taking classes in the summer you will need to talk and get permission from your high school counselor and parent/guardian. You will be responsible for tuition for summer quarter classes. The correct answer is true.',
+		),
+		'question_12'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'The Counseling Center provides educational, career and personal counseling. The correct answer is All of the above.',
+		),
+		'question_13'=>array(
+			'correct_answer'=>'c',
+			'error_msg'=>'You will earn both high school credit and college credit.',
+		),
+		'question_14'=>array(
+			'correct_answer'=>'a',
+			'error_msg'=>'Failure to officially withdraw from class could result in a 0.0 failing grade. A 0.0 failing grade will affect your high school and college cumulative GPA.',
+		),
+		'question_15'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'To officially withdraw from class(es), you will need to contact or meet with an RS advisor, officially withdraw form the course(s) online, and contact your high school counselor to inform them that you have withdrawn from class(es). The correct answer is All of the above.',
+		),
+		'question_16'=>array(
+			'correct_answer'=>'t',
+			'error_msg'=>'For every five college credits you earn, you will earn one high school credit.',
+		),
+		'question_17'=>array(
+			'correct_answer'=>'b',
+			'error_msg'=>'The 10th day of the quarter is the last day to withdraw without a W grade on your college transcripts.',
+		),
+		'question_18'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'This web page contains links to NSCC services and resources. The correct answer is All of the above.',
+		),
+		'question_19'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'You can register/add/drop classes,view your quarterly grades and view your unofficial transcripts. If your contact information has changed, you can update it online. The correct answer is all of the above.',
+		),
+		'question_20'=>array(
+			'correct_answer'=>'d',
+			'error_msg'=>'These are just some strategies for success. It is important to know your instructor\'s office hours and to talk to him/her if you have questions or concerns. NSCC has resources to help you succeed. There is free tutoring at the Loft/Writing Center and the Math/Science Tutoring Center. The Counseling Center provides academic, career and personal counseling. The #1 strategy for success is to Go To Class! The correct answer is All of the above.',
+		),
+	);
+	$all_right = true;
+	foreach($answers as $question=>$answer){
+		//watchdog('rs_issue', 'Question: <pre>'.print_r($question,true)."</pre>\n");
+		if($form_state['values'][$question] != $answer['correct_answer']){
+			if($all_right){
+				form_set_error('questions','Some of your answers were wrong, here\'s some hints to help you out:');
+			}			
+			$all_right = false;
+			form_set_error($question, check_plain($answer['error_msg']));
+		}
+	}
+}
+
+function rs_orientation_quiz_form_submit($form,&$form_state){
+	//$orientation_receiver = 'jmceldery@sccd.ctc.edu';
+	$orientation_receiver = 'chelsea.ackerman@seattlecolleges.edu';
+	$body_params = array(	
+		'first_name'=>check_plain($form_state['values']['first_name']),
+		'last_name'=>check_plain($form_state['values']['last_name']),
+		'response_email'=>$form_state['values']['response_email'],
+	);	
+
+	drupal_mail('nscc_prod','rs_orientation_quiz',$orientation_receiver,language_default(),$body_params,'RS-Orientation-robot@northseattle.edu');
+	drupal_set_message('Well done '.ucfirst(check_plain($form_state['values']['first_name'])).'. You have passed the quiz with a score of 100%. An email confirmation has been sent to the Running Start coordinator and the address you specified. Please see the Running Start coordinator to complete your Orientation.');
+
+}
+
+
+
+
+
+
+
+function nscc_prod_mail($key, &$message, $params){
+	switch($key){
+
+		case 'orientation_survey':
+			$message['subject'] = 'Online Orientation Survey';
+			$message['body'] = 'Someone has responded to the Online Orientation survey at https://northseattle.edu/online-orientation/conclusion.'."\n";
+			$message['body'] .= 'Their Responses:'."\n\n";
+			$message['body'] .= 'Was this orientation helpful? '.$params['helpful']."\n";
+			if($params['comment']){
+				$message['body'] .= 'Feedback: '."\n";
+				$message['body'] .= "\t".$params['comment']."\n\n";
+			}	
+			if($params['response_email']){
+				$message['body'] .='Response Emails to: '.$params['response_email'].' (Replies to this email will be directed there.)'."\n";
+				$message['headers']['Reply-To'] = $params['response_email'];
+			}
+			break;
+
+
+		case 'custom_tour_request':
+			$message['subject'] = 'Custom Tour Request';
+			$message['body'] = 'Someone has responded to the Custom Tour Request at https://northseattle.edu/tour-nscc/request-custom-tour'."\n";
+			$message['body'] .= 'Their Contact Info:'."\n\n";
+			$message['body'] .= 'Name:'.$params['name']."\n";
+			$message['body'] .= 'Phone:'.$params['phone']."\n";
+			if($params['response_email']){
+				$message['body'] .='Response Emails to: '.$params['response_email'].' (Replies to this email will be directed there.)'."\n";
+				$message['headers']['Reply-To'] = $params['response_email'];
+			}
+			$message['body'].="\n\n";
+			$message['body'].='Tour Details: '."\n";
+			$message['body'].='Tour Size: '.$params['tour_size']."\n";
+			$message['body'].='Tour Date: '.$params['tour_date']."\n";
+			$message['body'].='Tour Time: '.$params['tour_time']."\n";
+			$message['body'].='Docent: '.$params['docent']."\n";
+			$message['body'].="\n\n";
+			$message['body'].='Interests: '."\n";
+			$message['body'].='Academic Interests: '.$params['academic_interests']."\n";
+			$message['body'].='Other Academic Interests: '.$params['other_academic_interests']."\n";
+			$message['body'].='Services Interests: '.$params['services_interests']."\n";
+			$message['body'].='Other Services Interests: '.$params['other_services_interests']."\n";				
+			break;
+
+
+		case 'job_opening':
+			$message['subject'] = 'Job Opening Posting';
+			$message['body'] = 'Someone has responded to the Job Opening Form at https://northseattle.edu/career-services/employer-jobinternship-opening-form.'."\n";
+			foreach($params as $param_name => $param_value){
+				$message['body'] .= $param_name.": ".$param_value."\n"; 
+			}
+			break;
+
+		
+		case 'rs_orientation_quiz':
+			$message['subject'] = 'RS Orientation Quiz Passed';
+			$message['body'] = 'Someone has passed the RS Orientation Quiz at https://northseattle.edu/running-start/running-start-orientation-quiz.'."\n";
+			foreach($params as $param_name => $param_value){
+				$message['body'] .= $param_name.": ".$param_value."\n"; 
+			}
+			break;
+
+
+		case 'basketball_prospect_submission':
+		case 'storm-prospect-sub':
+			$sub_ts = date('D, d M Y g:ia T');
+			$message['subject'] = 'Storm Team Prospect';	
+			$message['body'] = "The online basketball prospect recruitment form was submitted $sub_ts by {$params['player_name']} with the following information.\n";
+			foreach ($params['fields'] as $field) {
+				$message['body'] .= "\n{$field['label']}: {$field['value']}";
+			}
+			$message['body'] .= "\n\n";
+			break;
+
+
+		case 'basketball_prospect_acknowledgement':
+		case 'storm-prospect-ack':
+			$message['subject'] = 'Storm Prospect Form Acknowledgement';
+			$message['body'] = "Hi {$params['player_name']}.\n\nThank you for your interest in playing for the SCC Storm. This message confirms that we have received your eligibility form.\n\nOur athletics staff will review the information provided, and follow up with you directly.\n\nSincerely,\n\nSCC Storm\n\n";
+			break;
+
+
+		case 'edfund-alumni-transmit-data':
+			$message['subject'] = 'Education Fund Site - Alumni Web Form';
+			$message['body'][] = "Data submitted via the Alumni Association recruitment form follows.\n";
+			foreach ($params as $key => $val) {
+				if ($key == 'Address') {
+					$message['body'][] = "$key:\n$val";	// better format for multiline data.
+				} else {
+					$message['body'][] = "$key:\t$val";
+				}
+			}
+			break;
+
+
+		case 'edfund-alumni-usr-ack':
+			$message['subject'] = 'NSCC Alumni Association Welcome';
+			$message['body'][] = t('Hi !name,', array('!name' => $params['fname']));
+			$message['body'][] = t('Thank you for joining the NSCC Alumni Association!');
+			$message['body'][] = t('We have received your information and look forward to keeping you informed about alumni-releated news and events. If you have any questions or need to contact us for any reason, you can reach us at !email-addr', array('!email-addr' => EDFUND_ALUMNI_ADDR));
+			break;
+
+
+		case 'invalid-contact':
+			$update = l('update the '. $params['problem_node'] . 'node', $params['node_path']);
+			$message['subject'] = 'Invalid Contact Discovered';
+			$message['body'][] = "The {$params['problem_node']} node references the following user accounts which are currently deactivated. Please $update with valid contacts.";
+			foreach ($params['users'] as $blocked) {
+				$message['body'][] = "\t• {$blocked->nscc_profile_first_name} {$blocked->nscc_profile_last_name} ({$blocked->name})";
+			}
+	}
+}
+
+function nscc_prod_ajax_profile(){
+	$profile_nid = $_POST['profile_nid'];
+	$profile_node = node_load($profile_nid,null,true);
+	//watchdog('profile_test','<pre>'.print_r($profile,true).'</pre>');
+	if($profile_node){
+		$json_array['error_msg'] = 'success';
+		$json_array['profile'] = theme('node',$profile_node);
+	} else {
+		$json_array['error_msg'] = 'error';
+	}
+	print drupal_json($json_array);
+	exit();
+}

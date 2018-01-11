@@ -1,0 +1,256 @@
+<?php
+// $Id$
+
+/**
+ * @file:	nscc_col_council.module
+ *
+ * Custom module to support additional functionality needed by College Council
+ * and Strategic Plan sites.
+ */
+
+
+
+// NID of College Council committee node from main NSCC site (prod_* tables)
+// used to extract misc data from main site
+define('CC_COMMITTEE_NID', 186);
+
+
+
+
+/**
+ * HOOK block
+ */
+function nscc_col_council_block($op = 'list', $delta = 0, $edit = array()) {
+	switch ($op) {
+		case 'list' :
+
+			// Committee Members list
+			$blocks[0]['info'] = t('Committee members list');
+			$blocks[0]['cache'] = BLOCK_NO_CACHE;
+
+			// Committee Calendar embed
+			$blocks[1]['info'] = t('Committee calendar embed');
+			$blocks[1]['cache'] = BLOCK_NO_CACHE;
+
+			return $blocks;
+			break;
+		case 'view' :
+			$block = array();
+			switch ($delta) {
+
+				// Committee Members list
+				case 0 :
+					$block['subject'] = t('Committee Members');
+					$block['content'] = theme('cc_members_list', _nscc_col_council_get_members());
+					break;
+
+				// Committee Calendar embed
+				case 1 :
+					$block['subject'] = t('Council Events');
+					$block['content'] = theme('cc_sidbar_calendar', _nscc_col_council_get_commitee_data());
+					break;
+			}
+			return $block;
+			break;
+		case 'configure' :
+			break;
+		case 'save' :
+			break;
+	}
+}
+
+
+
+
+
+/**
+ * HOOK theme
+ *
+ * Registers theme functions for items created by this module.
+ */
+function nscc_col_council_theme($existing, $type, $theme, $path) {
+	return array(
+		'cc_members_list' => array(
+			'arguments' => array('members' => null),
+		),
+		'cc_sidbar_calendar' => array(
+			'arguments' => array('committee_data' => null),
+		),
+	);
+}
+
+
+
+
+
+/**
+ * Theme function: College Council Members Listing
+ * Generates output markup for displaying a list of current members of the College Council
+ *
+ * @param Array The list of council members to be themed.
+ * @return String Themed list of council members
+ */
+function theme_cc_members_list($members) {
+	//return '<pre>'.print_r($members, true)."</pre>\n";
+	if (!empty($members['netid'])) {
+		foreach ($members['netid'] as $member) {
+			$name = check_plain($member->lname);
+			$name = empty($member->fname) ? $name : check_plain($member->fname)." $name";
+			$li[] = '<li class="committee-member">';
+			$li[] = '<span class="member-constituency">'.check_plain($member->constituency).'</span>';
+			$li[] = '<a class="member-name" title="View profile page" href="/users/'.check_plain($member->name)."\">$name</a>";
+			$li[] = empty($member->position) ? '' : '<span class="member-position">'.check_plain($member->position).'</span>';
+			$member_list[] = implode("\n", $li);
+			unset($li);
+		}
+	}
+	
+	if (!empty($members['other'])) {
+		foreach ($members['other'] as $member) {
+			$name = check_plain($member->name);
+			$li[] = '<li class="committee-member">';
+			$li[] = '<span class="member-constituency">'.check_plain($member->constituency).'</span>';
+			$li[] = "<span class=\"member-name\">$name</span>";
+			$li[] = empty($member->position) ? '' : '<span class="member-position">'.check_plain($member->position).'</span>';
+			$member_list[] = implode("\n", $li);
+			unset($li);
+		}
+	}
+	
+	return empty($member_list) ? '' : '<ul class="committee-member-list">'.implode("\n", $member_list).'</ul>';
+}
+
+
+
+
+
+/**
+ * Theme function: Committee events calendar
+ * @param array List of misc committee data
+ * @return string Themed calendar embed.
+ */
+function theme_cc_sidbar_calendar($committee_data) {
+	if (function_exists('_format_calendar')) {
+		return _format_calendar($committee_data['field_calendar_url_url'], 'agenda_embed_3col');
+	}
+	return '';
+}
+
+
+
+
+
+/**
+ * Helper function: Retrieves list of current committee members.
+ * @param int NID of College Council committee node from main NSCC site (prod_* tables)
+ * @return array List of committee member objects
+ */
+function _nscc_col_council_get_members($committee_nid = CC_COMMITTEE_NID) {
+	$members = array();
+
+	// Get internal committee members (i.e. have NetID accounts)
+	$query = <<<NETID_MEMBERS_SQL
+SELECT
+	cm.field_member_uid,
+	u.name,
+	position.field_position_value AS position,
+	fname.value fname,
+	lname.value lname,
+	trim(email.value) email,
+	constituency.field_constituency_value AS constituency
+FROM prod_content_type_committee_membership cm
+JOIN people_users u ON (cm.field_member_uid=u.uid)
+JOIN prod_content_field_position position ON (cm.vid=position.vid AND cm.nid=position.nid)
+JOIN prod_content_field_constituency constituency ON (cm.vid=constituency.vid AND cm.nid=constituency.nid)
+JOIN (SELECT * FROM people_nscc_profile_values WHERE fid=24) AS lname USING  (uid)
+JOIN (SELECT * FROM people_nscc_profile_values WHERE fid=23) AS fname USING (uid)
+JOIN (SELECT * FROM people_nscc_profile_values WHERE fid=4) as email USING (uid)
+WHERE cm.nid = %d
+NETID_MEMBERS_SQL;
+	$result = db_query($query, $committee_nid);
+
+	if ($result !== false) {
+		while ($record = db_fetch_object($result)) {
+			$members['netid'][] = $record;
+		}
+	}
+	
+
+	// Get external committee members (i.e. do not have NetID accounts)
+	$query = <<<OTHER_MEMBERS_SQL
+SELECT
+	cmo.field_member_name_value AS name,
+	position.field_position_value AS position,
+	constituency.field_constituency_value AS constituency
+FROM prod_content_type_committee_membership_out cmo
+JOIN prod_content_field_position AS position ON (cmo.vid = position.vid AND cmo.nid = position.nid)
+JOIN prod_content_field_constituency AS constituency ON (cmo.vid = constituency.vid AND cmo.nid = constituency.nid)
+WHERE cmo.nid = %d
+OTHER_MEMBERS_SQL;
+	$result = db_query($query, $committee_nid);
+	
+	if ($result !== false) {
+		While ($record = db_fetch_object($result)) {
+			$members['other'] = $record;
+		}
+	}
+
+	return $members;
+}
+
+
+
+
+
+/**
+ * Helper function: Retrieves misc data from Committee Overview
+ * @param int NID of Committee Overview node from main NSCC site (prod_* tables)
+ * @return 
+ */
+function _nscc_col_council_get_commitee_data($committee_nid = CC_COMMITTEE_NID) {
+	$committee_data = array();
+	$query = "SELECT * FROM prod_content_type_committee_overview WHERE nid=%d";
+	$result = db_query($query, $committee_nid);
+	if ($result !== false) {
+		//while ($record = db_fetch_array($result)) {
+		//	$committee_data[] = $record;
+		//}
+		return db_fetch_array($result);
+	}
+	return $committee_data;
+}
+
+
+
+
+
+//****Strategic Plan Module
+
+//tokenizing the report index field makes it available for URL aliases --part 1
+function nscc_col_council_token_values($type, $object = NULL, $options = array()) {
+    $values = array();
+
+    switch($type) {
+        case 'node' :
+            $node = $object;
+
+            $values['meeting_date'] = $node->field_meeting_date[0]['value'];
+            break;
+    };
+
+    return $values;
+};
+
+
+//tokenizing the report index field makes it available for URL aliases --part 2
+function nscc_col_council_token_list($type = 'all'){
+
+    if ($type == 'node' || $type == 'all'){
+
+        $tokens['node']['meeting_date'] = t('The value of the meeting_date field');
+
+    };
+
+    return $tokens;
+};
+

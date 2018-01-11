@@ -1,0 +1,21 @@
+Modernizr
+
+http://modernizr.com/
+
+Modernizr is a small JavaScript library that detects the availability of native implementations for next-generation web technologies, i.e. features that stem from the HTML5 and CSS3 specifications. Modernizr tells you whether the current browser has this feature natively implemented or not.
+
+The library is generated using an online tool (URL above) that configures the test suite to one's particular needs. As versions or needs change, the library may need to be rebuilt. To facilitate R&D the `full` build includes all standard tests for that version of the library. The lightweight build (`custom`) ideally contains just the tests currently needed for production use to minimize overhead to the browser.
+
+The following lists the tests currently in use and included in the `custom` build of the specified version. Be sure to include those tests and update this info when creating new builds. The `modernizr` symlink in this directory should always point to the latest version of the `custom` build.
+
+
+modernizr.custom.41883.js	(current)
+--------------
+	HTML5 Audio
+	HTML5 Video
+	html5shiv v3.6 w/printshiv
+	Media Queries
+	Add CSS Classes
+	Modernizr.testStyles()	
+--------------
+Build: http://modernizr.com/download/#-audio-video-printshiv-mq-cssclasses-teststyles

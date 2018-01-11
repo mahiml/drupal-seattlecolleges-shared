@@ -1,0 +1,13 @@
+/* CORRECTIVE IE STYLES FOR MAIN WEBSITE */
+
+
+.views_slideshow_singleframe_pager .pager-item a:link,
+.views_slideshow_singleframe_pager .pager-item a:visited {
+	color: rgb(84, 84, 84);
+	background-color: rgb(128, 128, 128);
+}
+
+.views_slideshow_singleframe_pager .pager-item a.activeSlide {
+	color: rgb(185, 76, 38);
+	background-color: rgb(220, 220, 220);
+}

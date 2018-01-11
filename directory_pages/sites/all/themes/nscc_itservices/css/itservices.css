@@ -1,0 +1,72 @@
+/* IT SERVICES */
+
+/* Toolbox */
+
+#toolbox { min-height: 60px; }	/* corrects for anonymous-user's site tools */
+
+
+/* Super Special Front Page */
+
+.view-front-page-aggregator {
+	padding: 0 10px;
+	border: solid 1px rgb(230, 227, 220);
+	background-color: rgb(245, 245, 245);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.view-front-page-aggregator .item-list ul {
+	margin: 0;
+	padding: 0;
+	list-style: none outside none;
+}
+
+.view-front-page-aggregator li.views-row {
+	margin: 10px 0;
+	padding: 6px 12px;
+	list-style: none outside none;
+	background-color: rgb(255, 255, 255);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
+	-webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
+	box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
+}
+
+#block-views-front_page_aggregator-block_2 li.views-row { background-color: rgb(255, 237, 229); }
+
+.view-front-page-aggregator .views-field-timestamp {
+	float: right;
+	font-size: 11px;
+	line-height: 1;
+	text-align: right;
+	color: 132, 130, 117;
+}
+
+.view-front-page-aggregator .views-field-title { font-size: 18px; }
+
+.view-front-page-aggregator .views-field-title a:link,
+.view-front-page-aggregator .views-field-title a:visited {
+	text-decoration: none;
+}
+
+.view-front-page-aggregator .views-field-title a:hover {
+	text-decoration: underline;
+}
+
+.view-front-page-aggregator .views-field-description {
+	margin: 10px 0;
+	border-top: solid 1px rgb(230, 227, 220);
+}
+
+.view-front-page-aggregator .views-field-description p,
+.view-front-page-aggregator .views-field-description li,
+.view-front-page-aggregator .views-field-description td {
+	font: 12px/1.5 DroidSerif,Georgia,"Times New Roman",Times,serif;
+}
+
+.view-front-page-aggregator .views-field-description table {
+	margin: 10px 0;
+}

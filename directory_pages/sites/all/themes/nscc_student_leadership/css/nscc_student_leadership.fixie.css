@@ -1,0 +1,103 @@
+/* Corrective Styles for IE < 8 */
+
+tr.odd td { background-color: rgb(245, 245, 245); }
+
+.region-main fieldset,
+.region-main fieldset fieldset,
+.region-main fieldset fieldset fieldset { background-color: #ffffff; }
+
+#toolbox div.block,
+#block-menu-primary-links li,
+#toolbox #block-nscc-1 h2 a,
+div.fee,
+div.schedule-tag-key li,
+.testimonial-quote blockquote { height: 1%; }
+
+#block-nscc-1 #user-login-form { background-color:  rgb(99,141,159); }
+
+#container div.region-quicklicks { position: static; }
+
+.primary-local-tasks { background-color: rgb(255, 255, 255); }
+
+.menu li.leaf,
+.menu li.collapsed,
+.menu li.expanded {
+  list-style-image: none;
+  list-style-type: none;
+}
+
+#navigation-panels ul li a:hover,
+#navigation-panels ul li.here a:hover,
+#navigation-panels ul li.here a:link,
+#navigation-panels ul li.here a:visited,
+#navigation-panels .navindex li a:link,
+#navigation-panels .navindex li a:visited,
+#navigation-panels li.here .navindex li a:link,
+#navigation-panels li.here .navindex li a:visited {
+	background: none;
+}
+
+#navigation-panels .navindex {
+	background-image: url(../imgs/bg-navpanel-body-ie.png);
+}
+
+#navigation-panels .navindex .panel-bottom {
+	background-image: url(../imgs/bg-navpanel-bottom-ie.png);
+}
+
+div.block-nscc_locator {
+	border: solid 1px rgb(216, 215, 210);
+	background-color: rgb(239, 239, 239);
+}
+
+.views_slideshow_singleframe_pager .pager-item a:link,
+.views_slideshow_singleframe_pager .pager-item a:visited {
+	color: rgb(84, 84, 84);
+	background-color: rgb(128, 128, 128);
+}
+
+.views_slideshow_singleframe_pager .pager-item a.activeSlide {
+	color: rgb(185, 76, 38);
+	background-color: rgb(220, 220, 220);
+}
+
+
+/* Not for IE 7+ \*/
+
+* html #block-nscc-1,
+* html div.comment,
+* html #block-views-calendar_date-calendar_block_1,
+* html #side-nav .menu li,
+* html .minifaq-accordion,
+* html .courselist li.schedule-course-list-item,
+* html .block-nscc_locator ul,
+* html .block-nscc_schedule .schedule-menu { height: 1%; }
+
+* html body { text-align: left; }
+
+* html #block-nscc-1 #edit-submit-1 { float: left; }
+
+* html #logo img,
+* html #logo img a,
+* html div.pngfix,
+* html div.fp_slide-content,
+* html div.adm_slide-content,
+* html #photo-header .program-banner-text { 
+   behavior: url(/sites/all/themes/zen_ninesixty/iepngfix.htc);
+}
+
+* html #photo-header { margin-bottom: 6px; }
+
+* html #photo-header .program-banner-text { bottom: 0; }
+
+* html #main-column,
+* html #side-column1 { overflow: hidden; }
+
+* html #navigation-panels li.nav_index_entry div.navindex li li a { padding-left: 10px; }
+
+* html div#fade-background { background-image: url(/sites/all/themes/nscc_960/imgs/bg-blk-50-ie6.gif); }
+
+* html #promo-explore-nscc .links li,
+* html .daywrapper div.grid-1 { display: inline; }
+
+/* all done */

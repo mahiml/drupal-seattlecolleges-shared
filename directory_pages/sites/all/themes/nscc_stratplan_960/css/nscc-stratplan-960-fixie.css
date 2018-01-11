@@ -1,0 +1,22 @@
+/*    CORRECTIVE IE STYLES FOR MAIN WEBSITE
+[refactored - moved style to parent theme]
+
+#navigation-panels ul li a:hover,
+#navigation-panels ul li.here a:hover,
+#navigation-panels ul li.here a:link,
+#navigation-panels ul li.here a:visited,
+#navigation-panels .navindex li a:link,
+#navigation-panels .navindex li a:visited,
+#navigation-panels li.here .navindex li a:link,
+#navigation-panels li.here .navindex li a:visited {
+	background: none;
+}
+
+#navigation-panels .navindex {
+	background-image: url(../imgs/bg-navpanel-body-ie.png);
+}
+
+#navigation-panels .navindex .panel-bottom {
+	background-image: url(../imgs/bg-navpanel-bottom-ie.png);
+}
+*/

@@ -1,0 +1,1117 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Arts & Lectures Events
+X-WR-TIMEZONE:UTC
+X-WR-CALDESC:
+BEGIN:VTIMEZONE
+TZID:America/Vancouver
+X-LIC-LOCATION:America/Vancouver
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20111024T080000
+DTEND;TZID=America/Vancouver:20111028T160000
+DTSTAMP:20160930T173002Z
+UID:pmhr5befa9cage3669cqnkmq78@google.com
+RECURRENCE-ID;TZID=America/Vancouver:20111024T100000
+CREATED:20111021T163903Z
+DESCRIPTION:
+LAST-MODIFIED:20150911T055828Z
+LOCATION:Espresso Lounge
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Espresso Lounge -  Dia de los Muertos Celebration Altar
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20111024T100000
+DTEND;TZID=America/Vancouver:20111030T110000
+RRULE:FREQ=WEEKLY;UNTIL=20111028T170000Z;BYDAY=MO,TU,WE,TH,FR
+EXDATE;TZID=America/Vancouver:20111028T100000
+EXDATE;TZID=America/Vancouver:20111027T100000
+EXDATE;TZID=America/Vancouver:20111026T100000
+EXDATE;TZID=America/Vancouver:20111025T100000
+DTSTAMP:20160930T173002Z
+UID:pmhr5befa9cage3669cqnkmq78@google.com
+CREATED:20111021T163903Z
+DESCRIPTION:
+LAST-MODIFIED:20150911T055828Z
+LOCATION:Espresso Lounge
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Espresso Lounge -  Dia de los Muertos Celebration Altar
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20110104T080000
+DTEND;TZID=America/Vancouver:20110104T190000
+RRULE:FREQ=DAILY;UNTIL=20110105T160000Z
+DTSTAMP:20160930T173002Z
+UID:4e4nm9dbbfhqro834866gv2tc4@google.com
+CLASS:PUBLIC
+CREATED:20101215T005959Z
+DESCRIPTION:Need help the 1st and 2nd day of the quarter? Find help with cl
+ ass room location or class change or other helpful info. Available for day 
+ and evening students!
+LAST-MODIFIED:20140921T050950Z
+LOCATION:In front of Bookstore and Registration Office
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Student Greeters 1st day of quarter
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20120515
+DTEND;VALUE=DATE:20120609
+DTSTAMP:20160930T173002Z
+UID:sibanmqi34ngno777hmilvs2tk@google.com
+CREATED:20120417T211815Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T211853Z
+LOCATION:Art Gallery
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Student Art Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20120325
+DTEND;VALUE=DATE:20120428
+DTSTAMP:20160930T173002Z
+UID:nuib1k3b6qst48dkmsqe7hpftg@google.com
+CREATED:20120417T211646Z
+DESCRIPTION:On the Fringe: Washington Community College Ceramics Show
+LAST-MODIFIED:20120417T211736Z
+LOCATION:Art Gallery
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ceramics Art Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120607T030000Z
+DTEND:20120607T043000Z
+DTSTAMP:20160930T173002Z
+UID:p54kdpvpgt612bh4mdq05iuq00@google.com
+CREATED:20120417T211451Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T211505Z
+LOCATION:Concert hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spring Jazz Concert with Fred Radke
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120608T023000Z
+DTEND:20120608T040000Z
+DTSTAMP:20160930T173002Z
+UID:v4krhb2brmjhnlp2e14rluq5u8@google.com
+CREATED:20120417T211427Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T211427Z
+LOCATION:Concert Hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spring Choir Concert
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120611T023000Z
+DTEND:20120611T040000Z
+DTSTAMP:20160930T173002Z
+UID:rn0qcnlftg5djbq12mp198c54k@google.com
+CREATED:20120417T211349Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T211349Z
+LOCATION:Concert Hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spring Symphonic Bank Concert
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120430T023000Z
+DTEND:20120430T040000Z
+DTSTAMP:20160930T173002Z
+UID:cnko4oru30qq73cg3jhr2ur3i0@google.com
+CREATED:20120417T211235Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T211300Z
+LOCATION:Concert Hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spring Symphonic Band Ensemble Night
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120531T170000Z
+DTEND:20120531T210000Z
+DTSTAMP:20160930T173002Z
+UID:7vse1mvtrk4c18a4u5ik9ib2i4@google.com
+CREATED:20120417T205635Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T205654Z
+LOCATION:Courtyard
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Springfest
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120517T190000Z
+DTEND:20120517T200000Z
+DTSTAMP:20160930T173002Z
+UID:lhd4dbmmrk66pjtmk9j327q8vk@google.com
+CREATED:20120417T205549Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T205609Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sunshine Polynesian Hula Dancers and Tahitian Drummers
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120516T170000Z
+DTEND:20120516T210000Z
+DTSTAMP:20160930T173002Z
+UID:en3btem0eimhdh0v47i5eodo8s@google.com
+CREATED:20120417T205032Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T205442Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Student Health Fair
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120523T173000Z
+DTEND:20120523T233000Z
+DTSTAMP:20160930T173002Z
+UID:jni2mm1dti5kaecebrk23a6ru0@google.com
+CREATED:20120417T204928Z
+DESCRIPTION:
+LAST-MODIFIED:20120417T204951Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Blood Drive Honoring Cesar Chavez
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120509T193000Z
+DTEND:20120509T210000Z
+DTSTAMP:20160930T173002Z
+UID:0te60313h882taamdrl7u5n0js@google.com
+CREATED:20120417T204442Z
+DESCRIPTION:Marcelo Bonta is the founder and executive director of the Cent
+ er for Diversity and the Environment (CDE)\, an organization devoted to rac
+ ially and ethnically diversifying the U.S. environmental movement\, and the
+  founder of the Environmental Professionals of Color\, a growing network of
+  over 300 leaders of color across the United States. The CDE provides oppor
+ tunities for positive change in diversity\, equity\, inclusion on the indiv
+ idual\, organizational\, and movement levels.  They have conducted a scopin
+ g project in Seattle recently— interviewing mainstream environmental\, envi
+ ronmental justice\, and social justice leaders to find out if these segment
+ s were ready to work more closely together and to do better on diversity\, 
+ equity\, and inclusion. They will also be starting an Environmental Profess
+ ionals of Color chapter in Seattle in 2012. 
+LAST-MODIFIED:20120417T204720Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Diversity Speaker: Marcelo Bonta - Diversifying the Environmental M
+ ovement\, Preparing for 2019
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120126T020000Z
+DTEND:20120126T033000Z
+DTSTAMP:20160930T173002Z
+UID:3j343rgr99ohvotrbmdlctmhng@google.com
+CREATED:20120112T184638Z
+DESCRIPTION:Contact: Dennis Schaffer\n934-4586\n
+LAST-MODIFIED:20120112T184751Z
+LOCATION:North Star Dining Room
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Engineering Mentor Night
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20120418
+DTEND;VALUE=DATE:20120419
+DTSTAMP:20160930T173002Z
+UID:hrdcufala2eh3ip21gdemoean4@google.com
+CREATED:20120109T224315Z
+DESCRIPTION:Motivational speaker with Tourette's Syndrome
+LAST-MODIFIED:20120109T224315Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Diversity Arts & Lecture Series: Marc Elliot 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120315T230000Z
+DTEND:20120316T020000Z
+DTSTAMP:20160930T173002Z
+UID:87v6n3eubki5nhujk61gcgrsac@google.com
+CREATED:20120109T224158Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T224158Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:St. Patrick's Day Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120308T180000Z
+DTEND:20120308T210000Z
+DTSTAMP:20160930T173002Z
+UID:ttepf580rc2t6ahfrmipqakok8@google.com
+CREATED:20120109T224114Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T224114Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:International Women's Day
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20120308
+DTEND;VALUE=DATE:20120309
+DTSTAMP:20160930T173002Z
+UID:tqk5ntg0k2h2s11u5a8vo06u1s@google.com
+CREATED:20120109T224039Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T224039Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Diversity Arts & Lecture Series: Curtis Chin (Asian American Film M
+ aker)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120223T190000Z
+DTEND:20120223T210000Z
+DTSTAMP:20160930T173002Z
+UID:3ik0qeilebqc6juvietiuvdl18@google.com
+CREATED:20120109T223755Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T223755Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:A Revolutionary Idea: Seminar with Emeritus Faculty
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20120216
+DTEND;VALUE=DATE:20120217
+DTSTAMP:20160930T173002Z
+UID:tneso8vo1pvejg7rm65qnjd3tg@google.com
+CREATED:20120109T223617Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T223702Z
+LOCATION:Baxter Center/Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ron Stubbs (Comody Hypnotist
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120213T203000Z
+DTEND:20120213T220000Z
+DTSTAMP:20160930T173002Z
+UID:8o7in4tok2d86oqmerb8jc2ntk@google.com
+CREATED:20120109T223457Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T223457Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:A Discussion with Barbara Earl Thomas
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120209T200000Z
+DTEND:20120209T210000Z
+DTSTAMP:20160930T173002Z
+UID:qns4tsdv6fbdq4tefd01fumrr4@google.com
+CREATED:20120109T223400Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T223400Z
+LOCATION:Cafeteria/Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:French Cabaret (Music Performance)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120201T160000Z
+DTEND:20120201T210000Z
+DTSTAMP:20160930T173002Z
+UID:va9r5na5e1evdm6pc9uldl7it0@google.com
+CREATED:20120109T222601Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T222601Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Game Day - Wii Bowling Tournament
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120125T160000Z
+DTEND:20120125T210000Z
+DTSTAMP:20160930T173002Z
+UID:5qictk5iq07gpi2n4sba84h1mg@google.com
+CREATED:20120109T222457Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T222457Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Chinese New Year Celebration 
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120124T200000Z
+DTEND:20120124T223000Z
+DTSTAMP:20160930T173002Z
+UID:rrar31cdvdkdkqsvs87ap3as7s@google.com
+CREATED:20120109T222412Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T222412Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:A Presentation of "The Battle of Algiers"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120111T233000Z
+DTEND:20120112T010000Z
+DTSTAMP:20160930T173002Z
+UID:kmcce3mv1m73objq4pf181t2k0@google.com
+CREATED:20120109T222322Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T222322Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY: Reading/Celebration of Prizewinning Student Essays
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120119T180000Z
+DTEND:20120119T220000Z
+DTSTAMP:20160930T173002Z
+UID:8hdb2vh28alkg93koo8p3i3g5g@google.com
+CREATED:20111123T230444Z
+DESCRIPTION:Contact Christian Rusby for more details
+LAST-MODIFIED:20120109T222041Z
+LOCATION:Cafeteria & Baxter Center
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Sustainability Fest
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120111T200000Z
+DTEND:20120111T210000Z
+DTSTAMP:20160930T173002Z
+UID:2g3ridjako6c5php9e374kdh2c@google.com
+CREATED:20120109T221816Z
+DESCRIPTION:
+LAST-MODIFIED:20120109T221902Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Total Experience Cospel Choir
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20120420
+DTEND;VALUE=DATE:20120421
+DTSTAMP:20160930T173002Z
+UID:cu6rp6al9kss08448pi41cq9fo@google.com
+CREATED:20111123T230602Z
+DESCRIPTION:Contact Christian Rusby for more information
+LAST-MODIFIED:20111202T154037Z
+LOCATION:
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Earth Day Event
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111129T180000Z
+DTEND:20111130T010000Z
+DTSTAMP:20160930T173002Z
+UID:gpvmi40gksnlif1pgu72at47hs@google.com
+CREATED:20111129T003043Z
+DESCRIPTION:The silent auction of student\, faculty\, and community member 
+ art.
+LAST-MODIFIED:20111129T003043Z
+LOCATION:Baxter Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Silent Auction Event!
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111129T230000Z
+DTEND:20111130T000000Z
+DTSTAMP:20160930T173002Z
+UID:300rnofjb9aulk1t52ert8o3ps@google.com
+CREATED:20111128T231444Z
+DESCRIPTION:Join us for a presentation workshop by Dr. Peter Schmidt\, Psy.
+ D. on the issues and challenges facing our returning Veterans. The transiti
+ on between military and civilian life can pose significant challenges for o
+ ur returning veterans. This interactive workshop will explore some of the c
+ omplex factors that contribute to reintegration and readjustment issues\, i
+ ncluding military training and culture\, war zone stressors\, a brief overv
+ iew of post-traumatic stress disorder and mild traumatic brain injury\, and
+  local veteran resources. As a result of this workshop participants will ga
+ in greater awareness and insight on how to better serve those who have serv
+ ed.
+LAST-MODIFIED:20111128T231444Z
+LOCATION:OCE&E Building\, Room 142
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:"Serving Those Who Served" Workshop by Dr. Peter Schmidt\, Psy.D.
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111207T190000Z
+DTEND:20111207T210000Z
+DTSTAMP:20160930T173002Z
+UID:glvj0rldkh9gcd5kqm933mgrgs@google.com
+CREATED:20111021T164413Z
+DESCRIPTION:
+LAST-MODIFIED:20111021T164413Z
+LOCATION:Espresso Lounge
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Espresso Lounge Concert Series - Lennon Aldort\, Pianist
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111116T180000Z
+DTEND:20111116T220000Z
+DTSTAMP:20160930T173002Z
+UID:fc8qb2q0i9hvaifen03haj25d4@google.com
+CREATED:20111021T164306Z
+DESCRIPTION:
+LAST-MODIFIED:20111021T164306Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Student Health Fair
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110613T023000Z
+DTEND:20110613T043000Z
+DTSTAMP:20160930T173002Z
+UID:3sf06mef6rfrqepqbueicidjnc@google.com
+CREATED:20110401T190251Z
+DESCRIPTION:Selections featuring North’s own students and community members
+ .  Directed by Lauren Anderson \n\n
+LAST-MODIFIED:20110523T052225Z
+LOCATION:Concert Hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Seattle Symphonic Band: Spring Concert
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110609T030000Z
+DTEND:20110609T050000Z
+DTSTAMP:20160930T173002Z
+UID:lfeed726vo6a428dmnttg6lle0@google.com
+CREATED:20110401T185419Z
+DESCRIPTION:North students\, professional musicians\, and people from the c
+ ommunity present jazz big band arrangements by Fred Radke\, and other works
+  by band members.\n\n
+LAST-MODIFIED:20110523T052225Z
+LOCATION:Concert
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:Jazz Ensemble
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110602T180000Z
+DTEND:20110602T200000Z
+DTSTAMP:20160930T173002Z
+UID:8duo60b510vn074r2ij90je7uc@google.com
+CREATED:20110328T211316Z
+DESCRIPTION:
+LAST-MODIFIED:20110523T052225Z
+LOCATION:Courtyard
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Spring Fest  
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110610T023000Z
+DTEND:20110610T043000Z
+DTSTAMP:20160930T173002Z
+UID:1d31eimhs20b249oujjo4f7rsc@google.com
+CREATED:20110401T190005Z
+DESCRIPTION:The Spring Quarter Concert features North’s own College Choir s
+ tudents singing a variety of works.  Directed by Brian Palmer.
+LAST-MODIFIED:20110523T052225Z
+LOCATION:Concert Hall
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:College Choir Concert
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110427T193000Z
+DTEND:20110427T210000Z
+DTSTAMP:20160930T173002Z
+UID:qri9pj2t4it0i0c6t5mr3r39d4@google.com
+CREATED:20110328T210644Z
+DESCRIPTION:Topic: When Caring People Hurt: Racial Micro-Agression and How 
+ Allies Can Help -\n\nHsiao-Wen Lo\, Ph.D.\, is a diversity consultant who w
+ orks with individuals and organizations interested in creating a genuinely 
+ inclusive living\, learning\, and working environment. She helps them reach
+  this goal by providing a wide-range of services\, including consultation\,
+  workshops\, and public speaking. Drawing from her background as a psycholo
+ gist\, Dr. Lo helps her clients make sustainable changes by providing them 
+ with information and skills so they can effectively move from intention to 
+ action. \n\n Dr. Lo holds license in the state of Michigan and has a privat
+ e practice in Ann Arbor. She works with clients from diverse backgrounds re
+ garding\, age\, gender\, nationality\, race\, religion\, sexual orientation
+ \, and socio-economic status. In addition\, she has worked in a variety of 
+ settings\, including domestic violence shelter\, children’s hospital\, comm
+ unity mental health clinic\, and university counseling centers. \n\nWebsite
+ : http://www.drloinannarbor.com \n
+LAST-MODIFIED:20110523T052225Z
+LOCATION:Baxter Events Center
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Diversity Series: Hsiao-wen Lo  12:30-2:00pm
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110505T190000Z
+DTEND:20110505T200000Z
+DTSTAMP:20160930T173002Z
+UID:fua3gko1m2h91r5tnog5750frg@google.com
+CREATED:20110328T215452Z
+DESCRIPTION:Celebrate Cinco de Mayo
+LAST-MODIFIED:20110523T052225Z
+LOCATION:Espresso Lounge
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Cinco de Mayo - Mariachi Band 12pm – 1pm
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110416T023000Z
+DTEND:20110416T043000Z
+DTSTAMP:20160930T173002Z
+UID:id7tmmrgpaiarcnhh9d0p113ns@google.com
+CREATED:20110401T182620Z
+DESCRIPTION:Julianne Seeman teaches Creative Writing online at Bellevue Com
+ munity College. She has published poems in numerous journals.  Her chapbook
+ \, Enough Light to See\, won the Anghina Award.  She will read from her boo
+ k and other poems.\nChristopher J. Jarmick is a Seattle-based poet\, noveli
+ st\, screenwriter\, and former T.V. producer/director who hosts/curates two
+  monthly poetry readings in Seattle and Kirkland. His latest poetry collect
+ ion is IGNITION (2010). He’s been published in numerous magazines\, newspap
+ ers\, literary journals\, and in the recent anthology\, Many Trails to the 
+ Summit. In 2009\, he released a spoken word CD collaboration with Pulitzer 
+ Prize-nominated poet Michael C. Ford.\nSusan Landgraf\, writer and photogra
+ pher\, has published over 400 poems in more than 150 journals. She has rece
+ ived numerous awards including a scholarship at Breadloaf\, Pushcart nomina
+ tions\, grants to study or teach in S. Africa\, Peru\, Bolivia\, and China.
+  She also teaches writing\, media\, literature\, and college studies at Hig
+ hline Community College.\nJed Myers\, is a Philadelphian living in Seattle.
+  His poems appear in Prairie Schooner\, Nimrod International Journal\, Spoo
+ n River Poetry Review\, the Journal of the American Medical Association\, a
+ nd in the new Rose Alley Press anthology\, Many Trails to the Summit.  He i
+ s a psychiatrist with a therapy practice and teaches at the University of W
+ ashington\n\n\n
+LAST-MODIFIED:20110507T045911Z
+LOCATION:North Star Dining Room
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Poets & Writers Series: Music & Poetry
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110421T160000Z
+DTEND:20110421T173000Z
+DTSTAMP:20160930T173002Z
+UID:k9qpff5bsfnkkovuumt1soqs1g@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Arts &
+  Lectures Events;X-NUM-GUESTS=0:mailto:northseattle.edu_sgsra9uvk8q0ti1nvhb
+ o2eho6g@group.calendar.google.com
+CREATED:20110401T194412Z
+DESCRIPTION:Dr. Susan Rankin is a Research Associate in the Center for the 
+ Study of Higher Education and Associate Professor of Education in the Colle
+ ge Student Affairs Program at The Pennsylvania State University. Dr. Rankin
+  earned her B.S. from Montclair State University in 1978\, a M.S. in Exerci
+ se Physiology from The Pennsylvania State University in 1981\, and a Ph.D. 
+ in Higher Education Administration in 1994\, also from Penn State. Before m
+ oving into her current position\, Dr. Ranking served for 17 years as the He
+ ad Coach for Women's Softball and Lecturer in Kinesiology at Penn State. Sh
+ e has presented and published widely on the impact of sexism\, racism and h
+ eterosexism in the academy and in intercollegiate athletics. Dr. Rankin's c
+ urrent research focuses on the assessment of institutional climate and prov
+ iding program planners and policy makers with recommended strategies to imp
+ rove the campus climate for under-served communities.\n\nDr. Rankin has col
+ laborated with over 70 institutions/organizations in implementing assessmen
+ ts and developing strategic plans regarding social justice issues. In her a
+ dvocacy work\, Dr. Rankin is a founding member of the Consortium of Higher 
+ Education LGBT Resource Professionals\, a network of professionals doing ad
+ vocacy work for LGBT people on college campuses and the Statewide Pennsylva
+ nia Rights Coalition\, a network of individuals and organizations across th
+ e Commonwealth committed to securing and defending full civil rights for LG
+ BT individuals.\n\nDr. Rankin is the recipient of the American College Pers
+ onnel Association's 2008 Voice of Inclusion Medallion. The award recognizes
+  individuals who embody the student affairs values of social justice\n
+LAST-MODIFIED:20110507T045911Z
+LOCATION:Baxter Event's Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Diversity Series: Dr. Susan Rankin\; 2010 State of Higher Education
+  For Lesbian\, Gay Bisexual And Transgendered People
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110413T180000Z
+DTEND:20110413T193000Z
+DTSTAMP:20160930T173002Z
+UID:mv0e7v17cnmr6u9s6jvndkku3c@google.com
+CREATED:20110406T184725Z
+DESCRIPTION:See the film Sharkwater to learn why we should be afraid FOR SH
+ ARKS\, not of them.\nScott West from Sea Shepherd will be there for a Q & A
+  on Wed.\, April 13 th \, 2011 @ 11:00 am.  Admission FREE!\nFilm will be s
+ hown @ North Seattle Community College\,\nCollege Center Building\, Cafeter
+ ia.
+LAST-MODIFIED:20110507T045910Z
+LOCATION:Cafeteria
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Film - SHARKWATER The Truth will Surface
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110406T173000Z
+DTEND:20110406T233000Z
+DTSTAMP:20160930T173002Z
+UID:41r4kddt7ske2a64kc0l0jog0k@google.com
+CREATED:20110328T211559Z
+DESCRIPTION:Closed for lunch 12:30 - 1:30pm.  To donate call 206-527-3641
+LAST-MODIFIED:20110418T012458Z
+LOCATION:Baxter Events Center
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Blood Drive
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110217T203000Z
+DTEND:20110217T220000Z
+DTSTAMP:20160930T173002Z
+UID:kgegsk2rb9rn68g6cime4efmgo@google.com
+CREATED:20110131T235649Z
+DESCRIPTION:Do you want to change racism in the world? Guess what? You have
+  to start with yourself! Cause you know what? If you're not part of the sol
+ ution\, you are part of the problem! Damali Ayo will share a simple 10-poin
+ t plan to take the progress of our culture forward\, with humor\, honesty\,
+  sincerity and spirit.
+LAST-MODIFIED:20110202T064449Z
+LOCATION:Baxter Event's Center
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Diversity Speaker Series: "I Can Fix Facism" by Damali Ayo
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20110226T193000
+DTEND;TZID=America/Vancouver:20110226T203000
+RRULE:FREQ=WEEKLY;UNTIL=20110313T033000Z;BYDAY=SA
+DTSTAMP:20160930T173002Z
+UID:infudje64ef49v3dpi67459b00@google.com
+CREATED:20101222T204302Z
+DESCRIPTION:Last year’s It’s not the P-I: A Living Newspaper About A Dying 
+ Newspaper was Stage One’s most successful production ever\, gaining nationa
+ l media attention and sell-out crowds.  So we are inviting another group of
+  the Northwest’s best playwrights to do it again.  This time the living new
+ spaper will examine the changing role of journalism in our new media enviro
+ nment.  This time with songs!  This will be another world premier productio
+ n directed by NSCC’s own Dawson Nichols.
+LAST-MODIFIED:20110105T060832Z
+LOCATION:Stage One
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:The New New News!  A Living Newspaper by Northwest Playwrights
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20110306T193000
+DTEND;TZID=America/Vancouver:20110306T203000
+RRULE:FREQ=WEEKLY;UNTIL=20110314T023000Z;BYDAY=SU
+DTSTAMP:20160930T173002Z
+UID:9ekpcen2ngr0jcvk09jh43v4uc@google.com
+CREATED:20101222T204723Z
+DESCRIPTION:Last year’s It’s not the P-I: A Living Newspaper About A Dying 
+ Newspaper was Stage One’s most successful production ever\, gaining nationa
+ l media attention and sell-out crowds.  So we are inviting another group of
+  the Northwest’s best playwrights to do it again.  This time the living new
+ spaper will examine the changing role of journalism in our new media enviro
+ nment.  This time with songs!  This will be another world premier productio
+ n directed by NSCC’s own Dawson Nichols.
+LAST-MODIFIED:20110105T060832Z
+LOCATION:Stage One
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The New New News!  A Living Newspaper by Northwest Playwrights
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20110225T193000
+DTEND;TZID=America/Vancouver:20110225T203000
+RRULE:FREQ=WEEKLY;UNTIL=20110312T033000Z;BYDAY=FR
+DTSTAMP:20160930T173002Z
+UID:702b2lf8j4apdejsi048bva0p0@google.com
+CREATED:20101222T201438Z
+DESCRIPTION:Last year’s It’s not the P-I: A Living Newspaper About A Dying 
+ Newspaper was Stage One’s most successful production ever\, gaining nationa
+ l media attention and sell-out crowds.  So we are inviting another group of
+  the Northwest’s best playwrights to do it again.  This time the living new
+ spaper will examine the changing role of journalism in our new media enviro
+ nment.  This time with songs!  This will be another world premier productio
+ n directed by NSCC’s own Dawson Nichols.
+LAST-MODIFIED:20110105T060832Z
+LOCATION:Stage One
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:The New New News!  A Living Newspaper by Northwest Playwrights
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110315T190000Z
+DTEND:20110315T210000Z
+DTSTAMP:20160930T173002Z
+UID:d95h28rsst2rqk9b0793kbkn30@google.com
+CREATED:20101230T013652Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:No Sound Cinema: Silent film star\, Harold Lloyd Cafeteria.
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110131T200000Z
+DTEND:20110131T220000Z
+DTSTAMP:20160930T173002Z
+UID:qr8nk0m3idt3b3qjfd66vvudn8@google.com
+CREATED:20101229T005352Z
+DESCRIPTION:Groundhog Day is a classic American comedy film directed by Har
+ old Ramis\, starring Bill Murray and Andie MacDowell. It was written by Ram
+ is and Danny Rubin\, based on a story by Rubin. Feb 1\, 12 noon and 2pm. Ba
+ xter Events Center.\n\n
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Baxter Events Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sound Cinema: Groundhog Day Movie (Baxter Events Center) 12pm 
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110216T200000Z
+DTEND:20110216T210000Z
+DTSTAMP:20160930T173002Z
+UID:d249f4jorlijlc29r0opdijtgo@google.com
+CREATED:20101230T012357Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Tube Steak Eating Competition\, Cafeteria
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110112T200000Z
+DTEND:20110112T210000Z
+DTSTAMP:20160930T173002Z
+UID:cjd36ifntec4tqfrk6en5525f4@google.com
+CREATED:20101223T010620Z
+DESCRIPTION:The Total Experience Gospel Choir bursts with love\, joy and en
+ thusiasm! It is hailed as one of the Pacific Northwest's finest soulful ens
+ embles.  In celebration of the birthday of Martin Luther King's birthday\, 
+ cake will be cerved after the performance.
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Martin Luther King birthday celebration: "Total Experience Gospel C
+ hoir"
+TRANSP:OPAQUE
+ATTACH;FILENAME=TEGC outside picture.jpg:https://docs.google.com/leaf?id=0B
+ xdsg1CWrVk-OTI3OTQ0YTEtNjliZi00Yzg3LThiYzctMjcwNjRjZWJlNGE5&hl=en
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110222T200000Z
+DTEND:20110222T220000Z
+DTSTAMP:20160930T173002Z
+UID:cr0f0nb354qqbr9qsup8g4t9hg@google.com
+CREATED:20101230T012642Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:No Sound Cinema: Silent film star\, Charlie Chaplin\, cafeteria
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110317T030000Z
+DTEND:20110317T040000Z
+DTSTAMP:20160930T173002Z
+UID:p4f2624rvulmld5icqcjf9gckc@google.com
+CREATED:20101222T205301Z
+DESCRIPTION:North students\, professional musicians\, and people from the c
+ ommunity present jazz big band arrangements by Fred Radke\, and other works
+  by band members.
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Concert Hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:JAZZ ENSEMBLE                   
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110204T180000Z
+DTEND:20110205T003000Z
+DTSTAMP:20160930T173002Z
+UID:pgne1rr8pibppfh2f7vpm4phmg@google.com
+CREATED:20101230T011740Z
+DESCRIPTION:To donate call 206-527-3641
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Baxter Events Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Blood Drive
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110131T033000Z
+DTEND:20110131T043000Z
+DTSTAMP:20160930T173002Z
+UID:jui75ih9268ifq8lferdvbp14k@google.com
+CREATED:20101222T205154Z
+DESCRIPTION:Featuring North’s own students and community members.  Directed
+  by Lauren Anderson.\n\n
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Concert Hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SEATTLE SYMPHONIC BAND:  RECITAL CONCERT
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110308T200000Z
+DTEND:20110308T220000Z
+DTSTAMP:20160930T173002Z
+UID:q755stjlrscgjlg8kb3gpfodh4@google.com
+CREATED:20101230T013138Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:No Sound Cinema:”Man with a Camera” A film Dziga Yertov
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110126T170000Z
+DTEND:20110126T230000Z
+DTSTAMP:20160930T173002Z
+UID:lp3i264kv732dvoc24dm83u208@google.com
+CREATED:20101229T003153Z
+DESCRIPTION:9:00    Registration \n10:00   Kickoff and Welcome: Mark Mitsui
+ \n11:00   Affinity Group Discussions \nNoon    Workshops \n1:00    Workshop
+ s\n2:00     Affinity Group Discussions\n3:00    Espresso Lounge – music and
+  free time\, a place to continue a conversation with   someone you met earl
+ ier in the day\n4:30    Evening Student Reception (Welcome\, networking\, f
+ ood)\n5:30     Affinity Group Discussions / Workshops\n
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Cafeteria and Baxter Events Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Winter Connections Festival\, welcome all students 
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110208T200000Z
+DTEND:20110208T220000Z
+DTSTAMP:20160930T173002Z
+UID:j4k4i4br0n5mofdo5gp43r7ea4@google.com
+CREATED:20101230T012103Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Cafeteria
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:No Sound Cinema: Best of “Tom and Jerry”
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110209T190000Z
+DTEND:20110209T210000Z
+DTSTAMP:20160930T173002Z
+UID:21jhjd369i6ho9pfjai25jl93s@google.com
+CREATED:20101230T012229Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Espresso Lounge
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Espresso Lounge Concert Series: Keith Scott solo blues performer
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110202T203000Z
+DTEND:20110202T220000Z
+DTSTAMP:20160930T173002Z
+UID:q58m4mtdkeg84rsi77ic2fijuk@google.com
+CREATED:20101229T011927Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Baxter Events Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Diversity Speaker Series: Brian C Johnson 12:30-2pm
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110302T203000Z
+DTEND:20110302T220000Z
+DTSTAMP:20160930T173002Z
+UID:c6d3bdg4cb8enog6a4n9a6k7o0@google.com
+CREATED:20101230T013027Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Baxter Events Center
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Diversity Speaker Series: Barbara Love
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110131T220000Z
+DTEND:20110201T000000Z
+DTSTAMP:20160930T173002Z
+UID:lm9jl32bc7p2p9c42vfrmhgcos@google.com
+CREATED:20101229T005650Z
+DESCRIPTION:Groundhog Day is a classic American comedy film directed by Har
+ old Ramis\, starring Bill Murray and Andie MacDowell. It was written by Ram
+ is and Danny Rubin\, based on a story by Rubin. Feb 1\, 12 noon and 2pm. Ba
+ xter Events Center.\n
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Baxter Events Center
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Sound Cinema: Groundhog Day Movie (Baxter Events Center) 2pm 
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110321T023000Z
+DTEND:20110321T033000Z
+DTSTAMP:20160930T173002Z
+UID:pk4fmcqs4ghith8r1oj2f4l5f8@google.com
+CREATED:20101222T205551Z
+DESCRIPTION:Selections featuring North’s own students and community members
+ .  Directed by Lauren Anderson. 
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Concert Hall
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SEATTLE SYMPHONIC BAND:  WINTER CONCERT
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110302T210000Z
+DTEND:20110302T220000Z
+DTSTAMP:20160930T173002Z
+UID:m4flvb96egc49q2koi012hjuuc@google.com
+CREATED:20101222T204818Z
+DESCRIPTION:Last year’s It’s not the P-I: A Living Newspaper About A Dying 
+ Newspaper was Stage One’s most successful production ever\, gaining nationa
+ l media attention and sell-out crowds.  So we are inviting another group of
+  the Northwest’s best playwrights to do it again.  This time the living new
+ spaper will examine the changing role of journalism in our new media enviro
+ nment.  This time with songs!  This will be another world premier productio
+ n directed by NSCC’s own Dawson Nichols.
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Stage one
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The New New News!  A Living Newspaper by Northwest Playwrights
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110310T200000Z
+DTEND:20110310T210000Z
+DTSTAMP:20160930T173002Z
+UID:qbr34uodq3vfdm7abc0kq02sms@google.com
+CREATED:20101230T013442Z
+DESCRIPTION:
+LAST-MODIFIED:20110105T060831Z
+LOCATION:Espresso Loung
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Espresso Concert Series: Open Mic with MC by Faisal O.
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20101110T193000Z
+DTEND:20101110T210000Z
+DTSTAMP:20160930T173002Z
+UID:1u2m5d7g88ihmak48kp59a1738@google.com
+CREATED:20101029T181824Z
+DESCRIPTION:
+LAST-MODIFIED:20101029T181824Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Espresso Concert Series: Baby Gramps
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

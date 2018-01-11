@@ -1,0 +1,610 @@
+/**
+ *		Print CSS for NSCC Continuing Education site
+ *
+ *		Style overrides to optimize output for print media.
+ *
+ *		01-May-2012 | mvellines:	converted to LESS syntax (http://lesscss.org/)
+ */
+
+@import "fonts";
+@import "mixins";
+
+
+
+/*	Print-optimize layout and containers	*/
+
+.container-12, .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9, .grid-10, .grid-11, .grid-12,
+.container-12 .grid-1, .container-12 .grid-2, .container-12 .grid-3, .container-12 .grid-4, .container-12 .grid-5, .container-12 .grid-6, .container-12 .grid-7, .container-12 .grid-8, .container-12 .grid-9, .container-12 .grid-10, .container-12 .grid-11, .container-12 .grid-12,
+#main-column {
+	position: static;
+	display: block;
+	float: none;
+	width: auto;
+	margin: 0;
+}
+
+#block-nscc_schedule-1 .current-quarter-title, #block-nscc_tuition_fees-0 .current-quarter-title,
+.more-link,
+.region-main .feeds, .region-main .feeds p {
+	text-align: left;
+}
+
+
+
+/*	Print-optimize fonts, colors, and backgrounds	*/
+
+html, body, div, span, p, blockquote, a, abbr, acronym, address, cite, del, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+a, a:link, a:visited,
+#program-meta h2, #program-meta dt, #program-meta dd,  #program-meta a, #program-meta a:link, #program-meta a:visited,
+.node-type-certificate p.total-credits .caveats, .node-type-degree-proftech p.total-credits .caveats,
+.curriculum th, table.curriculum th,
+.node .sbctc_meta p,
+#side-column1 .testimonial, div.testimonial-quote, #side-column1 .testimonial p, #side-column1 .testimonial li, #side-column1 .profile_teaser p, #side-column1 .profile_teaser li,
+.node-inner .content p, .node-inner .content li,
+div.contact-info p, div.contact-info li, #side-column1 div.contact-info p, #side-column1 div.contact-info li,
+.minifaq-accordion div.answer,
+.navindex li li a:link, .navindex li li a:visited,
+.view-Scholarships .views-row .views-field-field-sch-due-value span.date-display-single, #side-column1 .scholarship-meta span.scholarship-deadline,
+.filefield-file .file-size,
+.comment-inner .content p, .comment-inner .content li,
+li.schedule-tag .body h4,
+.schedule-course-desc {
+	font-family: @font-serif-print;
+	color: black !important;
+	background: white none scroll 0 0 repeat;
+	text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6,
+th, thead th, tbody th,
+.view .views-table th,
+.view .views-table th a,
+#program-meta h2,
+div.contact-info h2, div.contact-info h3, div.contact-info h4, div.contact-info h5, div.contact-info h6,
+#side-column1 h3,
+.node-type-certificate p.total-credits, .node-type-degree-proftech p.total-credits,
+#program-meta dt,
+.minifaq-accordion h3.question, .minifaq-accordion h3 a:link, .minifaq-accordion h3 a:visited,
+#meta-footer p,
+.node-type-ad-frame #secondary-content h3, .node-type-ad-frame #supplimental-content h3,
+.node-inner .navindex li, .navindex li a:link, .navindex li a:visited,
+#side-column1 .work-study-meta li label,
+.view table.committees-listing th,
+.node-type-schedule-final-schedule .node-inner th,
+.node-type-schedule-final-schedule .node-inner caption,
+#block-nscc_schedule-0 .event-date,
+div.fee .node-type-fee .fee-detail th abbr,
+div.fee .node-type-fee .fee-detail th acronym,
+.view table.committees-listing th.views-field-title,
+#content-title .title-wrapper h1.title-color-light,
+#content-title .title-wrapper h1.title-color-dark,
+.node-type-fp-page .feed-title, .node-type-fp-page .feed-title a,
+#forum th, #forum th a,
+.comment h3, .comment h3 a,
+.nscc-profile h3,
+.section-blogs .region-main h2, .section-blogs .region-main h2 a,
+#block-nscc_profile-2 .contact .label,
+.schedule-alt-modes span.button, .schedule-tag-key span.schedule-tag-button,
+li.schedule-item .schedule-tags-collapsed li span,
+li.schedule-tag span,
+li.schedule-jump-letter-target h3,
+li.schedule-course-list-item span.schedule-course-id,
+li.schedule-course-list-item span.schedule-course-id a,
+li.schedule-item td.sched-status span.status-output, li.item-status-waitlist td.sched-status span.status-output, li.item-status-unchecked td.sched-status span.status-output {
+	font-family: @font-std !important;
+	color: black;
+	background: white none scroll 0 0 repeat;
+}
+
+html, body, p, li,
+.node p, .node li, .node-inner .content p, .node-inner .content li,
+#side-column1 p, #side-column1 li,
+.curriculum th, .curriculum td, table.curriculum th, table.curriculum td,
+.node .sbctc_meta p,
+#program-meta dt, #program-meta dd,
+#photo-header p.program-banner-text, #photo-header-overview p.program-banner-text,
+div.contact-info p, div.contact-info li, #side-column1 div.contact-info p, #side-column1 div.contact-info li,
+.view .views-table td,
+.node-type-ad-frame .related-info-links li,
+.node-inner .navindex li li,
+.filefield-file a,
+#side-column1 .work-study-meta li label,
+div.fee .node-type-fee .fee-detail p, div.fee .node-type-fee .fee-detail li,
+.node-type-schedule-final-schedule .node-inner td,
+.node-type-schedule-final-schedule .node-inner td + td,
+.node-type-schedule-final-schedule .node-inner td + td + td,
+#block-nscc_schedule-0 .event-detail,
+#block-nscc_schedule-0 .note p, #block-nscc_schedule-0 .note li,
+#block-nscc_schedule-0 .event-date,
+div.fee .node-type-fee .fee-cost td,
+div.fee .node-type-fee .fee-cost p, div.fee .node-type-fee .fee-cost li,
+.feed-wrapper,
+.node-type-fp-page .feed-content,
+.region-main .feeds, .region-main .feeds p,
+#forum td, #forum td.title,
+.comment-inner .content p, .comment-inner .content li,
+.nscc-profile_list-item .job-title,
+.nscc-profile_list-item .contacts li,
+div.nscc_profile-nscc_profile_departments,
+.nscc-profile p,
+.schedule-tag-key span.schedule-tag-name,
+li.schedule-course-list-item span.schedule-course-id,
+.schedule-item td,
+.schedule-item td span,
+li.schedule-tag .body h4,
+#college-info .social-networks-list li {
+	font-size: 12pt;
+	line-height: 14pt;
+}
+
+h1,
+#photo-header h1.program-banner-text,
+#photo-header-overview h1.program-banner-text,
+#content-title .title-wrapper h1 {
+	font-size: 18pt;
+	line-height: 22pt;
+}
+
+h2,
+#program-meta h2,
+div.contact-info h2,
+.node-type-committee-overview h2,
+.nscc-profile_list-item h2,
+.section-blogs .region-main h2 {
+	font-size: 16pt;
+	line-height: 20pt;
+}
+
+h3,
+#side-column1 h3,
+.node-type-certificate p.total-credits, .node-type-degree-proftech p.total-credits,
+.view-Degrees .view .views-table td,
+.node-inner .navindex li,
+.view-Scholarships .views-row .views-field-field-sch-due-value span.date-display-single, #side-column1 .scholarship-meta span.scholarship-deadline,
+.node-type-schedule-final-schedule .node-inner caption,
+div.fee .node h2,
+.view table.committees-listing td.views-field-title,
+.node-type-fp-page .feed-title,
+.comment h3,
+.nscc-profile h3,
+li.schedule-jump-letter-target h3 {
+	font-size: 14pt;
+	line-height: 16pt;
+}
+
+th, thead th, tbody th,
+.view table.committees-listing td.views-field-field-other-website-url-url a,
+.node-type-schedule-final-schedule .node-inner th,
+.node-type-committee-overview .committee-resources .technical-contact p,
+#forum th, #forum th a,
+.node .meta,
+.comment .submitted,
+.nscc-profile_list-item .contacts .label,
+#people-header .job_title,
+li.schedule-course-list-item span.schedule-course-title,
+li.schedule-item td.sched-status span.status-output, li.item-status-waitlist td.sched-status span.status-output, li.item-status-unchecked td.sched-status span.status-output,
+li.schedule-item div.desc_content div,
+li.schedule-tag .body p, li.schedule-tag .body div,
+.schedule-course-desc {
+	font-size: 10pt;
+	line-height: 12pt;
+}
+
+.node-type-certificate p.total-credits .caveats, .node-type-degree-proftech p.total-credits .caveats,
+.curriculum th, table.curriculum th,
+#side-column1 .testimonial-name, #side-column1 .profile-name,
+#side-column1 .testimonial-job-title, #side-column1 .profile-job-title,
+.filefield-file .file-size,
+.region-right .block-aggregator .more-link,
+#block-nscc_profile-2 .contact .label,
+.sched_credits span:after {
+	font-size: 9pt;
+	line-height: 1;
+}
+
+#forum th, #forum th a,
+.node-type-certificate p.total-credits, .node-type-degree-proftech p.total-credits {
+	text-align: left;
+	white-space: normal;
+}
+
+#container,
+#header,
+#logo,
+#footer,
+#photo-header,
+#photo-header-overview,
+#photo-header .title-color-light,
+#photo-header .title-color-dark,
+#photo-header-overview .title-color-light,
+#photo-header-overview .title-color-dark,
+.curriculum-proftech, .curriculum table, table.curriculum,
+div.contact-info,
+.view table.committees-listing td.views-field-field-other-website-url-url a,
+div.fee,
+.region-right .block,
+#content-title .title-wrapper,
+#content-title .title-wrapper h1,
+.nscc-profile,
+.region-main,
+#block-nscc_profile-2,
+#block-nscc_profile-2 .picture img,
+li.schedule-course-list-item span.schedule-course-title,
+.category-course-list .course-teaser,
+#college-info .social-networks-list li,
+#schedule-promo,
+#ce-info,
+#college-info,
+#college-info div,
+#course-categories .course-category,
+#news-headlines,
+#latest-articles,
+#latest-articles .views-row,
+#side-column1,
+.course-schedule-info,
+.sidebar-profile .instructor-photo,
+.section-blog .view-blog-archive .views-row {
+	position: static !important;
+	display: block !important;
+	float: none;
+	width: auto;
+	height: auto !important;
+	min-height: 0;
+	overflow: visible !important;
+	margin: 0;
+	border: 0 none;
+	padding: 0 !important;
+	color: black;
+	background: white none scroll 0 0 repeat !important;
+	.no-box-shadow !important;
+	.border-radius(0);
+}
+
+#course-categories {
+	.column-count(4) !important;
+	background: white none scroll 0 0 repeat !important;
+}
+
+th, td,
+tr.even td.active, th.active, tr.odd td.active,
+.view table.committees-listing tr.odd td.active,
+ul.courselist li.schedule-item {
+	background: white none scroll 0 0 repeat !important;
+	.no-box-shadow !important;
+}
+
+.course-schedule-info a.enroll-link {
+	display: inline;
+	background: white none scroll 0 0 repeat !important;
+}
+
+
+
+/*	Inserted content	*/
+
+abbr:after,
+acronym:after {
+	content: " (" attr(title) ")";
+}
+
+a:link:after,
+a:visited:after {
+	content: " (" attr(href) ") ";
+	font-size: 80%;
+}
+
+a[href^="/"]:after {
+	content: " (https://northseattle.edu" attr(href) ") ";
+}
+
+a[href^="//"]:after {
+	content: " (https:" attr(href) ") ";
+}
+
+#header a,
+a[href^="#"] {
+	text-decoration: none;
+}
+
+#header a:after,
+th.views-field a:after,
+a[href^="#"]:after {
+	content: "";
+}
+
+a[href$="/feed"], a.link-rss,
+a[href$="/contact"], a.link-contact,
+a[href$="/emergency-notifier.htm"], a.link-emergency,
+a[href^="http://twitter.com"], a[href^="http://www.twitter.com"], a.link-twitter,
+a[href^="http://youtube.com"], a[href^="http://www.youtube.com"], a.link-youtube,
+a[href^="http://facebook.com"], a[href^="http://www.facebook.com"], a.link-facebook,
+a[href^="http://twitter.com"], a[href^="http://www.twitter.com"], a.link-twitter,
+a[href^="http://youtube.com"], a[href^="http://www.youtube.com"], a.link-youtube,
+a[href^="http://linkedin.com"], a[href^="http://www.linkedin.com"], a.link-linkedin,
+.node_read_more a[href^="/blog"],
+.comment_comments a[href$="#comments"],
+.comment_add a[href^="/comment"],
+a[href$='.pdf'],
+a[href$='.doc'],
+a[href$='.docx'],
+a[href$='.odt'],
+a[href$='.rtf'],
+a[href$='.swx'],
+a[href$='.xls'],
+a[href$='.xlsx'],
+a[href$='.csv'],
+a[href$='.tsv'],
+a[href$='.tab'],
+a[href$='.123'],
+a[href$='.ods'],
+a[href$='.sxc'],
+a[href$='.ppt'],
+a[href$='.pps'],
+a[href$='.pptx'],
+a[href$='.key'],
+a[href$='.keynote'],
+a[href$='.odp'],
+a[href$='.zip'],
+a[href$='.7z'],
+a[href$='.bz2'],
+a[href$='.gz'],
+a[href$='.tar'],
+a[href$='.tgz'],
+a[href$='.taz'],
+a[href$='.sit'],
+a[href$='.sitx'],
+a[href$='.tar.gz'],
+a[href$='.z'],
+a[href$='.iso'],
+a[href$='.dmg'],
+a[href$='.accdb'],
+a[href$='.db'],
+a[href$='.mdb'],
+a[href$='.ldb'],
+a[href$='.adp'],
+a[href$='.odb'],
+a[href$='.flv'],
+a[href$='.fla'],
+a[href$='.m4v'],
+a[href$='.mng'],
+a[href$='.mov'],
+a[href$='.mp4'],
+a[href$='.swf'], {
+	padding: 0;
+}
+
+.view table.committees-listing td.views-field-field-other-website-url-url a:after {
+	content: " " attr(title) " (" attr(href) ")";
+}
+
+.node-type-schedule-final-schedule .node-inner td abbr:after,
+.node-type-schedule-final-schedule .node-inner td acronym:after,
+#forum th a:after,
+.nscc-profile_list-item .picture a:after,
+div.nscc_profile-nscc_profile_departments a:after,
+li.schedule-item td a:after,
+.vevent abbr:after,
+.vevent acryonym:after {
+	content: "";
+}
+
+.node-type-fp-page .feed-content:after {
+	content: "… ";
+}
+
+
+
+/*	Suppress non-useful items	*/
+
+#toolbox,
+#navigation,
+#navigation-panels,
+#side-nav,
+#breadcrumbs,
+.region-quicklinks,
+ul.primary-local-tasks,
+#footer div,
+#meta-footer a,
+#meta-footer span,
+#photo-header img,
+#photo-header-overview img,
+.region-main .pager,
+.item-list .pager,
+.node-type-ad-frame #secondary-content, .node-type-ad-frame .callout,
+#tabs div.panes .tab_nav_span,
+ol.procedure_steps,
+.nav-index-callouts,
+div.promo,
+div.embedded_calendar iframe,
+th.active img,
+.node-type-front-page .region-featured_promos,
+.front .region-news_headlines,
+#block-nscc_schedule-1 .prev-quarter-button, #block-nscc_schedule-1 .next-quarter-button, #block-nscc_tuition_fees-0 .prev-quarter-button, #block-nscc_tuition_fees-0 .next-quarter-button,
+.node-type-schedule-final-schedule #side-nav #block-nscc_schedule-3,
+.node-type-schedule-final-schedule #side-nav #block-nscc_schedule-2,
+.node ul.links,
+.book-navigation .page-links,
+#content-title .feeds,
+.terms-inline,
+.forum-topic-navigation,
+.comment ul.links, .comment ul.links li,
+#people-header .tabs,
+.block-nscc_profile .yrq_nav,
+.section-schedule #block-nscc_schedule-3,
+.schedule-tag-key p,
+.schedule-index .schedule-jump-letters,
+.schedule-data .schedule-count-statement span.arranged-hide-button,
+li.schedule-item td.sched-status a.status-button,
+ul.items-found span.schedule-search-department,
+li.schedule-item .schedule-tags-collapsed,
+li.schedule-item .collapse-button, li.schedule-item .expand-button,
+#locator-directions-switcher,
+.section-locator .locator-form,
+.section-locator .poi-list,
+.section-locator .building-details,
+.section-locator .parking-details,
+.section-print-campus-map .print-notice,
+#header .byline,
+#slideshow,
+#schedule-promo img,
+#nscc-indicia,
+#news-headlines .views-field-field-ig-1-fid {
+	display: none !important;
+}
+
+
+/* Display useful items */
+
+#footer #block-block-9,
+#footer #block-block-9 div,
+#meta-footer p,
+#program-meta img,
+.minifaq-accordion div.answer,
+#tabs div, #tabs div.panes div.tab_body, #tabs div.panes,
+.node-type-scholarship .scholarship-eligibility,
+#home-callouts div.node-type-callout,
+.node-type-schedule-final-schedule #side-nav,
+.comment,
+.section-schedule #side-nav,
+.schedule-tag-key,
+li.schedule-item .schedule-tags-expanded {
+	display: block !important;
+	float: none;
+	padding: 0;
+	border: 0 none;
+	font-size: 9pt;
+	line-height: 1;
+	color: black;
+	background: white none scroll 0 0 repeat !important;
+}
+
+
+
+/*	Widths, margins, padding, borders, and backgrounds	*/
+
+h1, fieldset,
+#site-header, #site-subheader, #footer-region, .column, .node, .comment, .block,
+.node-type-ad-frame .related-info-links, .node-type-ad-frame .news-headlines {
+	margin: 14pt 0 !important;
+}
+
+h2, h3, h4, h5, h6 {
+	margin: 10pt 0 !important;
+}
+
+p, dl, hr, ol, ul, pre, table, address,
+div.fee, div.fee .node-type-fee .fee-detail p,
+.node-type-committee-overview .committee_links, .node-type-committee-overview .memberlist, .node-type-committee-overview .memberlist div,
+li.schedule-jump-letter-target,
+.schedule-alpha-list li.schedule-course-list-item,
+li.schedule-item .schedule-tags-expanded li.schedule-tag {
+	margin: 6pt 0 !important;
+}
+
+.minifaq-accordion h3.question, .minifaq-accordion h3 a:link, .minifaq-accordion h3 a:visited, .minifaq-accordion h3.expanded a:link, .minifaq-accordion h3.expanded a:visited, .minifaq-accordion div.answer,
+.feed-wrapper,
+.region-main .feeds,
+.altRow,
+li.schedule-course-list-item,
+li.schedule-department-list-item, li.schedule-instructor-list-item,
+li.schedule-item {
+	margin: 0;
+	padding: 0;
+	background: white none scroll 0 0 repeat;
+}
+
+.view .views-table th,
+.node-type-schedule-final-schedule .node-inner td,
+.node-type-schedule-final-schedule .node-inner td + td,
+.node-type-schedule-final-schedule .node-inner td + td + td,
+.node-type-schedule-final-schedule .node-inner th,
+.view table.committees-listing .views-field-title,
+.view table.committees-listing .views-field-field-other-website-url-url,
+#forum th, #forum th a, #forum td, #forum td.title {
+	width: auto;
+	margin: 0;
+	padding: 2pt 6pt;
+	border: 0 none;
+}
+
+.indented { margin-left: 18pt; }
+
+#nscc-profiles,
+.nscc-profile_list-item,
+.schedule-tags-expanded li.schedule-tag .body p,
+.schedule-tag .node-type-fee div.fee-detail,
+li.schedule-item .schedule-tags-expanded {
+	display: block;
+	clear: both;
+	float: none;
+	width: auto;
+	height: auto;
+	margin: 0 !important;
+	padding: 0;
+	border: 0 none;
+	background: white none scroll 0 0 repeat;
+}
+
+.schedule-alt-modes span.button,
+.schedule-tag-key span.schedule-tag-button,
+li.schedule-tag span,
+li.schedule-item .schedule-tags-collapsed li span {
+	margin: 1pt 0;
+	padding: 2pt;
+	border: solid .5pt black;
+	font-size: 9pt;
+	line-height: 1;
+/*
+	color: white !important;
+	background: black none scroll 0 0 repeat;
+*/
+	-moz-border-radius: 2pt;
+	-webkit-border-radius: 2pt;
+}
+
+li.schedule-tag .body h4 {
+	padding-left: 4pt;
+}
+
+li.schedule-item td.sched_item_num {
+	width: 27pt;
+}
+
+li.schedule-item td.sched_course,
+li.schedule-item td.sched_days {
+	width: 67.5pt;
+}
+
+li.schedule-item td.sched_credits {
+	width: 18pt;
+	padding-right: 4pt;
+}
+
+li.schedule-item td.sched_loc {
+	width: 52.5pt;
+}
+
+li.schedule-item td.sched_times {
+	width: 67.5pt;
+	padding-right: 13.5pt;
+}
+
+
+
+/*	Color	*/
+
+li.item-status-open td.sched-status span.status-output {
+	color: rgb(7, 127, 60) !important;
+}
+
+li.item-status-closed td.sched-status span.status-output {
+	color: rgb(191, 24, 11) !important;
+}
+
+
+
+/*	Misc. notes for non-printable content	*/
+
+div.embedded_calendar:after {
+	content: "Please use the calendar's print function for printing calendar events";
+}

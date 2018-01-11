@@ -1,0 +1,9 @@
+; $Id$
+name = ISP Admission
+description = Admission application form for International Students Program.
+package = NSCC
+version = VERSION
+core = 6.x
+version = 0.1
+dependencies[] = nscc
+dependencies[] = nscc_schedule

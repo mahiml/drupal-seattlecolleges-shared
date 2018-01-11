@@ -1,0 +1,398 @@
+<?php
+
+/**
+ *		@file basketball.module.incl
+ *
+ *		This file contains the processing and output logic for the basketball
+ *		recruitment form. It is included by the module's menu callback as needed.
+ */
+
+
+
+
+/**
+ *		Generate Recruitment Form page
+ *
+ *		Registered via module's HOOK_menu function and called by core's Menu Router.
+ */
+function storm_prospect_form_page() {
+	$out[] = drupal_get_form('storm_prospect_form');
+	return implode("\n", $out);
+}
+
+
+
+
+/**
+ *		Form Definition
+ *
+ *		@return array The form
+ */
+function storm_prospect_form(&$form_state = null) {
+	$form['preamble'] = array(
+		'#prefix' => '<p>',
+		'#suffix' => '</p>',
+		'#value' => t('Please use this form to send your eligibility information directly to our athletics staff. Prospective players that are not yet 18 years old must have permission from their parents to provide this information to us. Required items are marked !req-mark', array('!req-mark' => '<span title="This field is required." class="form-required">*</span>')),
+	);
+
+
+	// Contact info
+	$form['player'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('Contact Info'),
+		'#collapsible' => true,
+	);
+	$form['player']['player_name'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Name'),
+		'#required' => true,
+	);
+	$form['player']['player_address'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Home Address'),
+		'#rows' => 2,
+		'#required' => true,
+	);
+	$form['player']['player_city'] = array(
+		'#type' => 'textfield',
+		'#title' => t('City'),
+		'#required' => true,
+	);
+	$form['player']['player_state'] = array(
+		'#type' => 'textfield',
+		'#title' => t('State'),
+		'#required' => true,
+		'#size' => 3,
+	);
+	$form['player']['player_zip'] = array(
+		'#type' => 'textfield',
+		'#title' => t('ZIP/Postal Code'),
+		'#required' => true,
+		'#size' => 15,
+	);
+	$form['player']['player_phone'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Phone'),
+		'#required' => true,
+		'#size' => 15,
+	);
+	$form['player']['player_email'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Email'),
+		'#required' => false,
+		'#maxlength' => 254,
+		'#description' => t('If you provide this, we will send a confirmation message there when we receive the form submission.'),
+	);
+
+
+	// Athletic stats
+	$form['stats'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('Athletic Stats'),
+		'#collapsible' => true,
+	);
+	$form['stats']['height'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Height'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('In US units, ex: 6\' 3"'),
+	);
+	$form['stats']['weight'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Weight'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('In pounds, ex: 186 lbs'),
+	);
+	$form['stats']['positions'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Position'),
+		'#required' => true,
+		'#description' => t('Please list all positions you typically play.'),
+	);
+	$form['stats']['ppg'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Points per Game'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('Your average points-per-game.'),
+	);
+	$form['stats']['vl'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Vertical Leap'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('In inches, ex: 28"'),
+	);
+	$form['stats']['fgp'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Field Goal Percentage'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('Your average per-game field goal percentage.'),
+	);
+	$form['stats']['fgp3p'] = array(
+		'#type' => 'textfield',
+		'#title' => t('3-point Field Goal Percentage'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('Your average per-game 3-point field goal percentage.'),
+	);
+	$form['stats']['ft'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Free Throw Percentage'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('Your average per-game free-throw percentage.'),
+	);
+	$form['stats']['reb'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Rebounds'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('Your average rebounds per game.'),
+	);
+	$form['stats']['ast'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Assists'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('Your average assists per game.'),
+	);
+	$form['stats']['stl'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Steals'),
+		'#required' => true,
+		'#size' => 5,
+		'#description' => t('Your average steals per game.'),
+	);
+	$form['stats']['honors'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Basketball Honors Received'),
+		'#required' => false,
+		'#description' => t('Please list any awards or honors with brief descriptions of each.'),
+	);
+
+
+	// School info
+	$form['school'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('School Info'),
+		'#collapsible' => true,
+	);
+	$form['school']['school_name'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Name of School'),
+		'#required' => false,
+		'#description' => t('High school or equivalent.'),
+	);
+	$form['school']['school_city'] = array(
+		'#type' => 'textfield',
+		'#title' => t('City'),
+		'#required' => false,
+		'#description' => t('The city, town, or villiage in which your school is located.'),
+	);
+	$form['school']['school_state'] = array(
+		'#type' => 'textfield',
+		'#title' => t('State/Province'),
+		'#required' => false,
+		'#size' => 15,
+		'#description' => t('The state, province, or region in which your school is located.'),
+	);
+	$form['school']['coach'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Name of Coach'),
+		'#required' => false,
+		'#description' => t('Name of your school\'s basketball coach.'),
+	);
+	$form['school']['coach_contact'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Coach\'s contact'),
+		'#required' => false,
+		'#description' => t('Phone or email address of your school\'s coach.'),
+	);
+
+
+	// Team selection
+	$form['team'] = array(
+		'#type' => 'radios',
+		'#title' => t('Team Selection'),
+		'#description' => t('Please specify the team for which you are interested in playing.'),
+		'#required' => true,
+		'#options' => array(
+			'men' => t('Men\'s Team'),
+			'women' => t('Women\'s Team'),
+		),
+	);
+
+
+	// Form controls
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Submit'),
+	);
+
+
+	return $form;
+}
+
+
+
+
+/**
+ *		Form Validation
+ */
+function storm_prospect_form_validate($form, &$form_state) {
+	if ( !empty($form_state['values']['player_email']) && !valid_email_address($form_state['values']['player_email'])) {
+		form_set_error('player_email', t('The email address you have provided does not appear to be valid.'));
+	}
+}
+
+
+
+
+/**
+ *		Form Submission
+ */
+function storm_prospect_form_submit($form, &$form_state) {
+
+	$msg_from = valid_email_address($form_state['values']['player_email']) ? $form_state['values']['player_email'] : 'webserver@northseattle.edu';
+	$msg_params['team'] = $form_state['values']['team'];
+	switch ($form_state['values']['team']) {
+		case 'men' :
+			$msg_to = '"Kyle Gray" <kyle.gray@seattlecolleges.edu>';
+			break;
+		case 'women' :
+			$msg_to = '"Rebecca Valdivia" <rebecca.valdivia@seattlecolleges.edu>';
+			break;
+	}
+	//$msg_to = 'michael.vellines@seattlecolleges.edu';	//dev only
+	$msg_params['player_name'] = check_plain($form_state['values']['player_name']);
+	$msg_params['fields'][] = array(
+		'label' => 'Player Name',
+		'value' => check_plain($form_state['values']['player_name']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Address',
+		'value' => check_plain($form_state['values']['player_address']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'City',
+		'value' => check_plain($form_state['values']['player_city']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'State',
+		'value' => check_plain($form_state['values']['player_state']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'ZIP',
+		'value' => check_plain($form_state['values']['player_zip']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Phone',
+		'value' => check_plain($form_state['values']['player_phone']),
+	);
+	if (valid_email_address($form_state['values']['player_email'])) {
+		$msg_params['fields'][] = array(
+			'label' => 'Email',
+			'value' => check_plain($form_state['values']['player_email']),
+		);
+	}
+	$msg_params['fields'][] = array(
+		'label' => 'Height',
+		'value' => check_plain($form_state['values']['height']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Weight',
+		'value' => check_plain($form_state['values']['weight']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Positions',
+		'value' => check_plain($form_state['values']['positions']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'PPG',
+		'value' => check_plain($form_state['values']['ppg']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Vertical Leap',
+		'value' => check_plain($form_state['values']['vl']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'FG %',
+		'value' => check_plain($form_state['values']['fgp']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => '3pt FG %',
+		'value' => check_plain($form_state['values']['fgp3p']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'FT',
+		'value' => check_plain($form_state['values']['ft']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Reb',
+		'value' => check_plain($form_state['values']['reb']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Assists',
+		'value' => check_plain($form_state['values']['ast']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Steals',
+		'value' => check_plain($form_state['values']['stl']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Honors',
+		'value' => check_plain($form_state['values']['honors']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'School',
+		'value' => check_plain($form_state['values']['school_name']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'School City',
+		'value' => check_plain($form_state['values']['school_city']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'School State',
+		'value' => check_plain($form_state['values']['school_state']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Coach',
+		'value' => check_plain($form_state['values']['coach']),
+	);
+	$msg_params['fields'][] = array(
+		'label' => 'Coach Contact',
+		'value' => check_plain($form_state['values']['coach_contact']),
+	);
+	//$msg = drupal_mail('nscc_prod', 'storm-prospect-sub', $msg_to, language_default(), $msg_params, $msg_from, false);
+	//watchdog('basketball', 'Submission msg: <pre>'.print_r($msg,true)."</pre>\n");
+	$msg_sent = drupal_mail('nscc_prod', 'storm-prospect-sub', $msg_to, language_default(), $msg_params, $msg_from);
+
+
+	// Confirmation message to prospect
+	if (valid_email_address($form_state['values']['player_email'])) {
+		$conf_to = '"'. addslashes(mime_header_encode($form_state['values']['player_name'])) .'" <'. $form_state['values']['player_email'] .'>';	//RFC 2822
+		$conf_params['player_name'] = check_plain($form_state['values']['player_name']);
+		//$conf = drupal_mail('nscc_prod', 'storm-prospect-ack', $conf_to, language_default(), $conf_params, $msg_to, false);
+		//watchdog('basketball', 'Conf msg: <pre>'.print_r($conf,true)."</pre>\n");
+		$conf_sent = drupal_mail('nscc_prod', 'storm-prospect-ack', $conf_to, language_default(), $conf_params, $msg_to);
+	}
+	
+	if ($msg_sent) {
+		$ack[] = '<p>'.t('Thank you for your interest in playing for us. Your eligibility information was successfully submitted, and our athletics staff will review it soon.').'</p>';
+		if ($conf_sent) {
+			$ack[] = '<p>'.t('A confirmation message was sent to the email address you gave us.').'</p>';
+		}
+		drupal_set_message(implode("\n", $ack));
+		$form_state['redirect'] = 'storm/recruiting';
+	} else {
+		$ack[] = '<p>'.t('Oops! This is embarrasing. The server encountered a problem while processing your eligibility information and was not able to complete the process.').'</p>';
+		$ack[] = '<p>'.t('We\'re terribly sorry for the inconvenience, but could you please try once more? If you encounter this problem again, please inform our !webmaster', array('!webmaster' => l('Webmaster', 'mailto:webmaster@northseattle.edu', array('external'=>true, 'query'=>array('Subject'=>'Basketball Recruiting Form Error'))))).'</p>';
+		drupal_set_message(implode("\n", $ack), 'error');
+		$form_state['rebuild'] = true;
+	}
+	return;
+}

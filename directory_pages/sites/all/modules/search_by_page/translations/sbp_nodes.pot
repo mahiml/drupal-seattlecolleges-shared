@@ -1,0 +1,49 @@
+# $Id: sbp_nodes.pot,v 1.1.2.1 2009/08/12 00:54:10 jhodgdon Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sbp_nodes.module,v 1.1.2.4 2009/08/11 15:20:42 jhodgdon
+#  sbp_nodes.info,v 1.1.2.1 2009/06/11 17:05:21 jhodgdon
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-08-11 17:50-0700\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: sbp_nodes.module:136
+msgid "Nodes"
+msgstr ""
+
+#: sbp_nodes.module:151
+msgid "Node types to index"
+msgstr ""
+
+#: sbp_nodes.module:154
+msgid "Choose which node types you would like to have indexed by Search by Page"
+msgstr ""
+
+#: sbp_nodes.module:0
+msgid "sbp_nodes"
+msgstr ""
+
+#: sbp_nodes.info:0
+msgid "Search by Page Nodes"
+msgstr ""
+
+#: sbp_nodes.info:0
+msgid "Sub-Module for Search by Page: Allows you to choose node types for search indexing in Search by Page."
+msgstr ""
+
+#: sbp_nodes.info:0
+msgid "Search by Page"
+msgstr ""
+

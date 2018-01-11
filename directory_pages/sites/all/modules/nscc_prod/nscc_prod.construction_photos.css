@@ -1,0 +1,30 @@
+/* css settings for the construction_photos*/
+
+.construction-photo {
+	margin: 0 0 10px;
+	padding: 20px;
+	background-color: rgb(252, 249, 232);
+	box-shadow: 1px 3px 9px 1px rgba(0, 0, 0, 0.6);
+	font-family: chalkduster, "comic sans ms";
+}
+
+.tilt-left {
+	-webkit-transform: rotate(-5deg);
+	-o-transform: rotate(-5deg);
+	-ms-transform: rotate(-5deg);
+	transform: rotate(-5deg);
+}
+
+.tilt-right {
+	-webkit-transform: rotate(5deg);
+	-o-transform: rotate(5deg);
+	-ms-transform: rotate(5deg);
+	transform: rotate(5deg);
+}
+
+.tilt-none {
+	-webkit-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	transform: rotate(0deg);
+}

@@ -1,0 +1,130 @@
+# $Id: sbp_attach.pot,v 1.1.2.3 2009/08/12 16:57:48 jhodgdon Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sbp_attach.module,v 1.1.2.6 2009/08/12 16:52:25 jhodgdon
+#  sbp_attach.install,v 1.1.2.1 2009/06/09 21:24:28 jhodgdon
+#  sbp_attach.info,v 1.1.2.2 2009/06/11 17:05:21 jhodgdon
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-08-12 09:56-0700\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: sbp_attach.module:387
+msgid "Attachments"
+msgstr ""
+
+#: sbp_attach.module:394
+msgid "Search by Page Attachments indexes file attachments on your content types for searching. The attachments can be uploaded using the optional core Upload module, the CCK FileField module, or CCK fields derived from FileField. Choose the content types you want to index attachments of below, and if you want to index attachments from CCK fields, also choose which CCK fields you would like to index."
+msgstr ""
+
+#: sbp_attach.module:400
+msgid "You must choose at least one content type to index, or no attachments will be indexed. Clear all node types or disable the Search by Page Attachments module to stop indexing file attachments."
+msgstr ""
+
+#: sbp_attach.module:415
+msgid "Content types to index attachments of"
+msgstr ""
+
+#: sbp_attach.module:418
+msgid "Choose which content types whose Upload or CCK FileField files you would like to have indexed by Search by Page. Use the Control or Command key to select multiple types or undo your selections."
+msgstr ""
+
+#: sbp_attach.module:448
+msgid "CCK fields to index"
+msgstr ""
+
+#: sbp_attach.module:451
+msgid "Choose which CCK field types contain attachments you would like to have indexed by Search by Page. Use the Control or Command key to select multiple types or undo your selections."
+msgstr ""
+
+#: sbp_attach.module:458
+msgid "No CCK field types supporting file attachments were found. Only attachments from the core Uploads module will be indexed."
+msgstr ""
+
+#: sbp_attach.module:468
+msgid "Options:"
+msgstr ""
+
+#: sbp_attach.module:474
+msgid "Limit to listed files"
+msgstr ""
+
+#: sbp_attach.module:476
+msgid "The core Uploads module and the CCK FileField module allow you to specify whether a particular attached file should be listed on the site. If you check this option, Search by Page Attachments will only index files that have been marked as Listed. Otherwise, all attached files will be indexed."
+msgstr ""
+
+#: sbp_attach.module:482
+msgid "Prepend node title to file name"
+msgstr ""
+
+#: sbp_attach.module:484
+msgid "When an attached file is presented to the user in search results, the results will display a title, which defaults to the file name. If you check this box, the node title will be prepended to the file name."
+msgstr ""
+
+#: sbp_attach.module:490
+msgid "Node title separator"
+msgstr ""
+
+#: sbp_attach.module:492
+msgid "If you have chosen to prepend the node title to the file name, this separator will be put between the node title and the file name."
+msgstr ""
+
+#: sbp_attach.module:498
+msgid "Substitute description for file name"
+msgstr ""
+
+#: sbp_attach.module:500
+msgid "When an attached file is presented to the user in search results, the results will display a title, which is the file name by default. If you check this box, and the file has a Description defined, the description will be substituted for the file name in the search result title."
+msgstr ""
+
+#: sbp_attach.module:508
+msgid "Configure helper functions for extracting text from attachment files"
+msgstr ""
+
+#: sbp_attach.module:0
+msgid "sbp_attach"
+msgstr ""
+
+#: sbp_attach.install:14
+msgid "Contains files to be indexed by sbp_attach module"
+msgstr ""
+
+#: sbp_attach.install:17
+msgid "Primary key"
+msgstr ""
+
+#: sbp_attach.install:23
+msgid "Did this come from Upload, CCK, etc."
+msgstr ""
+
+#: sbp_attach.install:43
+msgid "If CCK, name of content type"
+msgstr ""
+
+#: sbp_attach.install:48
+msgid "If CCK, name of field"
+msgstr ""
+
+#: sbp_attach.info:0
+msgid "Search by Page Attachments"
+msgstr ""
+
+#: sbp_attach.info:0
+msgid "Sub-Module for Search by Page: Allows you to index file attachments in Search by Page."
+msgstr ""
+
+#: sbp_attach.info:0
+msgid "Search by Page"
+msgstr ""
+

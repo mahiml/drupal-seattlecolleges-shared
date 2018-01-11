@@ -1,0 +1,340 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:International Programs-Students
+X-WR-TIMEZONE:America/Vancouver
+X-WR-CALDESC:
+BEGIN:VTIMEZONE
+TZID:America/Vancouver
+X-LIC-LOCATION:America/Vancouver
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20121019T140000
+DTEND;TZID=America/Vancouver:20121019T170000
+DTSTAMP:20160930T173005Z
+UID:asa4k1q1svrfjm6plo38imk000@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Intern
+ ational Programs-Students;X-NUM-GUESTS=0:mailto:northseattle.edu_kpfl0b4gro
+ sjj7cbgf5um2n3ek@group.calendar.google.com
+RECURRENCE-ID;TZID=America/Vancouver:20121024T140000
+CREATED:20121002T203822Z
+DESCRIPTION:Do you have Talent?\nInternational Programs will be hosting aud
+ itions for the 3rd Annual International Night which will take place on Nove
+ mber 16. If you saw the show last year\, this is one you do not want to mis
+ s!!\n\nPlease contact Arlette Fellores\nEmail: arlette.fellores@seattlecoll
+ eges.edu if you have questions.
+LAST-MODIFIED:20150911T181217Z
+LOCATION:Baxter Center
+SEQUENCE:5
+STATUS:CONFIRMED
+SUMMARY:Internationl Night Auditions
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20121017T140000
+DTEND;TZID=America/Vancouver:20121017T170000
+RRULE:FREQ=WEEKLY;COUNT=2;BYDAY=WE
+DTSTAMP:20160930T173005Z
+UID:asa4k1q1svrfjm6plo38imk000@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Intern
+ ational Programs-Students;X-NUM-GUESTS=0:mailto:northseattle.edu_kpfl0b4gro
+ sjj7cbgf5um2n3ek@group.calendar.google.com
+CREATED:20121002T203822Z
+DESCRIPTION:Do you have Talent?\nInternational Programs will be hosting aud
+ itions for the 3rd Annual International Night which will take place on Nove
+ mber 16. If you saw the show last year\, this is one you do not want to mis
+ s!!\n\nPlease contact Arlette Fellores\nEmail: arlette.fellores@seattlecoll
+ eges.edu if you have questions.
+LAST-MODIFIED:20150911T181217Z
+LOCATION:Baxter Center
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:Internationl Night Auditions
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20121021
+DTEND;VALUE=DATE:20121023
+DTSTAMP:20160930T173005Z
+UID:ajn8tttcj8f3gr8rrtgj5ompk8@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Intern
+ ational Programs-Students;X-NUM-GUESTS=0:mailto:northseattle.edu_kpfl0b4gro
+ sjj7cbgf5um2n3ek@group.calendar.google.com
+CREATED:20121002T204642Z
+DESCRIPTION:Washington State University\, Office of International Programs\
+ , is excited to announce our "WSU or BUST" tour to Pullman!  International 
+ Programs is inviting community college international students and internati
+ onal student advisors to join our organized bus tour to WSU - Pullman on Oc
+ tober 21-22\, 2012.  \nTo register go here: http://go.wsu.edu/wsuintlbus  \
+ n
+LAST-MODIFIED:20121002T204722Z
+LOCATION:Washington State University\, Pullman
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:WSU or BUST
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20121013T230000Z
+DTEND:20121014T040000Z
+DTSTAMP:20160930T173005Z
+UID:hebtg74o6pcafjbuacvkeg03v4@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Intern
+ ational Programs-Students;X-NUM-GUESTS=0:mailto:northseattle.edu_kpfl0b4gro
+ sjj7cbgf5um2n3ek@group.calendar.google.com
+CREATED:20121002T204348Z
+DESCRIPTION:Have fun after dark at a local Washington farm. Students will e
+ xplore a maze of pathways cut into a field of corn\, don't get lost. Afterw
+ ard\, there will be time for a large bonfire for roasting marshmallows and 
+ telling stories. Last day to signup is this Friday\, October 5th. We have a
+ lready filled one bus and a waitlist has been created to reserve a second b
+ us. Twenty-five (25) signups are still needed\, so hurry and signup today!
+LAST-MODIFIED:20121002T204531Z
+LOCATION:Bob's Corn Maze
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Bob's Corn Maze at Night (Only $8.00)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20121003T170000Z
+DTEND:20121003T210000Z
+DTSTAMP:20160930T173005Z
+UID:f6ic8jakaietaebdpaigi34jpk@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Intern
+ ational Programs-Students;X-NUM-GUESTS=0:mailto:northseattle.edu_kpfl0b4gro
+ sjj7cbgf5um2n3ek@group.calendar.google.com
+CREATED:20121002T203448Z
+DESCRIPTION:Deluxe Gourmet Kosher Hot Dog or Veg Burger Chips\, apple\, car
+ rots\, soda for $3!\n
+LAST-MODIFIED:20121002T204304Z
+LOCATION:Courtyard
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Welcome Barbecue/Student Success Fair
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Vancouver:20121004T140000
+DTEND;TZID=America/Vancouver:20121004T170000
+RRULE:FREQ=DAILY;COUNT=2
+DTSTAMP:20160930T173005Z
+UID:d2nudqrkpsbhgmhnv3ura427g0@google.com
+CREATED:20121002T204245Z
+DESCRIPTION:Join IP for a cheap tour to the University of Washington campus
+ . Students will have the opportunity to see the campus\, including Red Squa
+ re\, the Quad\, Burke Museum of History and Culture\, and the Henry Art Gal
+ lery. Two days are available this Thursday and Friday. Come to the IP offic
+ e to sign up. For more information\, please contact Will Leadingham at will
+ .leadingham@seattlecolleges.edu.
+LAST-MODIFIED:20121002T204245Z
+LOCATION:UW Seattle
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:UW Tour & Art Walk (Only $2.00)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20121009T180000Z
+DTEND:20121009T190000Z
+DTSTAMP:20160930T173005Z
+UID:t4c8k61gao07a7ohet6ogchi1s@google.com
+CREATED:20121002T202900Z
+DESCRIPTION:If you are interested in working for 12 months in your field af
+ ter you earn your Associate Degree\, please attend the OPT Workshop!
+LAST-MODIFIED:20121002T203014Z
+LOCATION:CC3640
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:OPT Workshop
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111119T013000Z
+DTEND:20111119T043000Z
+DTSTAMP:20160930T173005Z
+UID:lncmpd40hk42vn6bg9r0lt4res@google.com
+CREATED:20111109T225520Z
+DESCRIPTION:Doors open at 5:30pm for food sampling\, performances from 6:00
+  – 8:30pm\; cost is $5.\nThe culminating event of the week\, featuring a fl
+ ag procession and student performances of song\, dance\, acrobatics\, and m
+ ore\, showcasing the different countries and cultures we have represented a
+ t NSCC. Come buy tickets in advance at the I.P. office\, CC 2357.
+LAST-MODIFIED:20111109T225520Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:International Night
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111118T190000Z
+DTEND:20111118T200000Z
+DTSTAMP:20160930T173005Z
+UID:25pu4coc82gjvas2oa0fjqtna8@google.com
+CREATED:20111109T225109Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T225206Z
+LOCATION:
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:International volunteerism and the Global Impact program
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111117T230000Z
+DTEND:20111118T000000Z
+DTSTAMP:20160930T173005Z
+UID:2aootvgivtnnp1bf4m31l57pf8@google.com
+CREATED:20111109T224935Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T225036Z
+LOCATION:Green Room
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Teach in China information session and panel
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111117T220000Z
+DTEND:20111117T223000Z
+DTSTAMP:20160930T173005Z
+UID:sk6kb0ihmrm02qltl244il95j8@google.com
+CREATED:20111109T224814Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T224915Z
+LOCATION:
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Disaster services with the Red Cross
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111117T213000Z
+DTEND:20111117T220000Z
+DTSTAMP:20160930T173005Z
+UID:odakkt29jaumbjqnckaoaide4k@google.com
+CREATED:20111109T224624Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T224747Z
+LOCATION:
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Cuban leather crafts
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111116T230000Z
+DTEND:20111117T000000Z
+DTSTAMP:20160930T173005Z
+UID:3lk976dsdp1654poir4ebpajjs@google.com
+CREATED:20111109T224342Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T224550Z
+LOCATION:
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Study Abroad information session and panel
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111116T220000Z
+DTEND:20111116T223000Z
+DTSTAMP:20160930T173005Z
+UID:i87qe86fip020ccq4he3rmdo04@google.com
+CREATED:20111109T224147Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T224316Z
+LOCATION:
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Biking in the Netherlands
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111116T210000Z
+DTEND:20111116T220000Z
+DTSTAMP:20160930T173005Z
+UID:9o8iqp24m7dlbip3bhpnet4j10@google.com
+CREATED:20111109T224050Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T224132Z
+LOCATION:
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:International Education Is Us: A panel discussion on living abroad
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111114T223000Z
+DTEND:20111114T230000Z
+DTSTAMP:20160930T173005Z
+UID:r7tsb7abrr871dl8ckejt9jolg@google.com
+CREATED:20111109T222843Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T222904Z
+LOCATION:Green Room
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Presentation by Mark Mitsui\, President of NSCC
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111114T220000Z
+DTEND:20111114T223000Z
+DTSTAMP:20160930T173005Z
+UID:qqg4242fh6alrl10sl50vjtkic@google.com
+CREATED:20111109T222613Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T222708Z
+LOCATION:Green Room
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Coconut oil as a biofuel in the Pacific Islands
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111114T210000Z
+DTEND:20111114T213000Z
+DTSTAMP:20160930T173005Z
+UID:hr8ud79igvqvdjnn3k0u5oskno@google.com
+CREATED:20111109T220657Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T220657Z
+LOCATION:Green Room
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Fulbright studies in the Middle East
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20111114
+DTEND;VALUE=DATE:20111115
+DTSTAMP:20160930T173005Z
+UID:fpvpl0ftlj5kndvp5go3rraglg@google.com
+CREATED:20111109T220525Z
+DESCRIPTION:
+LAST-MODIFIED:20111109T220525Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:International EXPO
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,14 @@
+/* News Prototype fixes for IE 6 & 7 */
+
+
+#content { height: 1%; }
+
+
+/* Hide from IE 7+ \*/
+* html .cols3 .region-left { left: 200px; }
+* html .cols2 .region-left,
+* html .dashboard .region-left {
+  display: inline;
+  left: 0px;
+}
+/* end hiding */

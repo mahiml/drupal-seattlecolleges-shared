@@ -1,0 +1,12 @@
+div.fp-highlight,
+a.fp-highlight:link,
+a.fp-highlight:visited,
+a.fp-highlight:active,
+{
+	display: block;
+}
+
+a.fp-highlight:hover
+{
+	display: block;
+}

@@ -1,0 +1,117 @@
+
+.locator-overlay-wrapper {
+	display:none;
+	position: absolute;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index:8000;
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+}
+
+
+.locator-overlay-matte {
+	display:none;
+	position: absolute;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index:9000;
+	width: 100%;
+	height: 100%;
+	background-color:#333;
+	background: url(/sites/all/themes/nscc_960/imgs/bg-blk-50.png);	
+}
+
+.locator-overlay-content {
+	display: block;
+	position: relative;
+	z-index:10000;
+	background-color: #F0F0F0;
+	color: black;
+	border:1px solid #666;
+	margin: 300px auto 0 ;
+	padding: 10px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;		
+	-moz-box-shadow:0 0 90px 5px #000;
+	-webkit-box-shadow: 0 0 90px #000;
+	opacity: 1;
+}
+.locator-pointlist {
+	font-size: .5em;
+}
+
+
+/* flyout shennanigans */
+div.locator-flyout {
+	display:none;
+	width: 600px;
+	background-color: white;
+	border: 1px solid black;
+	margin: 0 auto;
+	left: 80px;
+	z-index:99000;
+	padding: 20px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;	
+  -moz-box-shadow:0 0 90px 5px #000; 
+  -webkit-box-shadow: 0 0 90px #000;
+}
+
+div#fade-background {
+	position: absolute;
+	z-index: 98999;
+	top: 0;
+	left: 0; 
+	background: url(/sites/all/themes/nscc_960/imgs/bg-blk-50.png);
+}
+
+/*expando-menus*/
+div.block-nscc_locator {
+}
+
+.block-nscc_locator h2 {
+	color: #2A7490;
+}
+
+.block-nscc_locator h2:hover {
+	cursor: pointer;
+	text-decoration: underline;
+	color: #222222;
+}
+
+div.locator-menu {
+	display:none;
+}
+
+div.locator-menu.building-menu {
+	display: block;
+}
+
+/*	Print Directions Button	*/
+.block-nscc_locator a.print-directions {
+	display: block;
+	margin: 10px 0;
+	padding: 2px 6px;
+	font-size: 13px;
+	line-height: 1;
+	text-decoration: none;
+	text-align: center;
+	background: transparent url(/sites/all/themes/nscc_960/imgs/btn-generic.png) repeat-x;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.block-nscc_locator a.print-directions:link,
+.block-nscc_locator a.print-directions:visited { background-position: left top; }
+
+.block-nscc_locator a.print-directions:hover {
+	color: rgb(255, 255, 255);
+	background-color: rgb(51, 51, 51);
+	background-position: left bottom;
+}

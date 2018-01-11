@@ -1,0 +1,46 @@
+/**
+ *		RTF Widget (TinyMCE) CSS for NSCC Cooperative Preschools site
+ *
+ *		Defines the presentation of content inside the widget interface
+ *		and selectable style-groups for specific content elements (e.g. tables)
+ *		to simplify formatting standardization for content managers.
+ *
+ *		To ensure these styles are propagated to the public display, this CSS file
+ *		should be included by the site's base stylesheet via @include directive.
+ *
+ *		09-Aug-2011 | mvellines:	created
+ */
+
+
+body {
+  background-image: none;
+  background-color: white;
+}
+/*
+p,
+li { font: normal 14px/1.5 DroidSerif, Georgia, "Times New Roman", Times, serif; }
+*/
+.table-plain {
+	width: 100%;
+	margin: 15px 0;
+	border: none 0;
+}
+
+.table-plain caption {
+	margin: 0 0 10px;
+	font-size: 15px;
+	text-align: left;
+}
+
+.table-plain td {
+	padding: .25em .5em;
+	font-size: 12px;
+}
+
+.table-plain th {
+	padding: .25em .5em;
+	font-size: 11px;
+	font-weight: normal;
+	color: rgb(111, 111, 111);
+	border-bottom: solid 1px rgb(230, 227, 220);
+}

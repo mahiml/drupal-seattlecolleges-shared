@@ -1,0 +1,203 @@
+<?php
+
+function nscc_tour_signup_perm(){
+	return array('sign up for tours');
+}
+
+function nscc_tour_signup_menu(){
+	$items['campus-tours/%/signup'] = array(
+    'title' => 'Sign up for a Campus Tour',
+	  'description'=> 'Sign up for an campus tour',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_nscc_tour_signup_participant_add_form',1),
+   	'access callback' => true,
+    'type' => MENU_CALLBACK,
+	);
+
+	return $items;
+}
+
+function nscc_tour_signup_block($op='list', $delta=0,$edit=array()){
+	switch ($op){
+		case 'view':
+			$block=array();
+			switch($delta){
+				case 0:
+					//list upcoming tours
+					$block['subject'] = "Upcoming Campus Tours";
+					$block['content'] = _nscc_tour_signup_listing_public();
+					return $block;
+			}
+		case 'list':
+			$blocks[0]['info'] = t('NSCC Campus Tour Listing');
+			$blocks[0]['cache'] = BLOCK_CACHE_GLOBAL;
+			return $blocks;
+	}
+}
+
+
+function _nscc_tour_signup_listing_public(){
+	drupal_add_js(drupal_get_path('module', 'nscc_tour_signup') .'/nscc_tour_signup.js');
+  drupal_add_css(drupal_get_path('module', 'nscc_tour_signup') .'/nscc_tour_signup.css');
+	$get_sessions_sql = "SELECT * FROM people_nscc_campus_tours WHERE tour_datetime > %d ORDER BY tour_yrq ASC, tour_datetime ASC;";
+	$result = db_query(db_rewrite_sql($get_sessions_sql),time());
+	if($result){
+	$output .= "<table class=\"tour-list\">\n";
+	$output .="<tr class=\"column-heads\"><td class=\"column-yrq\">Year/Quarter</td><td class=\"column-dtg\">Date/Time</td><td class=\"column-spacea\">Seats Left</td><td class=\"column-controls\">Sign Up</td></tr>\n";
+	$yrq_array = _nscc_orientation_get_yrq_list();
+	while ($data = db_fetch_object($result)){
+		$remaining_seats = _nscc_tours_get_session_remaining_seats($data->tour_id);
+		$output .="<tr class=\"\"><td class=\"column-yrq\">".$yrq_array[$data->tour_yrq]."</td><td class=\"column-dtg\"><span class=\"date\">".date('M d, Y',$data->tour_datetime)."</span> <span class=\"time\">".date('h:iA',$data->tour_datetime)."</span></td><td class=\"column-spacea\">".$remaining_seats."</td>";
+		if ($remaining_seats >0){
+			$signup_link = '<a href="/campus-tours/'.$data->tour_id.'/signup" class=\"signup-link\">Sign Up!</a>';
+			$output .="<td class=\"column-controls\">$signup_link</td></tr>\n";
+		} else {
+			$output.="<td class=\"column-controls\">Full!</td></tr>\n";
+		}
+	}
+	$output .= "</table>\n";
+	} else {
+		$output = "No Upcoming Sessions";
+	}
+	return $output;
+}
+
+function _nscc_tours_get_session_remaining_seats($tour_id){
+	$session_count = _nscc_tours_get_session_count($tour_id);
+	$session_cap = db_result(db_query(db_rewrite_sql("select tour_cap from people_nscc_campus_tours where tour_id=%d;"),$tour_id));
+	return $session_cap - $session_count;
+
+}
+
+function _nscc_tours_get_session_count($tour_id){
+	return db_result(db_query(db_rewrite_sql("select count(*) from people_nscc_tour_participant where tour_id=%d;"),$tour_id));
+}
+
+function _nscc_tours_get_yrq_list(){
+	/*
+	$yrq_array = array(
+		'B012'=>'Fall 2010',
+		'B013'=>'Winter 2011',
+		'B014'=>'Spring 2011',
+		'B111'=>'Summer 2011',
+		'B112'=>'Fall 2011',
+	);
+	return $yrq_array;
+	*/
+	$how_far_to_go = 6;
+	$current_yrq = _schedule_get_next_starting_yrq('all');
+	$quarter_list = array();
+	$quarter_name_list = array();
+	for($i = 1; $i <= $how_far_to_go; $i++) {
+		$quarter_details = _schedule_get_quarter_details($current_yrq);
+		if($quarter_details){
+			$quarter_list[$i] = $current_yrq;
+			$qtr_name = _schedule_yrq_to_quarter($current_yrq);
+			//$qtr_start = date('M j', strtotime($quarter_details->first_day_yrq));
+			$qtr_start = date('M j',_schedule_hpdate_to_date($quarter_details->first_day_yrq));
+			//$qtr_end = date('M j', strtotime($quarter_details->last_day_yrq));
+			$qtr_end = date('M j',_schedule_hpdate_to_date($quarter_details->last_day_yrq));
+			//$quarter_name_list[$i] = "$qtr_name ($qtr_start - $qtr_end)";
+			$quarter_name_list[$i] = $qtr_name;
+		}
+		$current_yrq = _schedule_increment_yrq($current_yrq,false);
+  }
+
+  return array_combine($quarter_list,$quarter_name_list);
+}
+
+function _nscc_tour_instance_out($tour_id){
+}
+
+function _nscc_tour_signup_participant_add_form($form_state,$session_id){
+	drupal_add_js(drupal_get_path('module', 'nscc_tour_signup') .'/nscc_tour_signup.js');
+  drupal_add_css(drupal_get_path('module', 'nscc_tour_signup') .'/nscc_tour_signup.css');
+	if ($session_id){
+		$get_session_sql = "SELECT * FROM people_nscc_campus_tours WHERE tour_id = %d;";
+		$session_data = db_fetch_object(db_query(db_rewrite_sql($get_session_sql),$session_id));
+		$yrq_array = _nscc_tours_get_yrq_list();
+		
+		$form['tour_id']= array(
+			'#type'=>'value',
+			'#value'=>$tour_id,
+		);
+		$form['session_display'] = array(
+			'#type'=>'markup',
+			'#value'=>_nscc_tour_instance_out($tour_id),
+		);	
+		$form['participant_name'] = array(
+			'#title'=>t('Name'),
+			'#type'=>'textfield',
+			'#size'=>60,
+			'#description'=>t('Your Name'),
+			'#required'=>true,
+			'#default_value'=>'',
+		);
+		$form['participant_email'] = array(
+			'#title'=>t('E-mail'),
+			'#type'=>'textfield',
+			'#size'=>100,
+			'#description'=>t('Your email address'),
+			'#required'=>true,
+			'#default_value'=>'',
+		);
+		$form['participant_phone'] = array(
+			'#title'=>t('Phone Number'),
+			'#type'=>'textfield',
+			'#size'=>20,
+			'#description'=>t('Your phone number'),
+			'#required'=>true,
+			'#default_value'=>'',
+		);
+
+		$form['participant_program'] = array(
+			'#title' => t('Program'),
+			'#type' => 'textfield',
+			'#description' => t('What program are you intending to pursue?'),
+			'#size'=>60,
+		);
+
+	$form['disability_message'] = array(
+			'#type'=>'markup',
+			'#value'=>'<p>If you need accommodations, contact Disability Services at (206) 934-3697 or <a href="mailto:ds@sattlecolleges.edu">ds@seattlecolleges.edu</a>.</p>',
+	);
+		
+	$form['submit'] = array(
+			'#type'=>'submit',
+			'#value'=>'Sign Up',
+		);								
+	}	  
+  return $form;
+}
+
+function _nscc_tour_signup_participant_add_form_validate($form,&$form_state){
+	if(! $form_state['values']['tour_id'] or ! _nscc_tour_signup_tour_id_is_valid($form_state['values']['tour_id']) ){
+		form_set_error('submit', 'No such Tour is scheduled');
+	}
+
+}
+
+function _nscc_tour_signup_participant_add_form_submit($form,&$form_state){
+	$tour_id            = $form_state['values']['tour_id'];
+	$participant_name   = $form_state['values']['participant_name'];
+	$participant_email  = $form_state['values']['participant_email'];
+	$participant_phone  = $form_state['values']['participant_phone'];
+	$participant_intent = $form_state['values']['participant_program'];
+	$signup_datetime		= time();
+	  
+	$insert_sql = "INSERT INTO people_tour_participant (tour_id,participant_name,particpant_email,participant_phone,participant_intent,signup_datetime) VALUES (%d,'%s','%s','%s','%s',%d);";	
+
+	if (db_result(db_query($insert_sql,$tour_id,$participant_name,$participant_email,$participant_phone,$participant_intent,$signup_datetime))){
+			$form_state['redirect'] = 'tour-nscc';
+			drupal_set_message("You're all signed up! We look forward to seeing you at the tour.");
+			//send mail
+	} else {
+		//some error
+	}
+}
+
+function _nscc_tour_signup_tour_id_is_valid($tour_id){
+	return true;
+}
+
+

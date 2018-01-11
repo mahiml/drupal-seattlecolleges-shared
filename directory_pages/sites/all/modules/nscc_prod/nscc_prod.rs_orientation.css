@@ -1,0 +1,12 @@
+/* css settings for the running start orientation quiz*/
+
+div.correct {
+	color: green; 
+	background-color: #AAFFAA; 
+	border: 1px solid green;
+	padding: 5px; 
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;		
+	-moz-box-shadow:0 0 40px 5px #000;
+	-webkit-box-shadow: 0 0 40px #000;
+}

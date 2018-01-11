@@ -1,0 +1,1277 @@
+<?php
+// $Id: nscc.module,v 1.236.2.3 2009/01/12 10:09:19 goba Exp $
+
+function nscc_init(){
+	drupal_add_js('sites/all/libraries/js/jquery.hoverIntent.minified.js');
+	drupal_add_js(drupal_get_path('module', 'nscc') .'/filter.minimap-popup.js');
+	drupal_add_js(drupal_get_path('module', 'nscc') .'/filter.courseoverlay.js');
+	drupal_add_js(drupal_get_path('module', 'nscc') .'/filter.personoverlay.js');
+}
+
+function nscc_menu() {
+  $items['manage'] = array(
+		'title' => 'Manage %site Online Services',	//don't seem to work.
+		'title arguments' => array('%site' => variable_get('site_name', 'NSCC')),	//this don't work either.
+		'access arguments' => array('access management pages'),
+		'page callback' => '_nscc_manage_page',
+		'type' => MENU_SUGGESTED_ITEM,
+	);
+  $items['manage/announcements'] = array(
+  	'title' => 'NSCC Emergency Announcements',
+  	'description' => 'Lists all NSCC Emergency Announcements with administrative controls.',
+  	'page callback' => '_nscc_manage_announcements',
+		'page arguments'=>array(''),
+  	'access arguments' => array('create nscc announcement'),
+  	'type' => MENU_NORMAL_ITEM,
+  );
+  $items['manage/announcements/add'] = array(
+    'title' => 'Publish a New NSCC Emergency Announcement',
+		'description'=> 'Creates a new official NSCC Emergency Announcement and publishes it to various output channels.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nscc_announcements_form'),
+    'access arguments' => array('create nscc announcement'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );	
+  $items['manage/announcements/%/delete'] = array(
+    'title' => 'Delete NSCC Emergency Announcement',
+		'description'=> 'Deletes a specific NSCC Emergency Announcement. Cannot be undone.',
+    'page callback' => '_nscc_delete_announcement',
+    'page arguments' => array(2),
+    'access arguments' => array('create nscc announcement'),
+    'type' => MENU_CALLBACK,
+  );	
+	$items['nsccsearch/%'] = array(
+		'title' => 'Search Results',
+		'page callback' => '_nscc_search_results',
+		'page arguments'=>array(1),
+		'access callback'=> true,
+		'type' => MENU_SUGGESTED_ITEM,
+	);
+	$items['nsccsearch'] = array(
+		'title' => 'Search Our Web Space',
+		'page callback' => '_nscc_search_results',
+		'page arguments'=>array(''),
+		'access callback'=>true,
+		'type' => MENU_SUGGESTED_ITEM,
+	);
+	$items['ajax/nsccsearchfeedback']=array(
+		'title' => 'Submit Feedback on Our Search',
+		'page callback' => '_nscc_search_feedback_handler',
+		'page arguments'=>array(''),
+		'access callback'=>true,
+		'type' => MENU_CALLBACK,
+	);
+	$items['ajax/nsccdumpnavindex']=array(
+		'title' => 'Dump navindex block for external sites',
+		'page callback' => '_nscc_dump_navindex',
+		'page arguments'=>array(''),
+		'access callback'=>true,
+		'type' => MENU_CALLBACK,
+	);
+	$items['ajax/nsccdumpalerts']=array(
+		'title' => 'Dump Campus Alerts and NSCC Announcements blocks for external sites',
+		'page callback' => '_nscc_dump_alerts',
+		'page arguments'=>array(''),
+		'access callback'=>true,
+		'type' => MENU_CALLBACK,
+	);
+	$items['ajax/nsccdumpnode/%']=array(
+		'title' => 'Dump a local node',
+		'page callback' => '_nscc_dump_node',
+		'page arguments'=>array(2),
+		'access callback'=>true,
+		'type' => MENU_CALLBACK,
+	);
+	return $items;
+}
+
+
+
+/**
+ *	Menu callback to output the list of menu items available to the current user on the 'Manage' page.
+ */
+function _nscc_manage_page() {
+	$mtree_pdata = menu_tree_page_data();
+	$manage_page_content[] = '<p>' . t('This is the management interface for @site_name Web applications and services. Listed below are the apps and services to which you have been granted management permission.', array('@site_name' => variable_get('site_name', 'NSCC'))) . '</p>';
+	foreach ($mtree_pdata as $menu_item) {
+		if ($menu_item['link']['router_path'] != 'manage') { continue; }
+		foreach ($menu_item['below'] as $key => $val) {
+			$link = $val['link'];
+			$manage_page_content[] = '<div class="app-management-item"><h2>' . l($link['title'], $link['link_path'], $link['options']) . "</h2>\n<p>" . check_plain($link['description']) . '</p></div>';
+		}
+	}
+
+	return '<div class="app-management-index">' . implode("\n", $manage_page_content) . '</div>';
+}
+
+
+
+/**
+ *	Custom permissions for NSCC module functions.
+ */
+function nscc_perm(){
+	return array('access management pages', 'create nscc announcement');
+}
+
+/**
+ * Implementation of hook_filter().
+ */
+function nscc_filter($op,$delta=0,$format=-1,$text=''){
+	switch($op){
+		case 'list':
+			return array(
+				0=>t('Room tag filter'),
+				1=>t('Course Overlay filter'),
+				2=>t('NSCC Abbrieviator'),
+				3=>t('Person Overlay filter')
+			);
+		
+		case 'description':
+			$descriptions = array(
+				0=>t('Enables the room() tag to for in-copy minimap popups.'),
+				1=>t('Enables the course() tag to for in-copy course overlays.'),
+				2=>t('Adds abbr tag around NSCC.'),
+				3=>t('Enables the person() tag for in-copy person overlays.'),
+			);
+			return $descriptions[$delta];
+			break;
+			
+		case 'no cache':
+			$cache_settings = array(
+				0=>true,
+				1=>false,
+				2=>true,
+				3=>true,
+			);
+			return $cache_settings[$delta];
+			break;
+				
+		case 'prepare':
+			return $text;
+			break;
+			
+		case 'process':
+			switch($delta){
+				case '0':
+					//drupal_add_js('sites/all/libraries/js/jquery.hoverIntent.minified.js');
+					//drupal_add_js(drupal_get_path('module', 'nscc') .'/filter.minimap-popup.js');
+					return preg_replace("/room\((.*)\)/U","<span class=\"minimap-popup\"><a class=\"minimap-popup\" href=\"https://northseattle.edu/locator/locate/\\1\">\\1</a></span>",$text);
+					//return $text;
+					break;
+				case '1':
+					//drupal_add_js(drupal_get_path('module', 'nscc') .'/filter.courseoverlay.js');
+					//$early_pass = preg_replace("/course\((.*)&(.*)\)/U","<a class=\"course-overlay\" href=\"/catalog/course/\\1@@@\\2\">\\1&\\2</a>",$text);
+					return preg_replace_callback("/course\((.*)\)/U",function($matches){
+																															$course = strtoupper( preg_replace('/\s/','',$matches[1]) );
+																															$entity_clean_course = preg_replace('/AMP;/U','',$course); 
+																															$urlcourse = preg_replace('/&/','@@@',$entitiy_clean_course);
+																															//return "<span class=\"course-overlay\"><a href=\"https://northseattle.edu/catalog/course/$urlcourse\">$course</a></span>";
+																															return "<span class=\"course-overlay\">$course</span>";
+																														}
+																													,$text);
+					//return $text;
+					break;
+				case '2':
+					$firstpass  = preg_replace('/<abbr.*>NSCC<\/abbr>/U','NSCC',$text);
+					return preg_replace('/([\s>\.:,])NSCC([\s<\.:,\?\!])/U','\\1<abbr title="North Seattle College">NSC</abbr>\\2',$firstpass);
+					break;
+				case '3':
+					return preg_replace_callback("/person\((.*)\)/U",function($matches){
+																															$target_user = user_load(array('name'=>$matches[1]));
+																															if(!$target_user){
+																																return "<h1 class=\"error\">person(&quot;".$matches[1]."&quot; is not a valid NetID Username.)</h1>";
+																															}
+																															$fullname=theme('username',$target_user);																														
+																															return '<span class="person-overlay">'.$fullname.'</span>';
+																													}
+																													,$text);
+					break;											
+			}
+			break;
+			
+		default:
+			return $text;				
+	}
+}
+
+function nscc_filter_tips($delta,$format,$long=false){
+	switch($delta){
+		case 0:
+			if($long){
+				return t('You can insert a minimap popup into the body text with room(#). i.e. room(ED1745) will insert a link and minimap popup for room 1745 to appear in the output. You can exclude the building abbreviation for most parts of campus, but NOT the OC.');
+			}else{
+				return t('Use room(value) to insert a room number minimap popup.');
+			}
+			break;
+		case 1:
+			if($long){
+				return t('You can insert a course overlay into the body text with course(#). i.e. course(ACCT101) will insert a link and an overlay behavior for ACCT101 to appear in the output.');
+			}else{
+				return t('Use course(value) to insert a course link and overlay.');
+			}
+			break;
+		case 2:
+				//no tips for the nscc filter
+				return '';
+			break;
+		case 3:
+			if($long){
+				return t('You can insert a person overlay into the body text with person(netid). i.e. person(sbayne) will insert a link and an overlay behavior for Sam Bayne to appear in the output.');
+			}else{
+				return t('Use person(value) to insert a person link and overlay.');
+			}
+			break;			
+	}	
+}
+
+
+/**
+*	Implementation of hook_block()
+*/
+function nscc_block($op='list', $delta=0,$edit=array()){
+		switch ($op){
+			
+		case 'view':
+			$block=array();
+			switch($delta) {
+				case 0:
+					//campus alert display
+					$block['subject'] = t('Campus Alert!');
+					//$block['content'] = t(db_result(db_query('select alert_message from shared_campus_alerts where date > now()-INTERVAL \'5 minutes\' order by date desc limit 1')));
+					$target_time = date('Y-m-d H:i:s',time()-300);
+					$sql = 'select alert_message from shared_campus_alerts where date >= \''.$target_time.'\' order by date desc limit 1';
+					$block['content'] = t(db_result(db_query($sql)));
+					$block['content'] = !empty($block['content']) ? '<!-- SwishCommand noindex -->'.$block['content'].'<!-- SwishCommand index -->': '';
+					return $block;
+					
+				case 1:
+					//custom login
+					global $user;
+					// For usability's sake, avoid showing two login forms on one page.
+					//if (!$user->uid && !(arg(0) == 'user' && !is_numeric(arg(1)))) {
+					//jq_add('expose');
+					if (!$user->uid) {
+						$block['subject'] = l('Login','user/login');
+						$block['content'] = '<!-- SwishCommand noindex -->'.drupal_get_form('user_login_block').'<!-- SwishCommand index -->';
+					} else {
+						$block['subject'] = l('Logout','logout');
+						$block['content'] = '<!-- SwishCommand noindex -->'.'Don\'t Forget to '.l('Log Out','logout').'<!-- SwishCommand index -->';
+					}
+					return $block;
+        			
+				case 2:
+					//person tools
+					global $user;
+					if(!$user->uid){
+						$block['subject'] = '';
+						$block['content'] = '';
+						return $block;
+					}
+					$block['subject'] = $user->name;
+					$block['content'] = '<!-- SwishCommand noindex --><ul class="menu">';
+					if(_is_admin_user($user)) {
+						$block['content'] .= '<li class="first">'.l('Me','users/'.$user->name,array('attributes'=>array('title'=>'My Profile'))).'</li>';
+						if(_has_blog($user->uid)) {
+							$block['content'] .= '<li>'.l('Blog','https://people.northseattle.edu/blogs/'.$user->name,array('attributes'=>array('title'=>'My Blog'))).'</li>';
+						}
+					}
+					$block['content'] .= '<li class="last">'.l('NetID Mail','http://mail.northseattle.edu',array('attributes'=>array('title'=>'NetID email (provided by Google)'))).'</li>';
+					$block['content'] .= '</ul><!-- SwishCommand index -->';
+					return $block;
+        			
+				case 3:
+					//site tools
+					$block['subject'] = variable_get('site_name','NSCC').' site';					
+					if ($menu = menu_tree()) {
+						$block['content'] = '<!-- SwishCommand noindex -->'.$menu.'<!-- SwishCommand index -->';
+					}
+					return $block;
+
+			  case 4:
+					//global tools
+					$block['subject'] = '';
+					$block['content'] = '<!-- SwishCommand noindex --><ul class="menu"><li class="leaf first"><a href="http://resources.northseattle.edu/schedule" title="Quarterly class schedules">Classes</a></li><li class="leaf"><a href="https://resources.northseattle.edu/locator" title="Campus map, directions &amp; room finder">Maps</a></li><li class="leaf"><a href="https://people.northseattle.edu/" title="Employee directory &amp; profiles">People</a></li><li class="leaf last"><a href="https://calendar.northseattle.edu" title="Academic &amp; events">Calendars</a></li></ul><!-- SwishCommand index -->';
+					return $block;
+					
+			  case 5:
+					//address block
+					jq_add("overlay");
+					drupal_add_js(drupal_get_path('module', 'nscc') .'/nscc.addressblock-overlay.js');
+					$block['subject'] = '';
+					$block['content'] = <<<end_of_block
+				<!-- SwishCommand noindex --><img src="/sites/all/modules/nscc/imgs/nscccontactqrcode-small.png" class="address-qrcode" id="qrAddr-overlay-trigger" alt="NSCC QR" />	
+				<p>North Seattle College<br />
+				9600 College Way North<br />
+				Seattle, Washington 98103<br />
+				(206) 934-3600</p>
+				<p class="maplink"><a href="http://resources.northseattle.edu/locator">Maps &amp; Directions</a></p>
+			
+				<p>Seattle Colleges District<br />
+				<a href="http://seattlecolleges.edu">District</a> | <a href="http://northseattle.edu">North</a> | <a href="http://seattlecentral.edu">Central</a> | <a href="http://southseattle.edu">South</a> | <a href="http://sviweb.sccd.ctc.edu">SVI</a> | <a href="http://www.scctv.net">SCCTV</a></p>
+				<div id="qrcode_overlay" class="effect_overlay">
+					<img alt="NSCC QR" src="/sites/all/modules/nscc/imgs/nscccontactqrcode-medium.png" style="margin: 0 auto;" />
+					<p style="text-align: center;">Scan this <a href="http://en.wikipedia.org/wiki/QR_Code" id="wikipedia-entry-qr">QR Code</a> to add NSCC to your phone's contacts.</p>
+				</div><!-- SwishCommand index -->
+end_of_block;
+					return $block;
+					
+				case 6:
+					//connect block, long form
+					$block['subject'] = 'Connect with North';
+					$block['content'] = <<<end_of_block
+			<!-- SwishCommand noindex --><ul>
+				<li><a class="link-emergency" href="http://www.seattlecolleges.edu/alerts/">Emergency Alert Service</a></li>
+				<li><a class="link-rss" href="https://news.northseattle.edu/nscc_feed/Lead-Stories/feed">RSS News Feed</a></li>
+					<li><a class="link-facebook" href="http://www.facebook.com/northseattle">Facebook</a></li>
+				<li><a class="link-linkedin" href="http://www.linkedin.com/company/north-seattle-community-college">LinkedIn</a></li>
+				<!--
+				<li><a class="link-twitter" href="#">Follow us on Twitter</a></li> -->
+				<li><a class="link-youtube" href="http://www.youtube.com/user/marketingnscc">YouTube</a></li>
+			<li><a class="link-contact" href="https://northseattle.edu/contact">Contact North</a></li>
+			</ul><!-- SwishCommand index -->
+end_of_block;
+					return $block;
+					
+				case 7:
+					//social networks list
+					$block['subject'] = '&nbsp;';
+					$block['content'] = <<<end_of_block
+			<!-- SwishCommand noindex --><ul>
+				<li><a class="link-facebook" href="http://www.facebook.com/northseattle">Facebook</a></li>
+				<li><a class="link-linkedin" href="http://www.linkedin.com/company/north-seattle-community-college">LinkedIn</a></li>
+				<!--
+				<li><a class="link-twitter" href="#">Follow us on Twitter</a></li> -->
+				<li><a class="link-youtube" href="http://www.youtube.com/user/marketingnscc">YouTube</a></li>
+			</ul><!-- SwishCommand index -->
+end_of_block;
+					return $block;
+					
+				case 8:
+					//footer buttons
+					$block['subject'] = '';
+					$block['content'] = <<<EOB
+			<!-- SwishCommand noindex --><ul>
+				<li><a href="https://resources.northseattle.edu/admissions/steps" title="Begin Your North Experience">Apply Now</a></li>
+				<li><a href="https://nsccef.ejoinme.org/" title="Support Our Mission">Giving</a></li>
+				<li><a href="http://northscc.bncollege.com/" title="Get Textbooks, Supplies, &amp; North Gear">Bookstore</a></li>
+			</ul><!-- SwishCommand index -->
+EOB;
+					return $block;
+
+				case 9:
+					// Navigation Flyout-Panels
+					drupal_add_js('sites/all/libraries/js/jquery.hoverIntent.minified.js');
+					drupal_add_js(drupal_get_path('module', 'nscc') .'/nscc.nav_menu.js');
+					$block['subject'] = '';
+					$sql = 'select r.title,r.body,u.dst,f.field_nav_index_alt_url_url as alt_url from prod_node_revisions r join prod_node n using (nid,vid) join prod_content_type_nav_index f using (nid,vid) join prod_url_alias u on (\'node/\'||n.nid = u.src)  where n.type=\'nav_index\' and f.field_display_value = 1 order by f.field_nav_index_weight_value;';
+					$result = db_query($sql);
+					$block['content'] = '<ul><!-- SwishCommand noindex -->';
+					while ($current_nav_index = db_fetch_object($result) ){
+						if($current_nav_index->alt_url) {
+							$block['content'] .='<li class="nav_index_entry"><a href="'.$current_nav_index->alt_url.'">'.$current_nav_index->title."</a>\n";
+						} else {
+							$block['content'] .='<li class="nav_index_entry"><a href="https://resources.northseattle.edu/'.$current_nav_index->dst.'">'.$current_nav_index->title."</a>\n";
+						}
+						$block['content'] .= '<div class="nav_index_wrapper">'.$current_nav_index->body."\n</div><!-- end nav_index_wrapper-->\n";
+						$block['content'] .="</li>\n";
+					}
+					$block['content'] .= '</ul><!-- SwishCommand index -->';
+					return $block;	
+
+				case 10:
+					// NSCC Search form
+					$block['content'] = drupal_get_form('nscc_search_block_form');
+					return $block;
+
+				case 11:
+					// Search Callouts
+					$block['content'] = <<<EOB
+<div id="search-callouts">
+	<div class="search-callout search-callout-people">
+		<a href="https://people.northseattle.edu/" title="People directory"><span></span>Find People</a>
+	</div>
+	<div class="search-callout search-callout-places">
+		<a href="http://resources.northseattle.edu/locator/" title="Locator map"><span></span>Find Places</a>
+	</div>
+	<div class="search-callout search-callout-classes">
+		<a href="https://resources.northseattle.edu/schedule/" title="Class schedules catalogue"><span></span>Find Classes</a>
+	</div>
+	<div class="search-callout search-callout-scholarships">
+		<a href="https://resources.northseattle.edu/scholarships" title="Scholarship info"><span></span>Find Scholarships</a>
+	</div>
+	<div class="search-callout search-callout-calendar">
+		<a href="https://calendar.northseattle.edu/" title="Academic calendar and events"><span></span>Calendars &amp; Events</a>
+	</div>
+	<div class="search-callout search-callout-news">
+		<a href="https://news.northseattle.edu/" title="Campus news and announcements"><span></span>Campus News</a>
+	</div>
+</div>
+
+EOB;
+					return $block;
+					
+				case 12:
+					// Search Feedback form
+ 					drupal_add_js(drupal_get_path('module', 'nscc') .'/nscc.search_feedback.js');
+					$block['subject']='';
+					$block['content']=drupal_get_form('nscc_search_feedback_form');
+					return $block;
+
+				case 13:
+					// Announcements
+					global $user;
+					$block['subject'] = '';
+					$announcements = _nscc_get_announcements();
+					$block_content = array();
+					while ($record = db_fetch_array($announcements)) {
+						$css_class = 'announcement ' . strtolower($record['announcement_type']) . '-announcement';
+						$publish = date('D d-M-Y g:ia', strtotime($record['publish_date']));
+						$rescind = date('D d-M-Y g:ia', strtotime($record['rescind_date']));
+						$block_content[] = <<<ANNOUNCEMENT_ITEM
+		<div class="$css_class">
+			<h1>${record['title']}</h1>
+			<p>${record['message']}</p>
+			<p class="meta">Effective from $publish until $rescind.</p>
+		</div>
+ANNOUNCEMENT_ITEM;
+					}
+					$block['content'] = !empty($block_content) ? "<!-- SwishCommand noindex -->\n" . implode("\n", $block_content) . "<!-- SwishCommand index -->\n" : '';
+					//if ($announcements) { watchdog('alerts', 'Announcements block: <pre>'.print_r($block,true)."</pre>\n"); }
+					unset($announcements, $record, $block_content, $css_class, $publish, $rescind);
+					return $block;
+			case 14:
+					//campus hours
+ 					drupal_add_css(drupal_get_path('module', 'nscc') .'/nscc.css');
+					$block['subject'] = '&nbsp;';
+					$block['content'] = <<<end_of_block
+			<!-- SwishCommand noindex -->
+			<div class="campus-hours-block">
+			<!-- <h3 class="campus-hours-title">Campus Hours</h3> -->
+			<h4 class="campus-hours-title">Normal Campus Hours</h4>
+			<table class="campus-hours">
+			 <tr class="campus-hours"><td class="campus-hours-days">M-Th</td><td class="campus-hours-hours">8 am - 5:30 pm</td></tr>
+			 <tr class="campus-hours"><td class="campus-hours-days">F</td><td class="campus-hours-hours">9 am - 4:30 pm</td></tr>
+			</table>
+			<h4 class="campus-hours-title">Online Service Hours</h4>
+			<table class="campus-hours">
+			 <tr class="campus-hours special-hours online-hours"><td class="campus-hours-days">Daily</td><td class="campus-hours-hours">5 am - 11:00 pm</td></tr>
+			</table>
+			</div>
+			<!-- SwishCommand index -->
+end_of_block;
+					return $block;
+				case 15:
+					//connect block, long form
+					$block['subject'] = 'Connect with North';
+					$block['content'] = <<<end_of_block
+			<!-- SwishCommand noindex --><ul>
+				<li><a class="link-emergency" href="http://www.seattlecolleges.edu/alerts/">Emergency Alert Service</a></li>
+				<li><a class="link-rss" href="https://news.northseattle.edu/nscc_feed/Lead-Stories/feed">RSS News Feed</a></li>
+				<!--
+				<li><a class="link-twitter" href="#">Follow us on Twitter</a></li> -->
+			<li><a class="link-contact" href="https://northseattle.edu/contact">Contact North</a></li>
+			</ul><!-- SwishCommand index -->
+end_of_block;
+					return $block;
+				case 16:
+					//summer hours
+					$block['subject'] = '&nbsp;';
+					$block['content'] = <<<end_of_block
+			<!-- SwishCommand noindex -->
+			<div class="summer-hours-block">
+			<h3 class="summer-hours-title">Summer Campus Hours</h3>
+			<table class="summer-hours">
+			 <tr class="summer-hours"><td class="summer-hours-days">M-Th</td><td class="summer-hours-hours">8 am - 5 pm</td></tr>
+			 <tr class="summer-hours"><td class="summer-hours-days">F</td><td class="summer-hours-hours">8 am - 1 pm</td></tr>
+			</table>
+			</ul>
+			</div>
+			<!-- SwishCommand index -->
+end_of_block;
+
+
+
+			}
+			
+		case 'list':
+			$blocks[0]['info'] = t('NSCC Campus Alert Display');
+			$blocks[0]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[1]['info'] = t('NSCC Custom Login');
+			$blocks[1]['cache'] = BLOCK_NO_CACHE;
+			$blocks[2]['info'] = t('NSCC Person Tools');
+			$blocks[2]['cache'] = BLOCK_NO_CACHE;
+			$blocks[3]['info'] = t('NSCC Site Tools');
+			$blocks[3]['cache'] = BLOCK_NO_CACHE;
+			$blocks[4]['info'] = t('NSCC Global Tools');
+			$blocks[4]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[5]['info'] = t('NSCC Address');
+			$blocks[5]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[6]['info'] = t('NSCC Connect-long');
+			$blocks[6]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[7]['info'] = t('NSCC SocialNets');
+			$blocks[7]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[8]['info'] = t('NSCC PayLinks');
+			$blocks[8]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[9]['info'] = t('NSCC Nav Menu');
+			$blocks[9]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[10]['info'] = t('NSCC Custom Search Form');
+			$blocks[10]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[11]['info'] = t('NSCC Custom Search Sidebar');
+			$blocks[11]['cache'] = BLOCK_CACHE_GLOBAL;
+			$blocks[12]['info'] = t('NSCC Search Feedback');
+			$blocks[12]['cache'] = BLOCK_NO_CACHE;
+			$blocks[13]['info'] = t('NSCC Announcements');
+			$blocks[13]['cache'] = BLOCK_NO_CACHE;
+			$blocks[14]['info'] = t('NSCC Campus Hours');
+			$blocks[14]['cache'] = BLOCK_NO_CACHE;
+			$blocks[15]['info'] = t('NSCC Connect-short');
+			$blocks[15]['cache'] = BLOCK_NO_CACHE;
+			$blocks[16]['info'] = t('NSCC Summer Campus Hours');
+			$blocks[16]['cache'] = BLOCK_NO_CACHE;
+			return $blocks;
+	}
+}
+
+function nscc_search_block_form(){
+	$form['prefix']=array(
+		'#type'=>'markup',
+		'#value'=>'<div class="container-inline">',
+	);
+	$form['search_text'] = array(
+		'#title'=>'Search Keywords',
+		'#description'=>'',
+		'#type'=>'textfield',
+		'#size'=>15,
+		'#maxlength'=>128,
+		'#prefix'=>'',
+		'#suffix'=>'',
+		'#required'=>false, 
+	);
+	$form['search_button'] = array(
+		'#title'=>'Submit',
+		'#type'=>'image_button',
+		'#src'=>'sites/all/themes/nscc_960/imgs/button-search.png',
+		'#prefix'=>'',
+		'#suffix'=>'',
+		'#executes_submit_callback'=>true		
+	);
+	$form['suffix']=array(
+		'#type'=>'markup',
+		'#value'=>'</div>',
+	);
+	
+	return $form;
+}
+
+
+function nscc_mail_alter(&$message) {
+	//watchdog('mailtest','Reply-to: started as "'.$message['headers']['Reply-To'].'"');
+	if( ! $message['headers']['Reply-To'] ){
+		$message['headers']['Reply-To'] = $message['from'];
+	}
+	$message['headers']['From'] = $message['from'];
+	
+	// Alter preamble of inquiries sent via contact form to reduce confusion by
+	// receipients as to why they are receiving it and who the actual inquirer is.
+	// Some receipients seem to be perpetually confused about Drupal's ability
+	// to route inquiries directly to them.
+	if ($message['id'] === 'contact_page_mail') {
+		if (preg_match('#^.*(https?://(?:\w+\.)?northseattle\.edu\/.*)\.$#', $message['body'][0], $matches)) {
+			$message['body'][0] = "I am directing this message to you from the contact form at {$matches[1]}. My name is {$message['params']['name']} and you can reply to me at {$message['params']['mail']}.";
+		} else {
+			$message['body'][0] = "I am directing this message to you. My name is {$message['params']['name']} and you can reply to me at {$message['params']['mail']}.";
+		}
+	}
+	//watchdog('nscc module','Mail alter msg:<pre>'.print_r($message,true)."</pre>\n");
+}
+
+
+function nscc_search_feedback_form(){
+	$form['form_header']=array(
+		'#type'=>'markup',
+		'#value'=>'<div class="nscc-search-feedback-form">',
+	);
+	$form['form_title']=array(
+		'#type'=>'markup',
+		'#value'=>'<h2 class="nscc-search-feedback-form-title">SmartAlec SearchPoint™</h2>'."\n",	
+	);
+	$form['search_term']=array(
+		'#type'=> 'hidden',
+		'#value'=> $_SERVER['HTTP_REFERER'],
+	);
+	$form['result_url']=array(
+		'#type'=> 'hidden',
+		'#value'=> preg_replace('/\?search_standing=\d+$/','',$_SERVER['REQUEST_URI']),
+	);
+	preg_match('/search_standing=(\d+)/',$_SERVER['QUERY_STRING'],$matches);
+	$form['search_standing']=array(
+		'#type'=> 'hidden',
+		'#value'=> $matches[1],
+	);
+	$form['solution_yn']=array(
+		'#type'=> 'radios',
+		'#title'=> t('Was this page helpful?'),
+		'#description'=>  '',
+		'#options'=> array(
+			t('Yes'),
+			t('No'),
+			t('Stop asking'),
+		),
+	);	
+	$form['form_footer']=array(
+		'#type'=>'markup',
+		'#value'=>'<p>We appreciate your feedback. It helps us improve our site.</p><div class="clearfix">&nbsp;</div></div>',
+	);
+	return $form;
+}
+
+function _nscc_search_feedback_handler(){
+	global $user;
+	$json_array = array();
+	$solution_yn = $_POST['solution_yn'];
+	switch ($solution_yn) {
+		case 1 :
+			$solution_yn = 'yes';
+			break;
+		case 2 :
+			$solution_yn = 'disable';
+			break;
+		default :
+			$solution_yn = 'no';
+	}
+	
+	if ($solution_yn == 'disable') {
+		$_SESSION['nscc_search_feedback_disabled'] = true;
+		$json_array['return_code'] = true;
+		$json_array['return_message'] = 'Search feedback disabled.';
+	} else {	
+		$insert_feedback_sql = "INSERT INTO {nscc_search_feedback} (search_url,result_url,solution_yn,user_name,user_ip,search_standing) values ('%s','%s','%s','%s','%s',%d);";
+		$search_url=preg_replace('/https:\/\/resources.northseattle.edu\/nsccsearch\//','',$_POST['search_term']);	
+		$result_url = $_POST['result_url'];
+		$search_standing = $_POST['search_standing'];
+		$user_name = $user->name;
+		$user_ip = $_SERVER['REMOTE_ADDR'];
+		$success = db_query($insert_feedback_sql,$search_url,$result_url,$solution_yn,$user_name,$user_ip,$search_standing);
+		if ($success){
+			$json_array['return_code'] = true;
+			$json_array['return_message'] = 'Saved your input.';
+		} else {
+			$json_array['return_code'] = false;
+			$json_array['return_message'] = 'Problem Saving Input.';
+		}
+	}
+	watchdog('search_feedback','<pre>'.print_r($_POST,true).'</pre>'."\n".'<pre>'.print_r($json_array,true).'</pre>');
+	print drupal_json($json_array);
+	exit();
+}
+
+
+function nscc_search_page_form(){
+	$form['prefix']=array(
+		'#type'=>'markup',
+		'#value'=>'<div class="container-inline">',
+	);
+	$form['search_text'] = array(
+		'#title'=>'',
+		'#description'=>'',
+		'#type'=>'textfield',
+		'#size'=>15,
+		'#maxlength'=>128,
+		'#prefix'=>'',
+		'#suffix'=>'',
+		'#required'=>false, 
+	);
+	$form['search_button'] = array(
+		'#type'=>'image_button',
+		'#src'=>'sites/all/themes/nscc_960/imgs/button-search.png',
+		'#prefix'=>'',
+		'#suffix'=>'',
+		'#executes_submit_callback'=>true,
+		'#validate'=>array('nscc_search_block_form_validate'),
+		'#submit'=>array('nscc_search_block_form_submit')		
+	);
+	$form['suffix']=array(
+		'#type'=>'markup',
+		'#value'=>'<p class="search-tips">' . t('Enter some keywords for stuff you\'re looking for. To search for a phrase, use double-quotes around your keywords. You can use ') . ' <em>and</em>, <em>or</em>, <em>near</em>, <em>not</em> ' . t('to refine your search if you like, otherwise we presume you\'re looking for things that contain all of your keywords in any order or combination.') . '</p></div>',
+	);
+	
+	return $form;
+}
+
+
+
+function nscc_search_block_form_validate($form,&$form_state){
+	return $form;
+}
+function nscc_search_block_form_submit($form,&$form_state){
+  if (isset($_REQUEST['destination'])) {
+    unset($_REQUEST['destination']);
+  }
+  if (isset($_REQUEST['edit']['destination'])) {
+    unset($_REQUEST['edit']['destination']);
+  }
+
+  $form_id = $form['form_id']['#value'];
+  $form_state['redirect'] = 'https://resources.northseattle.edu/nsccsearch/'. trim($form_state['values']['search_text']);
+}
+
+
+function _nscc_search_results($search_terms = ''){
+	drupal_add_js(drupal_get_path('module', 'nscc') .'/nscc.search.js');
+	drupal_add_css(drupal_get_path('module', 'nscc') .'/nscc.search.css');
+
+
+	if ($search_terms){	
+		//Not the right way to do this. Should use a standardised clean-up function.
+		$clean_search_terms = preg_replace('/\"/','\\\"',$search_terms);
+		$swish = new Swish("/var/www/search-data/global.index");
+		$results = $swish->query($clean_search_terms);
+		$output = drupal_get_form('nscc_search_page_form');
+		$output .= "<div class=\"nscc-search-result-count\">Your Search for <em>".$search_terms."</em> Found ".$results->hits." results</div>\n";
+		//$output .= drupal_get_form('nscc_search_block_form');
+		$results_page=1;
+		$result_on_page=0;
+		$page_start = '<li id="nscc-search-results-page-'.$results_page.'" class="nscc-search-results-page open">'."\n";
+		$page_start .= '<div id="nscc-search-results-page-controls-'.$results_page.'" class="nscc-search-results-page-controls"><span id="nscc-search-results-previous-pane-control-'.$results_page.'" class="nscc-search-results-previous-pane-control grid-1 alpha">&nbsp;</span>  <span class="per-page-pager-list grid-7">&nbsp;</span> <span id="nscc-search-results-next-pane-control-'.$results_page.'" class="nscc-search-results-next-pane-control grid-1 omega">&nbsp;</span><div class="clearfix">&nbsp;</div></div>'."\n";
+		$page_start .= '<ul id="nscc-search-results-page-pane-'.$results_page.'" class="nscc-search-results-page-pane">'."\n";
+		$page_end='';
+	
+		if($results->hits){
+			$search_standing = 0;
+			$feeback_disabled = isset($_SESSION['nscc_search_feedback_disabled']) ? $_SESSION['nscc_search_feedback_disabled'] : false;
+			$output .='<ul class="nscc-search-results">'."\n";
+			while ($result = $results->nextResult()) {
+				$search_standing++;
+				if($result_on_page==24){
+					$page_end = "</ul> <!-- end results pane $results_page --> </li><!-- end results PAGE $results_page -->\n\n";
+				}
+				if($result_on_page==25){
+					$result_on_page=0;
+					$results_page++;
+					$page_start = '<li id="nscc-search-results-page-'.$results_page.'" class="nscc-search-results-page">'."\n";
+					$page_start .= '<div id="nscc-search-results-page-controls-'.$results_page.'" class="nscc-search-results-page-controls"><span id="nscc-search-results-previous-pane-control-'.$results_page.'" class="nscc-search-results-previous-pane-control grid-1 alpha">&nbsp;</span>  <span class="per-page-pager-list grid-7">&nbsp;</span> <span id="nscc-search-results-next-pane-control-'.$results_page.'" class="nscc-search-results-next-pane-control grid-1 omega">&nbsp;</span><div class="clearfix">&nbsp;</div></div>'."\n";
+					$page_start .= '<ul id="nscc-search-results-page-pane-'.$results_page.'" class="nscc-search-results-page-pane">'."\n";
+				}
+				$output .= $page_start;
+				$resulttitle = preg_replace('/\|.*$/','',$result->swishtitle);
+				$result_url = $result->swishdocpath;
+				$result_url .= ($feeback_disabled) ? '' : '?search_standing='.$search_standing;
+				$output .= '<li id="search-result-page-'.$results_page.'-index-'.$result_on_page.'" class="nscc-search-result-item">';
+				$output .= '<span class="search-result-title">'.l($resulttitle,$result_url).'</span>';
+				$output .= '<span class="search-result-url">'.$result->swishdocpath.'</span>';
+				$output .= '<span class="search-result-breadcrumb">'.$result->breadcrumb.'</span>';
+				$output .= "</li>\n";
+				$output .= $page_end;
+				$page_end = '';
+				$page_start = '';
+				$result_on_page++;
+			}
+			$output .="</ul> <!-- end results pane $results_page --> </li><!-- end results PAGE $results_page -->\n\n";
+			$output .="</ul>\n";
+			if($results_page ==1){
+				$pager='';
+			}else{
+				$pager = '<div id="nscc-search-results-pager" class="nscc-search-results-pager"> ';
+				for($page_index=1;$page_index<=$results_page;$page_index++){
+					$pager .='<a class="nscc-search-results-page-link" href="#nscc-search-results-page-'.$page_index.'">'."$page_index</a> ";
+				}
+				$pager .="</div>";
+			}
+		}
+		$output .=$pager;
+		return $output;
+	} else {
+		//no search terms
+		$output = drupal_get_form('nscc_search_page_form');
+		return $output;
+	}
+	return '';
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function nscc_user($type, &$edit, &$user, $category = NULL) {
+  switch ($type) {
+    case 'load':
+    	return nscc_load_short_profile($user);
+  }
+}
+
+
+function nscc_load_short_profile($user){
+  $result = db_query('SELECT f.name, f.type, v.value FROM people_nscc_profile_fields f INNER JOIN people_nscc_profile_values v ON f.fid = v.fid WHERE uid = %d AND ((v.fid > 1 AND v.fid < 6) OR (v.fid > 21 AND v.fid < 29) OR (v.fid > 31));',$user->uid);
+  while ($field = db_fetch_object($result)) {
+    if (empty($user->{$field->name})) {
+      //$user->{$field->name} = _nscc_short_profile_field_serialize($field->type) ? unserialize($field->value) : $field->value;
+      $user->{$field->name} = $field->value;
+    }
+  }
+}
+
+function _nscc_short_profile_field_serialize($type = NULL) {
+  return $type == 'date';
+}
+
+function nscc_form_user_login_alter(&$form,&$form_state){
+	$form['name']['#title'] = l('NetID','http://netid.northseattle.edu/faq.php');
+	$form['NetID Statement']['#prefix'] = '<div class="netid_help">';
+	$form['NetID Statement']['#value'] = '<h3>Need a NetID?</h3><p>Students: '.l('Set one up now!','http://netid.northseattle.edu/create.php').'</p>';
+	$form['NetID Statement']['#value'] .= '<p>Employees: See your supervisor.</p>';
+	$form['NetID Statement']['#suffix'] = '</div>';
+	$form['NetID Statement']['#weight'] = 80;
+}
+
+function nscc_form_user_login_block_alter(&$form,&$form_state){
+	$form['name']['#title'] = l('NetID','http://netid.northseattle.edu/faq.php');
+	$form['NetID Statement']['#prefix'] = '<div class="netid_help">';
+	$form['NetID Statement']['#value'] = '<h3>Need a NetID?</h3><p>Students: '.l('Set one up now!','http://netid.northseattle.edu/create.php').'</p>';
+	$form['NetID Statement']['#value'] .= '<p>Employees: See your supervisor.</p>';
+	$form['NetID Statement']['#suffix'] = '</div>';
+	$form['NetID Statement']['#weight'] = 80;
+}
+
+
+
+/**
+ *	Helper function to ouput NSCC global navigation for external sites.
+ */
+function _nscc_dump_navindex(){
+	// Navigation Flyout-Panels
+	//drupal_add_js('sites/all/libraries/js/jquery.hoverIntent.minified.js');
+	//drupal_add_js(drupal_get_path('module', 'nscc') .'/nscc.nav_menu.js');
+	$block['subject'] = '';
+	$sql = 'select r.title,r.body,u.dst,f.field_nav_index_alt_url_url as alt_url from prod_node_revisions r join prod_node n using (nid,vid) join prod_content_type_nav_index f using (nid,vid) join prod_url_alias u on (\'node/\'||n.nid = u.src)  where n.type=\'nav_index\' and f.field_display_value = 1 order by f.field_nav_index_weight_value;';
+	$result = db_query($sql);
+	$block['content'] = '<ul><!-- SwishCommand noindex -->';
+	while ($current_nav_index = db_fetch_object($result) ){
+		if($current_nav_index->alt_url){
+			$block['content'] .='<li class="nav_index_entry"><a href="'.$current_nav_index->alt_url.'">'.$current_nav_index->title."</a>\n";
+		} else {
+			$block['content'] .='<li class="nav_index_entry"><a href="https://resources.northseattle.edu/'.$current_nav_index->dst.'">'.$current_nav_index->title."</a>\n";
+		}
+		$block['content'] .= '<div class="nav_index_wrapper">'.$current_nav_index->body."\n</div><!-- end nav_index_wrapper-->\n";
+		$block['content'] .="</li>\n";
+	}
+	$block['content'] .= '</ul><!-- SwishCommand index -->';
+
+	$prefix = '<div id="navigation-panels" class="region navigation-panels container-12"><div id="block-nscc-9" class="block block-nscc region-odd odd region-count-1 count-13"><div class="block-inner"><div class="content">';
+	$suffix = "</div><!-- end class=content -->\n </div><!-- end block-inner -->\n </div><!-- end block-nscc-9 -->\n </div><!-- end navigation-panels -->\n";
+
+	print $prefix . $block['content'] . $suffix;	
+	exit;
+}
+
+
+/**
+ *	Helper function to output Campus Alerts and NSCC Announcements for external sites.
+ */
+function _nscc_dump_alerts() {
+	// Campus Alerts
+	$alerts = nscc_block('view', 0, null);
+	if (!empty($alerts['content'])) {
+		$alerts = (object)$alerts;
+		$alerts->module = 'nscc';
+		$alerts->delta = 0;
+		$alerts->region = 'campus_alert';
+		$alerts->themed = theme('block', $alerts);
+	}
+
+	// NSCC Announcements
+	$announcements = nscc_block('view', 13, null);
+	if (!empty($announcements['content'])) {
+		$announcements = (object)$announcements;
+		$announcements->module = 'nscc';
+		$announcements->delta = 13;
+		$announcements->region = 'campus_alert';
+		$announcements->themed = theme('block', $announcements);
+	}
+	
+	// Region wrapper
+	$prefix = '<div id="campus-alert" class="region region-campus_alert">';
+	$suffix = "</div>\n";
+
+	if (isset($alerts->themed, $announcements->themed)) {
+		print $prefix . $alerts->themed . $announcements->themed . $suffix;
+	} else {
+		print '';
+	}
+	exit;
+}
+
+function _nscc_dump_node($nid=null){
+	$json_array = array();
+	$json_array['success'] = 1;
+	$target_node = node_load($nid,NULL,true);
+	if (! $target_node ){
+		$json_array['success'] = 0;
+		$json_array['error_msg'] = 'Node Not Found';
+	} elseif ($target_node->status != 1){
+		$json_array['success'] = 0;
+		$json_array['error_msg'] = 'Unpublished Node';
+	} else {
+		$output = theme('node',$target_node);
+		$json_array['node_html'] = $output;
+	}
+	print drupal_json($json_array);
+	exit();
+}
+
+
+/**
+ * has_blog(): given uid returns true if any blog entries exist, false if none do.
+ */ 
+function _has_blog($uid){
+	$sql = "SELECT count(nid) from people_node where type='blog' and uid=%d";
+	$entry_count = db_result(db_query($sql,$uid));
+	if ($entry_count > 0){
+		return true;
+	}
+	return false; 
+}
+
+function _is_admin_user(&$user){
+	if($user->ldap_authentified == 1 && preg_match('/admindom/i',$user->ldap_dn)){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function _is_admin_account($account){
+	if($account['ldap_authentified'] == 1 && preg_match('/admindom/i',$account['ldap_dn'])){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+/**
+ *	Public utility function to allow drupal database api to work with external databases better.
+ */
+function nscc_write_record($table, &$object, $database_name, $update = array()) {
+  global $db_url;
+  	
+  // Standardize $update to an array.
+  if (is_string($update)) {
+    $update = array($update);
+  }
+
+  $schema = drupal_get_schema($table);
+  if (empty($schema)) {
+		watchdog('nscc','Error, Couldn\'t get table %table in schema',array('%table'=>$table));
+    return FALSE;
+  }
+
+  // Convert to an object if needed.
+  if (is_array($object)) {
+    $object = (object) $object;
+    $array = TRUE;
+  }
+  else {
+    $array = FALSE;
+  }
+
+  $fields = $defs = $values = $serials = $placeholders = array();
+
+  // Go through our schema, build SQL, and when inserting, fill in defaults for
+  // fields that are not set.
+  foreach ($schema['fields'] as $field => $info) {
+    // Special case -- skip serial types if we are updating.
+    if ($info['type'] == 'serial' && count($update)) {
+      continue;
+    }
+
+    // For inserts, populate defaults from Schema if not already provided
+    if (!isset($object->$field) && !count($update) && isset($info['default'])) {
+      $object->$field = $info['default'];
+    }
+
+    // Track serial fields so we can helpfully populate them after the query.
+    if ($info['type'] == 'serial') {
+      $serials[] = $field;
+      // Ignore values for serials when inserting data. Unsupported.
+      unset($object->$field);
+    }
+
+    // Build arrays for the fields, placeholders, and values in our query.
+    if (isset($object->$field)) {
+      $fields[] = $field;
+      $placeholders[] = db_type_placeholder($info['type']);
+
+      if (empty($info['serialize'])) {
+        $values[] = $object->$field;
+      }
+      else {
+        $values[] = serialize($object->$field);
+      }
+    }
+  }
+
+  // Build the SQL.
+  $query = '';
+  if (!count($update)) {
+    $query = "INSERT INTO {". $table ."} (". implode(', ', $fields) .') VALUES ('. implode(', ', $placeholders) .')';
+    $return = SAVED_NEW;
+  }
+  else {
+    $query = '';
+    foreach ($fields as $id => $field) {
+      if ($query) {
+        $query .= ', ';
+      }
+      $query .= $field .' = '. $placeholders[$id];
+    }
+
+    foreach ($update as $key){
+      $conditions[] = "$key = ". db_type_placeholder($schema['fields'][$key]['type']);
+      $values[] = $object->$key;
+    }
+
+    $query = "UPDATE {". $table ."} SET $query WHERE ". implode(' AND ', $conditions);
+    $return = SAVED_UPDATED;
+  }
+  //confirm existence of database name	
+  if (!$db_url[$database_name]) {
+		watchdog('nscc','Error, no database by the name %db_name.',array('%db_name'=>$database_name));
+		return FALSE;
+  }	
+  // Execute the SQL.
+  db_set_active($database_name);
+  if (db_query($query, $values)) {
+    if ($serials) {
+      // Get last insert ids and fill them in.
+      foreach ($serials as $field) {
+        $object->$field = db_last_insert_id($table, $field);
+      }
+    }
+  }
+  else {
+    $return = FALSE;
+  }
+  db_set_active('default');
+
+  // If we began with an array, convert back so we don't surprise the caller.
+  if ($array) {
+    $object = (array) $object;
+  }
+
+  return $return;
+}
+
+
+
+/**
+ *	Implementation of HOOK_footer()
+ *
+ *	Adds additional HTML/JS to page just before </body> via the $closure template variable.
+ *	Calls to this function are dispatched from theme_closure().
+ */
+function nscc_footer() {
+	$module_path = base_path() . drupal_get_path('module', 'nscc');
+	
+	// Enhances log reports with data for visitors' screen sizes, media plug-ins, etc.
+
+	return <<<AWSTATS_TRACKER
+
+<script type="text/javascript" src="$module_path/awstats_misc_tracker.js"></script>
+<noscript><p><img src="$module_path/awstats_misc_tracker.js?nojs=y" alt="" height="0" width="0" style="display: none" /></p></noscript>
+AWSTATS_TRACKER;
+}
+
+
+
+/**
+ *	Helper function to retrieve all active announcements.
+ */
+function _nscc_get_announcements($all = false) {
+	$query = $all
+		? "SELECT * FROM shared_announcements ORDER BY input_date DESC"
+		: "SELECT * FROM shared_announcements WHERE publish_date <= CURRENT_TIMESTAMP AND rescind_date > CURRENT_TIMESTAMP ORDER BY rescind_date ASC, input_date DESC";
+	return db_query($query);
+}
+
+/**
+ *	Helper function to retrieve all feature stories.
+ */
+function _nscc_list_feature_stories() {
+	$query = "SELECT * FROM {feature_stories} ORDER BY input_date DESC";
+	return db_query($query);
+}
+
+function _nscc_get_current_feature_story() {
+	$query = "SELECT * FROM {feature_stories} WHERE publish_date <= CURRENT_TIMESTAMP AND rescind_date > CURRENT_TIMESTAMP ORDER BY publish_date DESC LIMIT 1;";
+	return db_fetch_object(db_query($query));
+}
+
+
+
+/**
+ *	Helper function to delete a specific announcement.
+ */
+function _nscc_delete_announcement($id) {
+	$query = 'DELETE FROM shared_announcements WHERE announcement_id=%d';
+	if (db_query($query, intval($id))) {
+		drupal_set_message(t('Announcement has been deleted'));
+	} else {
+		drupal_set_message(t('Delete failed. Deletion of the announcement failed due to an internal system problem.'), 'warning');
+	}
+	drupal_goto('manage/announcements');
+}
+
+/**
+ *	Helper function to delete a specific announcement.
+ */
+function _nscc_delete_feature_story($id) {
+	$query = 'DELETE FROM {feature_stories} WHERE id=%d';
+	if (db_query($query, intval($id))) {
+		drupal_set_message(t('Feature Story has been deleted'));
+	} else {
+		drupal_set_message(t('Delete failed. Deletion of the feature story failed due to an internal system problem.'), 'warning');
+	}
+	drupal_goto('manage/featurestory');
+}
+
+
+/**
+ *	Lists all active NSCC announcements with interface controls for editors.
+ */
+function _nscc_manage_announcements() {
+	$announcements = _nscc_get_announcements(true);
+	$alist = array();
+	$content = '';
+	while ($record = db_fetch_array($announcements)) {
+		$atype = ucwords($record['announcement_type']);
+		$apublish = date('d-M-Y H:i', strtotime($record['publish_date']));
+		$arescind = date('d-M-Y H:i', strtotime($record['rescind_date']));
+		$astatus = (strtotime($record['rescind_date']) > time()) ? 'active' : 'expired';
+		$alist[] = "\t\t<tr class=\"$astatus\"><td>$atype</td><td>${record['title']}</td><td>${record['message']}</td><td>$apublish</td><td>$arescind</td><td><a href=\"/manage/announcements/${record['announcement_id']}/delete\">Delete</a></td></tr>";
+	}
+	if (empty($alist)) {
+		$content = '<p>There are no active NSCC announcments.</p>';
+	} else {
+		$rows = implode("\n", $alist);
+		$content = <<<MANAGE_ANNOUNCEMENTS
+<table summary="List of currently active NSCC announcements">
+	<thead>
+		<tr>
+			<th>Type</th>
+			<th>Headline</th>
+			<th>Message</th>
+			<th>Publish</th>
+			<th>Rescind</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+$rows
+	</tbody>
+</table>
+MANAGE_ANNOUNCEMENTS;
+	}
+	return "<div class=\"announcements-list\">\n$content\n<p>Publish a <a href=\"/manage/announcements/add\">new announcement</a></p></div>";
+}
+
+
+/**
+ *	Input form for creating NSCC Announcements.
+ */
+function nscc_announcements_form($form_state) {
+	$now = date('d-M-Y H:i');
+	$form['#redirect'] = 'manage/announcements';
+	$form['announcement_type'] = array(
+    '#title' => t('Announcement Type'),
+    '#type' => 'select',
+    '#options' => array(
+    	'snow' => 'Snow',
+    	'mechanical' => 'Mechanical',
+    	'earthquake' => 'Earthquake',
+    ),
+    '#description' => t('What type of message is this? Messages are auto-styled according to their type.'),
+    '#required' => true,
+    '#default_value' => 'snow',
+	);
+	$form['announcement_title'] = array(
+    '#title' => t('Announcement Headline'),
+    '#type' => 'textfield',
+    '#description' => t('The title or headline for this announcement.'),
+    '#size' => 64,
+    '#maxlength' => 64,
+    '#required' => true,
+	);
+	$form['message'] = array(
+    '#title' => t('Announcement Message'),
+    '#type' => 'textfield',
+    '#description' => t('The body of the announcement. For Twitter-compatibility, this is restricted to 140 characters and will be formatted as a single paragraph of text.'),
+    '#size' => 140,
+    '#maxlength' => 140,
+    '#required' => true,
+	);
+	$form['publish'] = array(
+    '#title' => t('Publish'),
+    '#type' => 'textfield',
+    '#description' => t('The date and time this announcement should be made available to the public. Ex: 04-Mar-2011 15:00; alternative variations like 4-Mar-2011 3:00pm will also work, but avoid ambiguous ones like 3/4/2011. Omitting the time will be interpreted as midnight (00:00).'),
+    '#size' => 20,
+    '#maxlength' => 20,
+    '#required' => true,
+    '#default_value' => $now,
+	);
+	$form['rescind'] = array(
+    '#title' => t('Rescind'),
+    '#type' => 'textfield',
+    '#description' => t('The date and time this announcement expires and should be rescinded. Ex: 04-Mar-2011 15:00; alternative variations like 4-Mar-2011 3:00pm will also work, but avoid ambiguous ones like 3/4/2011. Omitting the time will be interpreted as midnight (00:00).'),
+    '#size' => 20,
+    '#maxlength' => 20,
+    '#required' => true,
+    '#default_value' => $now,
+	);
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Publish Announcement'),
+  );
+	return $form;
+}
+
+
+/**
+ *	Custom validation of announcement form fields.
+ */
+function nscc_announcements_form_validate($form, &$form_state) {
+	if (strtotime($form_state['values']['publish']) === false) {
+		form_set_error('publish', t('Your specified publish date is invalid.'));
+	}
+	if (strtotime($form_state['values']['rescind']) === false) {
+		form_set_error('rescind', t('Your specified rescind date is invalid.'));
+	}
+}
+
+
+/**
+ *	Submission handler for announcement form.
+ */
+function nscc_announcements_form_submit($form, &$form_state) {
+	$pub_date = date('Y-m-d H:i:s', strtotime($form_state['values']['publish']));
+	$resc_date = date('Y-m-d H:i:s', strtotime($form_state['values']['rescind']));
+	$query = "INSERT INTO shared_announcements (announcement_type, title, message, publish_date, rescind_date) VALUES ('%s', '%s', '%s', '%s', '%s')";
+	$result = db_query($query, $form_state['values']['announcement_type'], $form_state['values']['announcement_title'], $form_state['values']['message'], $pub_date, $resc_date);
+	if ($result !== false) {
+		drupal_set_message(t('Congratulations! Your announcment was successfully published.'));
+	} else {
+		drupal_set_message(t('Sorry, a database error prevented publication of your announcement.'), 'warning');
+	}
+}
+
+
+
+/**
+ *	Public utility for validating email address syntax
+ *
+ *	Comprehensive RE pattern (by Derick Rethans and Pierre-A. Joye) accomodates all valid constructs
+ *	including esoteric edge cases with 1 false-positive and 0 false-negatives.
+ */
+function email_address_is_valid($address) {
+	if (empty($address)) { return false; }
+	$re = '/^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/iD';
+	return preg_match($re, $address);
+}

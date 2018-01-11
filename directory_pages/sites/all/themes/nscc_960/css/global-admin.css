@@ -1,0 +1,354 @@
+/**
+ *		Admin & Content Manager styles for NSCC 960 and derivative themes
+ *
+ */
+
+
+/*
+-------------------------
+CONTENT MANAGER UI
+-------------------------
+*/
+
+
+#node-form table { margin: 0; }
+
+#node-form .content-add-more {}
+
+#node-form .description,
+#node-form .description p,
+#node-form .description li {
+  margin-top: 3px;
+  font-size: 10px;
+  color: rgb(95, 95, 95);
+}
+
+#node-form .draggable .form-item {
+	margin: 10px 0;
+}
+
+#node-form #upload-attachments th,
+#node-form #upload-attachments td {
+  padding: 0 3px;
+}
+
+#node-form #upload-attachments tr .form-item { white-space: normal; }
+
+#node-form #upload-attachments .form-text {
+  display: inline;
+  width: auto;
+}
+
+.node-form .content-multiple-table td.content-multiple-drag {
+	vertical-align: middle;
+}
+
+#node-form .draggable a.tabledrag-handle {
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.draggable-handle-example {
+	padding-right: 18px;
+	background: url(/misc/draggable.png) right top no-repeat;
+}
+
+.filefield-element .widget-preview, 
+.filefield-element .widget-edit {
+  float: none;
+}
+
+.section-node-edit .content-area {
+	background-image: none;
+}
+
+input.searchfield {
+  margin: 2px 0 0 0;
+  padding: 0;
+  width: 222px;
+  vertical-align: middle;
+  float: left;
+}
+
+input.searchbutton {
+  margin: 0 0 0 10px;
+  padding: 0;
+  vertical-align: middle;
+  display: block;
+  float: left;
+}
+
+.region-main fieldset {
+  margin: 0 0 12px;
+  padding: 12px;
+  border: solid 1px rgb(230, 227, 220);
+  background-color: rgb(250, 248, 240);
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+html.js fieldset.collapsible { margin-bottom: 12px; }
+
+html.js fieldset.collapsible .fieldset-wrapper { overflow: inherit; }
+
+.region-main fieldset fieldset { background-color: rgb(240, 237, 230); }
+
+.region-main fieldset fieldset fieldset { background-color: rgb(223, 223, 209); }
+
+.region-main legend {
+  padding: 0 6px;
+  font-size: 14px;
+  color: rgb(143, 133, 89);
+}
+
+.region-main fieldset .description {
+  margin: 0 0 12px;
+  font-size: 12px;
+}
+
+.region-main .form-item label {
+  margin-bottom: 3px;
+  font-size: 11px;
+}
+
+.region-main .form-item .description li {
+  padding: 0 0 3px;
+  line-height: 1.1;
+}
+
+form .tips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+form .tips li {
+  margin: 0;
+  padding: 0 0 3px;
+  font-size: 10px;
+  line-height: 14px;
+  color: rgb(95, 95, 95);
+}
+
+.input-tips-links {
+	margin: 0 0 24px;
+	font-size: 10px;
+	text-align: right;
+}
+
+.teaser-checkbox div.form-item { margin: 0; }
+
+.wysiwyg-toggle-wrapper {
+  float: right;
+  font-size: 10px;
+}
+
+tr.odd.info,
+tr.even.info { background-color: rgb(235, 255, 252); }
+
+tr.odd.warning,
+tr.even.warning { background-color: rgb(255, 255, 235); }
+
+tr.odd.error,
+tr.even.error { background-color: rgb(255, 238, 238); }
+
+
+/* Login form (page) */
+
+.region-main #user-login .netid_help {
+  margin: 24px 0;
+  padding: 12px;
+  background-color: rgb(222, 229, 200);
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+
+/* Multiselect Module */
+
+#multiselect_btns .multiselect_add a {
+  display: block;
+  height: 38px;
+  text-indent: -9999px;
+  background: url(/sites/all/modules/multiselect/images/add.png) no-repeat;
+  background-position: 0 0;
+}
+
+#multiselect_btns .multiselect_remove a {
+  display: block;
+  height: 38px;
+  text-indent: -9999px;
+  background: url(/sites/all/modules/multiselect/images/remove.png) no-repeat;
+  background-position: 0 0;
+}
+
+
+/* Announcements list */
+
+.announcements-list th {
+	padding: 3px;
+	font-size: 11px;
+	font-weight: normal;
+	color: rgb(127, 127, 127);
+}
+
+.announcements-list td {
+	padding: 3px;
+	border-top: solid 1px rgb(220, 220, 220);
+	line-height: 1.2;
+}
+
+.announcements-list tr.expired { color: rgb(175, 175, 175); }
+
+
+
+
+/*
+-------------------------
+Admin UI
+-------------------------
+*/
+
+.section-admin th,
+.section-admin td { padding: 0 6px; }
+
+.section-admin table.system-status-report th,
+.section-adminc table.system-status-report tr.merge-up td { padding: 3px 0 3px 30px; }
+
+.section-admin .region-main td, th { font-size: 12px; }
+
+.section-admin .region-main tr.odd td.active { background-color: rgb(236, 243, 217); }
+
+.section-admin .region-main tr.even td.active,
+.section-admin .region-main th.active { background-color: rgb(245, 252, 233); }
+
+.section-admin .region-main  th,
+.section-admin .region-main  td { padding: 0 6px; }
+
+
+#node-form #upload-attachments th,
+#node-form #upload-attachments td {
+  padding: 0 3px;
+}
+
+#node-form #upload-attachments tr .form-item { white-space: normal; }
+
+#node-form #upload-attachments .form-text {
+  display: inline;
+  width: auto;
+}
+
+html.js fieldset.collapsible .fieldset-wrapper { overflow: inherit; }
+
+.filefield-element .widget-preview, 
+.filefield-element .widget-edit {
+  float: none;
+}
+
+#wysiwyg-profile-overview div {}
+
+#wysiwyg-profile-overview div a {}
+
+#wysiwyg-profile-overview div a:after {}
+
+#wysiwyg-profile-overview div div {}
+
+
+
+
+/*
+--------------------------
+HYPERLINK ENHANCEMENT EXCLUSIONS
+--------------------------
+*/
+
+.primary-local-tasks a,
+#menu-overview td a,
+.admin-panel a,
+.view-all-content-listing a {
+	background-image: none;
+	padding-left: 0;
+}
+
+
+
+
+
+/*
+--------------------------
+NAMED COLOR SWATCHES
+--------------------------
+*/
+
+fieldset.group-graphics .form-radios {
+	-moz-column-count: 4;
+	-webkit-column-count: 4;
+	column-count: 4;
+}
+
+fieldset.group-graphics .form-radios .form-item { margin: 0;}
+
+fieldset.group-graphics .form-radios .form-item label {
+	display: block;
+	font-size: 1em;
+	line-height: 2.5;
+	color: white;
+}
+
+fieldset.group-graphics .form-radios .form-item label input {
+	margin: 0 .5em;
+	padding: 0;
+	vertical-align: middle;
+}
+
+#edit-field-fp-slide-bg-color-value-Rust-wrapper {
+	background-color: rgb(185, 76, 38);
+}
+
+#edit-field-fp-slide-bg-color-value-Lime-wrapper {
+	background-color: rgb(139, 165, 66);
+}
+
+#edit-field-fp-slide-bg-color-value-Midnight-wrapper {
+	background-color: rgb(25, 54, 76);
+}
+
+#edit-field-fp-slide-bg-color-value-Enterprise-wrapper {
+	background-color: rgb(44, 165, 181);
+}
+
+#edit-field-fp-slide-bg-color-value-Disappointment-wrapper {
+	background-color: rgb(114, 109, 87);
+}
+
+#edit-field-fp-slide-bg-color-value-Fructose-wrapper {
+	background-color: rgb(129, 45, 91);
+}
+
+#edit-field-fp-slide-bg-color-value-Kahuna-wrapper {
+	background-color: rgb(38, 207, 156);
+}
+
+#edit-field-fp-slide-bg-color-value-Thirsty-wrapper {
+	background-color: rgb(120, 55, 223);
+}
+
+#edit-field-fp-slide-bg-color-value-Miasma-wrapper {
+	background-color: rgb(186, 141, 20);
+}
+
+#edit-field-fp-slide-bg-color-value-Vapid-wrapper {
+	/*color: rgb(51, 51, 51);*/
+	background-color: rgb(238, 255, 191);
+}
+
+#edit-field-fp-slide-bg-color-value-Vapid-wrapper label {
+	color: rgb(51, 51, 51);
+}
+
+#edit-field-fp-slide-bg-color-value-SAC-wrapper {
+	background-color: rgb(166, 70, 157);
+}

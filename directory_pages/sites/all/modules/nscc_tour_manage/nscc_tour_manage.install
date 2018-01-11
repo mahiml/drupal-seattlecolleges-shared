@@ -1,0 +1,91 @@
+<?php
+
+function nscc_tour_manage_install(){
+	drupal_install_schema('nscc_tour_manage');
+}
+
+function nscc_tour_manage_schema(){
+	$schema['nscc_campus_tours'] = array(
+		'description' => t('Stores the scheduled tour events.'),
+		'fields'=> array( 'tour_id'=>array(
+													'type'=>'serial',
+													'unsigned'=>TRUE,
+													'size'=>'medium',
+													'not null'=>TRUE,
+													'description'=>t('unique record id.'),
+												),
+											'tour_yrq'=>array(
+													'type'=>'varchar',
+													'length'=>'4',
+													'not null'=>TRUE,
+													'description'=>t('Quarter to which this tour applies'),
+											),
+											'tour_datetime'=>array(
+													'type' => 'int',
+        									'unsigned' => TRUE,
+        									'not null' => TRUE,
+        									'default' => 0,
+        									'description' => 'Unix timestamp for tour start',
+											),
+											'tour_cap'=>array(
+													'type'=>'varchar',
+													'length'=>'2',
+													'not null'=>TRUE,
+													'description'=>t('Session cap.'),
+											),
+								),
+		'primary key'=> array('tour_id'),
+		'indexes'=> array(
+			 'tour_id' => array('tour_id'),
+			 'tour_yrq' => array('tour_yrq'),
+			),
+	);
+	$schema['nscc_tour_participant'] = array(
+		'description' => t('Stores the rosters for the campus tours'),
+		'fields'=> array( 'participant_id'=>array(
+													'type'=>'serial',
+													'unsigned'=>TRUE,
+													'size'=>'medium',
+													'not null'=>TRUE,
+													'description'=>t('unique record id.'),
+												),
+											'tour_id'=>array(
+													'type' => 'int',
+        									'unsigned' => TRUE,
+        									'not null' => TRUE,
+        									'default' => 0,
+        									'description' => 'Foreign Key: nscc_running_start_session.session_id.',
+												),
+											'participant_name'=>array(
+													'type'=>'varchar',
+													'length'=>'255',
+													'not null'=>TRUE,
+													'description'=>t('Participant name'),
+												),
+											'participant_email'=>array(
+													'type'=>'varchar',
+													'length'=>'255',
+													'not null'=>TRUE,
+													'description'=>t('Participant email address'),
+												),
+											'signup_datetime'=>array(
+													'type' => 'int',
+        									'unsigned' => TRUE,
+        									'not null' => TRUE,
+        									'default' => 0,
+        									'description' => 'Unix timestamp for record_create',
+											),
+								),
+		'primary key'=> array('participant_id'),
+		'indexes'=> array(
+			 'participant_id' => array('participant_id'),
+			 'tour_id' => array('tour_id'),
+		),		
+	);
+
+	return $schema;
+}
+
+function nscc_tour_manage_uninstall(){
+	drupal_uninstall_schema('nscc_tour_manage');
+}

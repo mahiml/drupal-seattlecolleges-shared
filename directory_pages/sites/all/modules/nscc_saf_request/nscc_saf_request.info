@@ -1,0 +1,9 @@
+; $Id: nscc_utf_request,v 1.4 2007/06/08 05:50:55 dries Exp $
+name = NSCC_SAF_Request
+description = NSCC-Specific functionality Module
+package = NSCC
+version = VERSION
+core = 6.x
+
+version = "0.5"
+project = "NSCC"

@@ -1,0 +1,10 @@
+; $Id: nscc.info,v 1.4 2007/06/08 05:50:55 dries Exp $
+name = NSCC_prod
+description = Loose odds and ends for the prod site
+package = NSCC
+version = VERSION
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-01-14
+version = "0.5"
+project = "NSCC"

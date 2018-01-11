@@ -1,0 +1,45 @@
+<?php
+// $Id: revisiontags.install,v 1.1.4.1 2008/03/13 12:03:26 robertDouglass Exp $
+
+function revisiontags_schema() {
+  $schema['revision_tags'] = array(
+    'description' => t('The table for revisiontags.'),
+    'fields' => array(
+      'nid' => array(
+        'description' => t('The primary identifier for a node.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'vid' => array(
+        'description' => t('The current {node_revisions}.vid version identifier.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'tag' => array(
+        'description' => t('The {tag} of this revision.'),
+        'type' => 'varchar',
+        'length' => 127,
+        'not null' => TRUE,
+        'default' => ''),
+      'public' => array(
+        'description' => t('The visibility of the revision tag.'),
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      ),
+    'primary key' => array('nid', 'vid'),
+  );
+  return $schema;
+}
+
+function revisiontags_install() {
+  // Create my tables.
+  drupal_install_schema('revisiontags');
+}
+
+function revisiontags_uninstall() {
+  // Drop my tables.
+  drupal_uninstall_schema('revisiontags');
+}

@@ -1,0 +1,152 @@
+// $Id: CHANGELOG.txt,v 1.1.2.43 2010/06/15 20:44:18 jhodgdon Exp $
+
+Search by Page x.x-x.x, xxxx-xx-xx
+----------------------------------
+
+
+Search by Page 6.x-1.x, xxxx-xx-xx
+----------------------------------
+
+
+Search by Page 6.x-1.11, 2010-06-15
+-----------------------------------
+#828006 by jhodgdon: Block session saving when indexing content.
+
+#816770 by jhodgdon: Add node variable to search result template for more
+flexible theming in Search by Page Attachments.
+
+#810488 by jm.federico: When making teaser, use right args for node_view().
+
+#812406 by jhodgdon: Add theme support for search form to detect block vs. page.
+
+#806030 by jhodgdon: Add new setting to exclude HTML tag contents from search.
+
+#806028 by jhodgdon: Fix breadcrumb on search results page.
+
+#804762 by jhodgdon: Add theming options to search results display.
+
+
+Search by Page 6.x-1.10, 2010-04-07
+-----------------------------------
+#744584 by eugeny44: Add to $_GET so rendering of certain pages will work.
+
+#716342 by jhodgdon: Add random end to generated user names to avoid conflicts.
+Also, don't use $user as a local variable name.
+
+
+Search by Page 6.x-1.9, 2009-02-15
+----------------------------------
+#605458 by jhodgdon: Change the way role assignment is done during search
+indexing. Also increased efficiency in user queries and made sure only
+unblocked users are shown in search results.
+
+
+Search by Page 6.x-1.8, 2009-02-12
+----------------------------------
+#706134 by jhodgdon: Add theme support for the search form.
+
+#705154 by jhodgdon: Make pages with queries (?/&) in URLs work with Search
+by Page Paths.
+
+#699222 by jhodgdon: Fix minor code issues so Coder tests will pass. Also
+made updates to the tests to work with newer versions of Search Files module
+and SimpleTest.
+
+#605458, #492878 by jhodgdon: Update how permissions work for search indexing,
+and how search environments work.
+
+#605458, #662282, #492878 by jhodgdon: Better multilingual support. Add
+preliminary support for search environments (will be revised). Add preliminary
+fix for permissions problems indexing content (will be revised).
+
+
+Search by Page 6.x-1.7, 2009-12-13
+----------------------------------
+#650640 by jhodgdon: SBP Attachments was indexing some files it shouldn't have.
+
+#543214 by jhodgdon: Add more tests to module.
+
+
+Search by Page 6.x-1.6, 2009-11-19
+----------------------------------
+#543214 by jhodgdon: Add more tests to module.
+
+#613400 by jhodgdon: Make path aliases work in Search by Page and SBP Paths.
+
+
+Search by Page 6.x-1.5, 2009-10-21
+----------------------------------
+#492892 by jhodgdon: Add option to display teasers instead of excerpts in node
+search results.
+
+#543214 by jhodgdon: Add basic tests to the module.
+
+#605458 by jhodgdon: Add some error logging and ability to reset indexing for
+pages that for some reason didn't get indexed properly.
+
+
+Search by Page 6.x-1.4, 2009-10-01
+----------------------------------
+#493270, #437084, #492892 by jhodgdon: Add better search excerpt function to
+work with stemming modules to highlight stemmed keyword matches.
+
+
+Search by Page 6.x-1.3, 2009-09-09
+----------------------------------
+#572878 by milesw: Retain search pager totals on search results page.
+
+by jhodgdon: Regularize API documentation.
+
+#556820 by scottrigby, jhodgdon: Fix HTML validation errors.
+
+
+Search by Page 6.x-1.2, 2009-08-14
+----------------------------------
+#538936 by jhodgdon: Fix bug where paging of search results was 
+sometimes not working in Search by Page
+
+#547198 by jhodgdon: Update help text on settings screen, and restrict
+CCK field list to FileField types, in Search by Page Attachments, to
+avoid confusion.
+
+#543212 by jhodgdon: Add support for translating user-provided text
+in Search by Page and Search by Page Paths for multi-lingual sites.
+Also added ability to customize the submit button on the search form.
+
+#541958 by jhodgdon: Use parentheses to make sure all SQL joins are
+unambiguous in the search query for Search by Page
+
+Make all fieldsets on Settings pages collapsible, and give them
+weights for more sensible ordering.
+
+#543070 work-around by jhodgdon: Link directly to Search Files API
+helper set-up page in Search Files Attach, because main Search Files
+page is broken.
+
+#541958 by jhodgdon: Fix bug in search query when using Search by
+Page Attachments and Search by Page Nodes with a content access
+module.
+
+
+Search by Page 6.x-1.1, 2009-08-04
+----------------------------------
+#460942 by jhodgdon: Fix bug in search query generation
+
+jhodgdon: Simplify search query for Search by Page Users
+
+#460942 by jhodgdon: Fix URL problems for file attachments for 
+multi-lingual sites
+
+#460942 by jhodgdon (with help from Josh Waihi, as well as Search
+Files, and Upload modules): Add support for indexing file attachments,
+in the form of a new sub-module Search by Page Attachments
+
+#460942 by jhodgdon: Add support during search indexing for
+sub-modules to override generation of page content in
+hook_sbp_details(). This is primarily for file attachments.
+
+
+Search by Page 6.x-1.0, 2009-04-22
+----------------------------------
+Initial release, for Drupal 6.x
+

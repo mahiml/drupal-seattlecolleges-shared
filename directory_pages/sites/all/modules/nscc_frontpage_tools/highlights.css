@@ -1,0 +1,127 @@
+ul.highlights-management {
+	display: block;
+	list-style-type: none;
+	padding: 0;
+	margin-left: 0;
+}
+
+ul.highlights-management li {
+	position: relative;
+	display: block;
+	padding: 5px;
+	padding-left: 10px;
+	margin: 0 0 1em 0;
+	overflow: hidden;
+	/*border-radius: 10px;
+	box-shadow: 5px 2px 4px 1px rgba(0,0,0,.6);
+	background-color: rgb(220,220,200);*/
+	color: rgb(130, 130, 130);
+	background-color: rgb(212, 212, 212);
+	border-radius: .5em;
+	box-shadow: 0 -2px 6px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+ul.highlights-management li.active {
+	/*background-color: rgb(250,250,230);
+	opacity: 1.0;*/
+	color: rgb(51, 51, 51);
+	background-color: rgb(249, 245, 230);
+}
+
+ul.highlights-management li.active .message-column {
+	color: rgb(185, 76, 38);
+}
+
+ul.highlights-management li div.message-column {
+	width: 317px;
+	padding: 2px 10px 2px 0px;
+	float: left;
+}
+ul.highlights-management li div.dates-column {
+	float: left;
+	width: 135px;
+	font-size: 90%;
+}
+
+ul.highlights-management li div.dates-column span.date-label{
+	font-weight: bold;
+}
+
+ul.highlights-management li div.highlight-title {
+	/*font-weight: 700;*/
+	font-size: 14px;
+}
+
+ul.highlights-management li div.highlight-message {
+	/*font-weight: 400;*/
+}
+
+ul.highlights-management li div.highlight-pdate {
+	/*font-weight: 400;*/
+}
+
+ul.highlights-management li div.highlight-rdate {
+	/*font-weight: 400;*/
+}
+
+ul.highlights-management li div.highlight-controls {
+	float: left;
+	/*vertical-align: middle;
+	width: 36px;
+	padding: 2px;*/
+	width: 63px;
+}
+
+ul.highlights-management li div.highlight-controls a {
+	display: block;
+	border-radius: .5em;
+	text-align: center;
+}
+
+ul.highlights-management li div.highlight-controls a:link,
+ul.highlights-management li div.highlight-controls a:visited {}
+
+ul.highlights-management li div.highlight-controls a:hover {
+	background-color: white;
+}
+
+ul.highlights-management li div.highlight-controls a.highlight-delete-control {
+	text-decoration: none;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+}
+
+ul.highlights-management li div.highlight-controls a.highlight-delete-control:link,
+ul.highlights-management li div.highlight-controls a.highlight-delete-control:visited {
+	/*display: block;
+	width: 5em;
+	height: 1.5em;
+	font-size: .8em;
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	border-radius: 5px;
+	background-color: rgb(200,100,50);
+	padding: 1px 3px;
+	padding: 1px 5px 1px 2px;
+	box-shadow: -2px -1px 2px 2px rgba(0,0,0,.6) inset;*/
+	color: white;
+	background: rgb(227,139,95);
+	background: -moz-linear-gradient(top, rgb(227,139,95) 0%, rgb(213,96,37) 50%, rgb(174,78,30) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(227,139,95)), color-stop(50%,rgb(213,96,37)), color-stop(100%,rgb(174,78,30)));
+	background: -webkit-linear-gradient(top, rgb(227,139,95) 0%,rgb(213,96,37) 50%,rgb(174,78,30) 100%);
+	background: -o-linear-gradient(top, rgb(227,139,95) 0%,rgb(213,96,37) 50%,rgb(174,78,30) 100%);
+	background: -ms-linear-gradient(top, rgb(227,139,95) 0%,rgb(213,96,37) 50%,rgb(174,78,30) 100%);
+	background: linear-gradient(to bottom, rgb(227,139,95) 0%,rgb(213,96,37) 50%,rgb(174,78,30) 100%);
+}
+
+ul.highlights-management li div.highlight-controls a.highlight-delete-control:hover {
+	/*background-color: rgb(250,150,100);*/
+	color: rgb(200,100,50);
+	background: rgb(255,255,255);
+	background: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(246,246,246) 47%, rgb(237,237,237) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(255,255,255)), color-stop(47%,rgb(246,246,246)), color-stop(100%,rgb(237,237,237)));
+	background: -webkit-linear-gradient(top, rgb(255,255,255) 0%,rgb(246,246,246) 47%,rgb(237,237,237) 100%);
+	background: -o-linear-gradient(top, rgb(255,255,255) 0%,rgb(246,246,246) 47%,rgb(237,237,237) 100%);
+	background: -ms-linear-gradient(top, rgb(255,255,255) 0%,rgb(246,246,246) 47%,rgb(237,237,237) 100%);
+	background: linear-gradient(to bottom, rgb(255,255,255) 0%,rgb(246,246,246) 47%,rgb(237,237,237) 100%);
+}

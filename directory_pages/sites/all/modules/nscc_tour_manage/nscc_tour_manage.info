@@ -1,0 +1,11 @@
+; $Id: nscc_running_start.info,v 0.5 2007/06/08 05:50:55 dries Exp $
+name = NSCC_Tour_Manage
+description = Manage Campus Tours
+package = NSCC
+version = VERSION
+core = 6.x
+dependencies[] = nscc
+
+; Information added by drupal.org packaging script on 2009-01-14
+version = "0.5"
+project = "NSCC"

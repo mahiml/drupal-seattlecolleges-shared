@@ -1,0 +1,42 @@
+/* Corrective Styles for IE < 8 */
+
+
+#nscc-profiles,
+#instructor_schedule_quarter_display .classes li { height: 1%; }
+
+
+/* Autocomplete flyout */
+
+.front #nscc-profile-form-usersearch #autocomplete {
+  border: solid 1px rgb(129, 141, 159);
+  background-color: rgb(255, 255, 255);
+}
+
+.front #nscc-profile-form-usersearch #autocomplete li {
+  margin: 0;
+  padding: 3px 6px;
+  background-color: transparent;
+}
+
+.front #nscc-profile-form-usersearch #autocomplete li.selected {
+  color: white;
+  background-color: rgb(21, 63, 175);
+}
+
+#footer,
+#footer div {
+  position: static;
+}
+
+
+
+/* Not for IE 7 \*/
+
+* html #block-nscc_profile-2 { height: 1%; }
+
+* html .front .region-main #block-block-1 .content li.org-list { margin-right: 0; }
+
+* html .nscc-profile_list-item,
+* html .nscc-profile_list-item img { height: 96px; }
+
+/* end hiding */

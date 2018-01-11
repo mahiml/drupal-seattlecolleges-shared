@@ -1,0 +1,11 @@
+; $Id: nscc_etutoring.info,v 1.4 2007/06/08 05:50:55 dries Exp $
+name = NSCC Etutoring Registration
+description = NSCC Etutoring Registration Module
+package = NSCC
+version = VERSION
+core = 6.x
+dependencies[] = nscc
+
+; Information added by drupal.org packaging script on 2009-01-14
+version = "0.5"
+project = "NSCC"

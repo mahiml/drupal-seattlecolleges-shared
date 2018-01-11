@@ -1,0 +1,13 @@
+; $Id: revisiontags_views.info,v 1.2.2.1 2008/03/13 12:03:26 robertDouglass Exp $
+name = Revision tag views
+description = Views integration for the Revision tags module
+dependencies[] = views
+dependencies[] = revisiontags
+package = "Revision tags"
+core = 6.x
+; Information added by drupal.org packaging script on 2008-03-14
+version = "6.x-1.0"
+core = "6.x"
+project = "revisiontags"
+datestamp = "1205488508"
+
