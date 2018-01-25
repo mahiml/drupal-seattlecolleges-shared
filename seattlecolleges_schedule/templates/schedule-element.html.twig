@@ -1,19 +1,59 @@
-<div class="myElement">
-    <div class="randomNumber">Random Number: {{ schedule['#random_number'] }}</div>
-    <p>{{ schedule.description }}</p>
-    {{ schedule.link }}
-</div>
+{{ attach_library('seattlecolleges_schedule/schedule-library') }}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 scc-schedule-tab-container">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 scc-schedule-tab-menu">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active text-center">
+                        <h4 class="glyphicon glyphicon-plane"></h4><br/>Seattle Central
+                    </a>
+                    <a href="#" class="list-group-item text-center">
+                        <h4 class="glyphicon glyphicon-road"></h4><br/>North Seattle
+                    </a>
+                    <a href="#" class="list-group-item text-center">
+                        <h4 class="glyphicon glyphicon-home"></h4><br/>South Seattle
+                    </a>
+                    <a href="#" class="list-group-item text-center">
+                        <h4 class="glyphicon glyphicon-cutlery"></h4><br/>Seattle Vocational Institute(SVI)
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 scc-schedule-tab">
+                <!-- Seattle Central section -->
+                <div class="scc-schedule-tab-content active">
+                    <center>
+                        <h1 class="glyphicon glyphicon-plane" style="font-size:14em;color:#55518a"></h1>
+                        <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
+                        <h3 style="margin-top: 0;color:#55518a">SeattleCentral Schedule</h3>
+                    </center>
+                </div>
+                <!-- NOrth Seattle section -->
+                <div class="scc-schedule-tab-content">
+                    <center>
+                        <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
+                        <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
+                        <h3 style="margin-top: 0;color:#55518a">NOrthSeattle Schedule</h3>
+                    </center>
+                </div>
 
-{# Debug output #}
-<div>
-    <h3>We print the element</h3>
-    {{ schedule }}
-    <h3>Link</h3>
-    {{ schedule.link }}
-    <h3>Description</h3>
-    {{ schedule.description }}
-    <h3>#pre_render addition</h3>
-    {{ schedule.pre_render_addition }}
-    <h3>Random number (not printed when we printed the whole element)</h3>
-    {{ schedule['#random_number'] }}
+                <!-- South Seattle section -->
+                <div class="scc-schedule-tab-content">
+                    <center>
+                        <h1 class="glyphicon glyphicon-home" style="font-size:12em;color:#55518a"></h1>
+                        <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
+                        <h3 style="margin-top: 0;color:#55518a">SouthSeattle Schedule</h3>
+                    </center>
+                </div>
+
+                <!-- SVI section -->
+                <div class="scc-schedule-tab-content">
+                    <center>
+                        <h1 class="glyphicon glyphicon-cutlery" style="font-size:12em;color:#55518a"></h1>
+                        <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
+                        <h3 style="margin-top: 0;color:#55518a">SVI Schedule</h3>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -55,18 +55,16 @@ class ProgramAndClassController extends ControllerBase
     public function simple()
     {
         return [
-            'example one' => [
-                '#markup' => '<div>Markup Example</div>',
-            ],
-            'example two' => [
+            'seattlecolleges_composite_schedule' => [
                 '#type' => 'schedule_element',
-                '#label' => $this->t('This is the quarters data called before prerender is called'),
+                '#label' => $this->t('This is the main schedule element containing nav tabs and a drop down in each to show '),
                 '#description' => $this->getQuartersData()
             ],
         ];
     }
 
-    public function getYRQ(){
+    public function getYRQ()
+    {
 
     }
 
@@ -105,8 +103,8 @@ class ProgramAndClassController extends ControllerBase
      */
     public function getQuartersData()
     {
-        $body = json_encode(array('campusCode'=> $this->campus_code, 'today'=>""));
-        $options['headers'] =  ['Content-Type' => 'application/json', 'Accept' => 'application/json'];
+        $body = json_encode(array('campusCode' => $this->campus_code, 'today' => ""));
+        $options['headers'] = ['Content-Type' => 'application/json', 'Accept' => 'application/json'];
         $options['body'] = $body;
         $response = $this->http_client->request('POST', $this->get_quarters_API_url, $options);
         return $response->getBody();

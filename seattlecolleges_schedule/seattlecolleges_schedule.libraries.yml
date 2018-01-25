@@ -1,0 +1,10 @@
+schedule-library:
+  version: 1.x
+  css:
+    theme:
+      css/seattlecolleges_schedule.css: {}
+  js:
+    js/seattlecolleges_schedule.js: {}
+  dependencies:
+      - core/jquery
+      - core/jquery.once
