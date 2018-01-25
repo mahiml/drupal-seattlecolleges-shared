@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Table drag example root leaf form.
+ * Table drag `example root leaf form.
  *
  * Tabledrag rows can be marked as roots or leaves. This limits the way the user
  * can interact with them in drag-and-drop operations. We'll mark some rows this

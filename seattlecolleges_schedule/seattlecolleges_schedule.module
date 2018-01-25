@@ -1,0 +1,13 @@
+<?php
+/**
+ * Implements hook_theme().
+ */
+function seattlecolleges_schedule_theme($existing, $type, $theme, $path)
+{
+    $variables = [
+        'schedule_element' => [
+            'render element' => 'schedule',
+        ],
+    ];
+    return $variables;
+}

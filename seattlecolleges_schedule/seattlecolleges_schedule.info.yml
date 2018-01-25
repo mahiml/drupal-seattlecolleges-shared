@@ -1,0 +1,9 @@
+name: 'Seattle Colleges District wide Program/Class Schedule'
+description: "Seattle Colleges District wide Program/Class Schedule Module. This will be used as a comomon way to present classes/programmes across the district's site"
+package: custom
+# core: 8.x
+core: 8.x
+type: module
+configure: seattlecolleges_schedule.settings
+dependencies:
+  - drupal:node

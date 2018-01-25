@@ -1,0 +1,19 @@
+<div class="myElement">
+    <div class="randomNumber">Random Number: {{ schedule['#random_number'] }}</div>
+    <p>{{ schedule.description }}</p>
+    {{ schedule.link }}
+</div>
+
+{# Debug output #}
+<div>
+    <h3>We print the element</h3>
+    {{ schedule }}
+    <h3>Link</h3>
+    {{ schedule.link }}
+    <h3>Description</h3>
+    {{ schedule.description }}
+    <h3>#pre_render addition</h3>
+    {{ schedule.pre_render_addition }}
+    <h3>Random number (not printed when we printed the whole element)</h3>
+    {{ schedule['#random_number'] }}
+</div>

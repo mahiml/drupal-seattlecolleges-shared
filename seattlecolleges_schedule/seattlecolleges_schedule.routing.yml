@@ -1,0 +1,15 @@
+seattlecolleges_schedule:
+  path: '/schedule'
+  defaults:
+    _controller: '\Drupal\seattlecolleges_schedule\Controller\ProgramAndClassController:simple'
+    _title: 'Seattle Colleges Schedule'
+  requirements:
+    _access: 'TRUE'
+
+seattlecolleges_schedule.settings:
+  path: '/seattlecolleges-schedule/configure'
+  defaults:
+    _form: '\Drupal\seattlecolleges_schedule\Form\SeattleCollegesSchduleConfiguration'
+    _title: 'Seattle Colleges Schedule Configuration form'
+  requirements:
+     _permission: 'administer site configuration'
