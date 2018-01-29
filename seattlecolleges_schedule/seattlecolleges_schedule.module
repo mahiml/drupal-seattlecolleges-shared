@@ -8,6 +8,9 @@ function seattlecolleges_schedule_theme($existing, $type, $theme, $path)
         'schedule_element' => [
             'render element' => 'schedule',
         ],
-    ];
+        'class_list' => [
+            'template' => 'azclasslist',
+            'variables' => ['all_classes' => NULL, 'quarters' => NULL],
+        ]];
     return $variables;
 }

@@ -1,7 +1,7 @@
 seattlecolleges_schedule:
   path: '/schedule'
   defaults:
-    _controller: '\Drupal\seattlecolleges_schedule\Controller\ProgramAndClassController:simple'
+    _controller: '\Drupal\seattlecolleges_schedule\Controller\ProgramAndClassController:getScheduleElement'
     _title: 'Seattle Colleges Schedule'
   requirements:
     _access: 'TRUE'
